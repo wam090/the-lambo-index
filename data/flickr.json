@@ -78,45 +78,7 @@
   ]
  },
  "autentica": {
-  "images": [
-   {
-    "t": "flickr:52779261990",
-    "src": "flickr",
-    "title": "lamborghini-autentica-",
-    "a": "Javier Martin Espartosa",
-    "p": "https://www.flickr.com/photos/druidabruxux/52779261990/",
-    "l": "CC BY-NC-SA 2.0",
-    "lu": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
-    "w": 1024,
-    "ht": 657,
-    "sz": [
-     [
-      320,
-      "https://live.staticflickr.com/65535/52779261990_12088e0bd2_n.jpg"
-     ],
-     [
-      400,
-      "https://live.staticflickr.com/65535/52779261990_12088e0bd2_w.jpg"
-     ],
-     [
-      500,
-      "https://live.staticflickr.com/65535/52779261990_12088e0bd2.jpg"
-     ],
-     [
-      640,
-      "https://live.staticflickr.com/65535/52779261990_12088e0bd2_z.jpg"
-     ],
-     [
-      800,
-      "https://live.staticflickr.com/65535/52779261990_12088e0bd2_c.jpg"
-     ],
-     [
-      1024,
-      "https://live.staticflickr.com/65535/52779261990_12088e0bd2_b.jpg"
-     ]
-    ]
-   }
-  ]
+  "images": []
  },
  "aventador-50": {
   "images": [

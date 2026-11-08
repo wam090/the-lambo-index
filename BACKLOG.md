@@ -8,8 +8,11 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-08: Scope is indexing and easy browsing first, built up step by step.
 - 2026-11-08: The timeline's orange frame marks only the original form of each car; versions,
   editions and race variants stay unframed (rules in tools/catalog.py).
-- 2026-11-08: Photos are not limited to Wikimedia Commons; other freely licensed sources are fine
-  (rules in CLAUDE.md, Photos).
+- 2026-11-08: Every car should have photos, taken from anywhere on the internet. Free licences
+  first; otherwise credited press or all-rights-reserved photos, loaded from where they are hosted
+  (`data/nonfree_images.json`; rules in CLAUDE.md, Photos).
+- 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
+  really needed.
 - 2026-11-08: Keep everything relevant in this GitHub repo and avoid steps that need the user's
   hands. The site should have a working public link.
 
@@ -27,13 +30,9 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
       Revisit if the site goes public (then it would need accounts or a shared store).
 - [ ] **Auto-refresh**: a monthly scheduled task that adds new Lamborghinis, runs `images.py --only`
       for them and `flickr.py --all-gaps`, checks new photos by eye, rebuilds, runs the smoke check
-      and opens a PR. Expect Wikimedia rate limits (HTTP 429). First job, cars missing from the
+      and opens and merges a PR. Expect Wikimedia rate limits (HTTP 429). First job, cars missing from the
       index (verify each before adding): Huracán STJ (2024, 10 cars), Fenomeno Roadster (2026,
       15 cars), Revuelto SV (2026), Urus SE Performante (2026).
-- [ ] **Last 4 photo gaps (your call).** SC20, Invencible, Auténtica, Urus ST-X: every photo found
-      is copyrighted. Options: ask Flickr photographers to licence one photo each, or use
-      Lamborghini press photos (you register on media.lamborghini.com; editorial-use terms).
-      The Portofino has only an interior photo.
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),
       LP500 S (321–323), Urraco P200 (66–77), Murciélago SV (186 claimed, 268 found by a registry),
       Miura SVJ (about six), Diablo SV-R (31–34). Countach 25th Anniversary: 657 or 658. Gallardo

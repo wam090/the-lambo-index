@@ -8,9 +8,16 @@ licence and links to data/flickr.json. build.py adds them after a car's Commons 
 Visual review works as for Commons: add a photo's "t" ("flickr:<id>") to drop or hero in
 data/heroes.json.
 
-Usage: python3 tools/flickr.py [--only id,id] [--all-gaps] [--min 4]
+Usage: python3 tools/flickr.py [--only id,id] [--all-gaps] [--min 4] [--embed]
   --only      search these car ids
   --all-gaps  search every car with fewer than --min Commons photos (default 4)
+  --embed     for cars with no free photo at all: also accept all-rights-reserved photos whose
+              owners allow sharing on Flickr ("canShare"). Flickr's terms let such photos be
+              embedded elsewhere with a credit and a link back to their Flickr page, which the
+              site gives. They are labelled "All rights reserved", never as freely licensed.
+              Embed results are only candidates: they go to flickr_embed_candidates.json (not read
+              by the build). Review them with review_sheet.py, then copy the chosen ones into
+              data/nonfree_images.json with honest credits (press photos credited to their maker).
 """
 import argparse, json, os, re, ssl, sys, time, unicodedata, urllib.parse, urllib.request
 
@@ -134,9 +141,10 @@ def model_export(html):
     return None
 
 
-def search(text):
-    url = ("https://www.flickr.com/search/?text=" + urllib.parse.quote(text) +
-           "&license=" + urllib.parse.quote(",".join(str(k) for k in LICENCES)))
+def search(text, any_licence=False):
+    url = "https://www.flickr.com/search/?text=" + urllib.parse.quote(text)
+    if not any_licence:
+        url += "&license=" + urllib.parse.quote(",".join(str(k) for k in LICENCES))
     m = model_export(fetch(url))
     try:
         rows = m["main"]["search-photos-lite-models"][0]["data"]["photos"]["data"]["_data"]
@@ -155,7 +163,7 @@ def record(p):
     if not sizes:
         return None
     owner = p.get("pathAlias") or p.get("ownerNsid")
-    lic, lic_url = LICENCES[p["license"]]
+    lic, lic_url = LICENCES.get(p["license"], ("All rights reserved", ""))
     w, h, _ = sizes[-1]
     return {"t": f"flickr:{p['id']}", "src": "flickr", "title": p.get("title", ""),
             "a": p.get("realname") or p.get("username") or "Flickr user",
@@ -163,7 +171,12 @@ def record(p):
             "w": w, "ht": h, "sz": [[sw, u] for sw, sh, u in sizes]}
 
 
-def find(car):
+def can_share(page):
+    """True when the photo's owner lets others share (embed) it: Flickr's own permission setting."""
+    return '"canShare":true' in fetch(page).replace(" ", "")
+
+
+def find(car, embed=False):
     queries, pattern = QUERIES.get(car["id"], (None, None))
     if not queries:
         queries = ["Lamborghini " + fold(car["name"])]
@@ -172,9 +185,10 @@ def find(car):
     want = re.compile(pattern, re.I) if pattern else None
     found = {}
     for q in queries:
-        for p in search(q):
+        for p in search(q, any_licence=embed):
             who = {str(p.get(k, "")).lower() for k in ("pathAlias", "username", "ownerNsid")}
-            if p.get("license") not in LICENCES or p.get("id") in found or who & BLOCKED:
+            ok_licence = p.get("license") in LICENCES or (embed and p.get("license") == 0)
+            if not ok_licence or p.get("id") in found or who & BLOCKED:
                 continue
             text = fold(p.get("title", "") + " " + p.get("description", ""))
             if (want and not want.search(text)) or BAD.search(p.get("title", "")) or TOY.search(text):
@@ -182,10 +196,15 @@ def find(car):
             if "lamborghini" not in text.lower() and car["id"] != "portofino":
                 continue
             rec = record(p)
+            if rec and p.get("license") == 0:
+                rec["emb"] = 1     # all rights reserved: used only with the owner's sharing permission
             if rec and rec["w"] >= 800:
                 rec["_rank"] = (RANK.get(p["license"], 5), -min(p.get("faveCount", 0), 50))
                 found[p["id"]] = rec
-    best = sorted(found.values(), key=lambda r: r["_rank"])[:PER_CAR]
+    best = sorted(found.values(), key=lambda r: r["_rank"])
+    if embed:   # check the sharing permission of each photo we would keep (one request each)
+        best = [r for r in best[:PER_CAR * 2] if not r.get("emb") or can_share(r["p"])]
+    best = best[:PER_CAR]
     for r in best:
         r.pop("_rank")
     return best
@@ -196,8 +215,11 @@ def main():
     ap.add_argument("--only", default="")
     ap.add_argument("--all-gaps", action="store_true")
     ap.add_argument("--min", type=int, default=4)
+    ap.add_argument("--embed", action="store_true")
+    ap.add_argument("--out", default=None)
     args = ap.parse_args()
-    data = json.load(open(OUT, encoding="utf-8")) if os.path.exists(OUT) else {}
+    out = args.out or ("flickr_embed_candidates.json" if args.embed else OUT)
+    data = json.load(open(out, encoding="utf-8")) if os.path.exists(out) else {}
     ids = [s for s in args.only.split(",") if s]
     if args.all_gaps:
         commons = json.load(open(os.path.join(ROOT, "data", "images.json"), encoding="utf-8"))
@@ -206,10 +228,10 @@ def main():
     if not cars:
         sys.exit("nothing to do: pass --only id,id or --all-gaps")
     for c in cars:
-        imgs = find(c)
+        imgs = find(c, embed=args.embed)
         data[c["id"]] = {"images": imgs}
         print(f"{c['id']:28} {len(imgs)} photos")
-        with open(OUT, "w", encoding="utf-8") as f:
+        with open(out, "w", encoding="utf-8") as f:
             json.dump(dict(sorted(data.items())), f, ensure_ascii=False, indent=1)
 
 

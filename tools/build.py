@@ -23,13 +23,14 @@ def load(name):
 overrides = load("heroes.json")      # visual review: hero photo and rejected photos per car
 extra = load("extra_images.json")    # hand-picked Commons files outside the car's categories
 flickr = load("flickr.json")         # Creative Commons photos from Flickr (tools/flickr.py)
+nonfree = load("nonfree_images.json")  # credited press and all-rights-reserved photos (owner's decision)
 IMG_KEYS = ("t", "h", "n", "w", "ht", "a", "l", "lu", "src", "p", "sz")
 
 
 def ordered_images(cid):
-    """Commons photos, then hand-picked extras, then Flickr; drop rejected photos, chosen hero first."""
+    """Commons photos, hand-picked extras, Flickr, then non-free photos; drop rejected ones, hero first."""
     drop = set(overrides.get("drop", {}).get(cid, []))
-    ims = [im for src in (images, extra, flickr) for im in src.get(cid, {}).get("images", []) if im["t"] not in drop]
+    ims = [im for src in (images, extra, flickr, nonfree) for im in src.get(cid, {}).get("images", []) if im["t"] not in drop]
     pick = overrides.get("hero", {}).get(cid)
     if pick:
         ims.sort(key=lambda im: im["t"] != pick)

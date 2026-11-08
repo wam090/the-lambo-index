@@ -30,8 +30,8 @@ function imgUrl(im, want, original = false) {
   return w ? `${THUMB}${im.h}/${im.n}/${w}px-${im.n}` : `${ORIG}${im.h}/${im.n}`;
 }
 const filePage = (im) => im.p || `https://commons.wikimedia.org/wiki/File:${im.n}`;
-const photoSource = (im) => (im.src === 'flickr' ? 'Flickr' : 'Wikimedia Commons');
-const creditHTML = (im) => im ? `Photo: <a href="${esc(filePage(im))}" target="_blank" rel="noopener">${esc(im.a || `${photoSource(im)} contributor`)}</a>${im.l ? ` · ${im.lu ? `<a href="${esc(im.lu)}" target="_blank" rel="noopener">${esc(im.l)}</a>` : esc(im.l)}` : ''} · ${photoSource(im)}` : '';
+const photoSource = (im) => (im.src === 'flickr' || im.src === 'press' ? 'Flickr' : 'Wikimedia Commons');
+const creditHTML = (im) => im ? `${im.src === 'press' ? 'Press photo' : 'Photo'}: <a href="${esc(filePage(im))}" target="_blank" rel="noopener">${esc(im.a || `${photoSource(im)} contributor`)}</a>${im.l ? ` · ${im.lu ? `<a href="${esc(im.lu)}" target="_blank" rel="noopener">${esc(im.l)}</a>` : esc(im.l)}` : ''} · ${photoSource(im)}` : '';
 const photoSearches = (q) => `<a href="https://www.flickr.com/search/?text=${encodeURIComponent(q)}" target="_blank" rel="noopener">Flickr</a> · <a href="https://www.google.com/search?tbm=isch&amp;q=${encodeURIComponent(q)}" target="_blank" rel="noopener">Google Images</a>`;
 
 const FAMILY_NAME = { Murcielago: 'Murciélago', Huracan: 'Huracán', Reventon: 'Reventón', Sian: 'Sián', Autentica: 'Auténtica', Cala: 'Calà', '350': '350 GT', '400': '400 GT', '291': 'Lambo 291' };
@@ -280,7 +280,7 @@ function introText() {
   const first = cars.reduce((a, c) => (c.year < a.year ? c : a));
   const last = cars.reduce((a, c) => (c.year > a.year || (c.year === a.year && c.idx > a.idx) ? c : a));
   $('#intro-h').innerHTML = `Every Lamborghini <em>ever made</em>`;
-  $('#intro-p').innerHTML = `${fmt(cars.length)} cars, from the <span class="mono">${first.year}</span> ${esc(first.name)} to the <span class="mono">${last.year}</span> ${esc(last.name)}: production cars, limited series, one-offs, concepts, prototypes and race cars, with ${fmt(totalPhotos)} photos from Wikimedia Commons.`;
+  $('#intro-p').innerHTML = `${fmt(cars.length)} cars, from the <span class="mono">${first.year}</span> ${esc(first.name)} to the <span class="mono">${last.year}</span> ${esc(last.name)}: production cars, limited series, one-offs, concepts, prototypes and race cars.`;
   $('#foot-l').textContent = `Index compiled ${RAW.generated} · ${fmt(cars.length)} cars · ${fmt(totalPhotos)} photos`;
 }
 
