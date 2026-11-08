@@ -1,0 +1,71 @@
+{
+ "note": "Hand-picked after visual review of contact sheets: hero = first photo to show; drop = photos of the wrong car or unusable detail shots.",
+ "hero": {
+  "350-gtv": "Concorso Eleganza Villa d'Este 2013 (8846431785).jpg",
+  "miura-p400": "1967 Lamborghini Miura P400.jpg",
+  "jalpa": "1988 Lamborghini Jalpa P350 GTS in Bianco Polo Park, front left.jpg",
+  "diablo-vt": "2001 Lamborghini Diablo VT 10.jpg",
+  "diablo-vt-roadster": "Lamborghini Diablo VT Roadster Alpine Edition (1999).jpg",
+  "diablo-svr": "1997 Lamborghini Diablo SV-R SCD 24 Low.jpg",
+  "diablo-vt-60": "Moscow car show 2025-08-03 Lambo Diablo VT 6.0 2000 02.jpg",
+  "gallardo": "Lamborghini Gallardo 5.0 '06 (9405772534).jpg",
+  "gallardo-lp560": "Lamborghini Gallardo LP 560-4 2013 (34831870002).jpg",
+  "gallardo-lp560-spyder": "Lamborghini Gallardo LP 560-4 Bicolore - Flickr - Alexandre Prévot (2).jpg",
+  "sesto-elemento": "Lamborghini Sesto Elemento 6.jpg",
+  "gallardo-squadra-corse": "Lamborghini Gallardo LP570-4 Squadra Corse, MIAS 2014, Montreal (DSC04402-2).jpg",
+  "huracan-gt3": "Lamborghini Huracan, EMS 2024, Essen (P1031651).jpg",
+  "huracan-evo-rwd": "2010 Lamborghini Huracan EVO RWD.jpg",
+  "temerario": "Lamborghini Temerario (2026) (55081181722).jpg"
+ },
+ "drop": {
+  "350-gtv": [
+   "Lamborghini 350 GTV 1963.JPG",
+   "Bizzarrini Lamborghini Dallara.jpg"
+  ],
+  "diablo-svr": [
+   "Lamborghini diablo SVR white (6653850581).jpg",
+   "Lamborghini diablo SVR white (6653852229).jpg",
+   "Lamborghini diablo SVR white (6338969322).jpg",
+   "Lamborghini Diablo SV-R rear.jpg"
+  ],
+  "diablo-vt-60": [
+   "Moscow car show 2025-08-03 Lambo Diablo VT 6.0 2000 05.jpg",
+   "Moscow car show 2025-08-03 Lambo Diablo VT 6.0 2000 06.jpg"
+  ],
+  "gallardo": [
+   "76ª Volta a Portugal 2014 (15673325080).jpg",
+   "My garage (6722900215).jpg"
+  ],
+  "gallardo-gt3": [
+   "Blancpain Endurance Series - Lamborghini Gallardo GT3 11.jpg"
+  ],
+  "gallardo-lp560": [
+   "R8 ^ Gallardo LP 560-4 Bicolore - Flickr - Alexandre Prévot (2).jpg",
+   "R8 ^ Gallardo LP 560-4 Bicolore - Flickr - Alexandre Prévot (1).jpg",
+   "R8 ^ Gallardo LP 560-4 Bicolore - Flickr - Alexandre Prévot.jpg",
+   "Lamborghini Gallardo LP560-4 of Jan Jinadasa.JPG",
+   "Lamborghini Gallardo LP 560-4 R-EX (25282105065).jpg"
+  ],
+  "gallardo-lp560-spyder": [
+   "Black on Black Lamborghini Gallardo 560-4 Spyder (10132410286).jpg"
+  ],
+  "gallardo-squadra-corse": [
+   "Lamborghini Gallardo LP570-4 Squadra Corse rear-side at IAA 2013.JPG",
+   "Lamborghini Gallardo LP 570-4 Squadra Corse IAA 2013.jpg",
+   "Lamborghini Gallardo LP570-4 Squadra Corse front-side at IAA 2013.JPG"
+  ],
+  "huracan-gt3": [
+   "Motore lambo v10 huracan gt3 2016.jpg",
+   "British GT GT3 cars at Donington.jpg",
+   "Motore v10 huracan gt3 2016.jpg"
+  ],
+  "huracan-evo-rwd": [
+   "Porsche 7BA-992NG 911 GT3 - Lamborghini 7BA-ZFDGFB Huracán EVO RWD - Ferrari ABA-F164BCA Portofino (26031514002).jpg"
+  ],
+  "temerario": [
+   "2026 Adelaide Motorsport Festival (DSCF2494).jpg",
+   "2026 Adelaide Motorsport Festival Gouger Street Party - 38.jpg",
+   "2026 Adelaide Motorsport Festival Gouger Street Party - 39.jpg"
+  ]
+ }
+}
