@@ -7,8 +7,8 @@ that is missing here, add it.
 
 ## The project
 `index.html` is the whole product: one self-contained page listing every Lamborghini ever made or
-shown (production, limited series, one-offs, concepts, prototypes, race cars) with specs and Wikimedia
-Commons photos. Views: browse (search, filters, grid/list), car page with full-screen viewer, timeline,
+shown (production, limited series, one-offs, concepts, prototypes, race cars) with specs and photos from
+Wikimedia Commons and Flickr. Views: browse (search, filters, grid/list), car page with full-screen viewer, timeline,
 compare (up to 4), stats. State lives in the URL hash: `#/m/<id>`, `#/?family=Countach&decade=1970s`,
 `#/timeline`, `#/compare?ids=a,b`, `#/stats`. Vanilla JS: no framework, no npm packages, no server.
 README.md is the user-facing description.
@@ -39,6 +39,10 @@ Whatever the user writes, even one word, handle it in this order:
 | `tools/images.py` | picks Commons photos per car, fetches author and licence | rarely |
 | `tools/build.py` | catalogue + photos + src → `data/cars.json` + `index.html` | rarely |
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |
+| `tools/flickr.py` | Creative Commons photos from Flickr for cars Commons lacks | rarely |
+| `tools/review_sheet.py` | contact sheet of photo candidates, for checking by eye (Pillow) | rarely |
+| `data/extra_images.json` | hand-picked Commons files outside a car's categories | yes |
+| `data/flickr.json` | output of flickr.py | never by hand |
 | `data/images.json` | output of images.py | never by hand |
 | `data/cars.json`, `index.html` | output of build.py | never by hand |
 
@@ -48,6 +52,8 @@ python3 tools/catalog.py                # counts by type; asserts ids are unique
 python3 tools/images.py --only id1,id2  # pick photos + credits for these cars (slow on purpose)
 python3 tools/build.py                  # rebuild data/cars.json and index.html; prints counts
 node tools/smoke.js                     # must print "smoke OK" before you commit
+python3 tools/flickr.py --all-gaps      # Flickr photos for cars with < 4 Commons photos (or --only)
+python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates side by side
 ```
 `images.py` without `--only` picks photos only for cars missing from `data/images.json`, then fetches
 credits for any photo without a licence; `--credits-only` does only the second part.
@@ -84,16 +90,36 @@ credits for any photo without a licence; `--credits-only` does only the second p
 - Anything outside this repo dies with the session's container. Commit it or lose it.
 
 ## Photos
-- Only freely licensed Wikimedia Commons files, each credited with author, licence and link (the app
-  shows these). Never commit image files: the page loads them from Wikimedia.
+- Only freely licensed photos, each credited with author, licence and link (the app shows these).
+  Never commit image files: the page loads them from Wikimedia and Flickr. Sources, in order: Commons
+  categories (`images.py`); Commons files outside a car's categories, found with `Special:Search`
+  (`data/extra_images.json`); Flickr Creative Commons photos for cars Commons lacks (`flickr.py`).
+- Non-commercial (NC) licences are accepted because the site is non-commercial. If it ever carries
+  ads or sells anything, replace those photos.
+- Never use scans of printed material, re-uploaded press photos, toys or LEGO, renders or game
+  screenshots: their CC tags are not the uploader's to give. `BLOCKED` in `flickr.py` skips accounts
+  known for these. Every new photo is checked by eye before it stays.
 - Wikimedia rate-limits shared cloud IPs; HTTP 429 is common. `images.py` is single-threaded with
   0.6 s spacing and backs off on its own. Never parallelise it or re-run it over every car; use
   `--only`. If it gives up on a car, re-run that id later.
 - Re-running `--only <id>` replaces that car's photo list, so re-check its `hero` and `drop` entries
-  in `data/heroes.json` (keyed by car id; values are Commons file titles).
+  in `data/heroes.json` (keyed by car id; values are Commons file titles, or `flickr:<id>`).
 - Check chosen photos by eye before committing: wrong car or a detail shot → `drop`; a better lead
   photo → `hero`. Thumbnails can return 429 in cloud sessions too, so blank photo boxes in a
   screenshot may be the sandbox, not the site.
+- Commons thumbnails exist only at widths 330, 500, 960, 1280, 1920 and 3840 px, narrower than the
+  original. The page loads them from `thumb.wikimedia.org`; `upload.wikimedia.org` often returns 429
+  here. Use category pages, raw file pages (`action=raw`) and `Special:Search` HTML, not `api.php`.
+- Flickr's search page embeds its results as JSON after `modelExport:`; sizes go up to 1024 px.
+  Openverse finds nothing for rare cars.
+- lamborghini.com serves empty pages to scripts: do not work around it (no user-agent spoofing).
+  Press photos would need the user to register on media.lamborghini.com, and are the user's call.
+
+## Publishing
+- Public link that needs no setup: https://raw.githack.com/wam090/the-lambo-index/main/index.html
+  (serves `main`; updates within minutes of a merge).
+- GitHub Pages (https://wam090.github.io/the-lambo-index/) needs one click by the user: Settings →
+  Pages → Deploy from a branch → `main` / root. Sessions cannot change that setting.
 
 ## Before you finish (this replaces the handover)
 1. Rebuild if any source changed; `node tools/smoke.js` passes; look at the result.

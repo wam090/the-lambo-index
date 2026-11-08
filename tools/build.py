@@ -15,12 +15,21 @@ for _ in range(10):  # images.json may be mid-write while tools/images.py runs
         time.sleep(1)
 else:
     sys.exit("data/images.json is not valid JSON")
-overrides = json.load(open(os.path.join(ROOT, "data", "heroes.json"), encoding="utf-8")) if os.path.exists(os.path.join(ROOT, "data", "heroes.json")) else {}
+def load(name):
+    path = os.path.join(ROOT, "data", name)
+    return json.load(open(path, encoding="utf-8")) if os.path.exists(path) else {}
+
+
+overrides = load("heroes.json")      # visual review: hero photo and rejected photos per car
+extra = load("extra_images.json")    # hand-picked Commons files outside the car's categories
+flickr = load("flickr.json")         # Creative Commons photos from Flickr (tools/flickr.py)
+IMG_KEYS = ("t", "h", "n", "w", "ht", "a", "l", "lu", "src", "p", "sz")
 
 
 def ordered_images(cid):
-    """Apply the visual review: drop rejected photos, put the chosen hero first."""
-    ims = [im for im in images.get(cid, {}).get("images", []) if im["t"] not in set(overrides.get("drop", {}).get(cid, []))]
+    """Commons photos, then hand-picked extras, then Flickr; drop rejected photos, chosen hero first."""
+    drop = set(overrides.get("drop", {}).get(cid, []))
+    ims = [im for src in (images, extra, flickr) for im in src.get(cid, {}).get("images", []) if im["t"] not in drop]
     pick = overrides.get("hero", {}).get(cid)
     if pick:
         ims.sort(key=lambda im: im["t"] != pick)
@@ -38,7 +47,7 @@ for c in CARS:
     d = {k: c[k] for k in keep}
     d["cats"] = c["cats"][:1]
     d["debut"] = c["id"] in debuts
-    d["imgs"] = [{k: im[k] for k in ("t", "h", "n", "w", "ht", "a", "l", "lu")} for im in ordered_images(c["id"])]
+    d["imgs"] = [{k: im[k] for k in IMG_KEYS if k in im} for im in ordered_images(c["id"])]
     cars.append(d)
 payload = {"generated": datetime.date.today().isoformat(), "cars": cars}
 with open(os.path.join(ROOT, "data", "cars.json"), "w", encoding="utf-8") as f:

@@ -246,7 +246,18 @@
     "Lamborghini 350 GTS"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "Concorso Eleganza Villa d'Este 2013 (8847046890) (cropped).jpg",
+     "h": "f/f7",
+     "n": "Concorso_Eleganza_Villa_d%27Este_2013_%288847046890%29_%28cropped%29.jpg",
+     "w": 3060,
+     "ht": 2016,
+     "a": "Classic Virus",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/"
+    }
+   ]
   },
   {
    "id": "400-gt",
@@ -1717,7 +1728,152 @@
     "Lamborghini Jarama 400 GTS"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:52866659143",
+     "w": 1024,
+     "ht": 683,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/52866659143/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/52866659143_7a472fd148_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/52866659143_7a472fd148_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/52866659143_7a472fd148.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/52866659143_7a472fd148_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/52866659143_7a472fd148_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/52866659143_7a472fd148_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:8530772069",
+     "w": 1024,
+     "ht": 555,
+     "a": "Spanish Coches",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/39302751@N06/8530772069/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/8102/8530772069_1f42df43d7_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/8102/8530772069_1f42df43d7_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/8102/8530772069_1f42df43d7.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/8102/8530772069_1f42df43d7_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/8102/8530772069_1f42df43d7_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/8102/8530772069_1f42df43d7_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:52866606185",
+     "w": 1024,
+     "ht": 673,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/52866606185/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/52866606185_329c285135_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/52866606185_329c285135_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/52866606185_329c285135.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/52866606185_329c285135_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/52866606185_329c285135_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/52866606185_329c285135_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:26995507560",
+     "w": 1024,
+     "ht": 683,
+     "a": "Matt",
+     "l": "CC BY-NC-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/furlined/26995507560/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/7549/26995507560_03046e9e29_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/7549/26995507560_03046e9e29_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/7549/26995507560_03046e9e29.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/7549/26995507560_03046e9e29_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/7549/26995507560_03046e9e29_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/7549/26995507560_03046e9e29_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "urraco-p250",
@@ -1832,7 +1988,7 @@
    "engine": "3.9 L V12",
    "eng": "V12",
    "cv": 375,
-   "units": 152,
+   "units": null,
    "designer": "Marcello Gandini (Bertone)",
    "wiki": "Lamborghini Countach",
    "note": "The pure, wing-less original, named for its rear-view periscope.",
@@ -2148,7 +2304,7 @@
    "engine": "2.0 L V8",
    "eng": "V8",
    "cv": 182,
-   "units": 66,
+   "units": null,
    "designer": "Marcello Gandini (Bertone)",
    "wiki": "Lamborghini Urraco",
    "note": "Two-litre Urraco for the Italian tax regime.",
@@ -2156,7 +2312,44 @@
     "Lamborghini Urraco P200"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:36104289680",
+     "w": 1024,
+     "ht": 683,
+     "a": "cerbera15",
+     "l": "CC BY-NC-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/131106919@N08/36104289680/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/4335/36104289680_df1c1870da_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/4335/36104289680_df1c1870da_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/4335/36104289680_df1c1870da.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/4335/36104289680_df1c1870da_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/4335/36104289680_df1c1870da_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/4335/36104289680_df1c1870da_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "silhouette",
@@ -2550,7 +2743,7 @@
    "eng": "V8",
    "cv": 260,
    "units": 1,
-   "designer": "Bertone",
+   "designer": "Marc Deschamps (Bertone)",
    "wiki": "Lamborghini Athon",
    "note": "Bertone roadster concept on Silhouette mechanicals.",
    "cats": [
@@ -2602,7 +2795,7 @@
    "eng": "V8",
    "cv": 255,
    "units": 410,
-   "designer": "Bertone",
+   "designer": "Marc Deschamps (Bertone)",
    "wiki": "Lamborghini Jalpa",
    "note": "The last V8 Lamborghini until the Urus.",
    "cats": [
@@ -2731,7 +2924,18 @@
     "Lamborghini LM001"
    ],
    "debut": true,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "1981 Lamborghino LM001 prototipo.jpg",
+     "h": "8/8d",
+     "n": "1981_Lamborghino_LM001_prototipo.jpg",
+     "w": 749,
+     "ht": 406,
+     "a": "Unknown author",
+     "l": "Public domain in Italy (PD-Italy)",
+     "lu": "https://commons.wikimedia.org/wiki/Template:PD-Italy"
+    }
+   ]
   },
   {
    "id": "lma002",
@@ -2752,7 +2956,18 @@
     "Lamborghini LMA002"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "1982 Lamborghini LMA002 prototipo.jpg",
+     "h": "4/4b",
+     "n": "1982_Lamborghini_LMA002_prototipo.jpg",
+     "w": 600,
+     "ht": 300,
+     "a": "Unknown author",
+     "l": "Public domain in Italy (PD-Italy)",
+     "lu": "https://commons.wikimedia.org/wiki/Template:PD-Italy"
+    }
+   ]
   },
   {
    "id": "countach-lp500s",
@@ -2765,7 +2980,7 @@
    "engine": "4.8 L V12",
    "eng": "V12",
    "cv": 375,
-   "units": 323,
+   "units": null,
    "designer": "Marcello Gandini (Bertone)",
    "wiki": "Lamborghini Countach",
    "note": "Bigger 4.8-litre V12 for the early 1980s.",
@@ -3017,7 +3232,18 @@
     "Lamborghini Countach QVX"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "Lamborghini-countach-qvx.jpg",
+     "h": "8/83",
+     "n": "Lamborghini-countach-qvx.jpg",
+     "w": 580,
+     "ht": 376,
+     "a": "NoJive",
+     "l": "CC BY-SA 4.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+   ]
   },
   {
    "id": "lm002",
@@ -3160,7 +3386,40 @@
     "Lamborghini Portofino"
    ],
    "debut": true,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:14478679578",
+     "w": 800,
+     "ht": 650,
+     "a": "formulanone",
+     "l": "CC BY-NC-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/formulanone/14478679578/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/3917/14478679578_181486c7b5_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/3917/14478679578_181486c7b5_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/3917/14478679578_181486c7b5.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/3917/14478679578_181486c7b5_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/3917/14478679578_181486c7b5_c.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "countach-evoluzione",
@@ -3390,7 +3649,7 @@
    "eng": "V12",
    "cv": 455,
    "units": 1,
-   "designer": "Marcello Gandini (Bertone)",
+   "designer": "Marc Deschamps (Bertone)",
    "wiki": "Bertone Genesis",
    "note": "Bertone's V12 people carrier with gullwing doors.",
    "cats": [
@@ -3909,7 +4168,224 @@
     "Lamborghini Diablo SE30"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:14486997194",
+     "w": 1024,
+     "ht": 660,
+     "a": "Rutger van der Maar",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/rutgervandermaar/14486997194/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/3879/14486997194_875715d220_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/3879/14486997194_875715d220_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/3879/14486997194_875715d220.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/3879/14486997194_875715d220_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/3879/14486997194_875715d220_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/3879/14486997194_875715d220_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:53773655728",
+     "w": 1024,
+     "ht": 751,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/53773655728/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/53773655728_30d39079a8_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/53773655728_30d39079a8_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/53773655728_30d39079a8.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/53773655728_30d39079a8_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/53773655728_30d39079a8_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/53773655728_30d39079a8_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:54093507841",
+     "w": 1024,
+     "ht": 677,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/54093507841/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/54093507841_a87fb9702a_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/54093507841_a87fb9702a_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/54093507841_a87fb9702a.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/54093507841_a87fb9702a_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/54093507841_a87fb9702a_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/54093507841_a87fb9702a_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:5104958308",
+     "w": 1024,
+     "ht": 685,
+     "a": "Ryu1chi Miwa",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/ryu1miwa/5104958308/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/1123/5104958308_dbd35db53c_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/1123/5104958308_dbd35db53c_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/1123/5104958308_dbd35db53c.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/1123/5104958308_dbd35db53c_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/1123/5104958308_dbd35db53c_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/1123/5104958308_dbd35db53c_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:53773655693",
+     "w": 1024,
+     "ht": 584,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/53773655693/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/53773655693_bd86f8e23c_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/53773655693_bd86f8e23c_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/53773655693_bd86f8e23c.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/53773655693_bd86f8e23c_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/53773655693_bd86f8e23c_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/53773655693_bd86f8e23c_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:53773455136",
+     "w": 1024,
+     "ht": 662,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/53773455136/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/53773455136_a230ec0ae5_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/53773455136_a230ec0ae5_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/53773455136_a230ec0ae5.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/53773455136_a230ec0ae5_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/53773455136_a230ec0ae5_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/53773455136_a230ec0ae5_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "diablo-se30-jota",
@@ -3930,7 +4406,116 @@
     "Lamborghini Diablo SE30 Jota"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:8074903399",
+     "w": 1024,
+     "ht": 657,
+     "a": "Romain Drapri",
+     "l": "CC BY-NC-ND 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/rgt3/8074903399/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/7121/8074903399_3861e5c4c9_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/7121/8074903399_3861e5c4c9_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/7121/8074903399_3861e5c4c9.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/7121/8074903399_3861e5c4c9_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/7121/8074903399_3861e5c4c9_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/7121/8074903399_3861e5c4c9_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:8074904127",
+     "w": 1024,
+     "ht": 678,
+     "a": "Romain Drapri",
+     "l": "CC BY-NC-ND 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/rgt3/8074904127/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/7253/8074904127_321071c3cf_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/7253/8074904127_321071c3cf_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/7253/8074904127_321071c3cf.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/7253/8074904127_321071c3cf_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/7253/8074904127_321071c3cf_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/7253/8074904127_321071c3cf_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:55009281944",
+     "w": 1024,
+     "ht": 768,
+     "a": "Autos Exóticos en  México",
+     "l": "CC BY-NC-ND 4.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/carspottingmex/55009281944/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/55009281944_a0605c2ca9_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/55009281944_a0605c2ca9_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/55009281944_a0605c2ca9.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/55009281944_a0605c2ca9_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/55009281944_a0605c2ca9_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/55009281944_a0605c2ca9_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "cala",
@@ -4252,7 +4837,7 @@
    "units": 1,
    "designer": "Zagato",
    "wiki": "Zagato Raptor",
-   "note": "Zagato's roofless-entry coupé on Diablo VT mechanicals.",
+   "note": "Doorless Zagato coupé on Diablo VT mechanicals: the canopy tilts forward for entry.",
    "cats": [
     "Lamborghini Raptor Zagato"
    ],
@@ -4801,7 +5386,80 @@
     "Lamborghini Diablo VT 6.0 SE"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:14259866513",
+     "w": 1024,
+     "ht": 683,
+     "a": "Romain Drapri",
+     "l": "CC BY-NC-ND 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/rgt3/14259866513/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/5573/14259866513_6e80c9c1be_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/5573/14259866513_6e80c9c1be_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/5573/14259866513_6e80c9c1be.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/5573/14259866513_6e80c9c1be_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/5573/14259866513_6e80c9c1be_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/5573/14259866513_6e80c9c1be_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:14053036408",
+     "w": 1024,
+     "ht": 683,
+     "a": "Romain Drapri",
+     "l": "CC BY-NC-ND 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/rgt3/14053036408/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/5315/14053036408_8b4688d47e_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/5315/14053036408_8b4688d47e_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/5315/14053036408_8b4688d47e.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/5315/14053036408_8b4688d47e_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/5315/14053036408_8b4688d47e_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/5315/14053036408_8b4688d47e_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "murcielago",
@@ -6870,7 +7528,188 @@
     "Lamborghini Murciélago LP650-4 Roadster"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:5595796675",
+     "w": 1024,
+     "ht": 680,
+     "a": "Jeff",
+     "l": "CC BY-NC-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/jeffweb/5595796675/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/5172/5595796675_f7ef58c374_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/5172/5595796675_f7ef58c374_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/5172/5595796675_f7ef58c374.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/5172/5595796675_f7ef58c374_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/5172/5595796675_f7ef58c374_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/5172/5595796675_f7ef58c374_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:6348173565",
+     "w": 1024,
+     "ht": 682,
+     "a": "Schen Photography",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/schenphotography/6348173565/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/6212/6348173565_8e7dc900fa_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/6212/6348173565_8e7dc900fa_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/6212/6348173565_8e7dc900fa.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/6212/6348173565_8e7dc900fa_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/6212/6348173565_8e7dc900fa_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/6212/6348173565_8e7dc900fa_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:5596379968",
+     "w": 1024,
+     "ht": 680,
+     "a": "Jeff",
+     "l": "CC BY-NC-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/jeffweb/5596379968/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/5266/5596379968_31c30a1f78_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/5266/5596379968_31c30a1f78_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/5266/5596379968_31c30a1f78.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/5266/5596379968_31c30a1f78_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/5266/5596379968_31c30a1f78_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/5266/5596379968_31c30a1f78_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:5596380386",
+     "w": 1024,
+     "ht": 680,
+     "a": "Jeff",
+     "l": "CC BY-NC-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/jeffweb/5596380386/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/5142/5596380386_14aacf1147_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/5142/5596380386_14aacf1147_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/5142/5596380386_14aacf1147.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/5142/5596380386_14aacf1147_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/5142/5596380386_14aacf1147_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/5142/5596380386_14aacf1147_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:3341496521",
+     "w": 1024,
+     "ht": 686,
+     "a": "Romain Drapri",
+     "l": "CC BY-NC-ND 2.0",
+     "lu": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/rgt3/3341496521/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/3551/3341496521_486387602c_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/3551/3341496521_486387602c_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/3551/3341496521_486387602c.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/3551/3341496521_486387602c_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/3551/3341496521_486387602c_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/3551/3341496521_486387602c_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "murcielago-sv",
@@ -6883,10 +7722,10 @@
    "engine": "6.5 L V12",
    "eng": "V12",
    "cv": 670,
-   "units": 186,
+   "units": null,
    "designer": "Luc Donckerwolke",
    "wiki": "Lamborghini Murciélago",
-   "note": "Lighter, faster finale for the Murciélago.",
+   "note": "Lighter, faster finale for the Murciélago; planned run of 350, no official final count.",
    "cats": [
     "Lamborghini Murciélago LP670-4 SuperVeloce"
    ],
@@ -7496,7 +8335,7 @@
    "units": null,
    "designer": "Luc Donckerwolke",
    "wiki": "Lamborghini Gallardo",
-   "note": "Open Superleggera equivalent.",
+   "note": "Open Superleggera equivalent; the last Gallardo built, in November 2013, was one.",
    "cats": [
     "Lamborghini Gallardo LP570-4 Spyder Performante"
    ],
@@ -7745,7 +8584,80 @@
     "Lamborghini Murciélago R-SV"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:6006008012",
+     "w": 1024,
+     "ht": 680,
+     "a": "David Merrett",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/davehamster/6006008012/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/6024/6006008012_0262288406_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/6024/6006008012_0262288406_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/6024/6006008012_0262288406.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/6024/6006008012_0262288406_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/6024/6006008012_0262288406_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/6024/6006008012_0262288406_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:6006066550",
+     "w": 1024,
+     "ht": 680,
+     "a": "David Merrett",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/davehamster/6006066550/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/6012/6006066550_383383a67e_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/6012/6006066550_383383a67e_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/6012/6006066550_383383a67e.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/6012/6006066550_383383a67e_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/6012/6006066550_383383a67e_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/6012/6006066550_383383a67e_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "aventador-lp700",
@@ -8296,7 +9208,116 @@
     "Lamborghini Aventador LP720-4 50° Anniversario"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:14211320731",
+     "w": 1024,
+     "ht": 768,
+     "a": "Jacob Frey 4A",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/72637915@N03/14211320731/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/2928/14211320731_a65a4d5b19_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/2928/14211320731_a65a4d5b19_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/2928/14211320731_a65a4d5b19.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/2928/14211320731_a65a4d5b19_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/2928/14211320731_a65a4d5b19_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/2928/14211320731_a65a4d5b19_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:46205595914",
+     "w": 1024,
+     "ht": 681,
+     "a": "David Merrett",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/davehamster/46205595914/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/7911/46205595914_4019df6931_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/7911/46205595914_4019df6931_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/7911/46205595914_4019df6931.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/7911/46205595914_4019df6931_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/7911/46205595914_4019df6931_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/7911/46205595914_4019df6931_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:14027960779",
+     "w": 1024,
+     "ht": 768,
+     "a": "Jacob Frey 4A",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/72637915@N03/14027960779/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/2933/14027960779_a075c50597_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/2933/14027960779_a075c50597_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/2933/14027960779_a075c50597.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/2933/14027960779_a075c50597_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/2933/14027960779_a075c50597_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/2933/14027960779_a075c50597_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "egoista",
@@ -8374,7 +9395,7 @@
    "units": null,
    "designer": "Luc Donckerwolke",
    "wiki": "Lamborghini Gallardo",
-   "note": "The final Gallardo, from the racing department.",
+   "note": "The last new Gallardo version, from the racing department.",
    "cats": [
     "Lamborghini Gallardo LP570-4 Squadra Corse"
    ],
@@ -8433,10 +9454,10 @@
    "engine": "6.5 L V12",
    "eng": "V12",
    "cv": 750,
-   "units": 3,
+   "units": 4,
    "designer": "Filippo Perini",
    "wiki": "Lamborghini Veneno",
-   "note": "Three customer cars plus one kept by the factory.",
+   "note": "Four built: three for customers, one kept in the factory museum.",
    "cats": [
     "Lamborghini Veneno"
    ],
@@ -8986,7 +10007,7 @@
    "units": null,
    "designer": "Dallara / Squadra Corse",
    "wiki": "Lamborghini Huracán GT3",
-   "note": "Customer GT3 car, two-time Daytona 24 Hours winner.",
+   "note": "Customer GT3 car; won the GTD class at the 2018 Daytona 24 Hours, Lamborghini's first 24-hour race win.",
    "cats": [
     "Lamborghini Huracán GT3"
    ],
@@ -10768,17 +11789,17 @@
    "id": "urus-st-x",
    "family": "Urus",
    "name": "Urus ST-X",
-   "kind": "Race car",
+   "kind": "Concept",
    "year": 2018,
    "end": null,
    "body": "SUV",
    "engine": "4.0 L twin-turbo V8",
    "eng": "V8",
-   "cv": null,
+   "cv": 650,
    "units": null,
    "designer": "Squadra Corse",
    "wiki": null,
-   "note": "Racing Urus for the Super Trofeo-backed ST-X series.",
+   "note": "Racing Urus for a one-make series mixing track and off-road racing, planned for 2020; the series did not go ahead.",
    "cats": [
     "Lamborghini Urus ST-X"
    ],
@@ -11165,12 +12186,229 @@
    "units": null,
    "designer": "Squadra Corse",
    "wiki": "Lamborghini Huracán GT3",
-   "note": "Updated GT3 car (EVO2 from 2022).",
+   "note": "Updated GT3 car; won the GTD class at Daytona in 2019. EVO2 version from 2023.",
    "cats": [
     "Lamborghini Huracán GT3 Evo"
    ],
    "debut": false,
-   "imgs": []
+   "imgs": [
+    {
+     "t": "flickr:52228506984",
+     "w": 1024,
+     "ht": 618,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/52228506984/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/52228506984_983c3f5d0a_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/52228506984_983c3f5d0a_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/52228506984_983c3f5d0a.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/52228506984_983c3f5d0a_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/52228506984_983c3f5d0a_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/52228506984_983c3f5d0a_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:55056623095",
+     "w": 1024,
+     "ht": 771,
+     "a": "Thomas Vogt",
+     "l": "CC BY 4.0",
+     "lu": "https://creativecommons.org/licenses/by/4.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/thomas_vogt/55056623095/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/55056623095_f776bb7a99_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/55056623095_f776bb7a99_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/55056623095_f776bb7a99.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/55056623095_f776bb7a99_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/55056623095_f776bb7a99_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/55056623095_f776bb7a99_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:52571037872",
+     "w": 1024,
+     "ht": 683,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/52571037872/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/52571037872_d27efece6f_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/52571037872_d27efece6f_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/52571037872_d27efece6f.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/52571037872_d27efece6f_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/52571037872_d27efece6f_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/52571037872_d27efece6f_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:52228506924",
+     "w": 1024,
+     "ht": 675,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/52228506924/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/52228506924_628688a6bc_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/52228506924_628688a6bc_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/52228506924_628688a6bc.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/52228506924_628688a6bc_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/52228506924_628688a6bc_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/52228506924_628688a6bc_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:52228507084",
+     "w": 1024,
+     "ht": 656,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/52228507084/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/52228507084_a0b8c33033_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/52228507084_a0b8c33033_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/52228507084_a0b8c33033.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/52228507084_a0b8c33033_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/52228507084_a0b8c33033_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/52228507084_a0b8c33033_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "flickr:52228718160",
+     "w": 1024,
+     "ht": 619,
+     "a": "Charles",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/charles79/52228718160/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/52228718160_336c418737_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/52228718160_336c418737_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/52228718160_336c418737.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/52228718160_336c418737_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/52228718160_336c418737_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/52228718160_336c418737_b.jpg"
+      ]
+     ]
+    }
+   ]
   },
   {
    "id": "sian",
@@ -11901,7 +13139,7 @@
    "units": 600,
    "designer": "Filippo Perini",
    "wiki": "Lamborghini Aventador",
-   "note": "The last pure, non-hybrid V12 Lamborghini; 350 coupés and 250 roadsters.",
+   "note": "The last series-production Lamborghini with a non-hybrid V12; 350 coupés and 250 roadsters.",
    "cats": [
     "Lamborghini Aventador LP780-4 Ultimae"
    ],
@@ -12699,7 +13937,7 @@
    "name": "SC63",
    "kind": "Race car",
    "year": 2023,
-   "end": 0,
+   "end": 2025,
    "body": "LMDh prototype",
    "engine": "3.8 L twin-turbo V8 hybrid",
    "eng": "Hybrid V8",
@@ -12707,7 +13945,7 @@
    "units": null,
    "designer": "Ligier / Squadra Corse",
    "wiki": "Lamborghini SC63",
-   "note": "Le Mans Daytona hybrid prototype for WEC and IMSA.",
+   "note": "LMDh hybrid prototype; raced in WEC in 2024 and IMSA in 2024–25 before Lamborghini paused the programme.",
    "cats": [
     "Lamborghini SC63"
    ],
