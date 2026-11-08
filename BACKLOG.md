@@ -9,6 +9,10 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-08: The timeline's orange frame marks only the original form of each car; versions,
   editions and race variants stay unframed (rules in tools/catalog.py).
 
+## In progress
+
+Nothing. (A chat that runs low on room mid-task writes here what is left.)
+
 ## Next
 
 - [ ] **Go public (your call).** Wikimedia photos are freely licensed and credited, and the facts are

@@ -18,10 +18,16 @@ The user (the Coordinator) assigns the tasks and owns product decisions. Items m
 BACKLOG.md are theirs: ask, never assume. Decisions already made are listed in BACKLOG.md: follow
 them without asking again.
 
-## Start of session
-1. This file and the backlog are already in your context. Read code only for the area you touch.
+## Every chat: instructions first, then the ask
+Whatever the user writes, even one word, handle it in this order:
+1. This file and the backlog (already in your context). Read code only for the area you touch.
 2. Run `git log --oneline -8` and check for open pull requests. New sessions start from `main`, so
    unmerged work is invisible to you; if an open PR touches your area, tell the user before starting.
+3. Then the ask. "next" or "continue" means the first unfinished item in BACKLOG.md ("In progress"
+   first, then "Next"), skipping items marked "your call"; list those for the user instead.
+4. End every reply with a capacity bar, e.g. `Chat capacity: ████████░░░░░░░░░░░░ ~40% used (estimate)`.
+5. At about 70% used, or when the task is done, start nothing new: do "Before you finish" so the
+   chat never runs out mid-task.
 
 ## Files
 | Path | What it is | Edit? |
@@ -97,7 +103,11 @@ credits for any photo without a licence; `--credits-only` does only the second p
    cut stale lines instead of appending.
 4. `README.md` if user-visible features or counts changed.
 5. Commit sources and outputs together, push your session branch, open a draft PR.
-6. Tell the user plainly: what changed, how you verified it, what needs their decision, and that the
-   PR must be merged before the next session starts, or that session will not see this work.
+6. Tell the user plainly what changed and how you verified it, then end with **Next steps for you**:
+   - the PR to merge; it must be merged before the next chat, which starts from `main`;
+   - the exact sentence to paste into the next chat;
+   - any decision waiting on the user.
+   If the task is unfinished, leave the site working and put what is left under "In progress" in
+   BACKLOG.md, in the same PR, so the next chat only needs "continue".
 
 @BACKLOG.md
