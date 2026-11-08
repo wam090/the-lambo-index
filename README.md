@@ -39,6 +39,8 @@ data/heroes.json   hand-picked lead photos and rejected photos from visual revie
 src/template.html  page shell and styles
 src/app.js         the app
 tools/build.py     merges everything into index.html
+tools/smoke.js     headless browser check of every view
+CLAUDE.md          working instructions loaded by every Claude Code session
 ```
 
 Rebuild after editing the catalogue:
@@ -47,6 +49,7 @@ Rebuild after editing the catalogue:
 python3 tools/images.py --only new-car-id   # photos for new or changed cars only
 python3 tools/flickr.py --all-gaps          # Flickr photos for cars with few Commons photos
 python3 tools/build.py
+node tools/smoke.js                         # check the page still works
 ```
 
 `images.py` is deliberately slow and single-threaded: Wikimedia rate-limits shared cloud IPs.
