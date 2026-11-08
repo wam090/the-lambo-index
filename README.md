@@ -19,7 +19,8 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 - **Car pages**: gallery, full-resolution viewer (keyboard and swipe), spec sheet, links to
   Wikipedia, all Commons photos, for-sale searches and scale models on lambodiecast.com.
 - **Timeline**: every car, decade by decade. An orange frame marks each debut, the original form
-  of each car; versions, editions and race variants are unframed (rules in tools/catalog.py).
+  of each car (rules in tools/catalog.py). Limited series wear a platinum frame, one-offs a diamond
+  one and race cars a red frame scuffed with tyre marks, each with a badge beside the Debut badge.
 - **Compare**: up to four cars side by side; most powerful and rarest highlighted.
 - **Stats**: power from 1963 to today (record-holders labelled), cars per decade, engines,
   types, designers, most powerful, rarest road cars.
