@@ -90,15 +90,21 @@ credits for any photo without a licence; `--credits-only` does only the second p
 - Anything outside this repo dies with the session's container. Commit it or lose it.
 
 ## Photos
-- Only freely licensed photos, each credited with author, licence and link (the app shows these).
-  Never commit image files: the page loads them from Wikimedia and Flickr. Sources, in order: Commons
-  categories (`images.py`); Commons files outside a car's categories, found with `Special:Search`
-  (`data/extra_images.json`); Flickr Creative Commons photos for cars Commons lacks (`flickr.py`).
+- Every photo is credited with author, licence and a link to where it is hosted (the app shows
+  these). Never commit image files: the page loads them from Wikimedia and Flickr. Sources, in order:
+  Commons categories (`images.py`); Commons files outside a car's categories, found with
+  `Special:Search` (`data/extra_images.json`); Flickr Creative Commons photos (`flickr.py`); and only
+  for a car with no free photo, credited press or all-rights-reserved photos in
+  `data/nonfree_images.json` (user's decision, 2026-11-08; find candidates with `flickr.py --embed`).
+  Deleting that file removes them all.
 - Non-commercial (NC) licences are accepted because the site is non-commercial. If it ever carries
   ads or sells anything, replace those photos.
-- Never use scans of printed material, re-uploaded press photos, toys or LEGO, renders or game
-  screenshots: their CC tags are not the uploader's to give. `BLOCKED` in `flickr.py` skips accounts
-  known for these. Every new photo is checked by eye before it stays.
+- Never label a photo freely licensed when it isn't: scans of printed material and re-uploaded press
+  photos carry CC tags that are not the uploader's to give, so they may only go in
+  `nonfree_images.json`, credited to their real maker (press photos to the manufacturer). Never use
+  toys, LEGO, renders or game screenshots as photos of a car, paid stock or watermarked photos, or
+  anything that needs a site's protections worked around. `BLOCKED` in `flickr.py` skips known
+  accounts. Every new photo is checked by eye before it stays.
 - Wikimedia rate-limits shared cloud IPs; HTTP 429 is common. `images.py` is single-threaded with
   0.6 s spacing and backs off on its own. Never parallelise it or re-run it over every car; use
   `--only`. If it gives up on a car, re-run that id later.

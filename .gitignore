@@ -3,3 +3,4 @@ __pycache__/
 *.tmp
 preview-*.png
 .DS_Store
+flickr_embed_candidates.json

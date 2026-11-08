@@ -4,15 +4,16 @@ Every Lamborghini ever made or shown — production cars, limited series, one-of
 prototypes and race cars — in one fast, searchable, photo-first page.
 
 **Open `index.html` in any browser.** It is a single self-contained file (about 350 KB). The data is
-built in; photos stream from Wikimedia Commons at the best size for your screen, up to 3840 px in
+built in; photos stream from Wikimedia Commons and Flickr at the best size for your screen, up to 3840 px in
 the full-screen viewer. You need an internet connection for photos and fonts.
 
 ## What's in it
 
 - **145 cars** from the 1963 350 GTV to the 2025 Fenomeno, with year(s), type, body, engine,
   power (CV and kW), number built where reliably known, designer and a one-line note.
-- **About 1,050 photos** from Wikimedia Commons and Flickr (Creative Commons only), reviewed by eye.
-  Every photo shows its author and licence and links to its source page.
+- **About 1,060 photos**, reviewed by eye: freely licensed photos from Wikimedia Commons and Flickr,
+  plus credited press photos for the few cars with no free photo. Every photo shows its author and
+  licence and links to its source page.
 - **Browse**: instant search, filters with live counts (family, type, decade, engine, body,
   designer, power), family tiles that drill down into each car, grid and list layouts, random pick.
 - **Car pages**: gallery, full-resolution viewer (keyboard and swipe), spec sheet, links to
@@ -61,5 +62,6 @@ node tools/smoke.js                         # check the page still works
   blank where sources disagree. Corrections are welcome — edit `tools/catalog.py`.
 - Photos: Wikimedia Commons and Flickr contributors, under the licences shown on each photo (mostly
   CC BY-SA and CC BY; some non-commercial CC licences, fine while the site is non-commercial).
-  They are loaded from Wikimedia and Flickr, not copied into this project.
+  Cars with no free photo show press photos credited to their maker. All photos are loaded from
+  where they are hosted, not copied into this project.
 - Not affiliated with Automobili Lamborghini S.p.A. The page asks search engines not to index it.
