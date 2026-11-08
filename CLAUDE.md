@@ -65,7 +65,7 @@ credits for any photo without a licence; `--credits-only` does only the second p
   widths with Playwright (pre-installed in cloud sessions).
 - **Timeline frames**: a debut is the first car of each family by year, plus `EXTRA_DEBUTS`, minus
   `NOT_DEBUTS` (both in `tools/catalog.py`; applied in `build.py`). Kind frames and badges come from `kind`
-  in `buildTimeline()`: Limited series platinum, One-off diamond, Race car red with tyre marks. A car
+  in `buildTimeline()`: Limited series platinum, One-off platinum with diamond sparkles, Race car red with tyre marks. A car
   shows only its highest frame (diamond > platinum > red > orange) but keeps every badge. Styles in `src/template.html`; `smoke.js` counts each frame.
 
 ## Rules
