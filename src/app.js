@@ -720,17 +720,18 @@ function buildTimeline() {
   const sorted = cars.slice().sort((a, b) => a.year - b.year || a.idx - b.idx);
   // debuts are flagged in the catalogue: the original form of each distinct car
   const debut = new Set(cars.filter((c) => c.debut).map((c) => c.id));
+  const SPARKLES = `<span class="gems" aria-hidden="true">${'<i></i>'.repeat(7)}</span>`;   // crystal glints on one-offs
   for (const c of sorted) { if (!decades.has(c.decade)) decades.set(c.decade, []); decades.get(c.decade).push(c); }
   let html = '';
   for (const [d, list] of decades) {
     const nDebut = list.filter((c) => debut.has(c.id)).length;
     html += `<section class="decade"><h2>${d}<small>${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}</small></h2><div class="tl">${list.map((c) => {
       const isDebut = debut.has(c.id);
-      // limited series wear a platinum frame, one-offs a diamond one, race cars a tyre-scuffed red one;
-      // a debut keeps its orange frame inside
+      // one frame per car, the highest it qualifies for: one-off diamond > limited platinum >
+      // race red > debut orange. Every badge stays.
       const kc = { 'Limited series': 'lim', 'One-off': 'one', 'Race car': 'race' }[c.kind] || '';
       const tags = `${isDebut ? ' <span class="tl-tag debut">Debut</span>' : ''}${kc === 'lim' ? ' <span class="tl-tag lim">Limited</span>' : ''}${kc === 'one' ? ' <span class="tl-tag one">One-off</span>' : ''}${kc === 'race' ? ' <span class="tl-tag race">Race car</span>' : ''}`;
-      return `<a class="tl-item${isDebut ? ' debut' : ''}${kc ? ` ${kc}` : ''}" href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 960, '', isDebut ? '<span class="frame" aria-hidden="true"></span>' : '')}<span class="b"><span class="yr">${yearsLong(c)}${tags}</span><span class="nm">${esc(c.name)}</span><span class="meta"><span>${esc(c.kind)}</span><span>${c.cv ? `<span class="mono">${fmt(c.cv)}</span> CV` : esc(c.eng)}</span></span></span></a>`;
+      return `<a class="tl-item${isDebut ? ' debut' : ''}${kc ? ` ${kc}` : ''}" href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 960, '', isDebut && !kc ? '<span class="frame" aria-hidden="true"></span>' : '')}<span class="b"><span class="yr">${yearsLong(c)}${tags}</span><span class="nm">${esc(c.name)}</span><span class="meta"><span>${esc(c.kind)}</span><span>${c.cv ? `<span class="mono">${fmt(c.cv)}</span> CV` : esc(c.eng)}</span></span></span>${kc === 'one' ? SPARKLES : ''}</a>`;
     }).join('')}</div></section>`;
   }
   html += '<p class="tl-foot">Years mark when a car was first shown or first built. Click any car for photos and specifications.</p>';

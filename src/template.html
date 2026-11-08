@@ -380,12 +380,13 @@ button{cursor:pointer}
 .tl-tag+.tl-tag{margin-left:5px}
 .tl-tag.debut{background:var(--accent);color:var(--accent-ink)}
 .tl-key{color:var(--accent);font-weight:600}
-/* Limited series: platinum. One-off: diamond paint, faceted, slowly turning, with a passing glint. */
+/* Limited series: platinum. One-off: crystal diamond, cut-glass facets, turning, with glints and twinkling sparkles. */
 .tl{--platinum:linear-gradient(135deg,#eceef0 0%,#a9adb3 14%,#6f747b 30%,#d8dbdf 46%,#f7f8f9 52%,#8b9097 68%,#c4c7cc 84%,#5f646b 100%);
   --facets:#fff 0 12deg,#8fdcff 0 36deg,#fff 0 46deg,#c7a8ff 0 72deg,#f2fbff 0 86deg,#6fc8ff 0 112deg,#fff 0 122deg,#ffb3dd 0 148deg,#c9f6ff 0 166deg,#fff 0 178deg,#8ff0d2 0 204deg,#e3d0ff 0 226deg,#fff 0 238deg,#9fd2ff 0 264deg,#ffe39a 0 288deg,#fff 0 300deg,#b9a3ff 0 326deg,#d8f3ff 0 360deg}
 @property --gem{syntax:'<angle>';initial-value:0deg;inherits:false}
 .tl-item.lim{border:3px solid transparent}
-.tl-item.one{border:4px solid transparent}
+.tl-item.one{border:5px solid transparent;position:relative;overflow:visible}
+.tl-item.one .ph{border-radius:7px 7px 0 0}
 .tl-item.race{border:4px solid transparent}
 .tl-item.lim,.tl-item.lim:hover,.tl-item.one,.tl-item.one:hover,.tl-item.race,.tl-item.race:hover{border-color:transparent}
 /* Race car: racing red scuffed with tyre marks (tread streaks and rubber skid arcs) */
@@ -400,26 +401,37 @@ button{cursor:pointer}
 .tl-key.race{color:#ff3b46}
 .tl-item.lim{background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--platinum) border-box}
 .tl-item.one{background:linear-gradient(var(--panel),var(--panel)) padding-box,
-  radial-gradient(circle at 14% 0,#fff 0 1.6px,transparent 2.6px) border-box,
-  radial-gradient(circle at 100% 36%,#fff 0 1.6px,transparent 2.6px) border-box,
-  radial-gradient(circle at 63% 100%,#fff 0 1.6px,transparent 2.6px) border-box,
-  radial-gradient(circle at 0 18%,#fff 0 1.6px,transparent 2.6px) border-box,
-  radial-gradient(circle at 38% 0,#fff 0 1.2px,transparent 2.2px) border-box,
-  radial-gradient(circle at 100% 82%,#fff 0 1.2px,transparent 2.2px) border-box,
-  linear-gradient(110deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%) border-box,
+  linear-gradient(110deg,transparent 40%,rgba(255,255,255,.95) 49%,#fff 50%,rgba(255,255,255,.95) 51%,transparent 60%) border-box,
+  repeating-linear-gradient(60deg,transparent 0 5px,rgba(255,255,255,.75) 5px 6px,transparent 6px 11px) border-box,
+  repeating-linear-gradient(-60deg,transparent 0 7px,rgba(255,255,255,.6) 7px 8px,transparent 8px 13px) border-box,
+  repeating-linear-gradient(0deg,transparent 0 9px,rgba(160,215,255,.5) 9px 10px,transparent 10px 15px) border-box,
   conic-gradient(from var(--gem),var(--facets)) border-box;
-  background-size:100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,300% 100%,100% 100%;
-  animation:gem-turn 14s linear infinite,gem-glint 5s ease-in-out infinite}
+  background-size:100% 100%,300% 100%,100% 100%,100% 100%,100% 100%,100% 100%;
+  box-shadow:0 0 0 1px rgba(255,255,255,.25),0 0 18px rgba(150,210,255,.28);
+  animation:gem-turn 10s linear infinite,gem-glint 3.2s ease-in-out infinite}
 @keyframes gem-turn{to{--gem:360deg}}
-@keyframes gem-glint{0%{background-position:0 0,0 0,0 0,0 0,0 0,0 0,0 0,0% 0,0 0}55%,100%{background-position:0 0,0 0,0 0,0 0,0 0,0 0,0 0,100% 0,0 0}}
+@keyframes gem-glint{0%{background-position:0 0,0% 0,0 0,0 0,0 0,0 0}55%,100%{background-position:0 0,100% 0,0 0,0 0,0 0,0 0}}
+/* crystal sparkles: four-point stars with a soft halo, twinkling in turn around the frame */
+.gems{position:absolute;inset:-3px;pointer-events:none;z-index:4}
+.gems i{position:absolute;width:14px;height:14px;opacity:0;transform:translate(-50%,-50%) scale(.2);animation:twinkle 2.6s ease-in-out infinite}
+.gems i::before{content:"";position:absolute;inset:-7px;border-radius:50%;background:radial-gradient(circle,rgba(220,244,255,.9) 0,rgba(170,220,255,.35) 38%,transparent 70%)}
+.gems i::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,#fff 0 35%,#e9f8ff 60%,#bfe6ff);clip-path:polygon(50% 0,57% 43%,100% 50%,57% 57%,50% 100%,43% 57%,0 50%,43% 43%)}
+.gems i:nth-child(1){left:14%;top:0}
+.gems i:nth-child(2){left:68%;top:0;width:11px;height:11px;animation-delay:.9s}
+.gems i:nth-child(3){left:100%;top:30%;animation-delay:.4s}
+.gems i:nth-child(4){left:100%;top:86%;width:10px;height:10px;animation-delay:1.7s}
+.gems i:nth-child(5){left:57%;top:100%;width:12px;height:12px;animation-delay:1.2s}
+.gems i:nth-child(6){left:0;top:58%;animation-delay:2.1s}
+.gems i:nth-child(7){left:0;top:0;width:18px;height:18px;animation-delay:.6s}
+@keyframes twinkle{0%,100%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0deg)}40%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(45deg)}55%{opacity:.85;transform:translate(-50%,-50%) scale(.8) rotate(60deg)}}
 .tl-tag.lim{background:var(--platinum);color:#17181a}
-.tl-tag.one{color:#141824;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);
-  background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.95) 50%,transparent 60%),conic-gradient(from 20deg at 35% 45%,var(--facets));
-  background-size:300% 100%,100% 100%;animation:gem-glint-tag 5s ease-in-out infinite}
-@keyframes gem-glint-tag{0%{background-position:0% 0,0 0}55%,100%{background-position:100% 0,0 0}}
+.tl-tag.one{color:#141824;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 0 8px rgba(160,215,255,.45);
+  background:linear-gradient(110deg,transparent 40%,#fff 50%,transparent 60%),repeating-linear-gradient(60deg,transparent 0 4px,rgba(255,255,255,.55) 4px 5px),conic-gradient(from 20deg at 35% 45%,var(--facets));
+  background-size:300% 100%,100% 100%,100% 100%;animation:gem-glint-tag 3.2s ease-in-out infinite}
+@keyframes gem-glint-tag{0%{background-position:0% 0,0 0,0 0}55%,100%{background-position:100% 0,0 0,0 0}}
 .tl-key.plat{color:#d9dbde}
 .tl-key.gem{background:linear-gradient(90deg,#bfe9ff,#fff,#e9d4ff,#fff,#b8f3ea);-webkit-background-clip:text;background-clip:text;color:transparent}
-@media (prefers-reduced-motion:reduce){.tl-item.one,.tl-tag.one{animation:none}}
+@media (prefers-reduced-motion:reduce){.tl-item.one,.tl-tag.one{animation:none}.gems i{animation:none;opacity:.8;transform:translate(-50%,-50%) scale(.75)}}
 a.tile{text-decoration:none;color:inherit}
 .c-kind{position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:2px 8px 2px 7px;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;border:1px solid rgba(255,255,255,.14)}
 .c-kind::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--k)}
@@ -589,7 +601,7 @@ a.tile{text-decoration:none;color:inherit}
     <div class="wrap">
       <div class="page-h">
         <div><h1>Lamborghini, <em>car by car</em></h1>
-        <p>Every car in the index, in the order it was first shown or built. An <span class="tl-key">orange frame</span> marks a debut: the original form of each car. Later versions, special editions and race versions get no orange frame; a concept and its production car count separately when they are genuinely different cars. A <span class="tl-key plat">platinum frame</span> marks a limited series, a <span class="tl-key gem">diamond frame</span> a one-off and a <span class="tl-key race">tyre-scuffed red frame</span> a race car, so a debut can wear two frames.</p></div>
+        <p>Every car in the index, in the order it was first shown or built. An <span class="tl-key">orange frame</span> marks a debut: the original form of each car. Later versions, special editions and race versions get no orange frame; a concept and its production car count separately when they are genuinely different cars. A <span class="tl-key plat">platinum frame</span> marks a limited series, a <span class="tl-key gem">diamond frame</span> a one-off and a <span class="tl-key race">tyre-scuffed red frame</span> a race car. A car that qualifies for more than one frame shows the highest (diamond, then platinum, then red, then orange) and keeps every badge.</p></div>
       </div>
       <div id="timeline"></div>
     </div>

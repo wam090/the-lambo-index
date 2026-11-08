@@ -54,6 +54,9 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     expect(await page.isVisible('#view-timeline'), 'timeline: view not shown');
     expect(await n('#timeline .tl-item') === cars.length, `timeline: ${await n('#timeline .tl-item')} entries, expected ${cars.length}`);
     expect(await n('#timeline .tl-item.debut') === debuts, `timeline: ${await n('#timeline .tl-item.debut')} debut frames, expected ${debuts}`);
+    const framedKinds = ['Limited series', 'One-off', 'Race car'];
+    const plainDebuts = cars.filter((c) => c.debut && !framedKinds.includes(c.kind)).length;
+    expect(await n('#timeline .tl-item .frame') === plainDebuts, `timeline: ${await n('#timeline .tl-item .frame')} orange frames, expected ${plainDebuts} (debuts without a higher frame)`);
     for (const [cls, kind] of [['lim', 'Limited series'], ['one', 'One-off'], ['race', 'Race car']]) {
       const want = cars.filter((c) => c.kind === kind).length;
       const got = await n(`#timeline .tl-item.${cls}`);
