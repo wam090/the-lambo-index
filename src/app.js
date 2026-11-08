@@ -726,7 +726,11 @@ function buildTimeline() {
     const nDebut = list.filter((c) => debut.has(c.id)).length;
     html += `<section class="decade"><h2>${d}<small>${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}</small></h2><div class="tl">${list.map((c) => {
       const isDebut = debut.has(c.id);
-      return `<a class="tl-item${isDebut ? ' debut' : ''}" href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 960, '', isDebut ? '<span class="frame" aria-hidden="true"></span>' : '')}<span class="b"><span class="yr">${yearsLong(c)}${isDebut ? ' <span class="tl-debut">Debut</span>' : ''}</span><span class="nm">${esc(c.name)}</span><span class="meta"><span>${esc(c.kind)}</span><span>${c.cv ? `<span class="mono">${fmt(c.cv)}</span> CV` : esc(c.eng)}</span></span></span></a>`;
+      // limited series wear a platinum frame, one-offs a diamond one, race cars a tyre-scuffed red one;
+      // a debut keeps its orange frame inside
+      const kc = { 'Limited series': 'lim', 'One-off': 'one', 'Race car': 'race' }[c.kind] || '';
+      const tags = `${isDebut ? ' <span class="tl-tag debut">Debut</span>' : ''}${kc === 'lim' ? ' <span class="tl-tag lim">Limited</span>' : ''}${kc === 'one' ? ' <span class="tl-tag one">One-off</span>' : ''}${kc === 'race' ? ' <span class="tl-tag race">Race car</span>' : ''}`;
+      return `<a class="tl-item${isDebut ? ' debut' : ''}${kc ? ` ${kc}` : ''}" href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 960, '', isDebut ? '<span class="frame" aria-hidden="true"></span>' : '')}<span class="b"><span class="yr">${yearsLong(c)}${tags}</span><span class="nm">${esc(c.name)}</span><span class="meta"><span>${esc(c.kind)}</span><span>${c.cv ? `<span class="mono">${fmt(c.cv)}</span> CV` : esc(c.eng)}</span></span></span></a>`;
     }).join('')}</div></section>`;
   }
   html += '<p class="tl-foot">Years mark when a car was first shown or first built. Click any car for photos and specifications.</p>';

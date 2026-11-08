@@ -11,6 +11,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-08: Every car should have photos, taken from anywhere on the internet. Free licences
   first; otherwise credited press or all-rights-reserved photos, loaded from where they are hosted
   (`data/nonfree_images.json`; rules in CLAUDE.md, Photos).
+- 2026-11-08: Timeline frames by kind, alongside the orange debut frame and Debut badge: limited
+  series platinum, one-offs diamond paint, race cars red with tyre marks, each with its own badge.
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
   really needed.
 - 2026-11-08: Keep everything relevant in this GitHub repo and avoid steps that need the user's

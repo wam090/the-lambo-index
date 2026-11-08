@@ -64,7 +64,9 @@ credits for any photo without a licence; `--credits-only` does only the second p
 - **Change the UI**: edit `src/` → build → smoke → screenshot what you changed at desktop and phone
   widths with Playwright (pre-installed in cloud sessions).
 - **Timeline frames**: a debut is the first car of each family by year, plus `EXTRA_DEBUTS`, minus
-  `NOT_DEBUTS` (both in `tools/catalog.py`; applied in `build.py`).
+  `NOT_DEBUTS` (both in `tools/catalog.py`; applied in `build.py`). Kind frames and badges come from `kind`
+  in `buildTimeline()`: Limited series platinum, One-off diamond, Race car red with tyre marks; a
+  debut keeps its orange frame inside. Styles in `src/template.html`; `smoke.js` counts each frame.
 
 ## Rules
 - Never hand-edit `index.html`, `data/cars.json` or `data/images.json`. Commit them in the same
