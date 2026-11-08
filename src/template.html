@@ -379,9 +379,8 @@ button{cursor:pointer}
 .tl-tag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:4px;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;vertical-align:1px}
 .tl-tag+.tl-tag{margin-left:5px}
 .tl-tag.debut{background:var(--accent);color:var(--accent-ink)}
-.tl-key{color:var(--accent);font-weight:600}
 /* Limited series: platinum. One-off: a brighter platinum with a passing glint and twinkling diamond sparkles. */
-.tl{--platinum:linear-gradient(135deg,#eceef0 0%,#a9adb3 14%,#6f747b 30%,#d8dbdf 46%,#f7f8f9 52%,#8b9097 68%,#c4c7cc 84%,#5f646b 100%);
+#view-timeline{--platinum:linear-gradient(135deg,#eceef0 0%,#a9adb3 14%,#6f747b 30%,#d8dbdf 46%,#f7f8f9 52%,#8b9097 68%,#c4c7cc 84%,#5f646b 100%);
   --diamond:linear-gradient(135deg,#ffffff 0%,#cdd0d4 14%,#90949b 30%,#eff1f3 46%,#ffffff 52%,#aaaeb4 68%,#e6e8eb 84%,#80858c 100%)}
 .tl-item.lim{border:3px solid transparent}
 .tl-item.one{border:5px solid transparent;position:relative;overflow:visible}
@@ -397,7 +396,6 @@ button{cursor:pointer}
   radial-gradient(80% 110% at 0 62%,transparent 60%,rgba(14,11,9,.6) 62%,transparent 66%) border-box,
   linear-gradient(135deg,#e4111f,#b3000e 40%,#e8192b 68%,#9a000b) border-box}
 .tl-tag.race{color:#fff;background:repeating-linear-gradient(118deg,rgba(0,0,0,.3) 0 2px,transparent 2px 5px),#d3101d}
-.tl-key.race{color:#ff3b46}
 .tl-item.lim{background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--platinum) border-box}
 .tl-item.one{background:linear-gradient(var(--panel),var(--panel)) padding-box,
   linear-gradient(110deg,transparent 40%,rgba(255,255,255,.9) 49%,#fff 50%,rgba(255,255,255,.9) 51%,transparent 60%) border-box,
@@ -426,9 +424,17 @@ button{cursor:pointer}
   clip-path:polygon(50% 0,57% 43%,100% 50%,57% 57%,50% 100%,43% 57%,0 50%,43% 43%);animation:twinkle-tag 2.6s ease-in-out infinite}
 @keyframes twinkle-tag{0%,100%{opacity:0;transform:scale(.3) rotate(0deg)}40%{opacity:1;transform:scale(1) rotate(45deg)}}
 @keyframes gem-glint-tag{0%{background-position:0% 0,0 0}55%,100%{background-position:100% 0,0 0}}
-.tl-key.plat{color:#d9dbde}
-.tl-key.gem{color:#f4f6f8;text-shadow:0 0 6px rgba(255,255,255,.45)}
-@media (prefers-reduced-motion:reduce){.tl-item.one,.tl-tag.one,.tl-tag.one::after{animation:none}.gems i{animation:none;opacity:.8;transform:translate(-50%,-50%) scale(.75)}}
+.tl-legend{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:24px 0 4px;font-size:13.5px}
+.tl-legend .lg{display:inline-flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.tl-legend .gt{color:var(--faint);font-weight:400}
+.tl-legend .lg-note{margin-left:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.sw{position:relative;display:inline-block;width:30px;height:20px;border-radius:6px;border:3px solid transparent}
+.sw.debut{border-color:var(--accent);background:var(--panel)}
+.sw.race{background:linear-gradient(var(--panel),var(--panel)) padding-box,repeating-linear-gradient(118deg,transparent 0 3px,rgba(18,14,12,.65) 3px 5px,transparent 5px 8px) border-box,linear-gradient(135deg,#e4111f,#b3000e 40%,#e8192b 68%,#9a000b) border-box}
+.sw.lim{background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--platinum) border-box}
+.sw.one{background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--diamond) border-box;box-shadow:0 0 8px rgba(255,255,255,.18)}
+.sw.one::after{content:"";position:absolute;right:-7px;top:-7px;width:11px;height:11px;opacity:.9;background:#fff;clip-path:polygon(50% 0,57% 43%,100% 50%,57% 57%,50% 100%,43% 57%,0 50%,43% 43%);animation:twinkle-tag 2.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.tl-item.one,.tl-tag.one,.tl-tag.one::after,.sw.one::after{animation:none}.gems i{animation:none;opacity:.8;transform:translate(-50%,-50%) scale(.75)}}
 a.tile{text-decoration:none;color:inherit}
 .c-kind{position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:2px 8px 2px 7px;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;border:1px solid rgba(255,255,255,.14)}
 .c-kind::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--k)}
@@ -596,9 +602,12 @@ a.tile{text-decoration:none;color:inherit}
   <!-- Timeline -->
   <section class="view" id="view-timeline" data-view="timeline" aria-label="Timeline" hidden>
     <div class="wrap">
-      <div class="page-h">
-        <div><h1>Lamborghini, <em>car by car</em></h1>
-        <p>Every car in the index, in the order it was first shown or built. An <span class="tl-key">orange frame</span> marks a debut: the original form of each car. Later versions, special editions and race versions get no orange frame; a concept and its production car count separately when they are genuinely different cars. A <span class="tl-key plat">platinum frame</span> marks a limited series, a <span class="tl-key gem">platinum frame with diamond sparkles</span> a one-off and a <span class="tl-key race">tyre-scuffed red frame</span> a race car. A car that qualifies for more than one frame shows the highest (diamond, then platinum, then red, then orange) and keeps every badge.</p></div>
+      <div class="tl-legend" aria-label="What the frames mean">
+        <span class="lg"><i class="sw debut"></i>Debut</span><b class="gt" aria-hidden="true">›</b>
+        <span class="lg"><i class="sw race"></i>Race car</span><b class="gt" aria-hidden="true">›</b>
+        <span class="lg"><i class="sw lim"></i>Limited</span><b class="gt" aria-hidden="true">›</b>
+        <span class="lg"><i class="sw one"></i>One-off</span>
+        <span class="lg-note">rarest frame wins</span>
       </div>
       <div id="timeline"></div>
     </div>
