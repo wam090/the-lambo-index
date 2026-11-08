@@ -11,8 +11,8 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 
 - **145 cars** from the 1963 350 GTV to the 2025 Fenomeno, with year(s), type, body, engine,
   power (CV and kW), number built where reliably known, designer and a one-line note.
-- **About 1,000 photos** from Wikimedia Commons, picked for resolution and reviewed by eye. Every
-  photo shows its author and licence and links to its Commons page.
+- **About 1,050 photos** from Wikimedia Commons and Flickr (Creative Commons only), reviewed by eye.
+  Every photo shows its author and licence and links to its source page.
 - **Browse**: instant search, filters with live counts (family, type, decade, engine, body,
   designer, power), family tiles that drill down into each car, grid and list layouts, random pick.
 - **Car pages**: gallery, full-resolution viewer (keyboard and swipe), spec sheet, links to
@@ -32,6 +32,9 @@ Links are shareable: filters, car pages and views live in the URL (`#/m/miura-p4
 tools/catalog.py   hand-curated list of every car (facts + Commons category names)
 tools/images.py    picks photos from Commons category pages and fetches author/licence
 data/images.json   chosen photos per car with credits
+tools/flickr.py    Creative Commons photos from Flickr for cars Commons lacks -> data/flickr.json
+tools/review_sheet.py  contact sheets for reviewing photo candidates by eye
+data/extra_images.json hand-picked Commons files outside the cars' categories
 data/heroes.json   hand-picked lead photos and rejected photos from visual review
 src/template.html  page shell and styles
 src/app.js         the app
@@ -42,6 +45,7 @@ Rebuild after editing the catalogue:
 
 ```bash
 python3 tools/images.py --only new-car-id   # photos for new or changed cars only
+python3 tools/flickr.py --all-gaps          # Flickr photos for cars with few Commons photos
 python3 tools/build.py
 ```
 
@@ -49,8 +53,10 @@ python3 tools/build.py
 
 ## Sources and licences
 
-- Facts were compiled for this index from general automotive knowledge. Build numbers are left
+- Facts were compiled for this index from general automotive knowledge and spot-checked against
+  Wikipedia in November 2026. Build numbers are left
   blank where sources disagree. Corrections are welcome — edit `tools/catalog.py`.
-- Photos: Wikimedia Commons contributors, under the licences shown on each photo (mostly
-  CC BY-SA and CC BY). They are loaded from Wikimedia, not copied into this project.
+- Photos: Wikimedia Commons and Flickr contributors, under the licences shown on each photo (mostly
+  CC BY-SA and CC BY; some non-commercial CC licences, fine while the site is non-commercial).
+  They are loaded from Wikimedia and Flickr, not copied into this project.
 - Not affiliated with Automobili Lamborghini S.p.A. The page asks search engines not to index it.

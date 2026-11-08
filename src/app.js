@@ -20,13 +20,19 @@ const THUMB = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/';
 const ORIG = 'https://upload.wikimedia.org/wikipedia/commons/';
 function imgUrl(im, want, original = false) {
   if (!im) return '';
+  if (im.sz) {   // Flickr photo: fixed sizes up to 1024 px, smallest first
+    const s = original ? null : im.sz.find(([w]) => w >= want);
+    return (s || im.sz[im.sz.length - 1])[1];
+  }
   const fits = STD.filter((s) => s < im.w);   // thumbnails must be narrower than the original
   let w = fits.find((s) => s >= want);
   if (!w && !original) w = fits[fits.length - 1];   // small photo: largest standard thumbnail
   return w ? `${THUMB}${im.h}/${im.n}/${w}px-${im.n}` : `${ORIG}${im.h}/${im.n}`;
 }
-const filePage = (im) => `https://commons.wikimedia.org/wiki/File:${im.n}`;
-const creditHTML = (im) => im ? `Photo: <a href="${filePage(im)}" target="_blank" rel="noopener">${esc(im.a || 'Wikimedia Commons contributor')}</a>${im.l ? ` · ${im.lu ? `<a href="${esc(im.lu)}" target="_blank" rel="noopener">${esc(im.l)}</a>` : esc(im.l)}` : ''} · Wikimedia Commons` : '';
+const filePage = (im) => im.p || `https://commons.wikimedia.org/wiki/File:${im.n}`;
+const photoSource = (im) => (im.src === 'flickr' ? 'Flickr' : 'Wikimedia Commons');
+const creditHTML = (im) => im ? `Photo: <a href="${esc(filePage(im))}" target="_blank" rel="noopener">${esc(im.a || `${photoSource(im)} contributor`)}</a>${im.l ? ` · ${im.lu ? `<a href="${esc(im.lu)}" target="_blank" rel="noopener">${esc(im.l)}</a>` : esc(im.l)}` : ''} · ${photoSource(im)}` : '';
+const photoSearches = (q) => `<a href="https://www.flickr.com/search/?text=${encodeURIComponent(q)}" target="_blank" rel="noopener">Flickr</a> · <a href="https://www.google.com/search?tbm=isch&amp;q=${encodeURIComponent(q)}" target="_blank" rel="noopener">Google Images</a>`;
 
 const FAMILY_NAME = { Murcielago: 'Murciélago', Huracan: 'Huracán', Reventon: 'Reventón', Sian: 'Sián', Autentica: 'Auténtica', Cala: 'Calà', '350': '350 GT', '400': '400 GT', '291': 'Lambo 291' };
 const famName = (f) => FAMILY_NAME[f] || f;
@@ -501,7 +507,8 @@ function renderDetail(c) {
     ? `<div class="ph stage" id="stage" role="button" tabindex="0" aria-label="Open photo viewer" data-empty="Photo unavailable"><img id="stage-img" src="${imgUrl(photos[0], 1920)}" alt="${esc(c.title)}"><span class="zoom">1 / ${photos.length} · full resolution</span></div>
        <p class="credit" id="stage-credit">${creditHTML(photos[0])}</p>
        ${photos.length > 1 ? `<div class="thumbs" id="thumbs">${photos.map((im, i) => `<button type="button" data-ph="${i}" aria-label="Photo ${i + 1}" aria-current="${i === 0}"><img src="${imgUrl(im, 330)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}`
-    : `<div class="ph stage empty" data-empty="No freely licensed photo found yet"></div>`;
+    : `<div class="ph stage empty" data-empty="No freely licensed photo yet"></div>
+       <p class="credit">Every photo of this car we could find is copyrighted, so it can't be shown here. See it on ${photoSearches(q)}.</p>`;
   panel.innerHTML = `
   <div class="sheet-bar">
     <div class="grp">
@@ -536,6 +543,7 @@ function renderDetail(c) {
         <div class="links">
           <a class="btn" href="https://www.google.com/search?q=${encodeURIComponent(`${q} for sale`)}" target="_blank" rel="noopener">For sale ${icon('ext')}</a>
           <a class="btn" href="https://bringatrailer.com/search/?s=${encodeURIComponent(q)}" target="_blank" rel="noopener">Auction results ${icon('ext')}</a>
+          <a class="btn" href="https://www.flickr.com/search/?text=${encodeURIComponent(q)}" target="_blank" rel="noopener">More photos ${icon('ext')}</a>
           <a class="btn" href="https://www.lambodiecast.com/list.php?t=${encodeURIComponent(c.family)}" target="_blank" rel="noopener">Scale models ${icon('ext')}</a>
         </div>
         <p>Scale models open the ${esc(c.famName)} list on lambodiecast.com.</p>

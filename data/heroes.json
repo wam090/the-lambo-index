@@ -15,7 +15,15 @@
   "gallardo-squadra-corse": "Lamborghini Gallardo LP570-4 Squadra Corse, MIAS 2014, Montreal (DSC04402-2).jpg",
   "huracan-gt3": "Lamborghini Huracan, EMS 2024, Essen (P1031651).jpg",
   "huracan-evo-rwd": "2010 Lamborghini Huracan EVO RWD.jpg",
-  "temerario": "Lamborghini Temerario (2026) (55081181722).jpg"
+  "temerario": "Lamborghini Temerario (2026) (55081181722).jpg",
+  "aventador-50": "flickr:14211320731",
+  "diablo-se30": "flickr:14486997194",
+  "diablo-se30-jota": "flickr:8074903399",
+  "diablo-vt-60-se": "flickr:14259866513",
+  "huracan-gt3-evo": "flickr:52228506984",
+  "jarama-s": "flickr:52866659143",
+  "murcielago-lp650": "flickr:5595796675",
+  "murcielago-rsv": "flickr:6006008012"
  },
  "drop": {
   "350-gtv": [
@@ -66,6 +74,83 @@
    "2026 Adelaide Motorsport Festival (DSCF2494).jpg",
    "2026 Adelaide Motorsport Festival Gouger Street Party - 38.jpg",
    "2026 Adelaide Motorsport Festival Gouger Street Party - 39.jpg"
+  ],
+  "350-gts": [
+   "flickr:4637656272",
+   "flickr:54165276564"
+  ],
+  "autentica": [
+   "flickr:52779261990"
+  ],
+  "aventador-50": [
+   "flickr:13058526793",
+   "flickr:13058529813",
+   "flickr:13058709654",
+   "flickr:13058718514",
+   "flickr:13058721234"
+  ],
+  "diablo-se30": [
+   "flickr:31636130198",
+   "flickr:5104960080"
+  ],
+  "diablo-se30-jota": [
+   "flickr:4107318347",
+   "flickr:4108084666",
+   "flickr:55009281924",
+   "flickr:55009326345",
+   "flickr:55009326390"
+  ],
+  "huracan-gt3-evo": [
+   "flickr:52571781819",
+   "flickr:52571953460"
+  ],
+  "jarama-s": [
+   "flickr:53278958071",
+   "flickr:6237835081",
+   "flickr:6238358954",
+   "flickr:6545272825"
+  ],
+  "lm001": [
+   "flickr:5545257309",
+   "flickr:5545258915",
+   "flickr:5545260441",
+   "flickr:5545263679",
+   "flickr:5545843646",
+   "flickr:5545845450",
+   "flickr:8581753781",
+   "flickr:8582856516"
+  ],
+  "lma002": [
+   "flickr:30081740238",
+   "flickr:30081742978",
+   "flickr:43902135792",
+   "flickr:43902136732",
+   "flickr:43902137452",
+   "flickr:43902138282",
+   "flickr:43902140722",
+   "flickr:43950190781"
+  ],
+  "murcielago-lp650": [
+   "flickr:3356764581",
+   "flickr:3404309809"
+  ],
+  "murcielago-rsv": [
+   "flickr:14085433888",
+   "flickr:14085435788",
+   "flickr:14268760551",
+   "flickr:14270001842",
+   "flickr:14271651804",
+   "flickr:14272084955"
+  ],
+  "portofino": [
+   "flickr:46143078895"
+  ],
+  "urraco-p200": [
+   "flickr:32125633187",
+   "flickr:33192180398"
+  ],
+  "urus-st-x": [
+   "flickr:49797331226"
   ]
  }
 }
