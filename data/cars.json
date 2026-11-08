@@ -19,6 +19,7 @@
    "cats": [
     "Lamborghini 350 GTV"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Concorso Eleganza Villa d'Este 2013 (8846431785).jpg",
@@ -70,6 +71,7 @@
    "cats": [
     "Lamborghini 350 GT"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1965 Lamborghini 350 GT in Blu Notte, front left.jpg",
@@ -191,6 +193,7 @@
    "cats": [
     "Lamborghini 3500 GTZ"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1965 Lamborghini 3500 GTZ Zagato Coupe - 49779188621.jpg",
@@ -242,6 +245,7 @@
    "cats": [
     "Lamborghini 350 GTS"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -262,6 +266,7 @@
    "cats": [
     "Lamborghini 400 GT"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1964 Lamborghini 400 GT.jpg",
@@ -383,6 +388,7 @@
    "cats": [
     "Lamborghini 400GT Monza"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1966 Lamborghini 400 GT Monza - Flickr - exfordy.jpg",
@@ -424,6 +430,7 @@
    "cats": [
     "Lamborghini Flying Star II"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Flying Star II Concept front.jpg",
@@ -475,6 +482,7 @@
    "cats": [
     "Lamborghini Miura P400"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1967 Lamborghini Miura P400.jpg",
@@ -596,6 +604,7 @@
    "cats": [
     "Lamborghini Marzal"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Marzal, GIMS 2018, Le Grand-Saconnex (1X7A1407) (cropped).jpg",
@@ -707,6 +716,7 @@
    "cats": [
     "Lamborghini Miura Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Miura Roadster 1968 schräg.JPG",
@@ -768,6 +778,7 @@
    "cats": [
     "Lamborghini Miura P400 S"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1968 Lamborghini Miura S LC23.jpg",
@@ -889,6 +900,7 @@
    "cats": [
     "Lamborghini Islero"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1968 Lamborghini Islero 400 GT HCC24 Low.jpg",
@@ -1010,6 +1022,7 @@
    "cats": [
     "Lamborghini Islero S"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1969 Lamborghini Islero S LC23.jpg",
@@ -1131,6 +1144,7 @@
    "cats": [
     "Lamborghini Espada"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1972 Lamborghini Espada 2.jpg",
@@ -1252,6 +1266,7 @@
    "cats": [
     "Lamborghini Miura Jota"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Miura SV J.jpg",
@@ -1293,6 +1308,7 @@
    "cats": [
     "Lamborghini Jarama"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Paris - RM Sotheby’s 2018 - Lamborghini Jarama 400 GT - 1971 - 001.jpg",
@@ -1414,6 +1430,7 @@
    "cats": [
     "Lamborghini Miura P400 SV"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Miura SV jm.jpg",
@@ -1535,6 +1552,7 @@
    "cats": [
     "Lamborghini Miura SVJ"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Miura SV J.jpg",
@@ -1626,6 +1644,7 @@
    "cats": [
     "Lamborghini Countach LP500 Prototype"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1982 Lamborghini Countach LP500 - 32103850792.jpg",
@@ -1697,6 +1716,7 @@
    "cats": [
     "Lamborghini Jarama 400 GTS"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -1717,6 +1737,7 @@
    "cats": [
     "Lamborghini Urraco P250"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1974 Lamborghini Urraco P250 S.jpg",
@@ -1818,6 +1839,7 @@
    "cats": [
     "Lamborghini Countach LP400"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1975 Lamborghini Countach LP400 Periscopo 2.jpg",
@@ -1939,6 +1961,7 @@
    "cats": [
     "Lamborghini Bravo"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Bravo 1974 schräg.JPG",
@@ -2010,6 +2033,7 @@
    "cats": [
     "Lamborghini Urraco P300"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1975 Lamborghini Urraco P300 Prototype 5.jpg",
@@ -2131,6 +2155,7 @@
    "cats": [
     "Lamborghini Urraco P200"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -2151,6 +2176,7 @@
    "cats": [
     "Lamborghini Silhouette"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1976 Lamborghini Silhouette.jpg",
@@ -2272,6 +2298,7 @@
    "cats": [
     "Lamborghini Miura SVR"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Miura SVR (front).jpg",
@@ -2323,6 +2350,7 @@
    "cats": [
     "MTI-Lamborghini Cheetah"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1977 Lamborghini Cheetah.jpg",
@@ -2354,6 +2382,7 @@
    "cats": [
     "Lamborghini Countach LP400 S"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Countach LP 400 S (1980) (55081181777).jpg",
@@ -2475,6 +2504,7 @@
    "cats": [
     "Lamborghini Faena"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Faena 1978 schräg.JPG",
@@ -2526,6 +2556,7 @@
    "cats": [
     "Lamborghini Athon"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Athon 1980 schräg.JPG",
@@ -2577,6 +2608,7 @@
    "cats": [
     "Lamborghini Jalpa"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1988 Lamborghini Jalpa P350 GTS in Bianco Polo Park, front left.jpg",
@@ -2698,6 +2730,7 @@
    "cats": [
     "Lamborghini LM001"
    ],
+   "debut": true,
    "imgs": []
   },
   {
@@ -2718,6 +2751,7 @@
    "cats": [
     "Lamborghini LMA002"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -2738,6 +2772,7 @@
    "cats": [
     "Lamborghini Countach LP500 S"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Auto 2024, Zurich (PANA0907).jpg",
@@ -2859,6 +2894,7 @@
    "cats": [
     "Lamborghini Countach 5000QV"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Paris - Retromobile 2013 - Lamborghini Countach 5000 Quattrovalvole - 1946 - 101.jpg",
@@ -2980,6 +3016,7 @@
    "cats": [
     "Lamborghini Countach QVX"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -3000,6 +3037,7 @@
    "cats": [
     "Lamborghini LM002"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1991 Lamborghini LM002 LC23.jpg",
@@ -3121,6 +3159,7 @@
    "cats": [
     "Lamborghini Portofino"
    ],
+   "debut": true,
    "imgs": []
   },
   {
@@ -3141,6 +3180,7 @@
    "cats": [
     "Lamborghini Countach Evoluzione"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Countach Evoluzione Front.JPG",
@@ -3166,7 +3206,7 @@
   },
   {
    "id": "p132",
-   "family": "P132",
+   "family": "Diablo",
    "name": "P132 (Diablo prototype)",
    "kind": "Prototype",
    "year": 1987,
@@ -3182,6 +3222,7 @@
    "cats": [
     "Lamborghini P132"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Musée Lamborghini 0110.JPG",
@@ -3233,6 +3274,7 @@
    "cats": [
     "Lamborghini Countach 25th Anniversary"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1988 Lamborghini Countach 25th Anniversary Silver.jpg",
@@ -3354,6 +3396,7 @@
    "cats": [
     "Bertone Genesis"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Bertone Lamborghini Genesis (54972111533).jpg",
@@ -3405,6 +3448,7 @@
    "cats": [
     "Lamborghini P140"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Musée Lamborghini 0064.JPG",
@@ -3456,6 +3500,7 @@
    "cats": [
     "Lamborghini Diablo (1990–1999)"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "1994 Lamborghini Diablo Affolter Evolution, front right (Greenwich).jpg",
@@ -3577,6 +3622,7 @@
    "cats": [
     "Lambo 291"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lambo 291 V12 (22527014528).jpg",
@@ -3698,6 +3744,7 @@
    "cats": [
     "Lamborghini Pregunta"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini pregunta prototype.jpg",
@@ -3739,6 +3786,7 @@
    "cats": [
     "Lamborghini Diablo VT"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2001 Lamborghini Diablo VT 10.jpg",
@@ -3860,6 +3908,7 @@
    "cats": [
     "Lamborghini Diablo SE30"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -3880,6 +3929,7 @@
    "cats": [
     "Lamborghini Diablo SE30 Jota"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -3900,6 +3950,7 @@
    "cats": [
     "Lamborghini Calà"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Calà Salone di Ginevra 1995 - 3244446942.jpg",
@@ -3961,6 +4012,7 @@
    "cats": [
     "Lamborghini Diablo VT Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Diablo VT Roadster Alpine Edition (1999).jpg",
@@ -4082,6 +4134,7 @@
    "cats": [
     "Lamborghini Diablo SV"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1998 Lamborghini Diablo SV Yellow Supercarfest.jpg",
@@ -4203,6 +4256,7 @@
    "cats": [
     "Lamborghini Raptor Zagato"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Zagato Raptor 01.jpg",
@@ -4234,6 +4288,7 @@
    "cats": [
     "Lamborghini Diablo SV-R"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "1997 Lamborghini Diablo SV-R SCD 24 Low.jpg",
@@ -4315,6 +4370,7 @@
    "cats": [
     "Lamborghini P147 Gandini"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Musée Lamborghini 0106.JPG",
@@ -4366,6 +4422,7 @@
    "cats": [
     "Lamborghini Diablo GT"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2000 Lamborghini Diablo GT.jpg",
@@ -4487,6 +4544,7 @@
    "cats": [
     "Lamborghini Diablo GTR"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Diablo GTR (2000) (55214811461).jpg",
@@ -4588,6 +4646,7 @@
    "cats": [
     "Lamborghini P147 Zagato"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Musée Lamborghini 0101.JPG",
@@ -4639,6 +4698,7 @@
    "cats": [
     "Lamborghini Diablo VT 6.0"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Moscow car show 2025-08-03 Lambo Diablo VT 6.0 2000 02.jpg",
@@ -4740,6 +4800,7 @@
    "cats": [
     "Lamborghini Diablo VT 6.0 SE"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -4760,6 +4821,7 @@
    "cats": [
     "Lamborghini Murciélago"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2007 Lamborghini Murcielago SCD 24.jpg",
@@ -4881,6 +4943,7 @@
    "cats": [
     "Lamborghini Murciélago 40th Anniversary"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2004 Lamborghini Murcielago 40th Anniversary SCD 24.jpg",
@@ -4912,6 +4975,7 @@
    "cats": [
     "Lamborghini Gallardo (2003-2008)"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Gallardo 5.0 '06 (9405772534).jpg",
@@ -5013,6 +5077,7 @@
    "cats": [
     "Lamborghini Murciélago Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Murcielago roadster (7612229410).jpg",
@@ -5134,6 +5199,7 @@
    "cats": [
     "Lamborghini Murciélago R-GT"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2006 Lamborghini Murcielago R-GT DH26.jpg",
@@ -5255,6 +5321,7 @@
    "cats": [
     "Lamborghini Gallardo SE"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo SE coupe 2006.jpg",
@@ -5326,6 +5393,7 @@
    "cats": [
     "Lamborghini Concept S"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Customized Gallardo (5482880089).jpg",
@@ -5447,6 +5515,7 @@
    "cats": [
     "Lamborghini Gallardo Spyder"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Gallardo Spyder. (6388829817).jpg",
@@ -5568,6 +5637,7 @@
    "cats": [
     "Lamborghini Gallardo Nera"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo Nera.jpg",
@@ -5649,6 +5719,7 @@
    "cats": [
     "Lamborghini Gallardo GT3"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Blancpain Endurance Series - Lamborghini Gallardo GT3 02.jpg",
@@ -5760,6 +5831,7 @@
    "cats": [
     "Lamborghini Miura Concept"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Miura (22503638138).jpg",
@@ -5881,6 +5953,7 @@
    "cats": [
     "Lamborghini Murciélago LP640"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Green Lamborghini LP640 (8024589227).jpg",
@@ -6002,6 +6075,7 @@
    "cats": [
     "Lamborghini Murciélago LP640 Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2005 Lamborghini Murcielago Roadster.jpg",
@@ -6123,6 +6197,7 @@
    "cats": [
     "Lamborghini Gallardo Superleggera"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2014 Lamborghini Gallardo Superleggera Edizione Tecnica SP22.jpg",
@@ -6244,6 +6319,7 @@
    "cats": [
     "Lamborghini Reventón"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2008 Lamborghini Reventon HRO26.jpg",
@@ -6365,6 +6441,7 @@
    "cats": [
     "Lamborghini Gallardo LP560-4"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo LP 560-4 2013 (34831870002).jpg",
@@ -6436,6 +6513,7 @@
    "cats": [
     "Lamborghini Estoque"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Estoque Concept (14416915748).jpg",
@@ -6557,6 +6635,7 @@
    "cats": [
     "Lamborghini Gallardo LP560-4 Spyder"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo LP 560-4 Bicolore - Flickr - Alexandre Prévot (2).jpg",
@@ -6668,6 +6747,7 @@
    "cats": [
     "Lamborghini Gallardo LP550-2 Valentino Balboni"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2010 Lamborghini Gallardo LP550-2 Balboni LC23.jpg",
@@ -6789,6 +6869,7 @@
    "cats": [
     "Lamborghini Murciélago LP650-4 Roadster"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -6809,6 +6890,7 @@
    "cats": [
     "Lamborghini Murciélago LP670-4 SuperVeloce"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2009 Lamborghini Murcielago LP670-4 SV HRO26.jpg",
@@ -6930,6 +7012,7 @@
    "cats": [
     "Lamborghini Reventón Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Reventon Roadster 1.jpg",
@@ -7051,6 +7134,7 @@
    "cats": [
     "Lamborghini Gallardo LP560-4 Super Trofeo"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Super Trofeo.jpg",
@@ -7172,6 +7256,7 @@
    "cats": [
     "Lamborghini Gallardo LP550-2"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo LP550-2 Right.jpg",
@@ -7293,6 +7378,7 @@
    "cats": [
     "Lamborghini Gallardo LP570-4 Superleggera"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo LP570-4 Superleggera at the 2025 Shannons Adelaide Rally (028A4483).jpg",
@@ -7414,6 +7500,7 @@
    "cats": [
     "Lamborghini Gallardo LP570-4 Spyder Performante"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2013 Lamborghini Gallardo Performante SCD 24.jpg",
@@ -7535,6 +7622,7 @@
    "cats": [
     "Lamborghini Sesto Elemento"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Sesto Elemento 6.jpg",
@@ -7656,6 +7744,7 @@
    "cats": [
     "Lamborghini Murciélago R-SV"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -7676,6 +7765,7 @@
    "cats": [
     "Lamborghini Aventador LP700-4"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Blue Lamborghini Aventador LP-700 (8623429560).jpg",
@@ -7797,6 +7887,7 @@
    "cats": [
     "Lamborghini Gallardo LP570-4 Super Trofeo Stradale"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo LP570-4 Super Trofeo Stradale (15767726021).jpg",
@@ -7918,6 +8009,7 @@
    "cats": [
     "Lamborghini Aventador J"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "LamborghiniAventadorJ.jpg",
@@ -8039,6 +8131,7 @@
    "cats": [
     "Lamborghini Urus Concept"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "P1080941-Lamborghini Urus Concept.jpg",
@@ -8080,6 +8173,7 @@
    "cats": [
     "Lamborghini Aventador LP700-4 Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2015 Lamborghini Aventador LP700-4 Roadster in Grigio Titans, front left.jpg",
@@ -8201,6 +8295,7 @@
    "cats": [
     "Lamborghini Aventador LP720-4 50° Anniversario"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -8221,6 +8316,7 @@
    "cats": [
     "Lamborghini Egoista"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Egoista right mod.jpg",
@@ -8282,6 +8378,7 @@
    "cats": [
     "Lamborghini Gallardo LP570-4 Squadra Corse"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Gallardo LP570-4 Squadra Corse, MIAS 2014, Montreal (DSC04402-2).jpg",
@@ -8343,6 +8440,7 @@
    "cats": [
     "Lamborghini Veneno"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Veneno (11225271396).jpg",
@@ -8464,6 +8562,7 @@
    "cats": [
     "Lamborghini Veneno Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Autoworld Brüssel 148 - Italian Car Passion - Lamborghini Veneno Roadster.jpg",
@@ -8585,6 +8684,7 @@
    "cats": [
     "Lamborghini Huracán LP 610-4"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2016 Lamborghini Huracan 5.2 LP 610-4 (32162034380).jpg",
@@ -8706,6 +8806,7 @@
    "cats": [
     "Lamborghini Asterion LPI910/4"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Asterion - Mondial de l'Automobile de Paris 2014 - 001.jpg",
@@ -8827,6 +8928,7 @@
    "cats": [
     "Lamborghini 5-95 Zagato"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini 5-95 Zagato.jpg",
@@ -8888,6 +8990,7 @@
    "cats": [
     "Lamborghini Huracán GT3"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Huracan, EMS 2024, Essen (P1031651).jpg",
@@ -8979,6 +9082,7 @@
    "cats": [
     "Lamborghini Huracán Super Trofeo"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Huracan Super Trofeo EV 1.jpg",
@@ -9100,6 +9204,7 @@
    "cats": [
     "Lamborghini Aventador LP750-4 Superveloce"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini ABA-47L539 Aventador LP 750-4 SV (24042815474).jpg",
@@ -9221,6 +9326,7 @@
    "cats": [
     "Lamborghini Huracán LP 580-2"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Huracan LP580-2.jpg",
@@ -9342,6 +9448,7 @@
    "cats": [
     "Lamborghini Huracán Spyder"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2017 Lamborghini Huracan Spyder.jpg",
@@ -9463,6 +9570,7 @@
    "cats": [
     "Lamborghini Centenario"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "New York International Auto Show NYIAS (41289577792).jpg",
@@ -9584,6 +9692,7 @@
    "cats": [
     "Lamborghini Centenario Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Centenario Roadster au Salon de Paris 2026.jpg",
@@ -9685,6 +9794,7 @@
    "cats": [
     "Lamborghini Aventador LP750-4 SV Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Front of Lamborghini Aventador SV Roadster LP750-4.jpg",
@@ -9806,6 +9916,7 @@
    "cats": [
     "Lamborghini Aventador S coupé"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Aventador S, GIMS 2018, Le Grand-Saconnex (1X7A1507).jpg",
@@ -9927,6 +10038,7 @@
    "cats": [
     "Lamborghini Huracán LP 640-4 Performante"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Huracan Performante orange.jpg",
@@ -10048,6 +10160,7 @@
    "cats": [
     "Lamborghini Aventador S Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini 2017 Aventador S Roadster.jpg",
@@ -10169,6 +10282,7 @@
    "cats": [
     "Lamborghini Terzo Millennio"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Festival automobile international 2018 - Lamborghini Terzo Millennio - 001.jpg",
@@ -10290,6 +10404,7 @@
    "cats": [
     "Lamborghini Urus"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2019 Canadian International Auto Show (32198729407).jpg",
@@ -10411,6 +10526,7 @@
    "cats": [
     "Lamborghini Huracán Performante Spyder"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Huracan Performante Spyder (43862).jpg",
@@ -10492,6 +10608,7 @@
    "cats": [
     "Lamborghini Aventador SVJ"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2019 Lamborghini Aventador SVJ LP770-4.jpg",
@@ -10613,6 +10730,7 @@
    "cats": [
     "Lamborghini SC18 Alston"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini SC18 Alston.jpg",
@@ -10664,6 +10782,7 @@
    "cats": [
     "Lamborghini Urus ST-X"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -10684,6 +10803,7 @@
    "cats": [
     "Lamborghini Huracán EVO"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2020 Lamborghini Huracan EVO Rosso Arancio in motion.jpg",
@@ -10805,6 +10925,7 @@
    "cats": [
     "Lamborghini Huracán EVO Spyder"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2020 Lamborghini Huracan EVO Spyder 3.jpg",
@@ -10926,6 +11047,7 @@
    "cats": [
     "Lamborghini Aventador SVJ Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2020 Lamborghini Aventador SVJ Roadster in Oro Elios Metallic, front left.jpg",
@@ -11047,6 +11169,7 @@
    "cats": [
     "Lamborghini Huracán GT3 Evo"
    ],
+   "debut": false,
    "imgs": []
   },
   {
@@ -11067,6 +11190,7 @@
    "cats": [
     "Lamborghini Sián FKP 37"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Sián FKP 37 (52693496494).jpg",
@@ -11148,6 +11272,7 @@
    "cats": [
     "Lamborghini Lambo V12 Vision Gran Turismo"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "GIMS 2024, Le Grand-Saconnex (GIMS0020-2).jpg",
@@ -11239,6 +11364,7 @@
    "cats": [
     "Lamborghini Huracán EVO RWD"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2010 Lamborghini Huracan EVO RWD.jpg",
@@ -11330,6 +11456,7 @@
    "cats": [
     "Lamborghini Sián Roadster"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2021 Lamborghini Sian Roadster TM26.jpg",
@@ -11391,6 +11518,7 @@
    "cats": [
     "Lamborghini Essenza SCV12"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2021 Lamborghini Essenza SCV12.jpg",
@@ -11512,6 +11640,7 @@
    "cats": [
     "Lamborghini SC20"
    ],
+   "debut": true,
    "imgs": []
   },
   {
@@ -11532,6 +11661,7 @@
    "cats": [
     "Lamborghini Countach LPI 800-4"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2022 Lamborghini Countach LPI 800-4 SCD26.jpg",
@@ -11653,6 +11783,7 @@
    "cats": [
     "Lamborghini Huracán STO"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2021 Lamborghini Huracan STO Blue.jpg",
@@ -11774,6 +11905,7 @@
    "cats": [
     "Lamborghini Aventador LP780-4 Ultimae"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2022 Lamborghini Aventador Ultimae LP780-4.jpg",
@@ -11895,6 +12027,7 @@
    "cats": [
     "Lamborghini Huracán Tecnica"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2022 Lamborghini Huracan Tecnica.jpg",
@@ -12016,6 +12149,7 @@
    "cats": [
     "Lamborghini Urus Performante"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2023 Lamborghini Urus Performante 12.jpg",
@@ -12137,6 +12271,7 @@
    "cats": [
     "Lamborghini Urus S"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "Lamborghini Urus S (2024) (54093582401).jpg",
@@ -12258,6 +12393,7 @@
    "cats": [
     "Lamborghini Huracán Sterrato"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2023 Lamborghini Huracan Sterrato 6.jpg",
@@ -12379,6 +12515,7 @@
    "cats": [
     "Lamborghini Invencible"
    ],
+   "debut": true,
    "imgs": []
   },
   {
@@ -12399,6 +12536,7 @@
    "cats": [
     "Lamborghini Auténtica"
    ],
+   "debut": true,
    "imgs": []
   },
   {
@@ -12419,6 +12557,7 @@
    "cats": [
     "Lamborghini Revuelto"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2024 Lamborghini Revuelto 10.jpg",
@@ -12540,6 +12679,7 @@
    "cats": [
     "Lamborghini Lanzador"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Lanzador at Pebble Beach Concours 2023.jpg",
@@ -12571,6 +12711,7 @@
    "cats": [
     "Lamborghini SC63"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "2024 24 Hours of Le Mans (54093437317).jpg",
@@ -12692,6 +12833,7 @@
    "cats": [
     "Lamborghini Temerario"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Temerario (2026) (55081181722).jpg",
@@ -12783,6 +12925,7 @@
    "cats": [
     "Lamborghini Urus SE"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "2025 Lamborghini Urus SE - 01.jpg",
@@ -12904,6 +13047,7 @@
    "cats": [
     "Lamborghini Temerario GT3"
    ],
+   "debut": false,
    "imgs": [
     {
      "t": "DTM, Paul Motorsport, Lamborghini Huracán GT3 (53985433319).jpg",
@@ -13025,6 +13169,7 @@
    "cats": [
     "Lamborghini Fenomeno"
    ],
+   "debut": true,
    "imgs": [
     {
      "t": "Lamborghini Fenomeno (2026) (55082081146).jpg",

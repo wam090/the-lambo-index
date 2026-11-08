@@ -4,7 +4,7 @@ import datetime, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-from catalog import CARS
+from catalog import CARS, EXTRA_DEBUTS, NOT_DEBUTS
 
 import time
 for _ in range(10):  # images.json may be mid-write while tools/images.py runs
@@ -28,10 +28,16 @@ def ordered_images(cid):
 
 
 keep = ("id", "family", "name", "kind", "year", "end", "body", "engine", "eng", "cv", "units", "designer", "wiki", "note")
+debuts, seen = set(EXTRA_DEBUTS), set()
+for c in sorted(CARS, key=lambda c: (c["year"], CARS.index(c))):
+    if c["id"] not in NOT_DEBUTS and c["family"] not in seen:
+        seen.add(c["family"])
+        debuts.add(c["id"])
 cars = []
 for c in CARS:
     d = {k: c[k] for k in keep}
     d["cats"] = c["cats"][:1]
+    d["debut"] = c["id"] in debuts
     d["imgs"] = [{k: im[k] for k in ("t", "h", "n", "w", "ht", "a", "l", "lu")} for im in ordered_images(c["id"])]
     cars.append(d)
 payload = {"generated": datetime.date.today().isoformat(), "cars": cars}

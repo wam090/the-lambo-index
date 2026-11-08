@@ -112,7 +112,7 @@ CARS = [
       ["Lamborghini Portofino"], "Lamborghini Portofino", "Chrysler-designed four-door with scissor doors."),
     E("countach-evoluzione", "Countach", "Countach Evoluzione", "Prototype", 1987, None, "Coupé", "5.2 L V12", "V12", None, 1, None,
       ["Lamborghini Countach Evoluzione"], "Lamborghini Countach", "Carbon-composite test car that fed into the Diablo."),
-    E("p132", "P132", "P132 (Diablo prototype)", "Prototype", 1987, None, "Coupé", "5.7 L V12", "V12", None, None, "Marcello Gandini",
+    E("p132", "Diablo", "P132 (Diablo prototype)", "Prototype", 1987, None, "Coupé", "5.7 L V12", "V12", None, None, "Marcello Gandini",
       ["Lamborghini P132"], None, "Development prototypes of the Countach successor."),
     E("countach-25th", "Countach", "Countach 25th Anniversary", "Production", 1988, 1990, "Coupé", "5.2 L V12", "V12", 455, 658, "Horacio Pagani (restyle)",
       ["Lamborghini Countach 25th Anniversary"], "Lamborghini Countach", "The best-selling Countach, restyled by Horacio Pagani."),
@@ -327,6 +327,20 @@ CARS = [
     E("fenomeno", "Fenomeno", "Fenomeno", "Limited series", 2025, 0, "Coupé", "6.5 L V12 plug-in hybrid", "Hybrid V12", 1080, 29, BORKERT,
       ["Lamborghini Fenomeno"], None, "Few-off on Revuelto mechanicals; the most powerful Lamborghini so far."),
 ]
+
+# Timeline frames. A debut is the original form of each distinct car: by default the first car of
+# each family. Later versions, special editions, coachbuilt alterations and race versions are
+# derivatives and stay unframed. Exceptions:
+EXTRA_DEBUTS = {
+    "350-gt",            # Touring's production design differs clearly from the Scaglione 350 GTV
+    "lm002",             # front-engined production truck, a different car from the rear-engined LM001
+    "urus",              # production Urus is a different car from the 2012 Urus Concept
+    "miura-concept",     # 2006 retro concept, a new car rather than a Miura version
+    "countach-lpi-800",  # 2021 revival, a new car rather than a Countach version
+}
+NOT_DEBUTS = {
+    "p132",              # internal Diablo development prototype, never shown; the Diablo is the debut
+}
 
 if __name__ == "__main__":
     import collections

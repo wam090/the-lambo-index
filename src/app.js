@@ -710,10 +710,8 @@ function buildTimeline() {
   tlBuilt = true;
   const decades = new Map();
   const sorted = cars.slice().sort((a, b) => a.year - b.year || a.idx - b.idx);
-  // a debut is the first car of each model line; later versions and upgrades are not
-  const debut = new Set();
-  const seen = new Set();
-  for (const c of sorted) if (!seen.has(c.family)) { seen.add(c.family); debut.add(c.id); }
+  // debuts are flagged in the catalogue: the original form of each distinct car
+  const debut = new Set(cars.filter((c) => c.debut).map((c) => c.id));
   for (const c of sorted) { if (!decades.has(c.decade)) decades.set(c.decade, []); decades.get(c.decade).push(c); }
   let html = '';
   for (const [d, list] of decades) {

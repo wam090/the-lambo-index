@@ -17,8 +17,8 @@ the full-screen viewer. You need an internet connection for photos and fonts.
   designer, power), family tiles that drill down into each car, grid and list layouts, random pick.
 - **Car pages**: gallery, full-resolution viewer (keyboard and swipe), spec sheet, links to
   Wikipedia, all Commons photos, for-sale searches and scale models on lambodiecast.com.
-- **Timeline**: every car, decade by decade. An orange frame marks each debut, the first car
-  of a model line; later versions and upgrades are unframed.
+- **Timeline**: every car, decade by decade. An orange frame marks each debut, the original form
+  of each car; versions, editions and race variants are unframed (rules in tools/catalog.py).
 - **Compare**: up to four cars side by side; most powerful and rarest highlighted.
 - **Stats**: power from 1963 to today (record-holders labelled), cars per decade, engines,
   types, designers, most powerful, rarest road cars.
