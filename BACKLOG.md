@@ -14,6 +14,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-08: Timeline frames by kind: limited series platinum, one-offs platinum with diamond sparkles (no colours),
   race cars red with tyre marks, each with its own badge beside the Debut badge. One frame per car,
   the highest it qualifies for (diamond > platinum > red > orange debut); every badge stays.
+- 2026-11-08: Keep pages lean: the user prefers visuals to explanatory text. The timeline has no
+  intro, only a one-line legend of mini frames (Debut › Race car › Limited › One-off).
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
   really needed.
 - 2026-11-08: Keep everything relevant in this GitHub repo and avoid steps that need the user's
