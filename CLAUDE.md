@@ -10,7 +10,7 @@ that is missing here, add it.
 shown (production, limited series, one-offs, concepts, prototypes, race cars) with specs and photos from
 Wikimedia Commons and Flickr. Views: browse (search, filters, grid/list), car page with full-screen viewer, timeline,
 compare (up to 4), stats. State lives in the URL hash: `#/m/<id>`, `#/?family=Countach&decade=1970s`,
-`#/timeline`, `#/compare?ids=a,b`, `#/stats`. Vanilla JS: no framework, no npm packages, no server.
+`#/timeline`, `#/fast10`, `#/compare?ids=a,b`, `#/stats`. Vanilla JS: no framework, no npm packages, no server.
 README.md is the user-facing description.
 
 ## Who decides
@@ -67,6 +67,11 @@ credits for any photo without a licence; `--credits-only` does only the second p
   `NOT_DEBUTS` (both in `tools/catalog.py`; applied in `build.py`). Kind frames and badges come from `kind`
   in `buildTimeline()`: Limited series platinum, One-off platinum with diamond sparkles, Race car red with tyre marks. A car
   shows only its highest frame (diamond > platinum > red > orange) but keeps every badge. Styles in `src/template.html`; `smoke.js` counts each frame.
+- **Fast 10**: `PERF` in `tools/catalog.py` holds claimed top speed, an "over" flag and 0–100 for road
+  cars with official figures; `buildFast()` ranks by top speed (350+ above 350), then 0–100, then power,
+  and skips Roadster versions. Add a car's figures to `PERF` and it competes automatically.
+- **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
+  page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 
 ## Rules
 - Never hand-edit `index.html`, `data/cars.json` or `data/images.json`. Commit them in the same
@@ -125,8 +130,9 @@ credits for any photo without a licence; `--credits-only` does only the second p
 
 ## Publishing
 - Bookmark link, always the newest build: https://htmlpreview.github.io/?https://github.com/wam090/the-lambo-index/blob/main/index.html
-  (renders main's `index.html` straight from GitHub; updates within about 5 minutes of a merge; one
-  harmless console error, because htmlpreview runs the JSON data block as a script). Do not hand out
+  (renders main's `index.html` straight from GitHub; updates within about 5 minutes of a merge). It injects
+  a `<base>` tag, so the app resolves every `#/` link and `replaceState` URL against the page itself;
+  keep it that way. One harmless console error: htmlpreview runs the JSON data block as a script. Do not hand out
   githack links: in browsers they show an "External Content Notice" click-through page and ads.
 - GitHub Pages (https://wam090.github.io/the-lambo-index/) needs one click by the user: Settings →
   Pages → Deploy from a branch → `main` / root. Sessions cannot change that setting.

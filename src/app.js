@@ -14,6 +14,18 @@ const store = {
   set(k, v) { try { localStorage.setItem('li:' + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } },
 };
 
+/* #/ links must work even when a host injects a <base> tag (htmlpreview does): resolve them against
+   this page, never the base URL, or filters and car links open the raw source instead. */
+const pageURL = () => location.href.split('#')[0];
+document.addEventListener('click', (e) => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest('a[href^="#/"]');
+  if (!a || a.target) return;
+  e.preventDefault();
+  const h = a.getAttribute('href');
+  if (location.hash !== h) location.hash = h;
+});
+
 /* Wikimedia serves thumbnails only at standard widths */
 const STD = [330, 500, 960, 1280, 1920, 3840];
 const THUMB = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/';
@@ -159,7 +171,7 @@ function update() {
   currentQS = stateToQS();
   if (activeView === 'browse' && !detailId && !location.hash.startsWith('#/m/')) {
     const h = browseHash();
-    if (location.hash !== h && !(h === '#/' && (location.hash === '' || location.hash === '#'))) history.replaceState(null, '', h);
+    if (location.hash !== h && !(h === '#/' && (location.hash === '' || location.hash === '#'))) history.replaceState(null, '', pageURL() + h);
   }
   renderCount(); renderActive(); renderFacets(); renderStrip(); renderGrid(true); syncControls();
 }
@@ -713,6 +725,17 @@ $('#stats').addEventListener('click', (e) => {
 
 /* ================= timeline ================= */
 let tlBuilt = false;
+let fastBuilt = false;
+/* Fast 10: claimed top speed ("350+" ranks above 350), then 0-100 km/h, then power.
+   Open versions count with their coupé, so a Roadster never takes a second place. */
+function buildFast() {
+  if (fastBuilt) return;
+  fastBuilt = true;
+  const speed = (c) => c.vmax + (c.vplus ? 0.5 : 0);
+  const top = cars.filter((c) => c.vmax && !/Roadster$/.test(c.name))
+    .sort((a, b) => speed(b) - speed(a) || (a.acc || 99) - (b.acc || 99) || (b.cv || 0) - (a.cv || 0)).slice(0, 10);
+  $('#fast').innerHTML = top.map((c, i) => `<a class="f10" href="#/m/${c.id}" data-open="${c.id}"><span class="rk">${i + 1}</span>${phHTML(c.img, 960)}<span class="b"><span class="nm">${esc(c.name)}</span><span class="yr">${yearsLong(c)}</span><span class="st">${c.acc ? `<span><b>${c.acc}</b> s 0–100</span>` : ''}${c.cv ? `<span><b>${fmt(c.cv)}</b> CV</span>` : ''}</span></span><span class="sp"><b>${c.vmax}${c.vplus ? '+' : ''}</b>km/h</span></a>`).join('');
+}
 function buildTimeline() {
   if (tlBuilt) return;
   tlBuilt = true;
@@ -740,7 +763,7 @@ function buildTimeline() {
 
 /* ================= views & routing ================= */
 let activeView = null;
-const TITLES = { browse: 'The Lambo Index', timeline: 'Timeline · The Lambo Index', compare: 'Compare · The Lambo Index', stats: 'Stats · The Lambo Index' };
+const TITLES = { browse: 'The Lambo Index', timeline: 'Timeline · The Lambo Index', fast: 'Fast 10 · The Lambo Index', compare: 'Compare · The Lambo Index', stats: 'Stats · The Lambo Index' };
 function showView(v) {
   if (activeView !== v) {
     activeView = v;
@@ -748,6 +771,7 @@ function showView(v) {
     $$('a[data-view]').forEach((a) => a.setAttribute('aria-current', a.dataset.view === v ? 'page' : 'false'));
     if (v === 'stats') buildStats();
     if (v === 'timeline') buildTimeline();
+    if (v === 'fast') buildFast();
     window.scrollTo(0, 0);
   }
   if (v === 'compare') renderCompare();
@@ -768,6 +792,7 @@ function route() {
   hideDetail();
   lastViewHash = location.hash || '#/';
   if (path === '/timeline') showView('timeline');
+  else if (path === '/fast10') showView('fast');
   else if (path === '/stats') showView('stats');
   else if (path === '/compare') {
     const ids = (params.get('ids') || '').split(',').filter((id) => byId.has(id)).slice(0, 4);

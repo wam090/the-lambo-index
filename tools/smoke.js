@@ -63,6 +63,9 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
       expect(got === want, `timeline: ${got} ${kind} frames, expected ${want}`);
     }
 
+    await go('#/fast10');
+    expect(await page.isVisible('#view-fast') && await n('#fast .f10') === 10, `fast 10: ${await n('#fast .f10')} entries, expected 10`);
+
     await go('#/stats');
     expect(await page.isVisible('#view-stats') && await n('#stats .chart-wrap svg') > 0, 'stats: view or power chart missing');
 
@@ -75,5 +78,5 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     console.error('smoke FAILED:\n- ' + problems.join('\n- '));
     process.exit(1);
   }
-  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, stats and compare work with no JavaScript errors`);
+  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, stats and compare work with no JavaScript errors`);
 })().catch((e) => { console.error('smoke FAILED: ' + e.message); process.exit(1); });

@@ -342,9 +342,26 @@ NOT_DEBUTS = {
     "p132",              # internal Diablo development prototype, never shown; the Diablo is the debut
 }
 
+# Fast 10: Lamborghini's claimed top speed (km/h), whether the claim is "over" that figure, and
+# 0-100 km/h (s). Road cars with official figures only; anything without one stays out.
+PERF = {
+    "countach-lpi-800": (355, False, 2.8), "aventador-ultimae": (355, False, 2.8),
+    "veneno": (355, False, 2.8), "veneno-roadster": (355, False, 2.9),
+    "fenomeno": (350, True, 2.4), "revuelto": (350, True, 2.5),
+    "sian": (350, True, 2.8), "sian-roadster": (350, True, 2.9),
+    "aventador-svj": (350, True, 2.8), "aventador-svj-roadster": (350, True, 2.9),
+    "centenario": (350, True, 2.8), "centenario-roadster": (350, True, 2.9),
+    "aventador-sv": (350, True, 2.8), "aventador-sv-roadster": (350, True, 2.9),
+    "aventador-s": (350, False, 2.9), "aventador-s-roadster": (350, False, 3.0),
+    "aventador-50": (350, False, 2.9), "aventador-lp700": (350, False, 2.9),
+    "aventador-roadster": (350, False, 3.0), "temerario": (343, False, 2.7),
+    "murcielago-sv": (342, False, 3.2), "reventon": (340, False, 3.4), "murcielago-lp640": (340, False, 3.4),
+}
+
 if __name__ == "__main__":
     import collections
     print(len(CARS), "cars")
     print(collections.Counter(c["kind"] for c in CARS))
     ids = [c["id"] for c in CARS]
     assert len(ids) == len(set(ids)), "duplicate ids"
+    assert set(PERF) <= set(ids), f"PERF ids not in CARS: {set(PERF) - set(ids)}"
