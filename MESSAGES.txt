@@ -1,0 +1,18 @@
+MESSAGES between the Coordinator (the user) and the dev chats
+=============================================================
+Loaded into every chat through CLAUDE.md. Newest last. Keep it short.
+- A message stays OPEN until handled. The chat that handles it writes "Reply:" under
+  it and changes OPEN to DONE with a one-line result (PR link). Delete DONE messages
+  the next time you edit this file; git keeps the history.
+- Dev chats: OPEN messages to "dev" come before other work (see CLAUDE.md). To ask the
+  Coordinator something, add a message to "Coordinator" and also say it in the chat.
+
+[2026-11-09] Coordinator -> dev: OPEN
+Add the cars BACKLOG.md lists as missing (Auto-refresh, first job), Revuelto SV first.
+Research so far, from press reports (verify before using; lamborghini.com is empty to
+scripts, so use the press and Wikipedia):
+- Revuelto SV: world debut at The Quail, Monterey Car Week, 14 Aug 2026; 1,065 CV
+  (783 kW, about 1,050 hp); limited to 1,963 cars.
+- Headlines call it the most powerful Lamborghini ever, but the Fenomeno on the site has
+  1,080 CV (794 kW), so they most likely mean series production. Check it: it decides the
+  Fast 10 order and the Stats record labels. Some outlets print CV figures as hp.
