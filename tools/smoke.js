@@ -68,6 +68,11 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     const oneOffs = cars.filter((c) => c.kind === 'One-off').length;
     expect(shownOne === oneOffs, `timeline legend filter: ${shownOne} cars shown for One-off, expected ${oneOffs}`);
 
+    await go('#/timeline?only=lim,one');
+    const shownTwo = await page.$$eval('#timeline .tl-item', (els) => els.filter((e) => e.offsetParent !== null).length);
+    const limOne = cars.filter((c) => c.kind === 'Limited series' || c.kind === 'One-off').length;
+    expect(shownTwo === limOne, `timeline legend filter: ${shownTwo} cars shown for Limited + One-off, expected ${limOne}`);
+
     await go('#/fast10');
     expect(await page.isVisible('#view-fast') && await n('#fast .f10') === 10, `fast 10: ${await n('#fast .f10')} entries, expected 10`);
 

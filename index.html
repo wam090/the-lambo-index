@@ -456,18 +456,22 @@ button{cursor:pointer}
 .tl-legend .lg[aria-pressed="true"]{background:var(--panel-2);border-color:var(--line-2)}
 .tl-legend.on .lg[aria-pressed="false"]{opacity:.45}
 /* legend filter: only the chosen kind of car shows; empty decades hide */
-#timeline[data-only="debut"] .tl-item:not(.debut),#timeline[data-only="race"] .tl-item:not(.race),
-#timeline[data-only="lim"] .tl-item:not(.lim),#timeline[data-only="one"] .tl-item:not(.one),
-#timeline[data-only] .decade.none{display:none}
+#timeline[data-only] .tl-item,#timeline[data-only] .decade.none{display:none}
+#timeline[data-only~="debut"] .tl-item.debut,#timeline[data-only~="race"] .tl-item.race,
+#timeline[data-only~="lim"] .tl-item.lim,#timeline[data-only~="one"] .tl-item.one{display:grid}
 .tl-legend .gt{color:var(--faint);font-weight:400}
-.tl-legend .lg-note{margin-left:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.tl-legend .lg-note{display:inline-flex;align-items:center;gap:6px;margin-right:2px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.tl-legend .arw{display:inline-block;animation:arw-nudge 2.4s ease-in-out infinite}
+@keyframes arw-nudge{0%,60%,100%{transform:translateX(0)}30%{transform:translateX(3px)}}
+.tl-legend .lg-clear{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:none;border:0;padding:5px 6px;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.tl-legend:not(.on) .lg-clear{display:none}
 .sw{position:relative;display:inline-block;width:30px;height:20px;border-radius:6px;border:3px solid transparent}
 .sw.debut{border-color:var(--accent);background:var(--panel)}
 .sw.race{background:linear-gradient(var(--panel),var(--panel)) padding-box,repeating-linear-gradient(118deg,transparent 0 3px,rgba(18,14,12,.65) 3px 5px,transparent 5px 8px) border-box,linear-gradient(135deg,#e4111f,#b3000e 40%,#e8192b 68%,#9a000b) border-box}
 .sw.lim{background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--platinum) border-box}
 .sw.one{background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--diamond) border-box;box-shadow:0 0 8px rgba(255,255,255,.18)}
 .sw.one::after{content:"";position:absolute;right:-7px;top:-7px;width:11px;height:11px;opacity:.9;background:#fff;clip-path:polygon(50% 0,57% 43%,100% 50%,57% 57%,50% 100%,43% 57%,0 50%,43% 43%);animation:twinkle-tag 2.6s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){.tl-item.one,.tl-tag.one,.tl-tag.one::after,.sw.one::after{animation:none}.gems i{animation:none;opacity:.8;transform:translate(-50%,-50%) scale(.75)}}
+@media (prefers-reduced-motion:reduce){.tl-item.one,.tl-tag.one,.tl-tag.one::after,.sw.one::after,.tl-legend .arw{animation:none}.gems i{animation:none;opacity:.8;transform:translate(-50%,-50%) scale(.75)}}
 a.tile{text-decoration:none;color:inherit}
 .c-kind{position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:2px 8px 2px 7px;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;border:1px solid rgba(255,255,255,.14)}
 .c-kind::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--k)}
@@ -644,12 +648,13 @@ a.tile{text-decoration:none;color:inherit}
 
   <section class="view" id="view-timeline" data-view="timeline" aria-label="Timeline" hidden>
     <div class="wrap">
-      <div class="tl-legend" aria-label="What the frames mean">
-        <button class="lg" type="button" data-tlf="debut" aria-pressed="false"><i class="sw debut"></i>Debut</button><b class="gt" aria-hidden="true">›</b>
-        <button class="lg" type="button" data-tlf="race" aria-pressed="false"><i class="sw race"></i>Race car</button><b class="gt" aria-hidden="true">›</b>
-        <button class="lg" type="button" data-tlf="lim" aria-pressed="false"><i class="sw lim"></i>Limited</button><b class="gt" aria-hidden="true">›</b>
+      <div class="tl-legend" aria-label="Filter the timeline by frame">
+        <span class="lg-note">Filter by frame <span class="arw" aria-hidden="true">→</span></span>
+        <button class="lg" type="button" data-tlf="debut" aria-pressed="false"><i class="sw debut"></i>Debut</button>
+        <button class="lg" type="button" data-tlf="race" aria-pressed="false"><i class="sw race"></i>Race car</button>
+        <button class="lg" type="button" data-tlf="lim" aria-pressed="false"><i class="sw lim"></i>Limited</button>
         <button class="lg" type="button" data-tlf="one" aria-pressed="false"><i class="sw one"></i>One-off</button>
-        <span class="lg-note">rarest frame wins</span>
+        <button class="lg-clear" type="button" data-tlf-clear>Clear</button>
       </div>
       <div id="timeline"></div>
     </div>
@@ -1448,26 +1453,32 @@ $('#stats').addEventListener('click', (e) => {
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
-/* Timeline legend chips filter the timeline to one kind of car: #/timeline?only=debut|race|lim|one */
+/* Timeline legend chips filter the timeline; several can be on at once and a car shows when it
+   matches any of them: #/timeline?only=lim,one (debut|race|lim|one) */
 const TL_ONLY = { debut: ['debut', 'debut', 'debuts'], race: ['race', 'race car', 'race cars'], lim: ['lim', 'limited', 'limited'], one: ['one', 'one-off', 'one-offs'] };
-function applyTlOnly(f) {
-  if (!TL_ONLY[f]) f = '';
+const tlSelected = () => ($('#timeline').dataset.only || '').split(' ').filter(Boolean);
+function applyTlOnly(raw) {
+  const sel = Object.keys(TL_ONLY).filter((k) => String(raw || '').split(',').includes(k));
   const tl = $('#timeline');
-  if (f) tl.dataset.only = f; else tl.removeAttribute('data-only');
-  $('.tl-legend').classList.toggle('on', !!f);
-  $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tlf === f)));
+  if (sel.length) tl.dataset.only = sel.join(' '); else tl.removeAttribute('data-only');
+  $('.tl-legend').classList.toggle('on', sel.length > 0);
+  $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(sel.includes(b.dataset.tlf))));
   $$('#timeline .decade').forEach((sec) => {
     const small = sec.querySelector('h2 small');
-    const n = f ? sec.querySelectorAll(`.tl-item.${TL_ONLY[f][0]}`).length : -1;
+    const n = sel.length ? sec.querySelectorAll(sel.map((f) => `.tl-item.${TL_ONLY[f][0]}`).join(',')).length : -1;
     sec.classList.toggle('none', n === 0);
-    small.textContent = f ? `${n} ${n === 1 ? TL_ONLY[f][1] : TL_ONLY[f][2]}` : small.dataset.all;
+    small.textContent = !sel.length ? small.dataset.all
+      : sel.length === 1 ? `${n} ${n === 1 ? TL_ONLY[sel[0]][1] : TL_ONLY[sel[0]][2]}` : `${n} car${n === 1 ? '' : 's'}`;
   });
 }
 document.addEventListener('click', (e) => {
+  const clear = e.target.closest('.tl-legend [data-tlf-clear]');
   const b = e.target.closest('.tl-legend [data-tlf]');
-  if (!b) return;
-  const f = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.tlf;
-  location.hash = f ? `#/timeline?only=${f}` : '#/timeline';
+  if (!clear && !b) return;
+  const cur = new Set(clear ? [] : tlSelected());
+  if (b) { if (cur.has(b.dataset.tlf)) cur.delete(b.dataset.tlf); else cur.add(b.dataset.tlf); }
+  const sel = Object.keys(TL_ONLY).filter((k) => cur.has(k));
+  location.hash = sel.length ? `#/timeline?only=${sel.join(',')}` : '#/timeline';
   window.scrollTo(0, 0);
 });
 /* Fast 10: horsepower first, then claimed top speed ("350+" ranks above 350). Road cars with an

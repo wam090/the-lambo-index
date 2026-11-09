@@ -18,7 +18,8 @@ history). Record each decision the user makes under Decisions, with its date.
   intro, only a one-line legend of mini frames (Debut › Race car › Limited › One-off).
 - 2026-11-09: Fast 10 tab beside Timeline: ranked by horsepower, then claimed top speed;
   roadsters count with their coupé. The site shows power in hp, not CV.
-- 2026-11-09: Tapping a timeline legend chip shows only that kind of car; tapping it again shows all.
+- 2026-11-09: Timeline legend reads "Filter by frame →"; chips toggle, several can be on at once
+  (cars matching any of them), and Clear shows all.
 - 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);
   the user disliked existing multi-brand sites, so no umbrella site unless a second brand is real.
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when

@@ -20,8 +20,8 @@ the full-screen viewer. You need an internet connection for photos and fonts.
   Wikipedia, all Commons photos, for-sale searches and scale models on lambodiecast.com.
 - **Timeline**: every car, decade by decade. An orange frame marks each debut, the original form
   of each car (rules in tools/catalog.py). Limited series wear a platinum frame, one-offs a brighter platinum
-  with diamond sparkles and race cars a red frame scuffed with tyre marks, each with a badge beside the Debut badge. Tap a legend chip to
-  show only those cars. A car that qualifies for two frames shows the higher
+  with diamond sparkles and race cars a red frame scuffed with tyre marks, each with a badge beside the Debut badge. Tap legend chips to
+  show only those cars; several can be on at once. A car that qualifies for two frames shows the higher
   one and keeps both badges.
 - **Fast 10**: the ten fastest Lamborghinis by horsepower, then claimed top speed.
 - **Compare**: up to four cars side by side; most powerful and rarest highlighted.

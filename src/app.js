@@ -729,26 +729,32 @@ $('#stats').addEventListener('click', (e) => {
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
-/* Timeline legend chips filter the timeline to one kind of car: #/timeline?only=debut|race|lim|one */
+/* Timeline legend chips filter the timeline; several can be on at once and a car shows when it
+   matches any of them: #/timeline?only=lim,one (debut|race|lim|one) */
 const TL_ONLY = { debut: ['debut', 'debut', 'debuts'], race: ['race', 'race car', 'race cars'], lim: ['lim', 'limited', 'limited'], one: ['one', 'one-off', 'one-offs'] };
-function applyTlOnly(f) {
-  if (!TL_ONLY[f]) f = '';
+const tlSelected = () => ($('#timeline').dataset.only || '').split(' ').filter(Boolean);
+function applyTlOnly(raw) {
+  const sel = Object.keys(TL_ONLY).filter((k) => String(raw || '').split(',').includes(k));
   const tl = $('#timeline');
-  if (f) tl.dataset.only = f; else tl.removeAttribute('data-only');
-  $('.tl-legend').classList.toggle('on', !!f);
-  $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tlf === f)));
+  if (sel.length) tl.dataset.only = sel.join(' '); else tl.removeAttribute('data-only');
+  $('.tl-legend').classList.toggle('on', sel.length > 0);
+  $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(sel.includes(b.dataset.tlf))));
   $$('#timeline .decade').forEach((sec) => {
     const small = sec.querySelector('h2 small');
-    const n = f ? sec.querySelectorAll(`.tl-item.${TL_ONLY[f][0]}`).length : -1;
+    const n = sel.length ? sec.querySelectorAll(sel.map((f) => `.tl-item.${TL_ONLY[f][0]}`).join(',')).length : -1;
     sec.classList.toggle('none', n === 0);
-    small.textContent = f ? `${n} ${n === 1 ? TL_ONLY[f][1] : TL_ONLY[f][2]}` : small.dataset.all;
+    small.textContent = !sel.length ? small.dataset.all
+      : sel.length === 1 ? `${n} ${n === 1 ? TL_ONLY[sel[0]][1] : TL_ONLY[sel[0]][2]}` : `${n} car${n === 1 ? '' : 's'}`;
   });
 }
 document.addEventListener('click', (e) => {
+  const clear = e.target.closest('.tl-legend [data-tlf-clear]');
   const b = e.target.closest('.tl-legend [data-tlf]');
-  if (!b) return;
-  const f = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.tlf;
-  location.hash = f ? `#/timeline?only=${f}` : '#/timeline';
+  if (!clear && !b) return;
+  const cur = new Set(clear ? [] : tlSelected());
+  if (b) { if (cur.has(b.dataset.tlf)) cur.delete(b.dataset.tlf); else cur.add(b.dataset.tlf); }
+  const sel = Object.keys(TL_ONLY).filter((k) => cur.has(k));
+  location.hash = sel.length ? `#/timeline?only=${sel.join(',')}` : '#/timeline';
   window.scrollTo(0, 0);
 });
 /* Fast 10: horsepower first, then claimed top speed ("350+" ranks above 350). Road cars with an
