@@ -124,9 +124,10 @@ credits for any photo without a licence; `--credits-only` does only the second p
   Press photos would need the user to register on media.lamborghini.com, and are the user's call.
 
 ## Publishing
-- Bookmark link, always the newest build: https://raw.githack.com/wam090/the-lambo-index/main/latest.html
-  (`latest.html` asks GitHub for main's newest commit and opens that exact build on rawcdn.githack.com;
-  the plain main-branch link can serve a cached older copy).
+- Bookmark link, always the newest build: https://htmlpreview.github.io/?https://github.com/wam090/the-lambo-index/blob/main/index.html
+  (renders main's `index.html` straight from GitHub; updates within about 5 minutes of a merge; one
+  harmless console error, because htmlpreview runs the JSON data block as a script). Do not hand out
+  githack links: in browsers they show an "External Content Notice" click-through page and ads.
 - GitHub Pages (https://wam090.github.io/the-lambo-index/) needs one click by the user: Settings →
   Pages → Deploy from a branch → `main` / root. Sessions cannot change that setting.
 
