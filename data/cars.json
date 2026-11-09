@@ -14711,6 +14711,64 @@
    ]
   },
   {
+   "id": "huracan-stj",
+   "family": "Huracan",
+   "name": "Huracán STJ",
+   "kind": "Limited series",
+   "year": 2024,
+   "end": null,
+   "body": "Coupé",
+   "engine": "5.2 L V10",
+   "eng": "V10",
+   "cv": 640,
+   "units": 10,
+   "designer": "Mitja Borkert",
+   "wiki": "Lamborghini Huracán",
+   "note": "Ten-car farewell to the naturally aspirated V10, derived from the STO.",
+   "cats": [
+    "Lamborghini Huracán STJ"
+   ],
+   "debut": false,
+   "imgs": [
+    {
+     "t": "nonfree:55300074865",
+     "w": 1024,
+     "ht": 683,
+     "a": "FotoByST",
+     "l": "All rights reserved",
+     "lu": "",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/fotobyst/55300074865/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/55300074865_cc59da711e_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/55300074865_cc59da711e_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/55300074865_cc59da711e.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/55300074865_cc59da711e_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/55300074865_cc59da711e_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/55300074865_cc59da711e_b.jpg"
+      ]
+     ]
+    }
+   ]
+  },
+  {
    "id": "temerario-gt3",
    "family": "Temerario",
    "name": "Temerario GT3",
@@ -14954,6 +15012,232 @@
      "a": "Turning67",
      "l": "CC BY-SA 4.0",
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+   ]
+  },
+  {
+   "id": "fenomeno-roadster",
+   "family": "Fenomeno",
+   "name": "Fenomeno Roadster",
+   "kind": "Limited series",
+   "year": 2026,
+   "end": 0,
+   "body": "Roadster",
+   "engine": "6.5 L V12 plug-in hybrid",
+   "eng": "Hybrid V12",
+   "cv": 1080,
+   "units": 15,
+   "designer": "Mitja Borkert",
+   "wiki": null,
+   "note": "Open Fenomeno, shown at Imola in May 2026 and limited to 15 cars.",
+   "cats": [
+    "Lamborghini Fenomeno Roadster"
+   ],
+   "debut": false,
+   "vmax": 340,
+   "vplus": true,
+   "acc": 2.4,
+   "imgs": [
+    {
+     "t": "nonfree:55375144847",
+     "w": 1024,
+     "ht": 690,
+     "a": "Lokale Blicke",
+     "l": "All rights reserved",
+     "lu": "",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/157290793@N07/55375144847/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/55375144847_d5817a3d24.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_b.jpg"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "urus-se-performante",
+   "family": "Urus",
+   "name": "Urus SE Performante",
+   "kind": "Production",
+   "year": 2026,
+   "end": 0,
+   "body": "SUV",
+   "engine": "4.0 L twin-turbo V8 plug-in hybrid",
+   "eng": "Hybrid V8",
+   "cv": 812,
+   "units": null,
+   "designer": "Lamborghini Centro Stile",
+   "wiki": "Lamborghini Urus",
+   "note": "Lighter, sharper plug-in hybrid Urus; the most powerful Urus yet.",
+   "cats": [
+    "Lamborghini Urus SE Performante"
+   ],
+   "debut": false,
+   "imgs": [
+    {
+     "t": "Lamborghini Urus SE 2025 1.jpg",
+     "h": "6/6e",
+     "n": "Lamborghini_Urus_SE_2025_1.jpg",
+     "w": 3424,
+     "ht": 2568,
+     "a": "Calreyn88",
+     "l": "CC BY-SA 4.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+   ]
+  },
+  {
+   "id": "revuelto-sv",
+   "family": "Revuelto",
+   "name": "Revuelto SV",
+   "kind": "Limited series",
+   "year": 2026,
+   "end": 0,
+   "body": "Coupé",
+   "engine": "6.5 L V12 plug-in hybrid, three electric motors",
+   "eng": "Hybrid V12",
+   "cv": 1065,
+   "units": 1963,
+   "designer": "Mitja Borkert",
+   "wiki": "Lamborghini Revuelto",
+   "note": "Sharper Revuelto with 50 CV more; the most powerful series-production Lamborghini.",
+   "cats": [
+    "Lamborghini Revuelto SV"
+   ],
+   "debut": false,
+   "vmax": 345,
+   "vplus": true,
+   "acc": 2.4,
+   "imgs": [
+    {
+     "t": "nonfree:55622954337",
+     "w": 1024,
+     "ht": 683,
+     "a": "J.C.",
+     "l": "All rights reserved",
+     "lu": "",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/136533511@N06/55622954337/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/55622954337_9541432d4c_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/55622954337_9541432d4c_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/55622954337_9541432d4c.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/55622954337_9541432d4c_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/55622954337_9541432d4c_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/55622954337_9541432d4c_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "nonfree:55622941627",
+     "w": 1024,
+     "ht": 683,
+     "a": "J.C.",
+     "l": "All rights reserved",
+     "lu": "",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/136533511@N06/55622941627/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/55622941627_8a20b9eb51_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/55622941627_8a20b9eb51_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/55622941627_8a20b9eb51.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/55622941627_8a20b9eb51_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/55622941627_8a20b9eb51_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/55622941627_8a20b9eb51_b.jpg"
+      ]
+     ]
+    },
+    {
+     "t": "nonfree:55513474654",
+     "w": 1024,
+     "ht": 683,
+     "a": "Si",
+     "l": "All rights reserved",
+     "lu": "",
+     "src": "flickr",
+     "p": "https://www.flickr.com/photos/si558/55513474654/",
+     "sz": [
+      [
+       320,
+       "https://live.staticflickr.com/65535/55513474654_cb38e67b03_n.jpg"
+      ],
+      [
+       400,
+       "https://live.staticflickr.com/65535/55513474654_cb38e67b03_w.jpg"
+      ],
+      [
+       500,
+       "https://live.staticflickr.com/65535/55513474654_cb38e67b03.jpg"
+      ],
+      [
+       640,
+       "https://live.staticflickr.com/65535/55513474654_cb38e67b03_z.jpg"
+      ],
+      [
+       800,
+       "https://live.staticflickr.com/65535/55513474654_cb38e67b03_c.jpg"
+      ],
+      [
+       1024,
+       "https://live.staticflickr.com/65535/55513474654_cb38e67b03_b.jpg"
+      ]
+     ]
     }
    ]
   }

@@ -322,10 +322,18 @@ CARS = [
       ["Lamborghini Temerario"], "Lamborghini Temerario", "Huracán successor revving to 10,000 rpm."),
     E("urus-se", "Urus", "Urus SE", "Production", 2024, 0, "SUV", "4.0 L twin-turbo V8 plug-in hybrid", "Hybrid V8", 800, None, CS,
       ["Lamborghini Urus SE"], "Lamborghini Urus", "Plug-in hybrid Urus."),
+    E("huracan-stj", "Huracan", "Huracán STJ", "Limited series", 2024, None, "Coupé", "5.2 L V10", "V10", 640, 10, BORKERT,
+      ["Lamborghini Huracán STJ"], "Lamborghini Huracán", "Ten-car farewell to the naturally aspirated V10, derived from the STO."),
     E("temerario-gt3", "Temerario", "Temerario GT3", "Race car", 2025, 0, "Coupé", "4.0 L twin-turbo V8", "V8", None, None, "Squadra Corse",
       ["Lamborghini Temerario GT3"], None, "Customer GT3 car replacing the Huracán GT3 EVO2."),
     E("fenomeno", "Fenomeno", "Fenomeno", "Limited series", 2025, 0, "Coupé", "6.5 L V12 plug-in hybrid", "Hybrid V12", 1080, 29, BORKERT,
       ["Lamborghini Fenomeno"], None, "Few-off on Revuelto mechanicals; the most powerful Lamborghini so far."),
+    E("fenomeno-roadster", "Fenomeno", "Fenomeno Roadster", "Limited series", 2026, 0, "Roadster", "6.5 L V12 plug-in hybrid", "Hybrid V12", 1080, 15, BORKERT,
+      ["Lamborghini Fenomeno Roadster"], None, "Open Fenomeno, shown at Imola in May 2026 and limited to 15 cars."),
+    E("urus-se-performante", "Urus", "Urus SE Performante", "Production", 2026, 0, "SUV", "4.0 L twin-turbo V8 plug-in hybrid", "Hybrid V8", 812, None, CS,
+      ["Lamborghini Urus SE Performante"], "Lamborghini Urus", "Lighter, sharper plug-in hybrid Urus; the most powerful Urus yet."),
+    E("revuelto-sv", "Revuelto", "Revuelto SV", "Limited series", 2026, 0, "Coupé", "6.5 L V12 plug-in hybrid, three electric motors", "Hybrid V12", 1065, 1963, BORKERT,
+      ["Lamborghini Revuelto SV"], "Lamborghini Revuelto", "Sharper Revuelto with 50 CV more; the most powerful series-production Lamborghini."),
 ]
 
 # Timeline frames. A debut is the original form of each distinct car: by default the first car of
@@ -348,6 +356,7 @@ PERF = {
     "countach-lpi-800": (355, False, 2.8), "aventador-ultimae": (355, False, 2.8),
     "veneno": (355, False, 2.8), "veneno-roadster": (355, False, 2.9),
     "fenomeno": (350, True, 2.4), "revuelto": (350, True, 2.5),
+    "revuelto-sv": (345, True, 2.4), "fenomeno-roadster": (340, True, 2.4),
     "sian": (350, True, 2.8), "sian-roadster": (350, True, 2.9),
     "aventador-svj": (350, True, 2.8), "aventador-svj-roadster": (350, True, 2.9),
     "centenario": (350, True, 2.8), "centenario-roadster": (350, True, 2.9),

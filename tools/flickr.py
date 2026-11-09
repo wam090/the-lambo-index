@@ -84,6 +84,10 @@ QUERIES = {
     "sc20": (["Lamborghini SC20", "Lamborghini SC 20", "SC20 Squadra Corse", "Lamborghini SC20 barchetta"], r"SC ?20"),
     "invencible": (["Lamborghini Invencible", "Invencible one-off"], r"Invencible"),
     "autentica": (["Lamborghini Autentica", "Lamborghini Auténtica", "Autentica one-off"], r"Aut[eé]ntica"),
+    "huracan-stj": (["Lamborghini Huracan STJ", "Huracán STJ"], r"STJ"),
+    "fenomeno-roadster": (["Lamborghini Fenomeno Roadster"], r"Fenomeno Roadster"),
+    "urus-se-performante": (["Lamborghini Urus SE Performante"], r"SE Performante"),
+    "revuelto-sv": (["Lamborghini Revuelto SV"], r"Revuelto SV|Revuelto Super ?veloce"),
 }
 
 # Accounts whose licences cannot be relied on: scans of printed promotional cards, re-uploaded

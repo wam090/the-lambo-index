@@ -17,7 +17,9 @@ README.md is the user-facing description.
 ## Who decides
 The user (the Coordinator) assigns the tasks and owns product decisions. Items marked "your call" in
 BACKLOG.md are theirs: ask, never assume. Decisions already made are listed in BACKLOG.md: follow
-them without asking again.
+them without asking again. A chat the user calls the Coordinator's chat only advises and writes
+messages in `MESSAGES.txt`; it changes nothing else in the repo. Every change on GitHub (code, data,
+docs, PRs, merges) is made by a dev chat.
 
 ## Every chat: instructions first, then the ask
 Whatever the user writes, even one word, handle it in this order:
