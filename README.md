@@ -10,7 +10,7 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 ## What's in it
 
 - **145 cars** from the 1963 350 GTV to the 2025 Fenomeno, with year(s), type, body, engine,
-  power (CV and kW), number built where reliably known, designer and a one-line note.
+  power (hp and kW), number built where reliably known, designer and a one-line note.
 - **About 1,060 photos**, reviewed by eye: freely licensed photos from Wikimedia Commons and Flickr,
   plus credited press photos for the few cars with no free photo. Every photo shows its author and
   licence and links to its source page.
@@ -22,7 +22,7 @@ the full-screen viewer. You need an internet connection for photos and fonts.
   of each car (rules in tools/catalog.py). Limited series wear a platinum frame, one-offs a brighter platinum
   with diamond sparkles and race cars a red frame scuffed with tyre marks, each with a badge beside the Debut badge. A car that qualifies for two frames shows the higher
   one and keeps both badges.
-- **Fast 10**: the ten fastest Lamborghinis by claimed top speed, with 0–100 km/h and power.
+- **Fast 10**: the ten fastest Lamborghinis by horsepower, then claimed top speed.
 - **Compare**: up to four cars side by side; most powerful and rarest highlighted.
 - **Stats**: power from 1963 to today (record-holders labelled), cars per decade, engines,
   types, designers, most powerful, rarest road cars.

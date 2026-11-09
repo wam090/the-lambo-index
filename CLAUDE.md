@@ -68,8 +68,8 @@ credits for any photo without a licence; `--credits-only` does only the second p
   in `buildTimeline()`: Limited series platinum, One-off platinum with diamond sparkles, Race car red with tyre marks. A car
   shows only its highest frame (diamond > platinum > red > orange) but keeps every badge. Styles in `src/template.html`; `smoke.js` counts each frame.
 - **Fast 10**: `PERF` in `tools/catalog.py` holds claimed top speed, an "over" flag and 0–100 for road
-  cars with official figures; `buildFast()` ranks by top speed (350+ above 350), then 0–100, then power,
-  and skips Roadster versions. Add a car's figures to `PERF` and it competes automatically.
+  cars with official figures; `buildFast()` ranks by horsepower, then top speed (350+ above 350), and
+  skips Roadster versions. Add a car's figures to `PERF` and it competes automatically.
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 
@@ -88,6 +88,8 @@ credits for any photo without a licence; `--credits-only` does only the second p
 - `kind` must be one of `KIND_ORDER` and `eng` one of `ENG_ORDER` (`src/app.js`; colours in
   `KIND_COLOUR`/`ENG_COLOUR`). `body` is free text that `bodyGroup()` maps to a filter group, and
   unmatched words fall into "Coupé". A new value needs code changes there.
+- Power: `cv` is stored in CV, as Lamborghini quotes it; the site shows hp (`hp()` in `app.js`,
+  cv × 0.98632, rounded) and kW. The power filter's steps are in hp.
 - `end`: 0 = still built, None = one year only. `cv` and `units`: None when not reliably known.
   Blank beats wrong: if sources disagree, leave it blank.
 - `src/app.js` must not contain `</script` (build asserts). No external JS: only photos and fonts
