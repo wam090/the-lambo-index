@@ -16,3 +16,9 @@ scripts, so use the press and Wikipedia):
 - Headlines call it the most powerful Lamborghini ever, but the Fenomeno on the site has
   1,080 CV (794 kW), so they most likely mean series production. Check it: it decides the
   Fast 10 order and the Stats record labels. Some outlets print CV figures as hp.
+
+[2026-11-09] Coordinator -> dev: OPEN
+New working model (user's decision, 2026-11-09): the Coordinator's chat only advises and writes
+messages here; every change on GitHub (code, data, docs, PRs, merges) is done by a dev chat.
+Record it under Decisions in BACKLOG.md, and add to "Who decides" in CLAUDE.md: a chat the user
+calls the Coordinator's chat changes nothing in the repo except messages in MESSAGES.txt.
