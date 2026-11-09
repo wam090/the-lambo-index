@@ -133,8 +133,8 @@ credits for any photo without a licence; `--credits-only` does only the second p
 ## Publishing
 - Bookmark link, always the newest build: https://htmlpreview.github.io/?https://github.com/wam090/the-lambo-index/blob/main/index.html
   (renders main's `index.html` straight from GitHub; updates within about 5 minutes of a merge). It injects
-  a `<base>` tag, so the app resolves every `#/` link and `replaceState` URL against the page itself;
-  keep it that way. One harmless console error: htmlpreview runs the JSON data block as a script. Do not hand out
+  a `<base>` tag and rewrites static links into full URLs, so the app treats any link containing `#/`
+  as in-app and resolves `replaceState` URLs against the page itself; keep it that way. One harmless console error: htmlpreview runs the JSON data block as a script. Do not hand out
   githack links: in browsers they show an "External Content Notice" click-through page and ads.
 - GitHub Pages (https://wam090.github.io/the-lambo-index/) needs one click by the user: Settings →
   Pages → Deploy from a branch → `main` / root. Sessions cannot change that setting.
