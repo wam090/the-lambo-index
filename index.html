@@ -451,7 +451,14 @@ button{cursor:pointer}
 @keyframes twinkle-tag{0%,100%{opacity:0;transform:scale(.3) rotate(0deg)}40%{opacity:1;transform:scale(1) rotate(45deg)}}
 @keyframes gem-glint-tag{0%{background-position:0% 0,0 0}55%,100%{background-position:100% 0,0 0}}
 .tl-legend{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:24px 0 4px;font-size:13.5px}
-.tl-legend .lg{display:inline-flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.tl-legend .lg{display:inline-flex;align-items:center;gap:8px;color:var(--text);font:inherit;font-weight:600;background:none;border:1px solid transparent;border-radius:999px;padding:5px 12px 5px 7px;cursor:pointer;transition:background .15s,border-color .15s,opacity .15s}
+.tl-legend .lg:hover{background:var(--panel-2);border-color:var(--line)}
+.tl-legend .lg[aria-pressed="true"]{background:var(--panel-2);border-color:var(--line-2)}
+.tl-legend.on .lg[aria-pressed="false"]{opacity:.45}
+/* legend filter: only the chosen kind of car shows; empty decades hide */
+#timeline[data-only="debut"] .tl-item:not(.debut),#timeline[data-only="race"] .tl-item:not(.race),
+#timeline[data-only="lim"] .tl-item:not(.lim),#timeline[data-only="one"] .tl-item:not(.one),
+#timeline[data-only] .decade.none{display:none}
 .tl-legend .gt{color:var(--faint);font-weight:400}
 .tl-legend .lg-note{margin-left:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
 .sw{position:relative;display:inline-block;width:30px;height:20px;border-radius:6px;border:3px solid transparent}
@@ -638,10 +645,10 @@ a.tile{text-decoration:none;color:inherit}
   <section class="view" id="view-timeline" data-view="timeline" aria-label="Timeline" hidden>
     <div class="wrap">
       <div class="tl-legend" aria-label="What the frames mean">
-        <span class="lg"><i class="sw debut"></i>Debut</span><b class="gt" aria-hidden="true">›</b>
-        <span class="lg"><i class="sw race"></i>Race car</span><b class="gt" aria-hidden="true">›</b>
-        <span class="lg"><i class="sw lim"></i>Limited</span><b class="gt" aria-hidden="true">›</b>
-        <span class="lg"><i class="sw one"></i>One-off</span>
+        <button class="lg" type="button" data-tlf="debut" aria-pressed="false"><i class="sw debut"></i>Debut</button><b class="gt" aria-hidden="true">›</b>
+        <button class="lg" type="button" data-tlf="race" aria-pressed="false"><i class="sw race"></i>Race car</button><b class="gt" aria-hidden="true">›</b>
+        <button class="lg" type="button" data-tlf="lim" aria-pressed="false"><i class="sw lim"></i>Limited</button><b class="gt" aria-hidden="true">›</b>
+        <button class="lg" type="button" data-tlf="one" aria-pressed="false"><i class="sw one"></i>One-off</button>
         <span class="lg-note">rarest frame wins</span>
       </div>
       <div id="timeline"></div>
@@ -1441,6 +1448,28 @@ $('#stats').addEventListener('click', (e) => {
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
+/* Timeline legend chips filter the timeline to one kind of car: #/timeline?only=debut|race|lim|one */
+const TL_ONLY = { debut: ['debut', 'debut', 'debuts'], race: ['race', 'race car', 'race cars'], lim: ['lim', 'limited', 'limited'], one: ['one', 'one-off', 'one-offs'] };
+function applyTlOnly(f) {
+  if (!TL_ONLY[f]) f = '';
+  const tl = $('#timeline');
+  if (f) tl.dataset.only = f; else tl.removeAttribute('data-only');
+  $('.tl-legend').classList.toggle('on', !!f);
+  $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tlf === f)));
+  $$('#timeline .decade').forEach((sec) => {
+    const small = sec.querySelector('h2 small');
+    const n = f ? sec.querySelectorAll(`.tl-item.${TL_ONLY[f][0]}`).length : -1;
+    sec.classList.toggle('none', n === 0);
+    small.textContent = f ? `${n} ${n === 1 ? TL_ONLY[f][1] : TL_ONLY[f][2]}` : small.dataset.all;
+  });
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.tl-legend [data-tlf]');
+  if (!b) return;
+  const f = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.tlf;
+  location.hash = f ? `#/timeline?only=${f}` : '#/timeline';
+  window.scrollTo(0, 0);
+});
 /* Fast 10: horsepower first, then claimed top speed ("350+" ranks above 350). Road cars with an
    official top speed only; open versions count with their coupé, so a Roadster never takes a second place. */
 function buildFast() {
@@ -1463,7 +1492,7 @@ function buildTimeline() {
   let html = '';
   for (const [d, list] of decades) {
     const nDebut = list.filter((c) => debut.has(c.id)).length;
-    html += `<section class="decade"><h2>${d}<small>${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}</small></h2><div class="tl">${list.map((c) => {
+    html += `<section class="decade"><h2>${d}<small data-all="${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}">${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}</small></h2><div class="tl">${list.map((c) => {
       const isDebut = debut.has(c.id);
       // one frame per car, the highest it qualifies for: one-off diamond > limited platinum >
       // race red > debut orange. Every badge stays.
@@ -1506,7 +1535,7 @@ function route() {
   }
   hideDetail();
   lastViewHash = location.hash || '#/';
-  if (path === '/timeline') showView('timeline');
+  if (path === '/timeline') { showView('timeline'); applyTlOnly(params.get('only') || ''); }
   else if (path === '/fast10') showView('fast');
   else if (path === '/stats') showView('stats');
   else if (path === '/compare') {
