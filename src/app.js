@@ -14,15 +14,16 @@ const store = {
   set(k, v) { try { localStorage.setItem('li:' + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } },
 };
 
-/* #/ links must work even when a host injects a <base> tag (htmlpreview does): resolve them against
-   this page, never the base URL, or filters and car links open the raw source instead. */
+/* Every #/ link stays inside the app, even when a host injects a <base> tag or rewrites static links
+   into full URLs (htmlpreview does both): only the #/ part counts. No outside link contains "#/". */
 const pageURL = () => location.href.split('#')[0];
 document.addEventListener('click', (e) => {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-  const a = e.target.closest('a[href^="#/"]');
+  const a = e.target.closest('a[href*="#/"]');
   if (!a || a.target) return;
   e.preventDefault();
-  const h = a.getAttribute('href');
+  const href = a.getAttribute('href');
+  const h = href.slice(href.indexOf('#/'));
   if (location.hash !== h) location.hash = h;
 });
 
