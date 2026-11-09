@@ -35,10 +35,8 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
 
 ## Next
 
-- [ ] **GitHub Pages (your call: one click).** Settings → Pages → Deploy from a branch → `main` /
-      root; then https://wam090.github.io/the-lambo-index/ works. Until then the bookmark link is
-      https://htmlpreview.github.io/?https://github.com/wam090/the-lambo-index/blob/main/index.html Removing `noindex` so search
-      engines list the site is a separate call.
+- [ ] **Search engines (your call).** The site is live at https://wam090.github.io/the-lambo-index/ with `noindex`;
+      remove it when you want search engines to list the site.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
 - [ ] **Auto-refresh**: a monthly scheduled task that adds new Lamborghinis, runs `images.py --only`

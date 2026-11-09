@@ -3,7 +3,7 @@
 Every Lamborghini ever made or shown — production cars, limited series, one-offs, concepts,
 prototypes and race cars — in one fast, searchable, photo-first page.
 
-**Open `index.html` in any browser.** It is a single self-contained file (about 350 KB). The data is
+**Live at https://wam090.github.io/the-lambo-index/**, or open `index.html` in any browser. It is a single self-contained file (about 350 KB). The data is
 built in; photos stream from Wikimedia Commons and Flickr at the best size for your screen, up to 3840 px in
 the full-screen viewer. You need an internet connection for photos and fonts.
 
