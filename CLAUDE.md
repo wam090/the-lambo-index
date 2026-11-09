@@ -1,7 +1,8 @@
 # The Lambo Index: instructions for every session
 
-This file and `BACKLOG.md` (imported at the bottom) load into every Claude Code session on this repo
-automatically. Together they are the handover. Do not ask the user to re-explain the project or wait
+This file, `BACKLOG.md` and `MESSAGES.txt` (both imported at the bottom) load into every Claude Code
+session on this repo automatically. Together they are the handover; `MESSAGES.txt` is how the
+Coordinator and the chats talk to each other. Do not ask the user to re-explain the project or wait
 for handover notes: what you need is here or in the code. If you had to work out something important
 that is missing here, add it.
 
@@ -20,11 +21,12 @@ them without asking again.
 
 ## Every chat: instructions first, then the ask
 Whatever the user writes, even one word, handle it in this order:
-1. This file and the backlog (already in your context). Read code only for the area you touch.
+1. This file, the backlog and the messages (already in your context). Read code only for the area
+   you touch. OPEN messages to "dev" are part of your work unless the user's ask says otherwise.
 2. Run `git log --oneline -8` and check for open pull requests. New sessions start from `main`, so
    unmerged work is invisible to you; if an open PR touches your area, tell the user before starting.
-3. Then the ask. "next" or "continue" means the first unfinished item in BACKLOG.md ("In progress"
-   first, then "Next"), skipping items marked "your call"; list those for the user instead.
+3. Then the ask. "next" or "continue" means: OPEN messages to "dev" first, then BACKLOG.md
+   ("In progress", then "Next"), skipping items marked "your call"; list those for the user instead.
 4. End every reply with a capacity bar, e.g. `Chat capacity: ████████░░░░░░░░░░░░ ~40% used (estimate)`.
 5. At about 70% used, or when the task is done, start nothing new: do "Before you finish" so the
    chat never runs out mid-task.
@@ -147,13 +149,18 @@ credits for any photo without a licence; `--credits-only` does only the second p
    record any decision the user made, with the date. Keep it short: it loads into every session.
 3. This file: update it only if you changed how the project works. Keep it under about 150 lines;
    cut stale lines instead of appending.
-4. `README.md` if user-visible features or counts changed.
-5. Commit sources and outputs together, push your session branch, open a draft PR.
+4. `README.md` if user-visible features or counts changed. `MESSAGES.txt`: mark what you handled
+   DONE, delete older DONE messages, and leave a message if the Coordinator or the next chat must
+   know something the backlog does not say.
+5. Commit sources and outputs together, push your session branch, open a PR and merge it yourself
+   (user's decision, see BACKLOG.md); the next chat starts from `main`.
 6. Tell the user plainly what changed and how you verified it, then end with **Next steps for you**:
-   - the PR to merge; it must be merged before the next chat, which starts from `main`;
+   - the PR you merged, or why you could not;
    - the exact sentence to paste into the next chat;
    - any decision waiting on the user.
    If the task is unfinished, leave the site working and put what is left under "In progress" in
    BACKLOG.md, in the same PR, so the next chat only needs "continue".
 
 @BACKLOG.md
+
+@MESSAGES.txt
