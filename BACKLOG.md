@@ -16,6 +16,10 @@ history). Record each decision the user makes under Decisions, with its date.
   the highest it qualifies for (diamond > platinum > red > orange debut); every badge stays.
 - 2026-11-08: Keep pages lean: the user prefers visuals to explanatory text. The timeline has no
   intro, only a one-line legend of mini frames (Debut › Race car › Limited › One-off).
+- 2026-11-09: Fast 10 tab beside Timeline: ranked by claimed top speed, then 0–100, then power;
+  roadsters count with their coupé.
+- 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);
+  the user disliked existing multi-brand sites, so no umbrella site unless a second brand is real.
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
   really needed.
 - 2026-11-08: Keep everything relevant in this GitHub repo and avoid steps that need the user's

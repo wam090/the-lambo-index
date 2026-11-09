@@ -1,5 +1,6 @@
 {
- "generated": "2026-11-08",
+ "brand": "Lamborghini",
+ "generated": "2026-11-09",
  "cars": [
   {
    "id": "350-gtv",
@@ -6648,6 +6649,9 @@
     "Lamborghini Murciélago LP640"
    ],
    "debut": false,
+   "vmax": 340,
+   "vplus": false,
+   "acc": 3.4,
    "imgs": [
     {
      "t": "Green Lamborghini LP640 (8024589227).jpg",
@@ -7014,6 +7018,9 @@
     "Lamborghini Reventón"
    ],
    "debut": true,
+   "vmax": 340,
+   "vplus": false,
+   "acc": 3.4,
    "imgs": [
     {
      "t": "2008 Lamborghini Reventon HRO26.jpg",
@@ -7766,6 +7773,9 @@
     "Lamborghini Murciélago LP670-4 SuperVeloce"
    ],
    "debut": false,
+   "vmax": 342,
+   "vplus": false,
+   "acc": 3.2,
    "imgs": [
     {
      "t": "2009 Lamborghini Murcielago LP670-4 SV HRO26.jpg",
@@ -8714,6 +8724,9 @@
     "Lamborghini Aventador LP700-4"
    ],
    "debut": true,
+   "vmax": 350,
+   "vplus": false,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "Blue Lamborghini Aventador LP-700 (8623429560).jpg",
@@ -9122,6 +9135,9 @@
     "Lamborghini Aventador LP700-4 Roadster"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": false,
+   "acc": 3.0,
    "imgs": [
     {
      "t": "2015 Lamborghini Aventador LP700-4 Roadster in Grigio Titans, front left.jpg",
@@ -9244,6 +9260,9 @@
     "Lamborghini Aventador LP720-4 50° Anniversario"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": false,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "flickr:14211320731",
@@ -9498,6 +9517,9 @@
     "Lamborghini Veneno"
    ],
    "debut": true,
+   "vmax": 355,
+   "vplus": false,
+   "acc": 2.8,
    "imgs": [
     {
      "t": "Lamborghini Veneno (11225271396).jpg",
@@ -9620,6 +9642,9 @@
     "Lamborghini Veneno Roadster"
    ],
    "debut": false,
+   "vmax": 355,
+   "vplus": false,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "Autoworld Brüssel 148 - Italian Car Passion - Lamborghini Veneno Roadster.jpg",
@@ -10262,6 +10287,9 @@
     "Lamborghini Aventador LP750-4 Superveloce"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.8,
    "imgs": [
     {
      "t": "Lamborghini ABA-47L539 Aventador LP 750-4 SV (24042815474).jpg",
@@ -10628,6 +10656,9 @@
     "Lamborghini Centenario"
    ],
    "debut": true,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.8,
    "imgs": [
     {
      "t": "New York International Auto Show NYIAS (41289577792).jpg",
@@ -10750,6 +10781,9 @@
     "Lamborghini Centenario Roadster"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "Centenario Roadster au Salon de Paris 2026.jpg",
@@ -10852,6 +10886,9 @@
     "Lamborghini Aventador LP750-4 SV Roadster"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "Front of Lamborghini Aventador SV Roadster LP750-4.jpg",
@@ -10974,6 +11011,9 @@
     "Lamborghini Aventador S coupé"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": false,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "Lamborghini Aventador S, GIMS 2018, Le Grand-Saconnex (1X7A1507).jpg",
@@ -11218,6 +11258,9 @@
     "Lamborghini Aventador S Roadster"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": false,
+   "acc": 3.0,
    "imgs": [
     {
      "t": "Lamborghini 2017 Aventador S Roadster.jpg",
@@ -11666,6 +11709,9 @@
     "Lamborghini Aventador SVJ"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.8,
    "imgs": [
     {
      "t": "2019 Lamborghini Aventador SVJ LP770-4.jpg",
@@ -12214,6 +12260,9 @@
     "Lamborghini Aventador SVJ Roadster"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "2020 Lamborghini Aventador SVJ Roadster in Oro Elios Metallic, front left.jpg",
@@ -12574,6 +12623,9 @@
     "Lamborghini Sián FKP 37"
    ],
    "debut": true,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.8,
    "imgs": [
     {
      "t": "Lamborghini Sián FKP 37 (52693496494).jpg",
@@ -12840,6 +12892,9 @@
     "Lamborghini Sián Roadster"
    ],
    "debut": false,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.9,
    "imgs": [
     {
      "t": "2021 Lamborghini Sian Roadster TM26.jpg",
@@ -13154,6 +13209,9 @@
     "Lamborghini Countach LPI 800-4"
    ],
    "debut": true,
+   "vmax": 355,
+   "vplus": false,
+   "acc": 2.8,
    "imgs": [
     {
      "t": "2022 Lamborghini Countach LPI 800-4 SCD26.jpg",
@@ -13398,6 +13456,9 @@
     "Lamborghini Aventador LP780-4 Ultimae"
    ],
    "debut": false,
+   "vmax": 355,
+   "vplus": false,
+   "acc": 2.8,
    "imgs": [
     {
      "t": "2022 Lamborghini Aventador Ultimae LP780-4.jpg",
@@ -14172,6 +14233,9 @@
     "Lamborghini Revuelto"
    ],
    "debut": true,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.5,
    "imgs": [
     {
      "t": "2024 Lamborghini Revuelto 10.jpg",
@@ -14448,6 +14512,9 @@
     "Lamborghini Temerario"
    ],
    "debut": true,
+   "vmax": 343,
+   "vplus": false,
+   "acc": 2.7,
    "imgs": [
     {
      "t": "Lamborghini Temerario (2026) (55081181722).jpg",
@@ -14784,6 +14851,9 @@
     "Lamborghini Fenomeno"
    ],
    "debut": true,
+   "vmax": 350,
+   "vplus": true,
+   "acc": 2.4,
    "imgs": [
     {
      "t": "Lamborghini Fenomeno (2026) (55082081146).jpg",

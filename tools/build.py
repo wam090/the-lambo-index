@@ -4,7 +4,8 @@ import datetime, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-from catalog import CARS, EXTRA_DEBUTS, NOT_DEBUTS
+from catalog import CARS, EXTRA_DEBUTS, NOT_DEBUTS, PERF
+BRAND = "Lamborghini"   # room for more brands later: one page per brand from the same tools
 
 import time
 for _ in range(10):  # images.json may be mid-write while tools/images.py runs
@@ -48,9 +49,11 @@ for c in CARS:
     d = {k: c[k] for k in keep}
     d["cats"] = c["cats"][:1]
     d["debut"] = c["id"] in debuts
+    if c["id"] in PERF:
+        d["vmax"], d["vplus"], d["acc"] = PERF[c["id"]]
     d["imgs"] = [{k: im[k] for k in IMG_KEYS if k in im} for im in ordered_images(c["id"])]
     cars.append(d)
-payload = {"generated": datetime.date.today().isoformat(), "cars": cars}
+payload = {"brand": BRAND, "generated": datetime.date.today().isoformat(), "cars": cars}
 with open(os.path.join(ROOT, "data", "cars.json"), "w", encoding="utf-8") as f:
     json.dump(payload, f, ensure_ascii=False, indent=1)
 tpl = open(os.path.join(ROOT, "src", "template.html"), encoding="utf-8").read()
