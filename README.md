@@ -9,7 +9,7 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 
 ## What's in it
 
-- **145 cars** from the 1963 350 GTV to the 2025 Fenomeno, with year(s), type, body, engine,
+- **149 cars** from the 1963 350 GTV to the 2026 Revuelto SV, with year(s), type, body, engine,
   power (hp and kW), number built where reliably known, designer and a one-line note.
 - **About 1,060 photos**, reviewed by eye: freely licensed photos from Wikimedia Commons and Flickr,
   plus credited press photos for the few cars with no free photo. Every photo shows its author and

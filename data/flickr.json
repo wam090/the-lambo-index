@@ -1061,6 +1061,9 @@
    }
   ]
  },
+ "fenomeno-roadster": {
+  "images": []
+ },
  "huracan-gt3-evo": {
   "images": [
    {
@@ -1360,6 +1363,9 @@
     ]
    }
   ]
+ },
+ "huracan-stj": {
+  "images": []
  },
  "invencible": {
   "images": []
@@ -2901,6 +2907,9 @@
    }
   ]
  },
+ "revuelto-sv": {
+  "images": []
+ },
  "sc20": {
   "images": []
  },
@@ -3018,6 +3027,9 @@
     ]
    }
   ]
+ },
+ "urus-se-performante": {
+  "images": []
  },
  "urus-st-x": {
   "images": [
