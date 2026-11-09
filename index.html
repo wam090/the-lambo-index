@@ -379,13 +379,15 @@ button{cursor:pointer}
 .f10 .yr{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
 .f10 .st{display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
 .f10 .st b,.f10 .sp b{color:var(--text);font-weight:600}
-.f10 .sp{display:grid;justify-items:end;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.f10 .sp{display:flex;gap:26px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.f10 .sp>span{display:grid;justify-items:end}
 .f10 .sp b{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:38px;line-height:1;letter-spacing:0}
 @media (max-width:640px){
   .f10{grid-template-columns:34px 112px minmax(0,1fr);gap:10px;padding:8px 10px 8px 4px}
   .f10 .rk{font-size:28px}
   .f10 .nm{font-size:15px}
-  .f10 .sp{grid-column:2 / -1;justify-items:start;display:flex;align-items:baseline;gap:6px}
+  .f10 .sp{grid-column:2 / -1;gap:18px}
+  .f10 .sp>span{display:flex;align-items:baseline;gap:5px}
   .f10 .sp b{font-size:24px}
 }
 .foot{border-top:1px solid var(--line);padding-block:22px 34px;color:var(--faint);font-size:12.5px}
@@ -628,7 +630,7 @@ a.tile{text-decoration:none;color:inherit}
   <!-- Timeline -->
   <section class="view" id="view-fast" data-view="fast" aria-label="Fast 10" hidden>
     <div class="wrap">
-      <div class="f10-h"><h1>Fast <em>10</em></h1><span class="f10-note">by claimed top speed</span></div>
+      <div class="f10-h"><h1>Fast <em>10</em></h1><span class="f10-note">by horsepower, then top speed</span></div>
       <div id="fast"></div>
     </div>
   </section>
@@ -776,6 +778,7 @@ function bodyGroup(b) {
 const yearsLong = (c) => (c.end === 0 ? `${c.year}–present` : c.end && c.end !== c.year ? `${c.year}–${c.end}` : `${c.year}`);
 const yearsShort = (c) => (c.end === 0 ? `${c.year}–now` : c.end && c.end !== c.year ? `${c.year}–${String(c.end).slice(2)}` : `${c.year}`);
 const kw = (cv) => Math.round(cv * 0.7355);
+const hp = (cv) => Math.round(cv * 0.98632);   // data is in CV, as Lamborghini quotes it; the site shows hp
 
 const cars = RAW.cars.map((r, i) => {
   const c = { ...r, idx: i, imgs: r.imgs || [] };
@@ -791,7 +794,7 @@ const cars = RAW.cars.map((r, i) => {
   c.rest = rest;
   if (!rest) c.head = r.name;
   c.title = `Lamborghini ${r.name}`;
-  c.hay = norm([r.name, c.famName, r.family, r.kind, r.body, c.bodyGroup, r.engine, r.eng, c.designer, r.note, r.year, r.end || '', c.decade, r.cv ? `${r.cv} cv hp` : ''].join(' | '));
+  c.hay = norm([r.name, c.famName, r.family, r.kind, r.body, c.bodyGroup, r.engine, r.eng, c.designer, r.note, r.year, r.end || '', c.decade, r.cv ? `${hp(r.cv)} hp ${r.cv} cv` : ''].join(' | '));
   return c;
 });
 const byId = new Map(cars.map((c) => [c.id, c]));
@@ -822,7 +825,7 @@ const FACETS = [
 ];
 const FK = Object.fromEntries(FACETS.map((f) => [f.key, f]));
 const POWER_STEPS = [0, 400, 600, 800, 1000];
-const state = { q: '', sel: Object.fromEntries(FACETS.map((f) => [f.key, new Set()])), minCv: 0, sort: 'new', view: store.get('view', 'grid') };
+const state = { q: '', sel: Object.fromEntries(FACETS.map((f) => [f.key, new Set()])), minHp: 0, sort: 'new', view: store.get('view', 'grid') };
 const ui = { expanded: {}, find: {} };
 let qTokens = [];
 let results = [];
@@ -835,7 +838,7 @@ function passes(c, except) {
     const s = state.sel[f.key];
     if (s.size && !s.has(f.get(c))) return false;
   }
-  if (state.minCv && !(c.cv >= state.minCv)) return false;
+  if (state.minHp && !(c.cv && hp(c.cv) >= state.minHp)) return false;
   if (qTokens.length && !matchTokens(c, qTokens)) return false;
   return true;
 }
@@ -852,14 +855,14 @@ function stateToQS() {
   const p = new URLSearchParams();
   if (state.q) p.set('q', state.q);
   for (const f of FACETS) for (const v of state.sel[f.key]) p.append(f.param, v);
-  if (state.minCv) p.set('power', state.minCv);
+  if (state.minHp) p.set('power', state.minHp);
   if (state.sort !== 'new') p.set('sort', state.sort);
   return p.toString();
 }
 function applyQS(p) {
   state.q = p.get('q') || '';
   for (const f of FACETS) state.sel[f.key] = new Set(p.getAll(f.param));
-  state.minCv = +p.get('power') || 0;
+  state.minHp = +p.get('power') || 0;
   state.sort = SORTERS[p.get('sort')] ? p.get('sort') : 'new';
   qTokens = tokens(state.q);
 }
@@ -889,7 +892,7 @@ function renderCount() {
   const filtered = results.length !== cars.length;
   $('#count').innerHTML = `${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}${filtered ? ` <small>of ${fmt(cars.length)}</small>` : ''}`;
   $('#f-show').textContent = results.length ? `Show ${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}` : 'No matches';
-  const n = FACETS.reduce((a, f) => a + state.sel[f.key].size, 0) + (state.minCv ? 1 : 0);
+  const n = FACETS.reduce((a, f) => a + state.sel[f.key].size, 0) + (state.minHp ? 1 : 0);
   $('#f-n').textContent = n || '';
 }
 function renderActive() {
@@ -899,7 +902,7 @@ function renderActive() {
     const nm = f.name ? f.name(v) : v;
     chips.push(`<span class="achip"><span class="k">${f.label}</span> ${esc(nm)}<button type="button" data-rm="${f.key}" data-v="${esc(v)}" aria-label="Remove ${esc(f.label)} ${esc(nm)}">${icon('x')}</button></span>`);
   }
-  if (state.minCv) chips.push(`<span class="achip"><span class="k">Power</span> ${fmt(state.minCv)}+ CV<button type="button" data-rm="power" aria-label="Remove power filter">${icon('x')}</button></span>`);
+  if (state.minHp) chips.push(`<span class="achip"><span class="k">Power</span> ${fmt(state.minHp)}+ hp<button type="button" data-rm="power" aria-label="Remove power filter">${icon('x')}</button></span>`);
   if (chips.length > 1) chips.push('<button class="clear-all" type="button" data-clear-all>Clear all</button>');
   $('#active').innerHTML = chips.join('');
   $('#active').hidden = !chips.length;
@@ -914,7 +917,7 @@ function buildFacetShells() {
     </section>`).join('') + `
     <section class="facet" data-facet="power">
       <div class="facet-h"><h3>Power</h3></div>
-      <div class="chips" id="power-chips">${POWER_STEPS.map((p) => `<button class="chip" type="button" data-power="${p}" aria-pressed="false">${p ? `${fmt(p)}+ CV` : 'Any'}</button>`).join('')}</div>
+      <div class="chips" id="power-chips">${POWER_STEPS.map((p) => `<button class="chip" type="button" data-power="${p}" aria-pressed="false">${p ? `${fmt(p)}+ hp` : 'Any'}</button>`).join('')}</div>
     </section>`;
 }
 function renderFacets() {
@@ -941,7 +944,7 @@ function renderFacets() {
     if (more) { more.hidden = !(hidden || ui.expanded[f.key]) || !!find; more.textContent = ui.expanded[f.key] ? 'Show fewer' : `Show all ${fmt(hidden + f.top)}`; }
     $(`[data-clear-facet="${f.key}"]`).hidden = !sel.size;
   }
-  $$('#power-chips .chip').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.power === state.minCv)));
+  $$('#power-chips .chip').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.power === state.minHp)));
 }
 function renderStrip() {
   const famSel = [...state.sel.fam];
@@ -963,7 +966,7 @@ function renderStrip() {
   }
   $('#strip').innerHTML = tiles.join('');
 }
-function powerLabel(c) { return c.cv ? `${fmt(c.cv)} CV` : ''; }
+function powerLabel(c) { return c.cv ? `${fmt(hp(c.cv))} hp` : ''; }
 function cardHTML(c) {
   const cmp = compare.includes(c.id);
   const overlay = `<span class="c-scale">${yearsShort(c)}</span>${c.kind !== 'Production' ? `<span class="c-kind" style="--k:${KIND_COLOUR[c.kind]}">${esc(c.kind)}</span>` : ''}${c.imgs.length > 1 ? `<span class="c-ph">${c.imgs.length} photos</span>` : ''}`;
@@ -1020,17 +1023,17 @@ $('#facets').addEventListener('click', (e) => {
   if (b.dataset.f) toggleSel(b.dataset.f, b.dataset.v);
   else if (b.dataset.more) { ui.expanded[b.dataset.more] = !ui.expanded[b.dataset.more]; renderFacets(); }
   else if (b.dataset.clearFacet) { state.sel[b.dataset.clearFacet].clear(); update(); }
-  else if (b.dataset.power !== undefined) { state.minCv = +b.dataset.power; update(); }
+  else if (b.dataset.power !== undefined) { state.minHp = +b.dataset.power; update(); }
 });
 $('#facets').addEventListener('input', (e) => { const t = e.target; if (t.dataset.find) { ui.find[t.dataset.find] = t.value; renderFacets(); } });
 $('#active').addEventListener('click', (e) => {
   const b = e.target.closest('button[data-rm]');
   if (!b) return;
   const k = b.dataset.rm;
-  if (k === 'q') { state.q = ''; $('#q').value = ''; } else if (k === 'power') state.minCv = 0; else state.sel[k].delete(b.dataset.v);
+  if (k === 'q') { state.q = ''; $('#q').value = ''; } else if (k === 'power') state.minHp = 0; else state.sel[k].delete(b.dataset.v);
   update();
 });
-function clearAll() { state.q = ''; $('#q').value = ''; for (const f of FACETS) state.sel[f.key].clear(); state.minCv = 0; update(); }
+function clearAll() { state.q = ''; $('#q').value = ''; for (const f of FACETS) state.sel[f.key].clear(); state.minHp = 0; update(); }
 document.addEventListener('click', (e) => { if (e.target.closest('[data-clear-all]')) clearAll(); });
 $('#strip').addEventListener('click', (e) => {
   const b = e.target.closest('button');
@@ -1166,7 +1169,7 @@ function renderCompare() {
     const rarest = best(list.map((c) => c.units), true);
     const rows = [
       ['Years', (c) => yearsLong(c)], ['Type', (c) => esc(c.kind)], ['Body', (c) => esc(c.body)], ['Engine', (c) => esc(c.engine)],
-      ['Power', (c) => (c.cv ? `<span class="mono">${fmt(c.cv)} CV</span> <span style="color:var(--faint)">${fmt(kw(c.cv))} kW</span>` : '—'), (c) => c.cv != null && c.cv === bestCv],
+      ['Power', (c) => (c.cv ? `<span class="mono">${fmt(hp(c.cv))} hp</span> <span style="color:var(--faint)">${fmt(kw(c.cv))} kW</span>` : '—'), (c) => c.cv != null && c.cv === bestCv],
       ['Built', (c) => (c.units ? `<span class="mono">${fmt(c.units)}</span>` : '—'), (c) => c.units != null && c.units === rarest],
       ['Designer', (c) => esc(c.designer)], ['Photos', (c) => `<span class="mono">${c.imgs.length}</span>`],
     ];
@@ -1251,7 +1254,7 @@ function renderDetail(c) {
         <dt>Type</dt><dd><a href="${hashFor({ kind: [c.kind] })}" style="color:var(--text)">${esc(c.kind)}</a></dd>
         <dt>Body</dt><dd>${esc(c.body)}</dd>
         <dt>Engine</dt><dd>${esc(c.engine)}</dd>
-        ${c.cv ? `<dt>Power</dt><dd><span class="mono">${fmt(c.cv)} CV</span> <span class="hint">${fmt(kw(c.cv))} kW</span></dd>` : ''}
+        ${c.cv ? `<dt>Power</dt><dd><span class="mono">${fmt(hp(c.cv))} hp</span> <span class="hint">${fmt(kw(c.cv))} kW</span></dd>` : ''}
         <dt>Built</dt><dd>${c.units ? `<span class="mono">${fmt(c.units)}</span>${c.units === 1 ? ' <span class="hint">one of one</span>' : ''}` : '<span class="hint">not reliably known</span>'}</dd>
         <dt>Designer</dt><dd><a href="${hashFor({ designer: [c.designer] })}" style="color:var(--text)">${esc(c.designer)}</a></dd>
         <dt>Family</dt><dd><a href="${hashFor({ fam: [c.family] })}" style="color:var(--text)">${esc(c.famName)}</a> <span class="hint">${fmt(sameFam.length + 1)} in the index</span></dd>
@@ -1363,6 +1366,7 @@ function barsHTML(entries, key, colourOf) {
   return `<div class="bars">${entries.map(([v, n, label]) => `<button class="bar" type="button" data-go="${key}" data-v="${esc(v)}"><span class="nm">${esc(label || v)}</span><span class="tr"><i style="width:${((n / max) * 100).toFixed(1)}%;${colourOf ? `background:${colourOf(v)}` : ''}"></i></span><span class="v">${fmt(n)}</span></button>`).join('')}</div>`;
 }
 function powerChart() {
+  const P = (c) => hp(c.cv);
   const pts = cars.filter((c) => c.cv && ['Production', 'Limited series', 'One-off'].includes(c.kind)).sort((a, b) => a.year - b.year || a.cv - b.cv);
   const W = 1000; const H = 380; const L = 58; const R = 18; const T = 18; const B = 34;
   const x0 = 1960; const x1 = 2030; const yMax = 1100;
@@ -1373,18 +1377,18 @@ function powerChart() {
   for (let y = 1960; y <= 2020; y += 10) grid += `<line x1="${X(y)}" x2="${X(y)}" y1="${T}" y2="${H - B}" class="gl gl-v"/><text x="${X(y)}" y="${H - B + 20}" class="ax" text-anchor="middle">${y}s</text>`;
   let rec = 0; let path = ''; const records = [];
   for (const c of pts) {
-    if (c.cv > rec) { path += `${path ? 'L' : 'M'}${X(c.year).toFixed(1)},${Y(rec || c.cv).toFixed(1)} L${X(c.year).toFixed(1)},${Y(c.cv).toFixed(1)} `; rec = c.cv; records.push(c); }
+    if (P(c) > rec) { path += `${path ? 'L' : 'M'}${X(c.year).toFixed(1)},${Y(rec || P(c)).toFixed(1)} L${X(c.year).toFixed(1)},${Y(P(c)).toFixed(1)} `; rec = P(c); records.push(c); }
   }
   path += `L${X(2026).toFixed(1)},${Y(rec).toFixed(1)}`;
   const dots = pts.map((c) => {
     const col = ENG_COLOUR[engBase(c.eng)] || '#888';
     const hybrid = c.eng.startsWith('Hybrid');
-    return `<a href="#/m/${c.id}" data-open="${c.id}"><circle cx="${X(c.year + 0.5).toFixed(1)}" cy="${Y(c.cv).toFixed(1)}" r="6" fill="${hybrid ? 'var(--panel)' : col}" stroke="${col}" stroke-width="${hybrid ? 2.5 : 1}"><title>${esc(c.name)} (${c.year}): ${fmt(c.cv)} CV, ${esc(c.eng)}</title></circle></a>`;
+    return `<a href="#/m/${c.id}" data-open="${c.id}"><circle cx="${X(c.year + 0.5).toFixed(1)}" cy="${Y(P(c)).toFixed(1)}" r="6" fill="${hybrid ? 'var(--panel)' : col}" stroke="${col}" stroke-width="${hybrid ? 2.5 : 1}"><title>${esc(c.name)} (${c.year}): ${fmt(P(c))} hp, ${esc(c.eng)}</title></circle></a>`;
   }).join('');
-  const labelled = records.filter((c, i) => i === 0 || c.cv - records[i - 1].cv >= 60 || i === records.length - 1);
-  const labels = labelled.map((c) => `<text x="${X(c.year + 0.5) - 4}" y="${Y(c.cv) - 11}" class="lbl" text-anchor="end">${esc(c.name.replace(/[“”]/g, ''))} · ${fmt(c.cv)}</text>`).join('');
+  const labelled = records.filter((c, i) => i === 0 || P(c) - P(records[i - 1]) >= 60 || i === records.length - 1);
+  const labels = labelled.map((c) => `<text x="${X(c.year + 0.5) - 4}" y="${Y(P(c)) - 11}" class="lbl" text-anchor="end">${esc(c.name.replace(/[“”]/g, ''))} · ${fmt(P(c))}</text>`).join('');
   const legend = ['V12', 'V10', 'V8', 'Electric'].map((k) => `<span><i style="background:${ENG_COLOUR[k]}"></i>${k}</span>`).join('') + '<span><i class="hy"></i>Hybrid (ring)</span>';
-  return `<div class="chart-wrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Power of Lamborghini road cars by year, from 280 CV in 1964 to ${fmt(rec)} CV">${grid}<text x="${L}" y="${T - 4}" class="ax">CV</text><path d="${path}" class="frontier"/>${dots}${labels}</svg></div><div class="legend">${legend}<span><i class="fr"></i>Most powerful so far</span></div>`;
+  return `<div class="chart-wrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Power of Lamborghini road cars by year, from ${fmt(P(records[0]))} hp in ${records[0].year} to ${fmt(rec)} hp">${grid}<text x="${L}" y="${T - 4}" class="ax">hp</text><path d="${path}" class="frontier"/>${dots}${labels}</svg></div><div class="legend">${legend}<span><i class="fr"></i>Most powerful so far</span></div>`;
 }
 function buildStats() {
   if (statsBuilt) return;
@@ -1408,7 +1412,7 @@ function buildStats() {
     <div class="fig"><b>${fmt(concepts)}</b><span>concepts and prototypes</span></div>
     <div class="fig"><b>${fmt(kinds.get('One-off') || 0)}</b><span>one-offs</span></div>
     <div class="fig"><b>${fmt(totalPhotos)}</b><span>photos</span></div>
-    <div class="fig"><b>${fmt(Math.max(...cars.map((c) => c.cv || 0)))}</b><span>CV, the most powerful</span></div>
+    <div class="fig"><b>${fmt(hp(Math.max(...cars.map((c) => c.cv || 0))))}</b><span>hp, the most powerful</span></div>
   </div>
   <div class="stats-grid">
     <section class="panel wide"><h2>Power, 1963 to today</h2><p class="note">Road cars with a published output. The line steps up each time a new car beats the record. Click a dot to open the car.</p>${powerChart()}</section>
@@ -1420,7 +1424,7 @@ function buildStats() {
       <div class="legend">${KIND_ORDER.filter((k) => kinds.has(k)).map((k) => `<button type="button" data-go="kind" data-v="${k}"><i style="background:${KIND_COLOUR[k]}"></i>${k} <span class="v">${kinds.get(k)}</span></button>`).join('')}</div></section>
     <section class="panel"><h2>Designers</h2><p class="note">Top 10 by number of cars</p>${barsHTML([...designers.entries()].filter(([d]) => d !== 'Not credited').sort((a, b) => b[1] - a[1]).slice(0, 10), 'designer')}</section>
     <section class="panel"><h2>Families</h2><p class="note">Top 10 by number of entries</p>${barsHTML([...fams.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([f, n]) => [f, n, famName(f)]), 'fam')}</section>
-    <section class="panel"><h2>Most powerful</h2><p class="note">All types, including race and concept cars with a published figure</p>${listHTML(strongest, (c) => `${fmt(c.cv)} CV`)}</section>
+    <section class="panel"><h2>Most powerful</h2><p class="note">All types, including race and concept cars with a published figure</p>${listHTML(strongest, (c) => `${fmt(hp(c.cv))} hp`)}</section>
     <section class="panel"><h2>Rarest road cars</h2><p class="note">Production, limited and one-off cars with a known build count</p>${listHTML(rarest, (c) => (c.units === 1 ? '1 of 1' : `${fmt(c.units)} built`))}</section>
   </div>`;
 }
@@ -1428,7 +1432,7 @@ $('#stats').addEventListener('click', (e) => {
   const t = e.target.closest('[data-go]');
   if (!t) return;
   for (const f of FACETS) state.sel[f.key].clear();
-  state.q = ''; state.minCv = 0;
+  state.q = ''; state.minHp = 0;
   state.sel[t.dataset.go].add(t.dataset.v);
   location.hash = browseHash();
 });
@@ -1436,15 +1440,15 @@ $('#stats').addEventListener('click', (e) => {
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
-/* Fast 10: claimed top speed ("350+" ranks above 350), then 0-100 km/h, then power.
-   Open versions count with their coupé, so a Roadster never takes a second place. */
+/* Fast 10: horsepower first, then claimed top speed ("350+" ranks above 350). Road cars with an
+   official top speed only; open versions count with their coupé, so a Roadster never takes a second place. */
 function buildFast() {
   if (fastBuilt) return;
   fastBuilt = true;
   const speed = (c) => c.vmax + (c.vplus ? 0.5 : 0);
   const top = cars.filter((c) => c.vmax && !/Roadster$/.test(c.name))
-    .sort((a, b) => speed(b) - speed(a) || (a.acc || 99) - (b.acc || 99) || (b.cv || 0) - (a.cv || 0)).slice(0, 10);
-  $('#fast').innerHTML = top.map((c, i) => `<a class="f10" href="#/m/${c.id}" data-open="${c.id}"><span class="rk">${i + 1}</span>${phHTML(c.img, 960)}<span class="b"><span class="nm">${esc(c.name)}</span><span class="yr">${yearsLong(c)}</span><span class="st">${c.acc ? `<span><b>${c.acc}</b> s 0–100</span>` : ''}${c.cv ? `<span><b>${fmt(c.cv)}</b> CV</span>` : ''}</span></span><span class="sp"><b>${c.vmax}${c.vplus ? '+' : ''}</b>km/h</span></a>`).join('');
+    .sort((a, b) => (b.cv || 0) - (a.cv || 0) || speed(b) - speed(a)).slice(0, 10);
+  $('#fast').innerHTML = top.map((c, i) => `<a class="f10" href="#/m/${c.id}" data-open="${c.id}"><span class="rk">${i + 1}</span>${phHTML(c.img, 960)}<span class="b"><span class="nm">${esc(c.name)}</span><span class="yr">${yearsLong(c)}</span><span class="st">${c.acc ? `<span><b>${c.acc}</b> s 0–100</span>` : ''}</span></span><span class="sp"><span><b>${fmt(hp(c.cv))}</b>hp</span><span><b>${c.vmax}${c.vplus ? '+' : ''}</b>km/h</span></span></a>`).join('');
 }
 function buildTimeline() {
   if (tlBuilt) return;
@@ -1464,7 +1468,7 @@ function buildTimeline() {
       // race red > debut orange. Every badge stays.
       const kc = { 'Limited series': 'lim', 'One-off': 'one', 'Race car': 'race' }[c.kind] || '';
       const tags = `${isDebut ? ' <span class="tl-tag debut">Debut</span>' : ''}${kc === 'lim' ? ' <span class="tl-tag lim">Limited</span>' : ''}${kc === 'one' ? ' <span class="tl-tag one">One-off</span>' : ''}${kc === 'race' ? ' <span class="tl-tag race">Race car</span>' : ''}`;
-      return `<a class="tl-item${isDebut ? ' debut' : ''}${kc ? ` ${kc}` : ''}" href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 960, '', isDebut && !kc ? '<span class="frame" aria-hidden="true"></span>' : '')}<span class="b"><span class="yr">${yearsLong(c)}${tags}</span><span class="nm">${esc(c.name)}</span><span class="meta"><span>${esc(c.kind)}</span><span>${c.cv ? `<span class="mono">${fmt(c.cv)}</span> CV` : esc(c.eng)}</span></span></span>${kc === 'one' ? SPARKLES : ''}</a>`;
+      return `<a class="tl-item${isDebut ? ' debut' : ''}${kc ? ` ${kc}` : ''}" href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 960, '', isDebut && !kc ? '<span class="frame" aria-hidden="true"></span>' : '')}<span class="b"><span class="yr">${yearsLong(c)}${tags}</span><span class="nm">${esc(c.name)}</span><span class="meta"><span>${esc(c.kind)}</span><span>${c.cv ? `<span class="mono">${fmt(hp(c.cv))}</span> hp` : esc(c.eng)}</span></span></span>${kc === 'one' ? SPARKLES : ''}</a>`;
     }).join('')}</div></section>`;
   }
   html += '<p class="tl-foot">Years mark when a car was first shown or first built. Click any car for photos and specifications.</p>';
