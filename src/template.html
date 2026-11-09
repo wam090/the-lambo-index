@@ -451,7 +451,14 @@ button{cursor:pointer}
 @keyframes twinkle-tag{0%,100%{opacity:0;transform:scale(.3) rotate(0deg)}40%{opacity:1;transform:scale(1) rotate(45deg)}}
 @keyframes gem-glint-tag{0%{background-position:0% 0,0 0}55%,100%{background-position:100% 0,0 0}}
 .tl-legend{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:24px 0 4px;font-size:13.5px}
-.tl-legend .lg{display:inline-flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.tl-legend .lg{display:inline-flex;align-items:center;gap:8px;color:var(--text);font:inherit;font-weight:600;background:none;border:1px solid transparent;border-radius:999px;padding:5px 12px 5px 7px;cursor:pointer;transition:background .15s,border-color .15s,opacity .15s}
+.tl-legend .lg:hover{background:var(--panel-2);border-color:var(--line)}
+.tl-legend .lg[aria-pressed="true"]{background:var(--panel-2);border-color:var(--line-2)}
+.tl-legend.on .lg[aria-pressed="false"]{opacity:.45}
+/* legend filter: only the chosen kind of car shows; empty decades hide */
+#timeline[data-only="debut"] .tl-item:not(.debut),#timeline[data-only="race"] .tl-item:not(.race),
+#timeline[data-only="lim"] .tl-item:not(.lim),#timeline[data-only="one"] .tl-item:not(.one),
+#timeline[data-only] .decade.none{display:none}
 .tl-legend .gt{color:var(--faint);font-weight:400}
 .tl-legend .lg-note{margin-left:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
 .sw{position:relative;display:inline-block;width:30px;height:20px;border-radius:6px;border:3px solid transparent}
@@ -638,10 +645,10 @@ a.tile{text-decoration:none;color:inherit}
   <section class="view" id="view-timeline" data-view="timeline" aria-label="Timeline" hidden>
     <div class="wrap">
       <div class="tl-legend" aria-label="What the frames mean">
-        <span class="lg"><i class="sw debut"></i>Debut</span><b class="gt" aria-hidden="true">›</b>
-        <span class="lg"><i class="sw race"></i>Race car</span><b class="gt" aria-hidden="true">›</b>
-        <span class="lg"><i class="sw lim"></i>Limited</span><b class="gt" aria-hidden="true">›</b>
-        <span class="lg"><i class="sw one"></i>One-off</span>
+        <button class="lg" type="button" data-tlf="debut" aria-pressed="false"><i class="sw debut"></i>Debut</button><b class="gt" aria-hidden="true">›</b>
+        <button class="lg" type="button" data-tlf="race" aria-pressed="false"><i class="sw race"></i>Race car</button><b class="gt" aria-hidden="true">›</b>
+        <button class="lg" type="button" data-tlf="lim" aria-pressed="false"><i class="sw lim"></i>Limited</button><b class="gt" aria-hidden="true">›</b>
+        <button class="lg" type="button" data-tlf="one" aria-pressed="false"><i class="sw one"></i>One-off</button>
         <span class="lg-note">rarest frame wins</span>
       </div>
       <div id="timeline"></div>

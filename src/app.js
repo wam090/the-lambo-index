@@ -729,6 +729,28 @@ $('#stats').addEventListener('click', (e) => {
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
+/* Timeline legend chips filter the timeline to one kind of car: #/timeline?only=debut|race|lim|one */
+const TL_ONLY = { debut: ['debut', 'debut', 'debuts'], race: ['race', 'race car', 'race cars'], lim: ['lim', 'limited', 'limited'], one: ['one', 'one-off', 'one-offs'] };
+function applyTlOnly(f) {
+  if (!TL_ONLY[f]) f = '';
+  const tl = $('#timeline');
+  if (f) tl.dataset.only = f; else tl.removeAttribute('data-only');
+  $('.tl-legend').classList.toggle('on', !!f);
+  $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tlf === f)));
+  $$('#timeline .decade').forEach((sec) => {
+    const small = sec.querySelector('h2 small');
+    const n = f ? sec.querySelectorAll(`.tl-item.${TL_ONLY[f][0]}`).length : -1;
+    sec.classList.toggle('none', n === 0);
+    small.textContent = f ? `${n} ${n === 1 ? TL_ONLY[f][1] : TL_ONLY[f][2]}` : small.dataset.all;
+  });
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.tl-legend [data-tlf]');
+  if (!b) return;
+  const f = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.tlf;
+  location.hash = f ? `#/timeline?only=${f}` : '#/timeline';
+  window.scrollTo(0, 0);
+});
 /* Fast 10: horsepower first, then claimed top speed ("350+" ranks above 350). Road cars with an
    official top speed only; open versions count with their coupé, so a Roadster never takes a second place. */
 function buildFast() {
@@ -751,7 +773,7 @@ function buildTimeline() {
   let html = '';
   for (const [d, list] of decades) {
     const nDebut = list.filter((c) => debut.has(c.id)).length;
-    html += `<section class="decade"><h2>${d}<small>${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}</small></h2><div class="tl">${list.map((c) => {
+    html += `<section class="decade"><h2>${d}<small data-all="${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}">${list.length} cars · ${nDebut} debut${nDebut === 1 ? '' : 's'}</small></h2><div class="tl">${list.map((c) => {
       const isDebut = debut.has(c.id);
       // one frame per car, the highest it qualifies for: one-off diamond > limited platinum >
       // race red > debut orange. Every badge stays.
@@ -794,7 +816,7 @@ function route() {
   }
   hideDetail();
   lastViewHash = location.hash || '#/';
-  if (path === '/timeline') showView('timeline');
+  if (path === '/timeline') { showView('timeline'); applyTlOnly(params.get('only') || ''); }
   else if (path === '/fast10') showView('fast');
   else if (path === '/stats') showView('stats');
   else if (path === '/compare') {

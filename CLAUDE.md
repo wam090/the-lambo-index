@@ -69,7 +69,9 @@ credits for any photo without a licence; `--credits-only` does only the second p
   shows only its highest frame (diamond > platinum > red > orange) but keeps every badge. Styles in `src/template.html`; `smoke.js` counts each frame.
 - **Fast 10**: `PERF` in `tools/catalog.py` holds claimed top speed, an "over" flag and 0–100 for road
   cars with official figures; `buildFast()` ranks by horsepower, then top speed (350+ above 350), and
-  skips Roadster versions. Add a car's figures to `PERF` and it competes automatically.
+  skips Roadster versions.
+- **Timeline legend**: the chips filter the timeline (`#/timeline?only=debut|race|lim|one`, `applyTlOnly()`);
+  Debut means every car with the Debut badge, the others the car's kind. Add a car's figures to `PERF` and it competes automatically.
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 
