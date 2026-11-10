@@ -71,13 +71,11 @@ credits for any photo without a licence; `--credits-only` does only the second p
   `NOT_DEBUTS` (both in `tools/catalog.py`; applied in `build.py`). Kind frames and badges come from `kind`
   in `buildTimeline()`: Limited series platinum, One-off platinum with diamond sparkles, Race car red with tyre marks. A car
   shows only its highest frame (diamond > platinum > red > orange) but keeps every badge. Styles in `src/template.html`; `smoke.js` counts each frame.
-- **Car of the day**: the browse masthead shows one car per date, picked in `introText()` from cars whose
-  lead Commons photo is wide (≥1600 px, ratio 1.3–2.2); it slims (`.masthead.slim`) while filtering.
 - **Fast 10**: `PERF` in `tools/catalog.py` holds claimed top speed, an "over" flag and 0–100 for road
   cars with official figures; `buildFast()` ranks by horsepower, then top speed (350+ above 350), and
   skips Roadster versions.
-- **Timeline legend** ("Filter by frame →"): chips filter the timeline; several can be on at once
-  and a car shows when it matches any (`#/timeline?only=lim,one`, `applyTlOnly()`);
+- **Timeline legend** ("Filter by frame →"): chips filter the timeline and combine as AND: Debut goes
+  with one kind (cars that are both), the kinds exclude each other (`#/timeline?only=debut,race`, `applyTlOnly()`);
   Debut means every car with the Debut badge, the others the car's kind. Add a car's figures to `PERF` and it competes automatically.
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.

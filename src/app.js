@@ -96,12 +96,19 @@ function phHTML(im, want, cls = '', overlay = '', label = 'No free photo found y
 }
 document.addEventListener('error', (e) => {   // photo hosts rate-limit bursts: retry once after a pause, then give up
   const t = e.target;
-  if (!t || t.tagName !== 'IMG' || !t.parentElement) return;
-  const box = t.parentElement;
-  if (!box.classList.contains('ph') && !box.classList.contains('hero')) return;
-  if (!t.dataset.retried) { t.dataset.retried = '1'; const src = t.src; setTimeout(() => { t.src = src; }, 1500 + Math.random() * 2500); return; }
-  box.classList.add('missing');
+  if (!t || t.tagName !== 'IMG' || !t.parentElement || !t.parentElement.classList.contains('ph')) return;
+  if (!t.dataset.retried) {
+    t.dataset.retried = '1'; t.style.visibility = 'hidden';   // no broken-image icon while waiting
+    t.addEventListener('load', () => { t.style.visibility = ''; }, { once: true });
+    const src = t.src; setTimeout(() => { t.src = src; }, 1500 + Math.random() * 2500); return;
+  }
+  t.parentElement.classList.add('missing');
 }, true);
+{ // phones: a placeholder that fits the narrow search box
+  const mq = matchMedia('(max-width:820px)');
+  const ph = () => { document.getElementById('q').placeholder = mq.matches ? `Search ${cars.length} cars` : 'Search model, year, engine or designer'; };
+  ph(); mq.addEventListener('change', ph);
+}
 function famRep(list) {
   const withImg = list.filter((c) => c.img);
   return withImg.find((c) => c.kind === 'Production') || withImg[0] || null;
@@ -183,7 +190,6 @@ function update() {
 }
 function renderCount() {
   const filtered = results.length !== cars.length;
-  $('.masthead').classList.toggle('slim', filtered || !!state.q);   // searching or filtering: the results matter more than the poster
   $('#count').innerHTML = `${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}${filtered ? ` <small>of ${fmt(cars.length)}</small>` : ''}`;
   $('#f-show').textContent = results.length ? `Show ${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}` : 'No matches';
   const n = FACETS.reduce((a, f) => a + state.sel[f.key].size, 0) + (state.minHp ? 1 : 0);
@@ -296,24 +302,6 @@ function syncControls() {
   $$('[data-layout]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.layout === state.view)));
 }
 function introText() {
-  const first = cars.reduce((a, c) => (c.year < a.year ? c : a));
-  const last = cars.reduce((a, c) => (c.year > a.year || (c.year === a.year && c.idx > a.idx) ? c : a));
-  $('#intro-h').innerHTML = `Every Lamborghini <em>ever made</em>`;
-  // Car of the day: a wide, sharp lead photo, the same for everyone on a given date
-  const wide = cars.filter((c) => c.img && !c.img.sz && c.img.w >= 1600 && c.img.ht && c.img.w / c.img.ht >= 1.3 && c.img.w / c.img.ht <= 2.2);
-  if (wide.length) {
-    const day = Math.floor(Date.now() / 864e5);
-    const pick = wide[(day * 2654435761 >>> 0) % wide.length];
-    const yrs = pick.end === 0 ? `${pick.year}–now` : pick.end ? `${pick.year}–${pick.end}` : `${pick.year}`;
-    $('#hero').innerHTML = `<img src="${esc(imgUrl(pick.img, 1920))}" alt="${esc(pick.title)}" fetchpriority="high" decoding="async">
-      <a class="hero-tag" href="#/m/${esc(pick.id)}"><span class="mono">Car of the day</span><b>${esc(pick.name)}</b><span class="mono">${yrs}</span><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></a>
-      <span class="hero-credit">Photo: ${esc(pick.img.a || 'unknown')} · ${esc(pick.img.l || '')}</span>`;
-    $('#hero').hidden = false;
-  }
-  const mq = matchMedia('(max-width:820px)');
-  const ph = () => { $('#q').placeholder = mq.matches ? `Search ${fmt(cars.length)} cars` : 'Search model, year, engine or designer'; };
-  ph(); mq.addEventListener('change', ph);
-  $('#intro-p').innerHTML = `${fmt(cars.length)} cars, from the <span class="mono">${first.year}</span> ${esc(first.name)} to the <span class="mono">${last.year}</span> ${esc(last.name)}: production cars, limited series, one-offs, concepts, prototypes and race cars.`;
   $('#foot-l').textContent = `Index compiled ${RAW.generated} · ${fmt(cars.length)} cars · ${fmt(totalPhotos)} photos`;
 }
 
@@ -748,22 +736,28 @@ $('#stats').addEventListener('click', (e) => {
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
-/* Timeline legend chips filter the timeline; several can be on at once and a car shows when it
-   matches any of them: #/timeline?only=lim,one (debut|race|lim|one) */
+/* Timeline legend chips filter the timeline and combine as AND: a car shows only when it has every
+   chosen badge. Debut goes with any kind; the kinds exclude each other, since a car has one kind.
+   #/timeline?only=debut,race */
 const TL_ONLY = { debut: ['debut', 'debut', 'debuts'], race: ['race', 'race car', 'race cars'], lim: ['lim', 'limited', 'limited'], one: ['one', 'one-off', 'one-offs'] };
+const TL_KINDS = ['race', 'lim', 'one'];
 const tlSelected = () => ($('#timeline').dataset.only || '').split(' ').filter(Boolean);
 function applyTlOnly(raw) {
-  const sel = Object.keys(TL_ONLY).filter((k) => String(raw || '').split(',').includes(k));
+  const asked = String(raw || '').split(',');
+  const kind = TL_KINDS.find((k) => asked.includes(k));
+  const sel = [...(asked.includes('debut') ? ['debut'] : []), ...(kind ? [kind] : [])];
   const tl = $('#timeline');
   if (sel.length) tl.dataset.only = sel.join(' '); else tl.removeAttribute('data-only');
   $('.tl-legend').classList.toggle('on', sel.length > 0);
   $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(sel.includes(b.dataset.tlf))));
+  $$('#timeline .tl-item').forEach((it) => it.classList.toggle('hit', sel.length > 0 && sel.every((f) => it.classList.contains(TL_ONLY[f][0]))));
   $$('#timeline .decade').forEach((sec) => {
     const small = sec.querySelector('h2 small');
-    const n = sel.length ? sec.querySelectorAll(sel.map((f) => `.tl-item.${TL_ONLY[f][0]}`).join(',')).length : -1;
+    const n = sel.length ? sec.querySelectorAll('.tl-item.hit').length : -1;
     sec.classList.toggle('none', n === 0);
     small.textContent = !sel.length ? small.dataset.all
-      : sel.length === 1 ? `${n} ${n === 1 ? TL_ONLY[sel[0]][1] : TL_ONLY[sel[0]][2]}` : `${n} car${n === 1 ? '' : 's'}`;
+      : sel.length === 1 ? `${n} ${n === 1 ? TL_ONLY[sel[0]][1] : TL_ONLY[sel[0]][2]}`
+      : `${n} debut ${n === 1 ? TL_ONLY[sel[1]][1] : TL_ONLY[sel[1]][2]}`;
   });
 }
 document.addEventListener('click', (e) => {
@@ -771,7 +765,11 @@ document.addEventListener('click', (e) => {
   const b = e.target.closest('.tl-legend [data-tlf]');
   if (!clear && !b) return;
   const cur = new Set(clear ? [] : tlSelected());
-  if (b) { if (cur.has(b.dataset.tlf)) cur.delete(b.dataset.tlf); else cur.add(b.dataset.tlf); }
+  if (b) {
+    const f = b.dataset.tlf;
+    if (cur.has(f)) cur.delete(f);
+    else { if (TL_KINDS.includes(f)) TL_KINDS.forEach((k) => cur.delete(k)); cur.add(f); }
+  }
   const sel = Object.keys(TL_ONLY).filter((k) => cur.has(k));
   location.hash = sel.length ? `#/timeline?only=${sel.join(',')}` : '#/timeline';
   window.scrollTo(0, 0);
