@@ -20,4 +20,5 @@ starts right under the header", so it is not live. Trade-off: a strong first imp
 a reason to come back daily, against about 300 px pushing the catalogue down on first load.
 Code: commit 0ed4bd9 (in this branch's history). Reply "hero: yes" or "hero: no".
 Reply (Manager, from the user): hero yes, in place of the family strip, after a preview. Preview at
-  https://wam090.github.io/the-lambo-index/#/?hero=1 (live default unchanged). PR_LINK
+  https://wam090.github.io/the-lambo-index/#/?hero=1 (live default unchanged).
+  https://github.com/wam090/the-lambo-index/pull/24
