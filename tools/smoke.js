@@ -88,7 +88,9 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     expect(await page.isVisible('#masthead') && !(await page.isVisible('#strip')) && await n('#hero a.hero-tag[href^="#/m/"]') === 1,
       'hero preview #/?hero=1: hero, its car link, or the hidden family strip is wrong');
     await go('#/?family=Countach');
-    expect(await page.isVisible('#masthead') && page.url().includes('hero=1'), 'hero preview: lost when filtering');
+    expect(!(await page.isVisible('#masthead')) && page.url().includes('hero=1'), 'hero preview: should step aside while filtering and keep its flag');
+    await go('#/');
+    expect(await page.isVisible('#masthead'), 'hero preview: lost after filtering');
     await go('#/?hero=0');
     expect(!(await page.isVisible('#masthead')) && await page.isVisible('#strip'), 'hero preview: hero=0 does not turn it off');
   } finally {

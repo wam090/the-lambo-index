@@ -82,8 +82,9 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   Roadster versions. Add a car's figures to `PERF` and it competes automatically.
 - **Monthly refresh**: the scheduled task "Lambo Index monthly refresh" (1st of each month) follows
   `tools/REFRESH.md`. Change the job there, through a PR.
-- **Hero preview**: `#/?hero=1` shows the car-of-the-day hero in place of the family strip (`setHero()`;
-  it stays on for the visit, `hero=0` turns it off). The default stays as it is until the user approves.
+- **Hero preview**: `#/?hero=1` shows the car-of-the-day photo, no heading, in place of the family strip
+  (`setHero()`; hidden while searching or filtering; stays on for the visit, `hero=0` turns it off). The
+  default stays as it is until the user approves.
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 
