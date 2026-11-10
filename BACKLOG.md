@@ -25,11 +25,11 @@ history). Record each decision the user makes under Decisions, with its date.
   only after the user has seen the preview (`#/?hero=1`).
 - 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
 - 2026-11-10: The monthly refresh's merge mode is parked: it stays `auto` for now.
-- 2026-11-09: Working model: the Coordinator's chat only advises and writes messages in MESSAGES.txt;
-  every change on GitHub (code, data, docs, PRs, merges) is done by a dev chat.
-- 2026-11-10: Every chat reports to the Manager chat when done or blocked (what changed, the PR,
-  decisions needed); MESSAGES.txt stays the durable record. Roles pass to the newest chat
-  (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2), found by title, never by a saved session ID.
+- 2026-11-09: Working model: every change on GitHub (code, data, docs, PRs, merges) is done by a dev
+  chat (Dev or Web designer); the other chats advise and write messages.
+- 2026-11-10: One line of communication: the user talks to the Manager, the Manager to every other
+  chat (Dev, Web designer, Cyber, scheduled runs). Chats report to the Manager and answer the user
+  in 1–2 lines. Roles pass to the newest chat (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2).
 - 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);
   the user disliked existing multi-brand sites, so no umbrella site unless a second brand is real.
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
@@ -43,6 +43,9 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
 
 ## Next
 
+- [ ] **Monthly refresh cannot push yet (your call, via the Manager).** Scheduled runs get a
+      read-only clone: no push, PR tools or send_message. Fix: recreate the task on the claude.ai
+      routines page with the repo attached, or point it at a dedicated session that has the repo.
 - [ ] **Hero banner live (your call).** After the preview at
       https://wam090.github.io/the-lambo-index/#/?hero=1, say "hero live" to make it the default.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.

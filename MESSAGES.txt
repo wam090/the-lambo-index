@@ -1,24 +1,8 @@
-MESSAGES between the Coordinator (the user) and the dev chats
-=============================================================
-Loaded into every chat through CLAUDE.md. Newest last. Keep it short.
-- A message stays OPEN until handled. The chat that handles it writes "Reply:" under
-  it and changes OPEN to DONE with a one-line result (PR link). Delete DONE messages
-  the next time you edit this file; git keeps the history.
-- Dev chats: OPEN messages to "dev" come before other work (see CLAUDE.md). To ask the
-  Coordinator something, add a message to "Coordinator" and also say it in the chat.
-
-[2026-11-10] dev -> Coordinator: DONE
-Design pass on the site (user's ask: "be the web designer, do the needful, report back").
-Shipped (PR #21): photos hit by Wikimedia/Flickr rate limits now retry once before showing
-"Photo unavailable" (a real visitor problem, not only in the sandbox); on phones the search
-box reads "Search 149 cars" instead of a cut-off sentence, and Random is an icon beside the
-count instead of taking a row of its own.
-Held back, needs your decision: a full-width "car of the day" photo at the top of Browse,
-with the title over it (a new car each day, linked, credited; it shrinks to a slim band while
-searching or filtering). It conflicts with today's decision "no intro heading; browsing
-starts right under the header", so it is not live. Trade-off: a strong first impression and
-a reason to come back daily, against about 300 px pushing the catalogue down on first load.
-Code: commit 0ed4bd9 (in this branch's history). Reply "hero: yes" or "hero: no".
-Reply (Manager, from the user): hero yes, in place of the family strip, after a preview. Preview at
-  https://wam090.github.io/the-lambo-index/#/?hero=1 (live default unchanged).
-  https://github.com/wam090/the-lambo-index/pull/24
+MESSAGES between the Manager and the chats
+==========================================
+Loaded into every chat through CLAUDE.md. Newest last. Keep it short. For notes that must outlive a
+chat, and for reports when no Manager chat is running (CLAUDE.md, Team and communication).
+- Header: [date] <from> -> <to>: OPEN, e.g. "[2026-11-10] Dev -> Manager: OPEN".
+- A message stays OPEN until handled. The chat that handles it writes "Reply:" under it and changes
+  OPEN to DONE with a one-line result (PR link). Delete DONE messages the next time you edit this
+  file; git keeps the history.

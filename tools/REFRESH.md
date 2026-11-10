@@ -31,8 +31,10 @@ user, step 8.)
    `git checkout -- .` and stop (the rebuild only changed the date). No commit, no PR.
 8. **PR.** Commit as `Monthly refresh YYYY-MM: <what was added>`. The PR lists each car with its
    sources, and the photos added, dropped or gone. If smoke passed and MERGE MODE is `auto`, merge it.
-   Otherwise (`wait`, smoke failed, or anything you are unsure of), leave it open and say why on
-   `main`: a `dev -> Coordinator: OPEN` message in `MESSAGES.txt`, on its own branch from `main`,
-   merged as its own PR.
-9. **Report.** End your reply with what was added (or "nothing new") and the PR link; the push
-   notification shows it. Send the same to the Manager chat (CLAUDE.md, Who decides).
+   Otherwise (`wait`, smoke failed, or anything you are unsure of), leave it open and say why in
+   your report.
+9. **Report** like every chat (CLAUDE.md, Team and communication): Done / Verified / Blocked / Needs
+   decision with the PR link, to the newest Manager chat with `send_message`. If none is running or
+   you lack the tool, write it as a `Refresh -> Manager: OPEN` message in `MESSAGES.txt` on its own
+   branch from `main`, merged as its own PR. End your reply with the same summary (the push
+   notification shows it).
