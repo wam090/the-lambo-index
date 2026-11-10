@@ -154,8 +154,9 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   `main` / root; updates a minute or so after each merge).
 - Fallback: https://htmlpreview.github.io/?https://github.com/wam090/the-lambo-index/blob/main/index.html.
   It injects a `<base>` tag and rewrites static links, so the app treats any link containing `#/` as
-  in-app and resolves `replaceState` URLs against the page itself; keep it that way (its one console
-  error is harmless). Never hand out githack links: they show a click-through notice and ads.
+  in-app and resolves `replaceState` URLs against the page itself; keep it that way. There the CSP
+  blocks the fonts (system fonts show) and its console errors are harmless. Never hand out githack
+  links: they show a click-through notice and ads.
 - Pages caches `index.html` for 10 minutes (`max-age=600`): a link handed out right after a merge
   needs a cache-buster before the `#`, e.g. https://wam090.github.io/the-lambo-index/?v=hero#/?hero=1.
 
