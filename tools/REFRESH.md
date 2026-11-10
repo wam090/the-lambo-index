@@ -1,6 +1,6 @@
 # Monthly refresh
 
-A scheduled task ("Lambo Index monthly refresh") runs this job once a month in a fresh session. Its
+A scheduled task ("Lambo Index monthly refresh") runs this job once a month. Its
 prompt only points here, so the job is changed here, through a PR. Do this job only: OPEN messages
 and backlog items are for other chats. Every rule in CLAUDE.md applies, above all Rules and Photos.
 
@@ -36,5 +36,5 @@ user, step 8.)
 9. **Report** like every chat (CLAUDE.md, Team and communication): Done / Verified / Blocked / Needs
    decision with the PR link, to the newest Manager chat with `send_message`. If none is running or
    you lack the tool, write it as a `Refresh -> Manager: OPEN` message in `MESSAGES.txt` on its own
-   branch from `main`, merged as its own PR. End your reply with the same summary (the push
-   notification shows it).
+   branch from `main`, merged as its own PR. End your reply with the same summary. Send no push
+   notifications (user's decision, 2026-11-10).
