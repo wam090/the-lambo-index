@@ -155,9 +155,21 @@ def wiki_text_to_plain(t):
     t = re.sub(r"\[https?://\S+\s+([^\]]+)\]", r"\1", t)
     t = re.sub(r"\[https?://\S+\]", "", t)
     t = re.sub(r"\{\{\s*(?:Creator|User):([^|}]+)[^}]*\}\}", r"\1", t, flags=re.I)
+    t = re.sub(r"\{\{\s*(?:u|user)\s*\|\s*([^|}~]+)[^}]*\}\}", r"\1", t, flags=re.I)   # {{u|Name~commonswiki}}
     t = re.sub(r"\{\{[^{}]*\}\}", "", t)
     t = QUOTES.sub("", re.sub(r"<[^>]+>", "", t))
     return re.sub(r"\s+", " ", t).strip(" ,;-")
+
+
+def creator_label(qid):
+    """Name of the person behind {{creator|wikidata=Q...}}: the Wikidata item's English label."""
+    txt = fetch_html(f"https://www.wikidata.org/wiki/Special:EntityData/{qid}.json")
+    try:
+        labels = next(iter(json.loads(txt)["entities"].values()))["labels"]
+    except (ValueError, KeyError, TypeError, StopIteration):
+        return ""
+    lab = labels.get("en") or next(iter(labels.values()), None)
+    return lab["value"] if lab else ""
 
 
 def raw_credit(title):
@@ -165,7 +177,9 @@ def raw_credit(title):
     if not txt:
         return None
     m = re.search(r"^\s*\|\s*(?:author|photographer|artist)\s*=\s*(.+)$", txt, re.I | re.M)
-    author = wiki_text_to_plain(m.group(1)) if m else ""
+    raw = m.group(1) if m else ""
+    q = re.search(r"\{\{\s*creator\s*\|\s*(?:wikidata\s*=\s*)?(Q\d+)", raw, re.I)
+    author = (creator_label(q.group(1)) if q else "") or wiki_text_to_plain(raw)
     low = txt.lower()
     lic, url = "", ""
     for pat, name, u in LIC:
@@ -338,7 +352,9 @@ def main():
         print(f"{c['id']:<34} {len(imgs):>2} photos  {source or '-'}", flush=True)
         with open(a.out, "w") as f:
             json.dump(out, f, ensure_ascii=False, indent=0)
-    todo = sorted({"File:" + im["t"] for v in out.values() for im in v.get("images", []) if not im.get("l")})
+    # photos without a licence; with --credits-only also those whose author could not be read before
+    todo = sorted({"File:" + im["t"] for v in out.values() for im in v.get("images", [])
+                   if not im.get("l") or (a.credits_only and im.get("a") in ("", "Unknown author"))})
     def apply(cr):
         for v in out.values():
             for im in v.get("images", []):

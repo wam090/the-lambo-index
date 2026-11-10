@@ -44,7 +44,8 @@ function imgUrl(im, want, original = false) {
 }
 const filePage = (im) => im.p || `https://commons.wikimedia.org/wiki/File:${im.n}`;
 const photoSource = (im) => (im.src === 'flickr' || im.src === 'press' ? 'Flickr' : 'Wikimedia Commons');
-const creditHTML = (im) => im ? `${im.src === 'press' ? 'Press photo' : 'Photo'}: <a href="${esc(filePage(im))}" target="_blank" rel="noopener">${esc(im.a || `${photoSource(im)} contributor`)}</a>${im.l ? ` · ${im.lu ? `<a href="${esc(im.lu)}" target="_blank" rel="noopener">${esc(im.l)}</a>` : esc(im.l)}` : ''} · ${photoSource(im)}` : '';
+const extLink = (url, html) => (/^https:\/\//i.test(url || '') ? `<a href="${esc(url)}" target="_blank" rel="noopener">${html}</a>` : html);   // https only
+const creditHTML = (im) => im ? `${im.src === 'press' ? 'Press photo' : 'Photo'}: ${extLink(filePage(im), esc(im.a || `${photoSource(im)} contributor`))}${im.l ? ` · ${extLink(im.lu, esc(im.l))}` : ''} · ${photoSource(im)}` : '';
 const photoSearches = (q) => `<a href="https://www.flickr.com/search/?text=${encodeURIComponent(q)}" target="_blank" rel="noopener">Flickr</a> · <a href="https://www.google.com/search?tbm=isch&amp;q=${encodeURIComponent(q)}" target="_blank" rel="noopener">Google Images</a>`;
 
 const FAMILY_NAME = { Murcielago: 'Murciélago', Huracan: 'Huracán', Reventon: 'Reventón', Sian: 'Sián', Autentica: 'Auténtica', Cala: 'Calà', '350': '350 GT', '400': '400 GT', '291': 'Lambo 291' };
@@ -542,9 +543,9 @@ function renderDetail(c) {
   const sameDecade = cars.filter((x) => x !== c && x.decade === c.decade && x.family !== c.family).sort((a, b) => a.year - b.year);
   const q = `Lamborghini ${c.name.replace(/[“”]/g, '')}`;
   const stage = photos.length
-    ? `<div class="ph stage" id="stage" role="button" tabindex="0" aria-label="Open photo viewer" data-empty="Photo unavailable"><img id="stage-img" src="${imgUrl(photos[0], 1920)}" alt="${esc(c.title)}"><span class="zoom">1 / ${photos.length} · full resolution</span></div>
+    ? `<div class="ph stage" id="stage" role="button" tabindex="0" aria-label="Open photo viewer" data-empty="Photo unavailable"><img id="stage-img" src="${esc(imgUrl(photos[0], 1920))}" alt="${esc(c.title)}"><span class="zoom">1 / ${photos.length} · full resolution</span></div>
        <p class="credit" id="stage-credit">${creditHTML(photos[0])}</p>
-       ${photos.length > 1 ? `<div class="thumbs" id="thumbs">${photos.map((im, i) => `<button type="button" data-ph="${i}" aria-label="Photo ${i + 1}" aria-current="${i === 0}"><img src="${imgUrl(im, 330)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}`
+       ${photos.length > 1 ? `<div class="thumbs" id="thumbs">${photos.map((im, i) => `<button type="button" data-ph="${i}" aria-label="Photo ${i + 1}" aria-current="${i === 0}"><img src="${esc(imgUrl(im, 330))}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}`
     : `<div class="ph stage empty" data-empty="No freely licensed photo yet"></div>
        <p class="credit">Every photo of this car we could find is copyrighted, so it can't be shown here. See it on ${photoSearches(q)}.</p>`;
   panel.innerHTML = `
