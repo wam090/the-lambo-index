@@ -94,10 +94,21 @@ function phHTML(im, want, cls = '', overlay = '', label = 'No free photo found y
     ? `<div class="ph ${cls}" data-empty="Photo unavailable"><img src="${esc(imgUrl(im, want))}" alt="" loading="lazy" decoding="async">${overlay}</div>`
     : `<div class="ph empty ${cls}" data-empty="${esc(label)}">${overlay}</div>`;
 }
-document.addEventListener('error', (e) => {
+document.addEventListener('error', (e) => {   // photo hosts rate-limit bursts: retry once after a pause, then give up
   const t = e.target;
-  if (t && t.tagName === 'IMG' && t.parentElement && t.parentElement.classList.contains('ph')) t.parentElement.classList.add('missing');
+  if (!t || t.tagName !== 'IMG' || !t.parentElement || !t.parentElement.classList.contains('ph')) return;
+  if (!t.dataset.retried) {
+    t.dataset.retried = '1'; t.style.visibility = 'hidden';   // no broken-image icon while waiting
+    t.addEventListener('load', () => { t.style.visibility = ''; }, { once: true });
+    const src = t.src; setTimeout(() => { t.src = src; }, 1500 + Math.random() * 2500); return;
+  }
+  t.parentElement.classList.add('missing');
 }, true);
+{ // phones: a placeholder that fits the narrow search box
+  const mq = matchMedia('(max-width:820px)');
+  const ph = () => { document.getElementById('q').placeholder = mq.matches ? `Search ${cars.length} cars` : 'Search model, year, engine or designer'; };
+  ph(); mq.addEventListener('change', ph);
+}
 function famRep(list) {
   const withImg = list.filter((c) => c.img);
   return withImg.find((c) => c.kind === 'Production') || withImg[0] || null;

@@ -538,6 +538,9 @@ a.tile{text-decoration:none;color:inherit}
   .decade h2{position:static;font-size:28px}
   .lb-stage{padding:0 8px}
   .lb-nav{display:none}
+  .toolbar{position:relative}
+  #random{position:absolute;right:0;top:2px;width:42px;padding:0;justify-content:center}
+  #random .lbl{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
@@ -615,7 +618,7 @@ a.tile{text-decoration:none;color:inherit}
                 <button type="button" data-layout="grid" aria-pressed="true" aria-label="Grid"><svg class="icon"><use href="#i-grid"/></svg></button>
                 <button type="button" data-layout="list" aria-pressed="false" aria-label="List"><svg class="icon"><use href="#i-list"/></svg></button>
               </div>
-              <button class="btn" type="button" id="random" title="Open a random car from these results"><svg class="icon"><use href="#i-dice"/></svg>Random</button>
+              <button class="btn" type="button" id="random" title="Open a random car from these results" aria-label="Random car"><svg class="icon"><use href="#i-dice"/></svg><span class="lbl">Random</span></button>
             </div>
           </div>
           <div class="active" id="active"></div>

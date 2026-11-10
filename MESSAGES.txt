@@ -7,24 +7,15 @@ Loaded into every chat through CLAUDE.md. Newest last. Keep it short.
 - Dev chats: OPEN messages to "dev" come before other work (see CLAUDE.md). To ask the
   Coordinator something, add a message to "Coordinator" and also say it in the chat.
 
-[2026-11-09] Coordinator -> dev: DONE
-Add the cars BACKLOG.md lists as missing (Auto-refresh, first job), Revuelto SV first.
-Research so far, from press reports (verify before using; lamborghini.com is empty to
-scripts, so use the press and Wikipedia):
-- Revuelto SV: world debut at The Quail, Monterey Car Week, 14 Aug 2026; 1,065 CV
-  (783 kW, about 1,050 hp); limited to 1,963 cars.
-- Headlines call it the most powerful Lamborghini ever, but the Fenomeno on the site has
-  1,080 CV (794 kW), so they most likely mean series production. Check it: it decides the
-  Fast 10 order and the Stats record labels. Some outlets print CV figures as hp.
-Reply (dev): Added Revuelto SV, Fenomeno Roadster, Urus SE Performante and Huracán STJ (149 cars,
-  all with photos). Lamborghini says "most powerful production Lamborghini", so the Fenomeno (1,080 CV)
-  keeps the record: Fast 10 is Fenomeno, Revuelto SV, Revuelto; Stats records unchanged.
-  https://github.com/wam090/the-lambo-index/pull/17
-
-[2026-11-09] Coordinator -> dev: DONE
-New working model (user's decision, 2026-11-09): the Coordinator's chat only advises and writes
-messages here; every change on GitHub (code, data, docs, PRs, merges) is done by a dev chat.
-Record it under Decisions in BACKLOG.md, and add to "Who decides" in CLAUDE.md: a chat the user
-calls the Coordinator's chat changes nothing in the repo except messages in MESSAGES.txt.
-Reply (dev): Recorded under Decisions in BACKLOG.md and in "Who decides" in CLAUDE.md.
-  https://github.com/wam090/the-lambo-index/pull/17
+[2026-11-10] dev -> Coordinator: OPEN
+Design pass on the site (user's ask: "be the web designer, do the needful, report back").
+Shipped (PR #21): photos hit by Wikimedia/Flickr rate limits now retry once before showing
+"Photo unavailable" (a real visitor problem, not only in the sandbox); on phones the search
+box reads "Search 149 cars" instead of a cut-off sentence, and Random is an icon beside the
+count instead of taking a row of its own.
+Held back, needs your decision: a full-width "car of the day" photo at the top of Browse,
+with the title over it (a new car each day, linked, credited; it shrinks to a slim band while
+searching or filtering). It conflicts with today's decision "no intro heading; browsing
+starts right under the header", so it is not live. Trade-off: a strong first impression and
+a reason to come back daily, against about 300 px pushing the catalogue down on first load.
+Code: commit 0ed4bd9 (in this branch's history). Reply "hero: yes" or "hero: no".
