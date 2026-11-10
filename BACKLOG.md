@@ -21,8 +21,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-09: Timeline legend reads "Filter by frame →"; Clear shows all. 2026-11-10: chips combine as
   AND (a car shows only when it has every chosen badge): Debut plus one kind; kinds exclude each other.
 - 2026-11-10: The home page has no intro heading; browsing starts right under the header.
-- 2026-11-10: The car-of-the-day hero banner is wanted, in place of the family strip; it goes live
-  only after the user has seen the preview (`#/?hero=1`).
+- 2026-11-10: The car-of-the-day hero banner is wanted, in place of the family strip and with no
+  visible heading; it goes live only after the user has seen the preview (`#/?hero=1`).
 - 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
 - 2026-11-10: Every chat works to about 90% of its capacity (was 70%), then hands over.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
