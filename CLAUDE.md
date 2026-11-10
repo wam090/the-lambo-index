@@ -20,8 +20,11 @@ BACKLOG.md are theirs: ask, never assume. Decisions already made are listed in B
 them without asking again. A chat the user calls the Coordinator's chat only advises and writes
 messages in `MESSAGES.txt`; it changes nothing else in the repo. Every change on GitHub (code, data,
 docs, PRs, merges) is made by a dev chat. Every chat reports to the Manager (user's instruction,
-2026-11-10): when you finish a task or hit a blocker, send the session titled "Manager"
-(`list_sessions`) a short status with `send_message`: what changed, the PR, decisions needed.
+2026-11-10): when you finish a task or hit a blocker, send it a short status with `send_message`:
+what changed, the PR, decisions needed. Roles pass to the newest chat: when one fills up, its
+successor takes the next version (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2), so "the Manager"
+and "the dev" always mean the newest chat with that title. Find them by title with
+`list_sessions`, never by a saved session ID.
 
 ## Every chat: instructions first, then the ask
 Whatever the user writes, even one word, handle it in this order:
