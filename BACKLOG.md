@@ -26,7 +26,9 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
 - 2026-11-10: Every chat works to about 90% of its capacity (was 70%), then hands over.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
-- 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager.
+- 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager. It runs in
+  a standing chat titled "Refresh" (option B), woken by the scheduled task, and merges only PRs
+  confined to the catalogue, photo data and build outputs.
 - 2026-11-10: The monthly refresh's merge mode is parked: it stays `auto` for now.
 - 2026-11-09: Working model: every change on GitHub (code, data, docs, PRs, merges) is done by a dev
   chat (Dev or Web designer); the other chats advise and write messages.
@@ -46,9 +48,6 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
 
 ## Next
 
-- [ ] **Monthly refresh cannot push yet (your call, via the Manager).** Scheduled runs get a
-      read-only clone: no push, PR tools or send_message. Fix: recreate the task on the claude.ai
-      routines page with the repo attached, or point it at a dedicated session that has the repo.
 - [ ] **Hero banner live (your call).** After the preview at
       https://wam090.github.io/the-lambo-index/#/?hero=1, say "hero live" to make it the default.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
