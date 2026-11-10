@@ -19,7 +19,9 @@ The user (the Coordinator) assigns the tasks and owns product decisions. Items m
 BACKLOG.md are theirs: ask, never assume. Decisions already made are listed in BACKLOG.md: follow
 them without asking again. A chat the user calls the Coordinator's chat only advises and writes
 messages in `MESSAGES.txt`; it changes nothing else in the repo. Every change on GitHub (code, data,
-docs, PRs, merges) is made by a dev chat.
+docs, PRs, merges) is made by a dev chat. Every chat reports to the Manager (user's instruction,
+2026-11-10): when you finish a task or hit a blocker, send the session titled "Manager"
+(`list_sessions`) a short status with `send_message`: what changed, the PR, decisions needed.
 
 ## Every chat: instructions first, then the ask
 Whatever the user writes, even one word, handle it in this order:
@@ -46,8 +48,7 @@ Whatever the user writes, even one word, handle it in this order:
 | `tools/flickr.py` | Creative Commons photos from Flickr for cars Commons lacks | rarely |
 | `tools/review_sheet.py` | contact sheet of photo candidates, for checking by eye (Pillow) | rarely |
 | `data/extra_images.json` | hand-picked Commons files outside a car's categories | yes |
-| `data/flickr.json` | output of flickr.py | never by hand |
-| `data/images.json` | output of images.py | never by hand |
+| `data/images.json`, `data/flickr.json` | output of images.py and flickr.py | never by hand |
 | `data/cars.json`, `index.html` | output of build.py | never by hand |
 
 ## Commands
@@ -73,10 +74,12 @@ credits for any photo without a licence; `--credits-only` does only the second p
   shows only its highest frame (diamond > platinum > red > orange) but keeps every badge. Styles in `src/template.html`; `smoke.js` counts each frame.
 - **Fast 10**: `PERF` in `tools/catalog.py` holds claimed top speed, an "over" flag and 0–100 for road
   cars with official figures; `buildFast()` ranks by horsepower, then top speed (350+ above 350), and
-  skips Roadster versions.
+  skips Roadster versions. Add a car's figures to `PERF` and it competes automatically.
 - **Timeline legend** ("Filter by frame →"): chips filter the timeline and combine as AND: Debut goes
   with one kind (cars that are both), the kinds exclude each other (`#/timeline?only=debut,race`, `applyTlOnly()`);
-  Debut means every car with the Debut badge, the others the car's kind. Add a car's figures to `PERF` and it competes automatically.
+  Debut means every car with the Debut badge, the others the car's kind.
+- **Monthly refresh**: the scheduled task "Lambo Index monthly refresh" (1st of each month, fresh
+  session) follows `tools/REFRESH.md`. Change the job there, through a PR.
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 

@@ -23,6 +23,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-10: The home page has no intro heading; browsing starts right under the header.
 - 2026-11-09: Working model: the Coordinator's chat only advises and writes messages in MESSAGES.txt;
   every change on GitHub (code, data, docs, PRs, merges) is done by a dev chat.
+- 2026-11-10: Every chat reports to the Manager chat when done or blocked (what changed, the PR,
+  decisions needed); MESSAGES.txt stays the durable record.
 - 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);
   the user disliked existing multi-brand sites, so no umbrella site unless a second brand is real.
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
@@ -40,9 +42,8 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
       remove it when you want search engines to list the site.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
-- [ ] **Auto-refresh**: a monthly scheduled task that adds new Lamborghinis, runs `images.py --only`
-      for them and `flickr.py --all-gaps`, checks new photos by eye, rebuilds, runs the smoke check
-      and opens and merges a PR. Expect Wikimedia rate limits (HTTP 429).
+- [ ] **Monthly refresh: merge on its own? (your call).** It merges its PR when smoke passes
+      (`MERGE MODE` line in `tools/REFRESH.md`); `wait` makes it open the PR for you instead.
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),
       LP500 S (321–323), Urraco P200 (66–77), Murciélago SV (186 claimed, 268 found by a registry),
       Miura SVJ (about six), Diablo SV-R (31–34). Countach 25th Anniversary: 657 or 658. Gallardo
