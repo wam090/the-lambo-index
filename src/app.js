@@ -291,10 +291,6 @@ function syncControls() {
   $$('[data-layout]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.layout === state.view)));
 }
 function introText() {
-  const first = cars.reduce((a, c) => (c.year < a.year ? c : a));
-  const last = cars.reduce((a, c) => (c.year > a.year || (c.year === a.year && c.idx > a.idx) ? c : a));
-  $('#intro-h').innerHTML = `Every Lamborghini <em>ever made</em>`;
-  $('#intro-p').innerHTML = `${fmt(cars.length)} cars, from the <span class="mono">${first.year}</span> ${esc(first.name)} to the <span class="mono">${last.year}</span> ${esc(last.name)}: production cars, limited series, one-offs, concepts, prototypes and race cars.`;
   $('#foot-l').textContent = `Index compiled ${RAW.generated} · ${fmt(cars.length)} cars · ${fmt(totalPhotos)} photos`;
 }
 
@@ -729,22 +725,28 @@ $('#stats').addEventListener('click', (e) => {
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
-/* Timeline legend chips filter the timeline; several can be on at once and a car shows when it
-   matches any of them: #/timeline?only=lim,one (debut|race|lim|one) */
+/* Timeline legend chips filter the timeline and combine as AND: a car shows only when it has every
+   chosen badge. Debut goes with any kind; the kinds exclude each other, since a car has one kind.
+   #/timeline?only=debut,race */
 const TL_ONLY = { debut: ['debut', 'debut', 'debuts'], race: ['race', 'race car', 'race cars'], lim: ['lim', 'limited', 'limited'], one: ['one', 'one-off', 'one-offs'] };
+const TL_KINDS = ['race', 'lim', 'one'];
 const tlSelected = () => ($('#timeline').dataset.only || '').split(' ').filter(Boolean);
 function applyTlOnly(raw) {
-  const sel = Object.keys(TL_ONLY).filter((k) => String(raw || '').split(',').includes(k));
+  const asked = String(raw || '').split(',');
+  const kind = TL_KINDS.find((k) => asked.includes(k));
+  const sel = [...(asked.includes('debut') ? ['debut'] : []), ...(kind ? [kind] : [])];
   const tl = $('#timeline');
   if (sel.length) tl.dataset.only = sel.join(' '); else tl.removeAttribute('data-only');
   $('.tl-legend').classList.toggle('on', sel.length > 0);
   $$('.tl-legend [data-tlf]').forEach((b) => b.setAttribute('aria-pressed', String(sel.includes(b.dataset.tlf))));
+  $$('#timeline .tl-item').forEach((it) => it.classList.toggle('hit', sel.length > 0 && sel.every((f) => it.classList.contains(TL_ONLY[f][0]))));
   $$('#timeline .decade').forEach((sec) => {
     const small = sec.querySelector('h2 small');
-    const n = sel.length ? sec.querySelectorAll(sel.map((f) => `.tl-item.${TL_ONLY[f][0]}`).join(',')).length : -1;
+    const n = sel.length ? sec.querySelectorAll('.tl-item.hit').length : -1;
     sec.classList.toggle('none', n === 0);
     small.textContent = !sel.length ? small.dataset.all
-      : sel.length === 1 ? `${n} ${n === 1 ? TL_ONLY[sel[0]][1] : TL_ONLY[sel[0]][2]}` : `${n} car${n === 1 ? '' : 's'}`;
+      : sel.length === 1 ? `${n} ${n === 1 ? TL_ONLY[sel[0]][1] : TL_ONLY[sel[0]][2]}`
+      : `${n} debut ${n === 1 ? TL_ONLY[sel[1]][1] : TL_ONLY[sel[1]][2]}`;
   });
 }
 document.addEventListener('click', (e) => {
@@ -752,7 +754,11 @@ document.addEventListener('click', (e) => {
   const b = e.target.closest('.tl-legend [data-tlf]');
   if (!clear && !b) return;
   const cur = new Set(clear ? [] : tlSelected());
-  if (b) { if (cur.has(b.dataset.tlf)) cur.delete(b.dataset.tlf); else cur.add(b.dataset.tlf); }
+  if (b) {
+    const f = b.dataset.tlf;
+    if (cur.has(f)) cur.delete(f);
+    else { if (TL_KINDS.includes(f)) TL_KINDS.forEach((k) => cur.delete(k)); cur.add(f); }
+  }
   const sel = Object.keys(TL_ONLY).filter((k) => cur.has(k));
   location.hash = sel.length ? `#/timeline?only=${sel.join(',')}` : '#/timeline';
   window.scrollTo(0, 0);

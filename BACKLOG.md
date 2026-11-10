@@ -18,8 +18,9 @@ history). Record each decision the user makes under Decisions, with its date.
   intro, only a one-line legend of mini frames (Debut › Race car › Limited › One-off).
 - 2026-11-09: Fast 10 tab beside Timeline: ranked by horsepower, then claimed top speed;
   roadsters count with their coupé. The site shows power in hp, not CV.
-- 2026-11-09: Timeline legend reads "Filter by frame →"; chips toggle, several can be on at once
-  (cars matching any of them), and Clear shows all.
+- 2026-11-09: Timeline legend reads "Filter by frame →"; Clear shows all. 2026-11-10: chips combine as
+  AND (a car shows only when it has every chosen badge): Debut plus one kind; kinds exclude each other.
+- 2026-11-10: The home page has no intro heading; browsing starts right under the header.
 - 2026-11-09: Working model: the Coordinator's chat only advises and writes messages in MESSAGES.txt;
   every change on GitHub (code, data, docs, PRs, merges) is done by a dev chat.
 - 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);

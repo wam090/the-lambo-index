@@ -68,10 +68,10 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     const oneOffs = cars.filter((c) => c.kind === 'One-off').length;
     expect(shownOne === oneOffs, `timeline legend filter: ${shownOne} cars shown for One-off, expected ${oneOffs}`);
 
-    await go('#/timeline?only=lim,one');
-    const shownTwo = await page.$$eval('#timeline .tl-item', (els) => els.filter((e) => e.offsetParent !== null).length);
-    const limOne = cars.filter((c) => c.kind === 'Limited series' || c.kind === 'One-off').length;
-    expect(shownTwo === limOne, `timeline legend filter: ${shownTwo} cars shown for Limited + One-off, expected ${limOne}`);
+    await go('#/timeline?only=debut,race');
+    const shownBoth = await page.$$eval('#timeline .tl-item', (els) => els.filter((e) => e.offsetParent !== null).length);
+    const debutRace = cars.filter((c) => c.debut && c.kind === 'Race car').length;
+    expect(shownBoth === debutRace, `timeline legend filter: ${shownBoth} cars shown for Debut + Race car, expected ${debutRace}`);
 
     await go('#/fast10');
     expect(await page.isVisible('#view-fast') && await n('#fast .f10') === 10, `fast 10: ${await n('#fast .f10')} entries, expected 10`);
