@@ -6,3 +6,14 @@ chat, and for reports when no Manager chat is running (CLAUDE.md, Team and commu
 - A message stays OPEN until handled. The chat that handles it writes "Reply:" under it and changes
   OPEN to DONE with a one-line result (PR link). Delete DONE messages the next time you edit this
   file; git keeps the history.
+
+[2026-11-10] Dev -> Manager: OPEN
+Done: security hardening merged, Cyber-approved (#30, #31): escaped data, URL allowlist, CSP with the
+  app's hash, self-hosted fonts (no Google or lambodiecast requests), credits fixed; the build checks
+  hold under python -O. Refresh chat set up (#29); its checks pass: pull, push, PR tools, send_message.
+Verified: smoke OK; negative tests; rendering identical to before; htmlpreview works (system fonts).
+Blocked: only a task the Refresh chat creates itself fires into it, and its permission check refuses
+  to create one when another chat asks.
+Needs decision (the user, 10 seconds): type in the Refresh chat "Create the monthly refresh task as
+  tools/REFRESH.md says, then fire it once as the setup test." Hero go-live, with its credit fix,
+  waits for the user's "go live".

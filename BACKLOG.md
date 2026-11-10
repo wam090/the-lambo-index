@@ -48,6 +48,9 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
 
 ## Next
 
+- [ ] **Monthly refresh task (the user, 10 seconds).** In the Refresh chat, type: "Create the monthly
+      refresh task as tools/REFRESH.md says, then fire it once as the setup test." A Dev then deletes
+      the placeholder task trig_017aDGyKxgfrxhwj1AYE5ofT (it would start a session without the repo).
 - [ ] **Hero banner live (your call).** After the preview at
       https://wam090.github.io/the-lambo-index/#/?hero=1, say "hero live" to make it the default.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
