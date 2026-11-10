@@ -39,4 +39,5 @@ Reply (dev): Recipe in tools/REFRESH.md (linked from CLAUDE.md, Recipes). Its ME
   search fails, and prints each car's new and gone photos. Scheduled task "Lambo Index monthly
   refresh": 03:17 UTC on the 1st of each month, fresh session, push on. It stores no connectors
   or repo, so the prompt attaches the repo itself; the test run (fired right after this merge)
-  checks that a run can open and merge its PR. Result goes to the Manager. PR_LINK
+  checks that a run can open and merge its PR. Result goes to the Manager.
+  https://github.com/wam090/the-lambo-index/pull/22
