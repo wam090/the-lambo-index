@@ -18,10 +18,10 @@ Every role reports to the Manager:
 - **Manager**: the newest chat titled "Manager…". Assigns the work and batches questions for the user.
 - **Dev** (Dev_0.x): code, data, docs, PRs and merges. **Web designer**: design work, via PRs like Dev.
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
-- **Refresh**: the standing chat titled "Refresh" that the scheduled task "Lambo Index monthly
-  refresh" wakes on the 1st of each month. The task is bound to it by session ID, the one exception
-  to the newest-version rule: never archive it, and if it is replaced, re-point the task. A Manager
-  that starts checks the task's last run (`list_triggers`) and relays the outcome to the user.
+- **Refresh**: the standing chat titled "Refresh". It owns the scheduled task "Lambo Index monthly
+  refresh" (created there, so it fires into it; `tools/REFRESH.md`, Setup). It is the one exception to
+  the newest-version rule: never archive it; if it is replaced, the new Refresh chat creates the task
+  again. A Manager that starts checks the task's last run (`list_triggers`) and relays the outcome.
 
 Roles pass to the newest chat as one fills up (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2). Find
 chats by title with `list_sessions`, never by a saved session ID.
