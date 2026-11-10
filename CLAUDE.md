@@ -83,6 +83,8 @@ credits for any photo without a licence; `--credits-only` does only the second p
   Debut means every car with the Debut badge, the others the car's kind.
 - **Monthly refresh**: the scheduled task "Lambo Index monthly refresh" (1st of each month, fresh
   session) follows `tools/REFRESH.md`. Change the job there, through a PR.
+- **Hero preview**: `#/?hero=1` shows the car-of-the-day hero in place of the family strip (`setHero()`;
+  it stays on for the visit, `hero=0` turns it off). The default stays as it is until the user approves.
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 
@@ -107,7 +109,8 @@ credits for any photo without a licence; `--credits-only` does only the second p
   Blank beats wrong: if sources disagree, leave it blank.
 - `src/app.js` must not contain `</script` (build asserts). No external JS: only photos and fonts
   come from the network.
-- Keep `<meta name="robots" content="noindex, nofollow">` until the user decides to go public.
+- Keep `<meta name="robots" content="noindex, nofollow">` until a cyber-security expert has reviewed
+  the site (user's decision, 2026-11-10).
 - The GitHub repo is public: no secrets and no personal data in commits.
 - Anything outside this repo dies with the session's container. Commit it or lose it.
 

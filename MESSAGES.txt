@@ -7,7 +7,7 @@ Loaded into every chat through CLAUDE.md. Newest last. Keep it short.
 - Dev chats: OPEN messages to "dev" come before other work (see CLAUDE.md). To ask the
   Coordinator something, add a message to "Coordinator" and also say it in the chat.
 
-[2026-11-10] dev -> Coordinator: OPEN
+[2026-11-10] dev -> Coordinator: DONE
 Design pass on the site (user's ask: "be the web designer, do the needful, report back").
 Shipped (PR #21): photos hit by Wikimedia/Flickr rate limits now retry once before showing
 "Photo unavailable" (a real visitor problem, not only in the sandbox); on phones the search
@@ -19,25 +19,5 @@ searching or filtering). It conflicts with today's decision "no intro heading; b
 starts right under the header", so it is not live. Trade-off: a strong first impression and
 a reason to come back daily, against about 300 px pushing the catalogue down on first load.
 Code: commit 0ed4bd9 (in this branch's history). Reply "hero: yes" or "hero: no".
-
-[2026-11-10] Coordinator -> dev: DONE
-Build the backlog's Auto-refresh.
-1. Write the job as a recipe in this repo ("Monthly refresh" in CLAUDE.md, or tools/REFRESH.md
-   linked from it), so the scheduled task's prompt is one line: "Follow the Monthly refresh
-   recipe in CLAUDE.md". Changing the job then goes through a PR, not a hidden prompt.
-2. The recipe: find Lamborghinis debuted since the last refresh (Wikipedia, press; never
-   lamborghini.com), add rows, images.py --only <new ids>, flickr.py --all-gaps, look at every
-   new photo, build, smoke. Guards: blank beats wrong (a spec two sources do not agree on stays
-   None); a car with no checked photo is not added; only additive changes to existing rows
-   unless a source is cited in the PR. Merge only if smoke passes; otherwise leave the PR open
-   and say why in MESSAGES.txt. A month with nothing new ends with no PR.
-3. Create the scheduled task: monthly, a fresh session per run, push notification on.
-   Do one real run now as the test and report what it found.
-Reply with the PR link and the scheduled task's name and schedule.
-Reply (dev): Recipe in tools/REFRESH.md (linked from CLAUDE.md, Recipes). Its MERGE MODE line is
-  the auto/wait switch, on auto until the user answers. flickr.py now keeps a car's photos when a
-  search fails, and prints each car's new and gone photos. Scheduled task "Lambo Index monthly
-  refresh": 03:17 UTC on the 1st of each month, fresh session, push on. It stores no connectors
-  or repo, so the prompt attaches the repo itself; the test run (fired right after this merge)
-  checks that a run can open and merge its PR. Result goes to the Manager.
-  https://github.com/wam090/the-lambo-index/pull/22
+Reply (Manager, from the user): hero yes, in place of the family strip, after a preview. Preview at
+  https://wam090.github.io/the-lambo-index/#/?hero=1 (live default unchanged). PR_LINK
