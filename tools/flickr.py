@@ -146,10 +146,13 @@ def model_export(html):
 
 
 def search(text, any_licence=False):
+    """Photos for a search: [] when there are none, None when the page could not be read."""
     url = "https://www.flickr.com/search/?text=" + urllib.parse.quote(text)
     if not any_licence:
         url += "&license=" + urllib.parse.quote(",".join(str(k) for k in LICENCES))
     m = model_export(fetch(url))
+    if m is None:
+        return None
     try:
         rows = m["main"]["search-photos-lite-models"][0]["data"]["photos"]["data"]["_data"]
     except (TypeError, KeyError, IndexError):
@@ -189,7 +192,10 @@ def find(car, embed=False):
     want = re.compile(pattern, re.I) if pattern else None
     found = {}
     for q in queries:
-        for p in search(q, any_licence=embed):
+        rows = search(q, any_licence=embed)
+        if rows is None:   # rate limit or network: keep the photos we already have
+            return None
+        for p in rows:
             who = {str(p.get(k, "")).lower() for k in ("pathAlias", "username", "ownerNsid")}
             ok_licence = p.get("license") in LICENCES or (embed and p.get("license") == 0)
             if not ok_licence or p.get("id") in found or who & BLOCKED:
@@ -233,8 +239,15 @@ def main():
         sys.exit("nothing to do: pass --only id,id or --all-gaps")
     for c in cars:
         imgs = find(c, embed=args.embed)
+        if imgs is None:
+            kept = len(data.get(c["id"], {}).get("images", []))
+            print(f"{c['id']:28} search failed; kept its {kept} photos (re-run later)", file=sys.stderr)
+            continue
+        before = {i["t"] for i in data.get(c["id"], {}).get("images", [])}
+        after = {i["t"] for i in imgs}
         data[c["id"]] = {"images": imgs}
-        print(f"{c['id']:28} {len(imgs)} photos")
+        print(f"{c['id']:28} {len(imgs)} photos"
+              + "".join(f"  {k}: {' '.join(sorted(v))}" for k, v in (("new", after - before), ("gone", before - after)) if v))
         with open(out, "w", encoding="utf-8") as f:
             json.dump(dict(sorted(data.items())), f, ensure_ascii=False, indent=1)
 

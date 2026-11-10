@@ -20,7 +20,7 @@ starts right under the header", so it is not live. Trade-off: a strong first imp
 a reason to come back daily, against about 300 px pushing the catalogue down on first load.
 Code: commit 0ed4bd9 (in this branch's history). Reply "hero: yes" or "hero: no".
 
-[2026-11-10] Coordinator -> dev: OPEN
+[2026-11-10] Coordinator -> dev: DONE
 Build the backlog's Auto-refresh.
 1. Write the job as a recipe in this repo ("Monthly refresh" in CLAUDE.md, or tools/REFRESH.md
    linked from it), so the scheduled task's prompt is one line: "Follow the Monthly refresh
@@ -34,3 +34,10 @@ Build the backlog's Auto-refresh.
 3. Create the scheduled task: monthly, a fresh session per run, push notification on.
    Do one real run now as the test and report what it found.
 Reply with the PR link and the scheduled task's name and schedule.
+Reply (dev): Recipe in tools/REFRESH.md (linked from CLAUDE.md, Recipes). Its MERGE MODE line is
+  the auto/wait switch, on auto until the user answers. flickr.py now keeps a car's photos when a
+  search fails, and prints each car's new and gone photos. Scheduled task "Lambo Index monthly
+  refresh": 03:17 UTC on the 1st of each month, fresh session, push on. It stores no connectors
+  or repo, so the prompt attaches the repo itself; the test run (fired right after this merge)
+  checks that a run can open and merge its PR. Result goes to the Manager.
+  https://github.com/wam090/the-lambo-index/pull/22
