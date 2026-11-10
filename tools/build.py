@@ -72,22 +72,27 @@ for c in cars:
                 bad.append(f"{c['id']} {field}: {url}")
         if "h" in im and not re.fullmatch(r"[0-9a-f]/[0-9a-f]{2}", im["h"]):
             bad.append(f"{c['id']} h: {im['h']}")
-assert not bad, "URLs outside URL_HOSTS in build.py:\n" + "\n".join(bad)
+if bad:   # explicit checks, not assert: python3 -O would skip those
+    sys.exit("URLs outside URL_HOSTS in build.py:\n" + "\n".join(bad))
 payload = {"brand": BRAND, "generated": datetime.date.today().isoformat(), "cars": cars}
 with open(os.path.join(ROOT, "data", "cars.json"), "w", encoding="utf-8") as f:
     json.dump(payload, f, ensure_ascii=False, indent=1)
 tpl = open(os.path.join(ROOT, "src", "template.html"), encoding="utf-8").read()
 app = open(os.path.join(ROOT, "src", "app.js"), encoding="utf-8").read()
-assert "</script" not in app.lower(), "app.js must not contain a closing script tag"
-assert "\r" not in app, "app.js must use LF line endings (the CSP hash is taken over it as written)"
+if "</script" in app.lower():
+    sys.exit("app.js must not contain a closing script tag")
+if "\r" in app:
+    sys.exit("app.js must use LF line endings (the CSP hash is taken over it as written)")
 # every "<" escaped: no data can close the script element or open a comment inside it
 data = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
 app_hash = base64.b64encode(hashlib.sha256(app.encode("utf-8")).digest()).decode()
 csp = (f"default-src 'none'; script-src 'sha256-{app_hash}'; style-src 'unsafe-inline'; font-src 'self'; "
        f"img-src {IMG_HOSTS} data:; base-uri 'none'; form-action 'none'")
-html = tpl.replace("__LI_CSP__", csp).replace("__LI_DATA__", data).replace("__LI_APP__", app)
+# one pass: a placeholder name inside the data (say, a scraped credit) is never substituted again
+html = re.sub(r"__LI_(CSP|DATA|APP)__", lambda m: {"CSP": csp, "DATA": data, "APP": app}[m.group(1)], tpl)
 tags = re.findall(r"<script\b[^>]*>", html, re.I)
-assert len(tags) == 2 and not any(re.search(r"\bsrc\s*=", t, re.I) for t in tags), f"expected 2 inline scripts, got {tags}"
+if len(tags) != 2 or any(re.search(r"\bsrc\s*=", t, re.I) for t in tags):
+    sys.exit(f"expected 2 inline scripts, got {tags}")
 out = os.path.join(ROOT, "index.html")
 with open(out, "w", encoding="utf-8") as f:
     f.write(html)
