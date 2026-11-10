@@ -87,6 +87,29 @@ button{cursor:pointer}
 .intro h1 em{font-style:normal;color:var(--accent)}
 .intro p{margin:0;color:var(--muted);font-size:14px;max-width:62ch}
 .intro p .mono{color:var(--text)}
+/* masthead: car of the day behind the title, a darkening scrim keeps the text legible */
+.masthead{position:relative;margin-top:18px;border-radius:16px;overflow:hidden;min-height:clamp(300px,28vw,420px);display:flex;transition:min-height .35s ease;align-items:flex-end;background:var(--panel);border:1px solid var(--line);isolation:isolate}
+.masthead.slim{min-height:0}
+.masthead.slim .intro{padding-block:20px 18px}
+.masthead.slim .intro h1{font-size:clamp(24px,3vw,36px)}
+.masthead.slim .hero-tag,.masthead.slim .hero-credit{display:none}
+.masthead:has(.hero[hidden]){min-height:0;border:0;background:none;border-radius:0;overflow:visible}
+.masthead:has(.hero[hidden]) .intro{padding:26px 0 4px}
+.hero{position:absolute;inset:0;z-index:-1;background:var(--photo)}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center 58%;animation:hero-in 1.2s cubic-bezier(.2,.7,.2,1) both}
+.hero.missing img{visibility:hidden}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(12,11,10,.96) 0%,rgba(12,11,10,.7) 30%,rgba(12,11,10,.1) 66%,rgba(12,11,10,.25) 100%),linear-gradient(to right,rgba(12,11,10,.65) 0%,rgba(12,11,10,0) 55%)}
+@keyframes hero-in{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+.masthead .intro{padding:28px 30px 26px;width:100%}
+.masthead .intro h1{font-size:clamp(30px,4.6vw,64px);text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.masthead .intro p{color:#d6cfc5;font-size:15px}
+.hero-tag{position:absolute;top:16px;right:16px;z-index:2;display:flex;align-items:center;gap:10px;max-width:calc(100% - 32px);padding:8px 12px 8px 14px;border-radius:999px;background:rgba(12,11,10,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);text-decoration:none;font-size:14px;transition:border-color .15s,background .15s}
+.hero-tag:hover{border-color:var(--accent);background:rgba(12,11,10,.82)}
+.hero-tag .mono{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);white-space:nowrap}
+.hero-tag .mono + b + .mono{color:var(--muted);letter-spacing:0}
+.hero-tag b{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hero-tag .icon{width:16px;height:16px;color:var(--accent)}
+.hero-credit{position:absolute;right:14px;bottom:10px;z-index:2;font-size:11px;color:rgba(244,240,234,.7);text-shadow:0 1px 4px rgba(0,0,0,.9);max-width:40%;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .strip-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:22px}
 .strip-h h2{margin:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .strip-h a{font-size:13px;color:var(--accent-2);text-decoration:none}
@@ -545,6 +568,17 @@ a.tile{text-decoration:none;color:inherit}
   .lb-stage{padding:0 8px}
   .lb-nav{display:none}
   .intro{padding-top:18px}
+  .masthead{margin-top:12px;min-height:340px;border-radius:14px}
+  .masthead.slim{min-height:0}
+  .masthead.slim .intro p{display:none}
+  .masthead .intro{padding:18px 16px 16px}
+  .masthead .intro p{font-size:13.5px}
+  .hero-tag{top:12px;left:12px;right:auto;max-width:calc(100% - 24px);font-size:13px;padding:7px 10px 7px 12px}
+  .hero-tag .mono + b + .mono{display:none}
+  .hero-credit{top:56px;bottom:auto;left:14px;right:auto;max-width:70%;text-align:left}
+  .toolbar{position:relative}
+  #random{position:absolute;right:0;top:2px;width:42px;padding:0;justify-content:center}
+  #random .lbl{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
@@ -600,9 +634,12 @@ a.tile{text-decoration:none;color:inherit}
   <!-- Browse -->
   <section class="view" id="view-browse" data-view="browse" aria-label="Browse models">
     <div class="wrap">
-      <div class="intro">
-        <h1 id="intro-h"></h1>
-        <p id="intro-p"></p>
+      <div class="masthead">
+        <div class="hero" id="hero" hidden></div>
+        <div class="intro">
+          <h1 id="intro-h"></h1>
+          <p id="intro-p"></p>
+        </div>
       </div>
       <div class="strip-h"><h2 id="strip-title">Browse by family</h2><a href="#/timeline" id="strip-link">See all cars in order</a></div>
       <div class="strip" id="strip"></div>
@@ -625,7 +662,7 @@ a.tile{text-decoration:none;color:inherit}
                 <button type="button" data-layout="grid" aria-pressed="true" aria-label="Grid"><svg class="icon"><use href="#i-grid"/></svg></button>
                 <button type="button" data-layout="list" aria-pressed="false" aria-label="List"><svg class="icon"><use href="#i-list"/></svg></button>
               </div>
-              <button class="btn" type="button" id="random" title="Open a random car from these results"><svg class="icon"><use href="#i-dice"/></svg>Random</button>
+              <button class="btn" type="button" id="random" title="Open a random car from these results" aria-label="Random car"><svg class="icon"><use href="#i-dice"/></svg><span class="lbl">Random</span></button>
             </div>
           </div>
           <div class="active" id="active"></div>

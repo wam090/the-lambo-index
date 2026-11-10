@@ -71,6 +71,8 @@ credits for any photo without a licence; `--credits-only` does only the second p
   `NOT_DEBUTS` (both in `tools/catalog.py`; applied in `build.py`). Kind frames and badges come from `kind`
   in `buildTimeline()`: Limited series platinum, One-off platinum with diamond sparkles, Race car red with tyre marks. A car
   shows only its highest frame (diamond > platinum > red > orange) but keeps every badge. Styles in `src/template.html`; `smoke.js` counts each frame.
+- **Car of the day**: the browse masthead shows one car per date, picked in `introText()` from cars whose
+  lead Commons photo is wide (≥1600 px, ratio 1.3–2.2); it slims (`.masthead.slim`) while filtering.
 - **Fast 10**: `PERF` in `tools/catalog.py` holds claimed top speed, an "over" flag and 0–100 for road
   cars with official figures; `buildFast()` ranks by horsepower, then top speed (350+ above 350), and
   skips Roadster versions.

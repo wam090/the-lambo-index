@@ -94,9 +94,13 @@ function phHTML(im, want, cls = '', overlay = '', label = 'No free photo found y
     ? `<div class="ph ${cls}" data-empty="Photo unavailable"><img src="${esc(imgUrl(im, want))}" alt="" loading="lazy" decoding="async">${overlay}</div>`
     : `<div class="ph empty ${cls}" data-empty="${esc(label)}">${overlay}</div>`;
 }
-document.addEventListener('error', (e) => {
+document.addEventListener('error', (e) => {   // photo hosts rate-limit bursts: retry once after a pause, then give up
   const t = e.target;
-  if (t && t.tagName === 'IMG' && t.parentElement && t.parentElement.classList.contains('ph')) t.parentElement.classList.add('missing');
+  if (!t || t.tagName !== 'IMG' || !t.parentElement) return;
+  const box = t.parentElement;
+  if (!box.classList.contains('ph') && !box.classList.contains('hero')) return;
+  if (!t.dataset.retried) { t.dataset.retried = '1'; const src = t.src; setTimeout(() => { t.src = src; }, 1500 + Math.random() * 2500); return; }
+  box.classList.add('missing');
 }, true);
 function famRep(list) {
   const withImg = list.filter((c) => c.img);
@@ -179,6 +183,7 @@ function update() {
 }
 function renderCount() {
   const filtered = results.length !== cars.length;
+  $('.masthead').classList.toggle('slim', filtered || !!state.q);   // searching or filtering: the results matter more than the poster
   $('#count').innerHTML = `${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}${filtered ? ` <small>of ${fmt(cars.length)}</small>` : ''}`;
   $('#f-show').textContent = results.length ? `Show ${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}` : 'No matches';
   const n = FACETS.reduce((a, f) => a + state.sel[f.key].size, 0) + (state.minHp ? 1 : 0);
@@ -294,6 +299,20 @@ function introText() {
   const first = cars.reduce((a, c) => (c.year < a.year ? c : a));
   const last = cars.reduce((a, c) => (c.year > a.year || (c.year === a.year && c.idx > a.idx) ? c : a));
   $('#intro-h').innerHTML = `Every Lamborghini <em>ever made</em>`;
+  // Car of the day: a wide, sharp lead photo, the same for everyone on a given date
+  const wide = cars.filter((c) => c.img && !c.img.sz && c.img.w >= 1600 && c.img.ht && c.img.w / c.img.ht >= 1.3 && c.img.w / c.img.ht <= 2.2);
+  if (wide.length) {
+    const day = Math.floor(Date.now() / 864e5);
+    const pick = wide[(day * 2654435761 >>> 0) % wide.length];
+    const yrs = pick.end === 0 ? `${pick.year}–now` : pick.end ? `${pick.year}–${pick.end}` : `${pick.year}`;
+    $('#hero').innerHTML = `<img src="${esc(imgUrl(pick.img, 1920))}" alt="${esc(pick.title)}" fetchpriority="high" decoding="async">
+      <a class="hero-tag" href="#/m/${esc(pick.id)}"><span class="mono">Car of the day</span><b>${esc(pick.name)}</b><span class="mono">${yrs}</span><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></a>
+      <span class="hero-credit">Photo: ${esc(pick.img.a || 'unknown')} · ${esc(pick.img.l || '')}</span>`;
+    $('#hero').hidden = false;
+  }
+  const mq = matchMedia('(max-width:820px)');
+  const ph = () => { $('#q').placeholder = mq.matches ? `Search ${fmt(cars.length)} cars` : 'Search model, year, engine or designer'; };
+  ph(); mq.addEventListener('change', ph);
   $('#intro-p').innerHTML = `${fmt(cars.length)} cars, from the <span class="mono">${first.year}</span> ${esc(first.name)} to the <span class="mono">${last.year}</span> ${esc(last.name)}: production cars, limited series, one-offs, concepts, prototypes and race cars.`;
   $('#foot-l').textContent = `Index compiled ${RAW.generated} · ${fmt(cars.length)} cars · ${fmt(totalPhotos)} photos`;
 }

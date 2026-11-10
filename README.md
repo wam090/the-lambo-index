@@ -3,7 +3,7 @@
 Every Lamborghini ever made or shown — production cars, limited series, one-offs, concepts,
 prototypes and race cars — in one fast, searchable, photo-first page.
 
-**Live at https://wam090.github.io/the-lambo-index/**, or open `index.html` in any browser. It is a single self-contained file (about 350 KB). The data is
+**Live at https://wam090.github.io/the-lambo-index/**, or open `index.html` in any browser. It is a single self-contained file (about 430 KB). The data is
 built in; photos stream from Wikimedia Commons and Flickr at the best size for your screen, up to 3840 px in
 the full-screen viewer. You need an internet connection for photos and fonts.
 
@@ -14,7 +14,8 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 - **About 1,060 photos**, reviewed by eye: freely licensed photos from Wikimedia Commons and Flickr,
   plus credited press photos for the few cars with no free photo. Every photo shows its author and
   licence and links to its source page.
-- **Browse**: instant search, filters with live counts (family, type, decade, engine, body,
+- **Browse**: a full-width "car of the day" photo (a new car each day; it slims down while you
+  search or filter), instant search, filters with live counts (family, type, decade, engine, body,
   designer, power), family tiles that drill down into each car, grid and list layouts, random pick.
 - **Car pages**: gallery, full-resolution viewer (keyboard and swipe), spec sheet, links to
   Wikipedia, all Commons photos, for-sale searches and scale models on lambodiecast.com.
