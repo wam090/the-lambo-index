@@ -82,6 +82,27 @@ button{cursor:pointer}
 .tab .n{font-family:var(--mono);font-size:11px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:inline-grid;place-items:center}
 
 /* ---------- browse ---------- */
+/* car of the day: preview only (#/?hero=1), in place of the family strip; a scrim keeps text legible */
+.masthead{position:relative;margin-top:18px;border-radius:16px;overflow:hidden;min-height:clamp(300px,28vw,420px);display:flex;align-items:flex-end;transition:min-height .35s ease;background:var(--panel);border:1px solid var(--line);isolation:isolate}
+.masthead.slim{min-height:0}
+.masthead.slim .mh-text{padding-block:20px 18px}
+.masthead.slim .mh-title{font-size:clamp(22px,2.6vw,32px)}
+.masthead.slim .hero-tag,.masthead.slim .hero-credit{display:none}
+.mh-text{padding:28px 30px 26px;width:100%}
+.mh-title{margin:0;font-family:var(--display);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(30px,4.6vw,64px);line-height:1;letter-spacing:.005em;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.mh-title em{font-style:normal;color:var(--accent)}
+.hero{position:absolute;inset:0;z-index:-1;background:var(--photo)}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center 58%;animation:hero-in 1.2s cubic-bezier(.2,.7,.2,1) both}
+.hero.missing img{visibility:hidden}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(12,11,10,.96) 0%,rgba(12,11,10,.7) 30%,rgba(12,11,10,.1) 66%,rgba(12,11,10,.25) 100%),linear-gradient(to right,rgba(12,11,10,.65) 0%,rgba(12,11,10,0) 55%)}
+@keyframes hero-in{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+.hero-tag{position:absolute;top:16px;right:16px;z-index:2;display:flex;align-items:center;gap:10px;max-width:calc(100% - 32px);padding:8px 12px 8px 14px;border-radius:999px;background:rgba(12,11,10,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);text-decoration:none;font-size:14px;transition:border-color .15s,background .15s}
+.hero-tag:hover{border-color:var(--accent);background:rgba(12,11,10,.82)}
+.hero-tag .mono{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);white-space:nowrap}
+.hero-tag .mono + b + .mono{color:var(--muted);letter-spacing:0}
+.hero-tag b{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hero-tag .icon{width:16px;height:16px;color:var(--accent)}
+.hero-credit{position:absolute;right:14px;bottom:10px;z-index:2;font-size:11px;color:rgba(244,240,234,.7);text-shadow:0 1px 4px rgba(0,0,0,.9);max-width:40%;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .strip-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:22px}
 .strip-h h2{margin:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .strip-h a{font-size:13px;color:var(--accent-2);text-decoration:none}
@@ -541,6 +562,12 @@ a.tile{text-decoration:none;color:inherit}
   .toolbar{position:relative}
   #random{position:absolute;right:0;top:2px;width:42px;padding:0;justify-content:center}
   #random .lbl{display:none}
+  .masthead{margin-top:12px;min-height:340px;border-radius:14px}
+  .masthead.slim{min-height:0}
+  .mh-text{padding:18px 16px 16px}
+  .hero-tag{top:12px;left:12px;right:auto;max-width:calc(100% - 24px);font-size:13px;padding:7px 10px 7px 12px}
+  .hero-tag .mono + b + .mono{display:none}
+  .hero-credit{top:56px;bottom:auto;left:14px;right:auto;max-width:70%;text-align:left}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
@@ -597,7 +624,11 @@ a.tile{text-decoration:none;color:inherit}
   <section class="view" id="view-browse" data-view="browse" aria-label="Browse models">
     <div class="wrap">
       <h1 class="sr-only">The Lambo Index: every Lamborghini ever made</h1>
-      <div class="strip-h"><h2 id="strip-title">Browse by family</h2><a href="#/timeline" id="strip-link">See all cars in order</a></div>
+      <div class="masthead" id="masthead" hidden>
+        <div class="hero" id="hero"></div>
+        <div class="mh-text"><p class="mh-title" aria-hidden="true">Every Lamborghini <em>ever made</em></p></div>
+      </div>
+      <div class="strip-h" id="strip-h"><h2 id="strip-title">Browse by family</h2><a href="#/timeline" id="strip-link">See all cars in order</a></div>
       <div class="strip" id="strip"></div>
 
       <div class="layout">
@@ -813,7 +844,7 @@ function phHTML(im, want, cls = '', overlay = '', label = 'No free photo found y
 }
 document.addEventListener('error', (e) => {   // photo hosts rate-limit bursts: retry once after a pause, then give up
   const t = e.target;
-  if (!t || t.tagName !== 'IMG' || !t.parentElement || !t.parentElement.classList.contains('ph')) return;
+  if (!t || t.tagName !== 'IMG' || !t.parentElement || !t.parentElement.matches('.ph, .hero')) return;
   if (!t.dataset.retried) {
     t.dataset.retried = '1'; t.style.visibility = 'hidden';   // no broken-image icon while waiting
     t.addEventListener('load', () => { t.style.visibility = ''; }, { once: true });
@@ -868,12 +899,14 @@ const SORTERS = {
   photos: (a, b) => b.imgs.length - a.imgs.length || b.year - a.year,
   name: (a, b) => a.name.localeCompare(b.name),
 };
+let heroOn = false;   // car-of-the-day preview (#/?hero=1); stays on for the visit until hero=0
 function stateToQS() {
   const p = new URLSearchParams();
   if (state.q) p.set('q', state.q);
   for (const f of FACETS) for (const v of state.sel[f.key]) p.append(f.param, v);
   if (state.minHp) p.set('power', state.minHp);
   if (state.sort !== 'new') p.set('sort', state.sort);
+  if (heroOn) p.set('hero', '1');
   return p.toString();
 }
 function applyQS(p) {
@@ -907,6 +940,7 @@ function update() {
 }
 function renderCount() {
   const filtered = results.length !== cars.length;
+  $('#masthead').classList.toggle('slim', filtered || !!state.q);
   $('#count').innerHTML = `${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}${filtered ? ` <small>of ${fmt(cars.length)}</small>` : ''}`;
   $('#f-show').textContent = results.length ? `Show ${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}` : 'No matches';
   const n = FACETS.reduce((a, f) => a + state.sel[f.key].size, 0) + (state.minHp ? 1 : 0);
@@ -1017,6 +1051,20 @@ function syncControls() {
   $('#q-clear').hidden = !qi.value;
   $('#sort').value = state.sort;
   $$('[data-layout]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.layout === state.view)));
+}
+function setHero(on) {   // preview only: the hero takes the family strip's place
+  heroOn = on;
+  $('#masthead').hidden = !on; $('#strip-h').hidden = on; $('#strip').hidden = on;
+  if (!on || $('#hero').childElementCount) return;
+  // a wide, sharp Commons lead photo, the same for everyone on a given date
+  const wide = cars.filter((c) => c.img && !c.img.sz && c.img.w >= 1600 && c.img.ht && c.img.w / c.img.ht >= 1.3 && c.img.w / c.img.ht <= 2.2);
+  if (!wide.length) return;
+  const day = Math.floor(Date.now() / 864e5);
+  const pick = wide[(day * 2654435761 >>> 0) % wide.length];
+  const yrs = pick.end === 0 ? `${pick.year}–now` : pick.end ? `${pick.year}–${pick.end}` : `${pick.year}`;
+  $('#hero').innerHTML = `<img src="${esc(imgUrl(pick.img, 1920))}" alt="${esc(pick.title)}" fetchpriority="high" decoding="async">
+    <a class="hero-tag" href="#/m/${esc(pick.id)}"><span class="mono">Car of the day</span><b>${esc(pick.name)}</b><span class="mono">${yrs}</span>${icon('right')}</a>
+    <span class="hero-credit">Photo: ${esc(pick.img.a || 'unknown')} · ${esc(pick.img.l || '')}</span>`;
 }
 function introText() {
   $('#foot-l').textContent = `Index compiled ${RAW.generated} · ${fmt(cars.length)} cars · ${fmt(totalPhotos)} photos`;
@@ -1565,6 +1613,7 @@ function route() {
     showView('compare');
   } else {
     const was = activeView === 'browse';
+    if (params.has('hero')) setHero(params.get('hero') === '1');
     showView('browse');
     if (params.toString() !== currentQS || !was) { if (params.toString() !== currentQS) applyQS(params); update(); }
     document.title = TITLES.browse;

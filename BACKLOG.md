@@ -21,6 +21,10 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-09: Timeline legend reads "Filter by frame →"; Clear shows all. 2026-11-10: chips combine as
   AND (a car shows only when it has every chosen badge): Debut plus one kind; kinds exclude each other.
 - 2026-11-10: The home page has no intro heading; browsing starts right under the header.
+- 2026-11-10: The car-of-the-day hero banner is wanted, in place of the family strip; it goes live
+  only after the user has seen the preview (`#/?hero=1`).
+- 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
+- 2026-11-10: The monthly refresh's merge mode is parked: it stays `auto` for now.
 - 2026-11-09: Working model: the Coordinator's chat only advises and writes messages in MESSAGES.txt;
   every change on GitHub (code, data, docs, PRs, merges) is done by a dev chat.
 - 2026-11-10: Every chat reports to the Manager chat when done or blocked (what changed, the PR,
@@ -39,12 +43,10 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
 
 ## Next
 
-- [ ] **Search engines (your call).** The site is live at https://wam090.github.io/the-lambo-index/ with `noindex`;
-      remove it when you want search engines to list the site.
+- [ ] **Hero banner live (your call).** After the preview at
+      https://wam090.github.io/the-lambo-index/#/?hero=1, say "hero live" to make it the default.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
-- [ ] **Monthly refresh: merge on its own? (your call).** It merges its PR when smoke passes
-      (`MERGE MODE` line in `tools/REFRESH.md`); `wait` makes it open the PR for you instead.
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),
       LP500 S (321–323), Urraco P200 (66–77), Murciélago SV (186 claimed, 268 found by a registry),
       Miura SVJ (about six), Diablo SV-R (31–34). Countach 25th Anniversary: 657 or 658. Gallardo

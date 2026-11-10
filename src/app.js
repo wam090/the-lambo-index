@@ -96,7 +96,7 @@ function phHTML(im, want, cls = '', overlay = '', label = 'No free photo found y
 }
 document.addEventListener('error', (e) => {   // photo hosts rate-limit bursts: retry once after a pause, then give up
   const t = e.target;
-  if (!t || t.tagName !== 'IMG' || !t.parentElement || !t.parentElement.classList.contains('ph')) return;
+  if (!t || t.tagName !== 'IMG' || !t.parentElement || !t.parentElement.matches('.ph, .hero')) return;
   if (!t.dataset.retried) {
     t.dataset.retried = '1'; t.style.visibility = 'hidden';   // no broken-image icon while waiting
     t.addEventListener('load', () => { t.style.visibility = ''; }, { once: true });
@@ -151,12 +151,14 @@ const SORTERS = {
   photos: (a, b) => b.imgs.length - a.imgs.length || b.year - a.year,
   name: (a, b) => a.name.localeCompare(b.name),
 };
+let heroOn = false;   // car-of-the-day preview (#/?hero=1); stays on for the visit until hero=0
 function stateToQS() {
   const p = new URLSearchParams();
   if (state.q) p.set('q', state.q);
   for (const f of FACETS) for (const v of state.sel[f.key]) p.append(f.param, v);
   if (state.minHp) p.set('power', state.minHp);
   if (state.sort !== 'new') p.set('sort', state.sort);
+  if (heroOn) p.set('hero', '1');
   return p.toString();
 }
 function applyQS(p) {
@@ -190,6 +192,7 @@ function update() {
 }
 function renderCount() {
   const filtered = results.length !== cars.length;
+  $('#masthead').classList.toggle('slim', filtered || !!state.q);
   $('#count').innerHTML = `${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}${filtered ? ` <small>of ${fmt(cars.length)}</small>` : ''}`;
   $('#f-show').textContent = results.length ? `Show ${fmt(results.length)} ${results.length === 1 ? 'car' : 'cars'}` : 'No matches';
   const n = FACETS.reduce((a, f) => a + state.sel[f.key].size, 0) + (state.minHp ? 1 : 0);
@@ -300,6 +303,20 @@ function syncControls() {
   $('#q-clear').hidden = !qi.value;
   $('#sort').value = state.sort;
   $$('[data-layout]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.layout === state.view)));
+}
+function setHero(on) {   // preview only: the hero takes the family strip's place
+  heroOn = on;
+  $('#masthead').hidden = !on; $('#strip-h').hidden = on; $('#strip').hidden = on;
+  if (!on || $('#hero').childElementCount) return;
+  // a wide, sharp Commons lead photo, the same for everyone on a given date
+  const wide = cars.filter((c) => c.img && !c.img.sz && c.img.w >= 1600 && c.img.ht && c.img.w / c.img.ht >= 1.3 && c.img.w / c.img.ht <= 2.2);
+  if (!wide.length) return;
+  const day = Math.floor(Date.now() / 864e5);
+  const pick = wide[(day * 2654435761 >>> 0) % wide.length];
+  const yrs = pick.end === 0 ? `${pick.year}–now` : pick.end ? `${pick.year}–${pick.end}` : `${pick.year}`;
+  $('#hero').innerHTML = `<img src="${esc(imgUrl(pick.img, 1920))}" alt="${esc(pick.title)}" fetchpriority="high" decoding="async">
+    <a class="hero-tag" href="#/m/${esc(pick.id)}"><span class="mono">Car of the day</span><b>${esc(pick.name)}</b><span class="mono">${yrs}</span>${icon('right')}</a>
+    <span class="hero-credit">Photo: ${esc(pick.img.a || 'unknown')} · ${esc(pick.img.l || '')}</span>`;
 }
 function introText() {
   $('#foot-l').textContent = `Index compiled ${RAW.generated} · ${fmt(cars.length)} cars · ${fmt(totalPhotos)} photos`;
@@ -848,6 +865,7 @@ function route() {
     showView('compare');
   } else {
     const was = activeView === 'browse';
+    if (params.has('hero')) setHero(params.get('hero') === '1');
     showView('browse');
     if (params.toString() !== currentQS || !was) { if (params.toString() !== currentQS) applyQS(params); update(); }
     document.title = TITLES.browse;

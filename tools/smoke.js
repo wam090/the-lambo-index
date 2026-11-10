@@ -81,6 +81,16 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
 
     await go('#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(','));
     expect(await n('#compare table.cmp thead td') === 2, 'compare: expected 2 cars side by side');
+
+    await go('#/');   // car-of-the-day hero: preview only, in place of the family strip
+    expect(!(await page.isVisible('#masthead')) && await page.isVisible('#strip'), 'browse: the hero shows without the preview flag, or the family strip is gone');
+    await go('#/?hero=1');
+    expect(await page.isVisible('#masthead') && !(await page.isVisible('#strip')) && await n('#hero a.hero-tag[href^="#/m/"]') === 1,
+      'hero preview #/?hero=1: hero, its car link, or the hidden family strip is wrong');
+    await go('#/?family=Countach');
+    expect(await page.isVisible('#masthead') && page.url().includes('hero=1'), 'hero preview: lost when filtering');
+    await go('#/?hero=0');
+    expect(!(await page.isVisible('#masthead')) && await page.isVisible('#strip'), 'hero preview: hero=0 does not turn it off');
   } finally {
     await browser.close();
   }
@@ -88,5 +98,5 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     console.error('smoke FAILED:\n- ' + problems.join('\n- '));
     process.exit(1);
   }
-  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, stats and compare work with no JavaScript errors`);
+  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, stats, compare and the hero preview work with no JavaScript errors`);
 })().catch((e) => { console.error('smoke FAILED: ' + e.message); process.exit(1); });
