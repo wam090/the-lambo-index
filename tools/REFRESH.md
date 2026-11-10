@@ -9,8 +9,9 @@ MERGE MODE: auto
 user, step 8.)
 
 1. **Branch.** Start your session branch from the latest `main`.
-2. **Window.** From the last refresh (`git log -1 --grep='^Monthly refresh' --format=%cs`, or 60 days
-   back if there is none) to today. Overlap is fine: skip cars already in `tools/catalog.py`.
+2. **Window.** From the last refresh (`git log -1 -E --grep='^Monthly refresh [0-9]{4}-[0-9]{2}:'
+   --format=%cs`, which matches only step 8's commit titles; 60 days back if there is none) to
+   today. Overlap is fine: skip cars already in `tools/catalog.py`.
 3. **New cars.** Lamborghinis first shown or announced in the window: new models and versions,
    limited series, one-offs, concepts, race cars. Sources: Wikipedia and the motoring press
    (Autocar, Car and Driver, Motor1, Top Gear, evo, Carscoops). Never lamborghini.com, and no
