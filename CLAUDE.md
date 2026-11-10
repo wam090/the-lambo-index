@@ -14,10 +14,14 @@ framework, no npm packages, no server. README.md is the user-facing description.
 ## Team and communication (user's instruction, 2026-11-10)
 The user owns product decisions and talks only to the Manager; the Manager talks to every other chat.
 "Your call" items in BACKLOG.md are the user's; decisions already made are listed there: follow them.
-Every role, and the scheduled refresh runs, report to the Manager:
+Every role reports to the Manager:
 - **Manager**: the newest chat titled "Manager…". Assigns the work and batches questions for the user.
 - **Dev** (Dev_0.x): code, data, docs, PRs and merges. **Web designer**: design work, via PRs like Dev.
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
+- **Refresh**: the standing chat titled "Refresh" that the scheduled task "Lambo Index monthly
+  refresh" wakes on the 1st of each month. The task is bound to it by session ID, the one exception
+  to the newest-version rule: never archive it, and if it is replaced, re-point the task. A Manager
+  that starts checks the task's last run (`list_triggers`) and relays the outcome to the user.
 
 Roles pass to the newest chat as one fills up (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2). Find
 chats by title with `list_sessions`, never by a saved session ID.
@@ -80,8 +84,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
 - **Fast 10**: `PERF` (`tools/catalog.py`) holds claimed top speed, an "over" flag and 0–100 for road
   cars with official figures; `buildFast()` ranks by hp, then top speed (350+ above 350), skipping
   Roadster versions. Add a car's figures to `PERF` and it competes automatically.
-- **Monthly refresh**: the scheduled task "Lambo Index monthly refresh" (1st of each month) follows
-  `tools/REFRESH.md`. Change the job there, through a PR.
+- **Monthly refresh**: the Refresh chat runs `tools/REFRESH.md` (03:17 UTC on the 1st). Change the job
+  there, through a PR; its merge guard is also in the task's stored prompt, which only that chat can edit.
 - **Hero preview**: `#/?hero=1` shows the car-of-the-day photo, no heading, in place of the family strip
   (`setHero()`; hidden while searching or filtering; stays on for the visit, `hero=0` turns it off). The
   default stays as it is until the user approves.
