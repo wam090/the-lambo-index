@@ -39,7 +39,8 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 3. Then the ask. "next" or "continue": OPEN messages first, then BACKLOG.md ("In progress", then
    "Next"), skipping items marked "your call" (list those for the Manager).
 4. End every reply with a capacity bar, e.g. `Chat capacity: ████████░░░░░░░░░░░░ ~40% used (estimate)`.
-5. At about 70% used, or when the task is done, start nothing new: do "Before you finish".
+5. At about 90% used (every chat's limit), or when the task is done, start nothing new: do "Before
+   you finish".
 
 ## Files
 | Path | What it is | Edit? |
@@ -146,6 +147,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   It injects a `<base>` tag and rewrites static links, so the app treats any link containing `#/` as
   in-app and resolves `replaceState` URLs against the page itself; keep it that way (its one console
   error is harmless). Never hand out githack links: they show a click-through notice and ads.
+- Pages caches `index.html` for 10 minutes (`max-age=600`): a link handed out right after a merge
+  needs a cache-buster before the `#`, e.g. https://wam090.github.io/the-lambo-index/?v=hero#/?hero=1.
 
 ## Before you finish (this replaces the handover)
 1. Rebuild if any source changed; `node tools/smoke.js` passes; look at the result.
