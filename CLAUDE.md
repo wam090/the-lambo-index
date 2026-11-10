@@ -58,6 +58,7 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 | `tools/build.py` | catalogue + photos + src → `data/cars.json` + `index.html` | rarely |
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |
 | `tools/REFRESH.md` | the monthly refresh job, run by a scheduled task | yes |
+| `fonts/` | self-hosted Archivo and IBM Plex Mono (SIL OFL 1.1, licence files beside them) | rarely |
 | `data/images.json`, `data/flickr.json`, `data/cars.json`, `index.html` | outputs of images.py, flickr.py, build.py | never by hand |
 
 ## Commands
@@ -110,7 +111,10 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   cv × 0.98632, rounded) and kW. The power filter's steps are in hp.
 - `end`: 0 = still built, None = one year only. `cv` and `units`: None when not reliably known.
   Blank beats wrong: if sources disagree, leave it blank.
-- `src/app.js` must not contain `</script` (build asserts). No external JS: only photos and fonts load.
+- `src/app.js` must not contain `</script` and keeps LF line endings: the build hashes it for the CSP.
+  No external JS or fonts: only photos load from the network (fonts are self-hosted in `fonts/`, SIL
+  OFL, licences beside them). A photo, licence or source URL outside `URL_HOSTS` (`build.py`) fails
+  the build; add a host only for a real new source.
 - Keep `<meta name="robots" content="noindex, nofollow">` until a cyber-security expert has reviewed
   the site (user's decision, 2026-11-10).
 - The GitHub repo is public: no secrets and no personal data in commits.
