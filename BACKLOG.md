@@ -24,7 +24,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-09: Working model: the Coordinator's chat only advises and writes messages in MESSAGES.txt;
   every change on GitHub (code, data, docs, PRs, merges) is done by a dev chat.
 - 2026-11-10: Every chat reports to the Manager chat when done or blocked (what changed, the PR,
-  decisions needed); MESSAGES.txt stays the durable record.
+  decisions needed); MESSAGES.txt stays the durable record. Roles pass to the newest chat
+  (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2), found by title, never by a saved session ID.
 - 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);
   the user disliked existing multi-brand sites, so no umbrella site unless a second brand is real.
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
