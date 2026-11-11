@@ -26,8 +26,6 @@ the full-screen viewer. You need an internet connection for photos and fonts.
   one and keeps both badges.
 - **Fast 10**: the ten fastest Lamborghinis by horsepower, then claimed top speed.
 - **Compare**: up to four cars side by side; most powerful and rarest highlighted.
-- **Stats**: power from 1963 to today (record-holders labelled), cars per decade, engines,
-  types, designers, most powerful, rarest road cars.
 
 Links are shareable: filters, car pages and views live in the URL (`#/m/miura-p400`,
 `#/?family=Countach&decade=1970s`).

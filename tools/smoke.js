@@ -79,8 +79,9 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     await go('#/fast10');
     expect(await page.isVisible('#view-fast') && await n('#fast .f10') === 10, `fast 10: ${await n('#fast .f10')} entries, expected 10`);
 
-    await go('#/stats');
-    expect(await page.isVisible('#view-stats') && await n('#stats .chart-wrap svg') > 0, 'stats: view or power chart missing');
+    await go('#/stats');   // the Stats page was removed (2026-11-11): old links land on Browse
+    expect(await page.isVisible('#view-browse') && await n('a[href="#/stats"]') === 0 && !(await page.$('#view-stats')),
+      'stats: old #/stats link should show Browse, and no Stats view or link should remain');
 
     await go('#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(','));
     expect(await n('#compare table.cmp thead td') === 2, 'compare: expected 2 cars side by side');
@@ -92,7 +93,7 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     expect(!(await page.isVisible('#masthead')), 'browse: the hero should step aside while filtering');
 
     const FAN = 'Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini. Lamborghini and related names are trademarks of their owners.';
-    for (const h of ['#/', '#/m/' + cars[0].id, '#/timeline', '#/fast10', '#/stats', '#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(',')]) {
+    for (const h of ['#/', '#/m/' + cars[0].id, '#/timeline', '#/fast10', '#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(',')]) {
       await go(h);
       expect(await page.isVisible('#fan-note') && ((await page.textContent('#fan-note')) || '').trim() === FAN, `footer: fan-site notice missing or changed on ${h}`);
     }
@@ -103,5 +104,5 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     console.error('smoke FAILED:\n- ' + problems.join('\n- '));
     process.exit(1);
   }
-  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, stats, compare, the hero and the fan-site notice work with no JavaScript errors`);
+  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, compare, old stats links, the hero and the fan-site notice work with no JavaScript errors`);
 })().catch((e) => { console.error('smoke FAILED: ' + e.message); process.exit(1); });
