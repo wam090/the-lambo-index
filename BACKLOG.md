@@ -21,8 +21,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-09: Timeline legend reads "Filter by frame →"; Clear shows all. 2026-11-10: chips combine as
   AND (a car shows only when it has every chosen badge): Debut plus one kind; kinds exclude each other.
 - 2026-11-10: The home page has no intro heading; browsing starts right under the header.
-- 2026-11-10: The car-of-the-day hero banner is wanted, in place of the family strip and with no
-  visible heading; it goes live only after the user has seen the preview (`#/?hero=1`).
+- 2026-11-10: The car-of-the-day hero banner replaces the family strip, with no visible heading;
+  live since 2026-11-11, its credit linking the photo's page and licence.
 - 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
 - 2026-11-10: Every chat works to about 90% of its capacity (was 70%), then hands over.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
@@ -51,8 +51,6 @@ Nothing. (A chat that runs low on room mid-task writes here what is left.)
 - [ ] **Monthly refresh task (the user, 10 seconds).** In the Refresh chat, type: "Create the monthly
       refresh task as tools/REFRESH.md says, then fire it once as the setup test." A Dev then deletes
       the placeholder task trig_017aDGyKxgfrxhwj1AYE5ofT (it would start a session without the repo).
-- [ ] **Hero banner live (your call).** After the preview at
-      https://wam090.github.io/the-lambo-index/#/?hero=1, say "hero live" to make it the default.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),

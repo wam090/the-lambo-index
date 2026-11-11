@@ -87,9 +87,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   Roadster versions. Add a car's figures to `PERF` and it competes automatically.
 - **Monthly refresh**: the Refresh chat runs `tools/REFRESH.md` (03:17 UTC on the 1st). Change the job
   there, through a PR; its merge guard is also in the task's stored prompt, which only that chat can edit.
-- **Hero preview**: `#/?hero=1` shows the car-of-the-day photo, no heading, in place of the family strip
-  (`setHero()`; hidden while searching or filtering; stays on for the visit, `hero=0` turns it off). The
-  default stays as it is until the user approves.
+- **Hero**: the car-of-the-day photo, no heading, replaces the family strip on Browse (`setHero()`;
+  hidden while searching or filtering); its credit links the photo's page and licence (`creditHTML`).
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 

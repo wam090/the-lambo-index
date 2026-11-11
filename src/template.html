@@ -86,7 +86,7 @@ button{cursor:pointer}
 .tab .n{font-family:var(--mono);font-size:11px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:inline-grid;place-items:center}
 
 /* ---------- browse ---------- */
-/* car of the day: preview only (#/?hero=1), in place of the family strip; hidden while searching */
+/* car of the day, in place of the family strip; hidden while searching or filtering */
 .masthead{position:relative;margin-top:18px;border-radius:16px;overflow:hidden;min-height:clamp(300px,28vw,420px);display:flex;align-items:flex-end;transition:min-height .35s ease;background:var(--panel);border:1px solid var(--line);isolation:isolate}
 .masthead.slim{display:none}
 .hero{position:absolute;inset:0;z-index:-1;background:var(--photo)}
@@ -101,6 +101,8 @@ button{cursor:pointer}
 .hero-tag b{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .hero-tag .icon{width:16px;height:16px;color:var(--accent)}
 .hero-credit{position:absolute;right:14px;bottom:10px;z-index:2;font-size:11px;color:rgba(244,240,234,.7);text-shadow:0 1px 4px rgba(0,0,0,.9);max-width:40%;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-credit a{color:inherit;text-decoration:underline;text-decoration-color:rgba(244,240,234,.35);text-underline-offset:2px}
+.hero-credit a:hover{color:#fff}
 .strip-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:22px}
 .strip-h h2{margin:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .strip-h a{font-size:13px;color:var(--accent-2);text-decoration:none}
@@ -563,7 +565,7 @@ a.tile{text-decoration:none;color:inherit}
   .masthead{margin-top:12px;min-height:340px;border-radius:14px}
   .hero-tag{top:12px;left:12px;right:auto;max-width:calc(100% - 24px);font-size:13px;padding:7px 10px 7px 12px}
   .hero-tag .mono + b + .mono{display:none}
-  .hero-credit{top:56px;bottom:auto;left:14px;right:auto;max-width:70%;text-align:left}
+  .hero-credit{left:14px;right:14px;bottom:10px;max-width:none;text-align:left}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
