@@ -64,13 +64,13 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-- [ ] **Photo hunt** for urus-st-x, sc20, invencible, autentica (no photo; user, 2026-11-11: the Scout
-      should search). Mode added in the `claude/scout-photo-hunt` PR; after Cyber's OK and the merge,
-      the Manager fires the Scout task with `Photo hunt: urus-st-x, sc20, invencible, autentica`; then
-      the Dev follows tools/REFRESH.md, Dev: photo hunt.
-
 ## Next
 
+- [ ] **Your call: four cars still have no photo** (urus-st-x, sc20, invencible, autentica). Photo hunt
+      of 2026-11-11: Commons has none (no category, no search hit). Flickr has only LEGO, blocked
+      press-scan accounts, Lamborghini press photos re-posted by others, and game screenshots. Only
+      official press photos exist (media.lamborghini.com needs the user's registration). The Scout
+      could not look at photos (its tools return page text only), so the Dev did the search itself.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),
