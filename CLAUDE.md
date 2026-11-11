@@ -16,13 +16,16 @@ The user owns product decisions and talks only to the Manager; the Manager talks
 "Your call" items in BACKLOG.md are the user's; decisions already made are listed there: follow them.
 Every role reports to the Manager:
 - **Manager**: the newest chat titled "Manager…". Assigns the work and batches questions for the user.
+  Reports to the user only as bullets under Done / Next / Needs approval, no prose (2026-11-11). At
+  about 90% measured it starts its own successor (`create_session`, title Manager_v0.N+1, with a
+  hand-over prompt) and tells the user in one line; it does the same for any role that reports full.
 - **Dev** (Dev_0.x): code, data, docs, PRs and merges. **Web designer**: design work, via PRs like Dev.
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session each month with no repo
   (`tools/REFRESH.md`). It only scouts and ends its reply with a JSON package; it changes nothing.
-  The Manager's own task "Lambo Index monthly pickup" (09:17 UTC on the 1st; a new Manager deletes
-  the old one and creates its own) wakes it to tell the newest Dev to pull the package from the
-  run record. The Dev imports it as untrusted data (`tools/scout_import.py`) and merges after Cyber's
+  The task "Lambo Index monthly pickup" (09:17 UTC on the 1st, a fresh session each time, bound to
+  no chat) reads the Scout run's metadata and tells the newest Dev chat to pull the package from the
+  run record, and the newest Manager chat in one line. The Dev imports it as untrusted data (`tools/scout_import.py`) and merges after Cyber's
   check; the Manager reports the month's refresh to the user in one block.
 
 Roles pass to the newest chat as one fills up (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2). Find
