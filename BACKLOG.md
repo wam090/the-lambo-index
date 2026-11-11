@@ -27,6 +27,11 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
   the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
 - 2026-11-10: Every chat works to about 90% of its capacity (was 70%), then hands over.
+- 2026-11-11: The Manager reports to the user only as bullets under Done / Next / Needs approval,
+  no prose.
+- 2026-11-11: At about 90% measured the Manager starts its own successor (create_session, title
+  Manager_v0.N+1, hand-over prompt) and tells the user in one line; likewise for any role that
+  reports it is full.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
 - 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager.
 - 2026-11-11: Refresh becomes the Scout. It only scouts (new cars, facts and sources, Commons
@@ -50,9 +55,12 @@ history). Record each decision the user makes under Decisions, with its date.
 
 - **Scout tasks (after PR A, #36, merged 2026-11-11 with Cyber's OK).** Waiting on the user's yes
   (Manager_v0.2 put the choice: fresh Scout recommended). Then the Manager creates "Lambo Index
-  scout" and its own "Lambo Index monthly pickup" exactly as `tools/REFRESH.md` Setup says, and sends
+  scout" and "Lambo Index monthly pickup" exactly as `tools/REFRESH.md` Setup says, and sends
   Cyber the Scout task's `get_trigger` output before the first run. After that: archive the old
   standing "Scout" chat (it has push) and delete the disabled task trig_017aDGyKxgfrxhwj1AYE5ofT.
+  Then a Dev PR records the Scout task's trigger ID in REFRESH.md and switches the pickup prompt and
+  Dev step 1 to `get_trigger(<id>)` instead of `list_triggers` plus a name (Cyber, 2026-11-11; if
+  get_trigger fails, stop and tell the Manager).
 
 ## Next
 
