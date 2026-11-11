@@ -488,6 +488,12 @@ def self_test():
         "k opened off-list": dict(base, opened=base["opened"] + ["https://evil.example/x"]),
         "k unreachable off-list": dict(base, unreachable=["evil.example"]),
         "k missing opened": {k: v for k, v in base.items() if k != "opened"},
+        "k opened userinfo": dict(base, opened=base["opened"] + ["https://en.wikipedia.org@evil.example/"]),
+        "k opened http": dict(base, opened=base["opened"] + ["http://www.evo.co.uk/x"]),
+        "k opened control char": dict(base, opened=base["opened"] + ["https://www.evo.co.uk/a\nb"]),
+        "k opened too long": dict(base, opened=base["opened"] + ["https://www.evo.co.uk/" + "a" * 300]),
+        "k opened duplicate": dict(base, opened=base["opened"] + [base["opened"][0]]),
+        "k unreachable not a list": dict(base, unreachable="en.wikipedia.org"),
     }
     tmpd = tempfile.mkdtemp()
     cat, pk = os.path.join(tmpd, "catalog.py"), os.path.join(tmpd, "p.json")

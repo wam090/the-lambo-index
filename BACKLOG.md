@@ -59,9 +59,6 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-- **Scout sources.** The 2026-11-11 dry run (0 cars, checked by Cyber_v0.2) relied on search
-  snippets: the Scout must open named sources in full and list them in the package (next Dev PR).
-
 ## Next
 
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
