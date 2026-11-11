@@ -12,7 +12,8 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 - **149 cars** from the 1963 350 GTV to the 2026 Revuelto SV, with year(s), type, body, engine,
   power (hp and kW), number built where reliably known, designer and a one-line note.
 - **About 1,060 photos**, reviewed by eye: freely licensed photos from Wikimedia Commons and Flickr,
-  plus credited press photos for the few cars with no free photo. Every photo shows its author and
+  plus, for the few cars with no free photo, private photographers' Flickr photos whose owners allow
+  sharing (never re-posted press photos). Every photo shows its author and
   licence and links to its source page.
 - **Browse**: instant search, filters with live counts (family, type, decade, engine, body,
   designer, power), family tiles that drill down into each car, grid and list layouts, random pick.
@@ -66,6 +67,7 @@ node tools/smoke.js                         # check the page still works
   blank where sources disagree. Corrections are welcome — edit `tools/catalog.py`.
 - Photos: Wikimedia Commons and Flickr contributors, under the licences shown on each photo (mostly
   CC BY-SA and CC BY; some non-commercial CC licences, fine while the site is non-commercial).
-  Cars with no free photo show press photos credited to their maker. All photos are loaded from
+  A car with no free photo may show a private photographer's Flickr photo whose owner allows sharing,
+  credited to them; never re-posted press photos. All photos are loaded from
   where they are hosted, not copied into this project.
 - Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini (every page says so in its footer). The page asks search engines not to index it.
