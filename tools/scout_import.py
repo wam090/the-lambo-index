@@ -154,6 +154,8 @@ def load_catalog(path=CATALOG):
                 for call in node.value.elts:
                     args = [names[a.id] if isinstance(a, ast.Name) else ast.literal_eval(a) for a in call.args]
                     row = dict(zip(FIELDS, args + [None] * (len(FIELDS) - len(args))))
+                    for kw in call.keywords:      # e.g. wiki=..., note=...; fills there fail closed
+                        row[kw.arg] = ast.literal_eval(kw.value)
                     if not isinstance(row["cats"], list):
                         row["cats"] = [row["cats"]]
                     row["note"] = row["note"] or ""
@@ -499,8 +501,11 @@ def main():
                 apply(pkg)
         else:
             # After apply the rows exist, so validate against main's catalogue instead of today's file.
-            base = subprocess.run(["git", "-C", ROOT, "show", "origin/main:tools/catalog.py"],
-                                  capture_output=True, text=True, check=True).stdout
+            r = subprocess.run(["git", "-C", ROOT, "show", "origin/main:tools/catalog.py"],
+                               capture_output=True, text=True)
+            if r.returncode:
+                raise Bad("cannot read origin/main:tools/catalog.py; run git fetch origin main first")
+            base = r.stdout
             with tempfile.TemporaryDirectory() as d:
                 p = os.path.join(d, "catalog.py")
                 with open(p, "w", encoding="utf-8") as fh:
