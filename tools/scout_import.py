@@ -100,12 +100,13 @@ def integer(v, where, lo, hi, none=True):
 def source(v, where):
     if type(v) is not str or len(v) > 300 or any(not 33 <= ord(c) <= 126 for c in v) or "`" in v:
         raise Bad(f"{where}: must be printable ASCII, at most 300 characters")
-    u = urllib.parse.urlsplit(v)
     try:
-        port = u.port
+        u = urllib.parse.urlsplit(v)
+        port, host = u.port, u.hostname
     except ValueError:
-        port = "bad"
-    if u.scheme != "https" or "@" in u.netloc or port is not None or u.hostname not in SOURCE_HOSTS:
+        raise Bad(f"{where}: not a valid URL")
+    # netloc must be exactly the lower-case allowlisted host: no userinfo, port or upper case
+    if u.scheme != "https" or port is not None or host not in SOURCE_HOSTS or u.netloc != host:
         raise Bad(f"{where}: must be https on one of {sorted(SOURCE_HOSTS)}")
 
 
@@ -198,16 +199,19 @@ def validate(pkg, cat_path=CATALOG):
         errs.append("opened: 2-30 distinct pages read in full")
         opened = []
     else:
+        good = []
         for j, u in enumerate(opened):
             try:
                 source(u, f"opened[{j}]")
+                good.append(u)
             except Bad as e:
                 errs.append(str(e))
+        opened = good
     if type(unreach) is not list or len(unreach) > len(SOURCE_HOSTS) or \
             any(type(h) is not str or h not in SOURCE_HOSTS for h in unreach) or len(set(unreach)) != len(unreach):
         errs.append(f"unreachable: distinct hosts from {sorted(SOURCE_HOSTS)}")
         unreach = []
-    hosts = {urllib.parse.urlsplit(u).hostname for u in opened if type(u) is str}
+    hosts = {urllib.parse.urlsplit(u).hostname for u in opened}     # only entries that passed source()
     press = SOURCE_HOSTS - {"en.wikipedia.org"}
     if "en.wikipedia.org" not in hosts and "en.wikipedia.org" not in unreach:
         errs.append("opened: no en.wikipedia.org page read, and Wikipedia not listed as unreachable")
@@ -495,6 +499,10 @@ def self_test():
         "k opened duplicate": dict(base, opened=base["opened"] + [base["opened"][0]]),
         "k unreachable not a list": dict(base, unreachable="en.wikipedia.org"),
         "k unreachable nested": dict(base, unreachable=[["en.wikipedia.org"]]),
+        "k opened bad ipv6": dict(base, opened=base["opened"] + ["https://[::1/x"]),
+        "k car source bad ipv6": one(sources=["https://[::1/x"]),
+        "k opened upper-case host": dict(base, opened=base["opened"] + ["https://EN.WIKIPEDIA.ORG/wiki/X"]),
+        "k unreachable dict": dict(base, unreachable=[{"h": "en.wikipedia.org"}]),
         "k opened nested": dict(base, opened=[["https://en.wikipedia.org/wiki/Lamborghini"], "https://www.evo.co.uk/lamborghini"]),
     }
     tmpd = tempfile.mkdtemp()
