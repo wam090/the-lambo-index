@@ -203,7 +203,7 @@ def find(car, embed=False):
         if rows is None:   # rate limit or network: keep the photos we already have
             return None
         for p in rows:
-            who = {str(p.get(k, "")).lower() for k in ("pathAlias", "username", "ownerNsid")}
+            who = {str(p.get(k, "")).lower() for k in ("pathAlias", "username", "ownerNsid", "realname")}
             ok_licence = p.get("license") in LICENCES or (embed and p.get("license") == 0)
             if not ok_licence or p.get("id") in found or who & BLOCKED:
                 continue
