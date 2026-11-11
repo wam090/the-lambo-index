@@ -58,6 +58,9 @@ history). Record each decision the user makes under Decisions, with its date.
   scout" and "Lambo Index monthly pickup" exactly as `tools/REFRESH.md` Setup says, and sends
   Cyber the Scout task's `get_trigger` output before the first run. After that: archive the old
   standing "Scout" chat (it has push) and delete the disabled task trig_017aDGyKxgfrxhwj1AYE5ofT.
+  Then a Dev PR records the Scout task's trigger ID in REFRESH.md and switches the pickup prompt and
+  Dev step 1 to `get_trigger(<id>)` instead of `list_triggers` plus a name (Cyber, 2026-11-11; if
+  get_trigger fails, stop and tell the Manager).
 
 ## Next
 

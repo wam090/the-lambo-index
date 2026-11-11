@@ -102,6 +102,10 @@ cd <scratch>/prN && cp index.html index.pr.html && python3 -I tools/build.py && 
   `persistent_session_id`, no `create_new_session_on_fire`), same cron, doing the same steps. Each new
   Manager recreates it in its first turn (deleting the old one), or asks the user for a yes if its
   permission check refuses. The Manager reports which option took; the Dev updates this section.
+- **Created in the claude.ai routines UI** (if ever): the Scout task gets no connectors at all; the
+  pickup task gets Claude_Code_Remote only. Untick everything else: the UI may preselect the
+  account's connectors, and other routines here carry Drive, Docs, Canva, Figma and Replit. Cyber
+  checks both tasks' `mcp_connections` with `get_trigger` before the first run.
 - **Acceptance tests** (on a throwaway task set up exactly like the Scout task; results in the PR
   that set this up): (a) `git push` from the clone fails; (b) `add_repo` with push access fails or
   waits for the user; (c) the run's tool list is recorded (send_message, add_repo, create_session,
