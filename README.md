@@ -68,4 +68,4 @@ node tools/smoke.js                         # check the page still works
   CC BY-SA and CC BY; some non-commercial CC licences, fine while the site is non-commercial).
   Cars with no free photo show press photos credited to their maker. All photos are loaded from
   where they are hosted, not copied into this project.
-- Not affiliated with Automobili Lamborghini S.p.A. The page asks search engines not to index it.
+- Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini (every page says so in its footer). The page asks search engines not to index it.
