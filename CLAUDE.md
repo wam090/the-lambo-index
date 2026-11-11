@@ -170,8 +170,9 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   here. Use category pages, raw file pages (`action=raw`) and `Special:Search` HTML, not `api.php`.
 - Flickr embeds search results as JSON after `modelExport:` (sizes up to 1024 px). Openverse finds
   nothing for rare cars.
-- lamborghini.com serves empty pages to scripts: do not work around it (no user-agent spoofing).
-  Press photos would need the user to register on media.lamborghini.com, and are the user's call.
+- lamborghini.com: some pages are readable to scripts (e.g. `/en-en/privacy-legal`); the site's terms
+  forbid reuse without written permission. media.lamborghini.com redirects there. Do not work
+  around anything (no user-agent spoofing). Press photos are the user's call (BACKLOG.md).
 
 ## Publishing
 - Live site, always the newest build: https://wam090.github.io/the-lambo-index/ (GitHub Pages from
