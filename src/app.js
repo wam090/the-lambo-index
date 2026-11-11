@@ -45,6 +45,9 @@ function imgUrl(im, want, original = false) {
 const filePage = (im) => im.p || `https://commons.wikimedia.org/wiki/File:${im.n}`;
 const photoSource = (im) => (im.src === 'flickr' || im.src === 'press' ? 'Flickr' : 'Wikimedia Commons');
 const extLink = (url, html) => (/^https:\/\//i.test(url || '') ? `<a href="${esc(url)}" target="_blank" rel="noopener">${html}</a>` : html);   // https only
+const REPORT = 'https://github.com/wam090/the-lambo-index/issues/new';
+const reportHTML = (c, im) => (im ? ` · ${extLink(`${REPORT}?title=${encodeURIComponent(`Photo report: ${c.name}`)}&body=${encodeURIComponent(
+  `Car: ${c.name}\nPage: https://wam090.github.io/the-lambo-index/#/m/${c.id}\nPhoto: ${filePage(im)}\n\nWhat is wrong with this photo (wrong car, wrong credit, should be removed)?`)}`, 'Report a photo')}` : '');
 const creditHTML = (im) => im ? `${im.src === 'press' ? 'Press photo' : 'Photo'}: ${extLink(filePage(im), esc(im.a || `${photoSource(im)} contributor`))}${im.l ? ` · ${extLink(im.lu, esc(im.l))}` : ''} · ${photoSource(im)}` : '';
 const photoSearches = (q) => `<a href="https://www.flickr.com/search/?text=${encodeURIComponent(q)}" target="_blank" rel="noopener">Flickr</a> · <a href="https://www.google.com/search?tbm=isch&amp;q=${encodeURIComponent(q)}" target="_blank" rel="noopener">Google Images</a>`;
 
@@ -541,7 +544,7 @@ function renderDetail(c) {
   const q = `Lamborghini ${c.name.replace(/[“”]/g, '')}`;
   const stage = photos.length
     ? `<div class="ph stage" id="stage" role="button" tabindex="0" aria-label="Open photo viewer" data-empty="Photo unavailable"><img id="stage-img" src="${esc(imgUrl(photos[0], 1920))}" alt="${esc(c.title)}"><span class="zoom">1 / ${photos.length} · full resolution</span></div>
-       <p class="credit" id="stage-credit">${creditHTML(photos[0])}</p>
+       <p class="credit" id="stage-credit">${creditHTML(photos[0])}${reportHTML(c, photos[0])}</p>
        ${photos.length > 1 ? `<div class="thumbs" id="thumbs">${photos.map((im, i) => `<button type="button" data-ph="${i}" aria-label="Photo ${i + 1}" aria-current="${i === 0}"><img src="${esc(imgUrl(im, 330))}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}`
     : `<div class="ph stage empty" data-empty="No freely licensed photo yet"></div>
        <p class="credit">Every photo of this car we could find is copyrighted, so it can't be shown here. See it on ${photoSearches(q)}.</p>`;
@@ -601,7 +604,7 @@ function renderDetail(c) {
       $('#stage-img').src = imgUrl(photos[i], 1920);
       st.classList.remove('missing');
       st.querySelector('.zoom').textContent = `${i + 1} / ${photos.length} · full resolution`;
-      $('#stage-credit').innerHTML = creditHTML(photos[i]);
+      $('#stage-credit').innerHTML = creditHTML(photos[i]) + reportHTML(c, photos[i]);
       $$('#thumbs button').forEach((b, j) => b.setAttribute('aria-current', String(j === i)));
     };
     st.addEventListener('click', () => openLB(c, cur));
@@ -649,7 +652,7 @@ function renderLB() {
   $('#lb-img').alt = `${c.title}, photo ${i + 1}`;
   $('#lb-count').textContent = `${i + 1} / ${c.imgs.length}`;
   $('#lb-title').textContent = `${c.name} · ${yearsLong(c)}`;
-  $('#lb-credit').innerHTML = `${creditHTML(im)} · ${fmt(im.w)} × ${fmt(im.ht)} px`;
+  $('#lb-credit').innerHTML = `${creditHTML(im)} · ${fmt(im.w)} × ${fmt(im.ht)} px${reportHTML(c, im)}`;
   [i - 1, i + 1].forEach((j) => { if (j >= 0 && j < c.imgs.length) { const pre = new Image(); pre.src = imgUrl(c.imgs[j], 3840, true); } });
 }
 function stepLB(d) { const n = lb.c.imgs.length; lb.i = (lb.i + d + n) % n; renderLB(); }

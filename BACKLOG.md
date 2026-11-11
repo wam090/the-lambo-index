@@ -24,6 +24,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-10: The car-of-the-day hero banner replaces the family strip, with no visible heading;
   live since 2026-11-11, its credit linking the photo's page and licence.
 - 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
+- 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
+  the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
 - 2026-11-10: Every chat works to about 90% of its capacity (was 70%), then hands over.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
 - 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager. It runs in
