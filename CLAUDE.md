@@ -8,7 +8,8 @@ here or in the code. If you had to work out something important that is missing 
 `index.html` is the whole product: one self-contained page of every Lamborghini ever made or shown
 (production, limited series, one-offs, concepts, prototypes, race cars) with specs and photos from
 Wikimedia Commons and Flickr. Views and their URL hashes: browse `#/?family=Countach&decade=1970s`,
-car page `#/m/<id>`, `#/timeline`, `#/fast10`, `#/compare?ids=a,b`, `#/stats`. Vanilla JS: no
+car page `#/m/<id>`, `#/timeline`, `#/fast10`, `#/compare?ids=a,b` (`#/stats` was removed on
+2026-11-11; old links land on Browse). Vanilla JS: no
 framework, no npm packages, no server. README.md is the user-facing description.
 
 ## Team and communication (user's instruction, 2026-11-10)
@@ -123,8 +124,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
 - Row order in `CARS` matters: same-year ties for debut and for sorting go to the earlier row.
 - `family` is an ASCII key (`Murcielago`, `Huracan`). A family whose display name differs needs it in
   both `FAMILY_NAME` (`src/app.js`, display) and `FAMILY_WORDS` (`tools/images.py`, photo matching).
-- `kind` must be one of `KIND_ORDER` and `eng` one of `ENG_ORDER` (`src/app.js`; colours in
-  `KIND_COLOUR`/`ENG_COLOUR`). `body` is free text that `bodyGroup()` maps to a filter group, and
+- `kind` must be one of `KIND_ORDER` and `eng` one of `ENG_ORDER` (`src/app.js`; type colours in
+  `KIND_COLOUR`). `body` is free text that `bodyGroup()` maps to a filter group, and
   unmatched words fall into "Coupé". A new value needs code changes there.
 - Power: `cv` is stored in CV, as Lamborghini quotes it; the site shows hp (`hp()` in `app.js`,
   cv × 0.98632, rounded) and kW. The power filter's steps are in hp.

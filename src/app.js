@@ -56,8 +56,6 @@ const famName = (f) => FAMILY_NAME[f] || f;
 const KIND_ORDER = ['Production', 'Limited series', 'One-off', 'Concept', 'Prototype', 'Race car'];
 const KIND_COLOUR = { Production: '#ff8100', 'Limited series': '#ffb46b', 'One-off': '#d8c3a5', Concept: '#8c7a66', Prototype: '#5e544a', 'Race car': '#c2410c' };
 const ENG_ORDER = ['V12', 'Hybrid V12', 'V10', 'Hybrid V10', 'V8', 'Hybrid V8', 'Inline-6', 'Electric', 'Other'];
-const ENG_COLOUR = { V12: '#ff8100', V10: '#e9dcc6', V8: '#9c8670', 'Inline-6': '#6f655a', Electric: '#5fb8c2', Other: '#5e544a' };
-const engBase = (e) => e.replace('Hybrid ', '');
 function bodyGroup(b) {
   const s = (b || '').toLowerCase();
   if (/suv|off-road/.test(s)) return 'SUV and off-road';
@@ -673,84 +671,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && document.body.classList.contains('filters-open')) document.body.classList.remove('filters-open');
 });
 
-/* ================= stats ================= */
-let statsBuilt = false;
-function barsHTML(entries, key, colourOf) {
-  const max = Math.max(...entries.map((e) => e[1]), 1);
-  return `<div class="bars">${entries.map(([v, n, label]) => `<button class="bar" type="button" data-go="${key}" data-v="${esc(v)}"><span class="nm">${esc(label || v)}</span><span class="tr"><i style="width:${((n / max) * 100).toFixed(1)}%;${colourOf ? `background:${colourOf(v)}` : ''}"></i></span><span class="v">${fmt(n)}</span></button>`).join('')}</div>`;
-}
-function powerChart() {
-  const P = (c) => hp(c.cv);
-  const pts = cars.filter((c) => c.cv && ['Production', 'Limited series', 'One-off'].includes(c.kind)).sort((a, b) => a.year - b.year || a.cv - b.cv);
-  const W = 1000; const H = 380; const L = 58; const R = 18; const T = 18; const B = 34;
-  const x0 = 1960; const x1 = 2030; const yMax = 1100;
-  const X = (y) => L + ((y - x0) / (x1 - x0)) * (W - L - R);
-  const Y = (v) => H - B - (v / yMax) * (H - T - B);
-  let grid = '';
-  for (let v = 0; v <= 1000; v += 200) grid += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" class="gl"/><text x="${L - 8}" y="${Y(v) + 4}" class="ax" text-anchor="end">${fmt(v)}</text>`;
-  for (let y = 1960; y <= 2020; y += 10) grid += `<line x1="${X(y)}" x2="${X(y)}" y1="${T}" y2="${H - B}" class="gl gl-v"/><text x="${X(y)}" y="${H - B + 20}" class="ax" text-anchor="middle">${y}s</text>`;
-  let rec = 0; let path = ''; const records = [];
-  for (const c of pts) {
-    if (P(c) > rec) { path += `${path ? 'L' : 'M'}${X(c.year).toFixed(1)},${Y(rec || P(c)).toFixed(1)} L${X(c.year).toFixed(1)},${Y(P(c)).toFixed(1)} `; rec = P(c); records.push(c); }
-  }
-  path += `L${X(2026).toFixed(1)},${Y(rec).toFixed(1)}`;
-  const dots = pts.map((c) => {
-    const col = ENG_COLOUR[engBase(c.eng)] || '#888';
-    const hybrid = c.eng.startsWith('Hybrid');
-    return `<a href="#/m/${c.id}" data-open="${c.id}"><circle cx="${X(c.year + 0.5).toFixed(1)}" cy="${Y(P(c)).toFixed(1)}" r="6" fill="${hybrid ? 'var(--panel)' : col}" stroke="${col}" stroke-width="${hybrid ? 2.5 : 1}"><title>${esc(c.name)} (${c.year}): ${fmt(P(c))} hp, ${esc(c.eng)}</title></circle></a>`;
-  }).join('');
-  const labelled = records.filter((c, i) => i === 0 || P(c) - P(records[i - 1]) >= 60 || i === records.length - 1);
-  const labels = labelled.map((c) => `<text x="${X(c.year + 0.5) - 4}" y="${Y(P(c)) - 11}" class="lbl" text-anchor="end">${esc(c.name.replace(/[“”]/g, ''))} · ${fmt(P(c))}</text>`).join('');
-  const legend = ['V12', 'V10', 'V8', 'Electric'].map((k) => `<span><i style="background:${ENG_COLOUR[k]}"></i>${k}</span>`).join('') + '<span><i class="hy"></i>Hybrid (ring)</span>';
-  return `<div class="chart-wrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Power of Lamborghini road cars by year, from ${fmt(P(records[0]))} hp in ${records[0].year} to ${fmt(rec)} hp">${grid}<text x="${L}" y="${T - 4}" class="ax">hp</text><path d="${path}" class="frontier"/>${dots}${labels}</svg></div><div class="legend">${legend}<span><i class="fr"></i>Most powerful so far</span></div>`;
-}
-function buildStats() {
-  if (statsBuilt) return;
-  statsBuilt = true;
-  const fams = countBy(cars, (c) => c.family);
-  const kinds = countBy(cars, (c) => c.kind);
-  const engs = countBy(cars, (c) => c.eng);
-  const designers = countBy(cars, (c) => c.designer);
-  const decades = countBy(cars, (c) => c.decade);
-  const decList = [...decades.entries()].sort((a, b) => a[0].localeCompare(b[0]));
-  const dMax = Math.max(...decList.map((e) => e[1]));
-  const road = cars.filter((c) => ['Production', 'Limited series', 'One-off'].includes(c.kind));
-  const rarest = road.filter((c) => c.units).sort((a, b) => a.units - b.units || b.year - a.year).slice(0, 10);
-  const strongest = cars.filter((c) => c.cv).sort((a, b) => b.cv - a.cv).slice(0, 10);
-  const listHTML = (list, val) => `<div class="toplist">${list.map((c) => `<a href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 330)}<span class="nm">${esc(c.name)}<small>${yearsLong(c)} · ${esc(c.kind)}</small></span><span class="v">${val(c)}</span></a>`).join('')}</div>`;
-  const concepts = (kinds.get('Concept') || 0) + (kinds.get('Prototype') || 0);
-  $('#stats').innerHTML = `
-  <div class="figs">
-    <div class="fig"><b>${fmt(cars.length)}</b><span>cars in the index</span></div>
-    <div class="fig"><b>${fmt(fams.size)}</b><span>families</span></div>
-    <div class="fig"><b>${fmt(concepts)}</b><span>concepts and prototypes</span></div>
-    <div class="fig"><b>${fmt(kinds.get('One-off') || 0)}</b><span>one-offs</span></div>
-    <div class="fig"><b>${fmt(totalPhotos)}</b><span>photos</span></div>
-    <div class="fig"><b>${fmt(hp(Math.max(...cars.map((c) => c.cv || 0))))}</b><span>hp, the most powerful</span></div>
-  </div>
-  <div class="stats-grid">
-    <section class="panel wide"><h2>Power, 1963 to today</h2><p class="note">Road cars with a published output. The line steps up each time a new car beats the record. Click a dot to open the car.</p>${powerChart()}</section>
-    <section class="panel"><h2>Cars per decade</h2><p class="note">By year first shown</p>
-      <div class="cols">${decList.map(([d, n]) => `<button class="colb" type="button" data-go="decade" data-v="${d}" title="${d}: ${n} cars"><span class="v">${n}</span><span class="tr"><i style="height:${((n / dMax) * 100).toFixed(1)}%"></i></span><span class="y">${d}</span></button>`).join('')}</div></section>
-    <section class="panel"><h2>Engines</h2><p class="note">Hybrids counted separately</p>${barsHTML(ENG_ORDER.filter((k) => engs.has(k)).map((k) => [k, engs.get(k)]), 'eng', (k) => ENG_COLOUR[engBase(k)])}</section>
-    <section class="panel wide"><h2>What kind of car</h2><p class="note">Every entry by type</p>
-      <div class="stack">${KIND_ORDER.filter((k) => kinds.has(k)).map((k) => `<button type="button" data-go="kind" data-v="${k}" title="${k}: ${kinds.get(k)}" style="flex:${kinds.get(k)};background:${KIND_COLOUR[k]}"></button>`).join('')}</div>
-      <div class="legend">${KIND_ORDER.filter((k) => kinds.has(k)).map((k) => `<button type="button" data-go="kind" data-v="${k}"><i style="background:${KIND_COLOUR[k]}"></i>${k} <span class="v">${kinds.get(k)}</span></button>`).join('')}</div></section>
-    <section class="panel"><h2>Designers</h2><p class="note">Top 10 by number of cars</p>${barsHTML([...designers.entries()].filter(([d]) => d !== 'Not credited').sort((a, b) => b[1] - a[1]).slice(0, 10), 'designer')}</section>
-    <section class="panel"><h2>Families</h2><p class="note">Top 10 by number of entries</p>${barsHTML([...fams.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([f, n]) => [f, n, famName(f)]), 'fam')}</section>
-    <section class="panel"><h2>Most powerful</h2><p class="note">All types, including race and concept cars with a published figure</p>${listHTML(strongest, (c) => `${fmt(hp(c.cv))} hp`)}</section>
-    <section class="panel"><h2>Rarest road cars</h2><p class="note">Production, limited and one-off cars with a known build count</p>${listHTML(rarest, (c) => (c.units === 1 ? '1 of 1' : `${fmt(c.units)} built`))}</section>
-  </div>`;
-}
-$('#stats').addEventListener('click', (e) => {
-  const t = e.target.closest('[data-go]');
-  if (!t) return;
-  for (const f of FACETS) state.sel[f.key].clear();
-  state.q = ''; state.minHp = 0;
-  state.sel[t.dataset.go].add(t.dataset.v);
-  location.hash = browseHash();
-});
-
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
@@ -829,13 +749,12 @@ function buildTimeline() {
 
 /* ================= views & routing ================= */
 let activeView = null;
-const TITLES = { browse: 'The Lambo Index', timeline: 'Timeline · The Lambo Index', fast: 'Fast 10 · The Lambo Index', compare: 'Compare · The Lambo Index', stats: 'Stats · The Lambo Index' };
+const TITLES = { browse: 'The Lambo Index', timeline: 'Timeline · The Lambo Index', fast: 'Fast 10 · The Lambo Index', compare: 'Compare · The Lambo Index' };
 function showView(v) {
   if (activeView !== v) {
     activeView = v;
     $$('.view').forEach((s) => { s.hidden = s.dataset.view !== v; });
     $$('a[data-view]').forEach((a) => a.setAttribute('aria-current', a.dataset.view === v ? 'page' : 'false'));
-    if (v === 'stats') buildStats();
     if (v === 'timeline') buildTimeline();
     if (v === 'fast') buildFast();
     window.scrollTo(0, 0);
@@ -859,7 +778,6 @@ function route() {
   lastViewHash = location.hash || '#/';
   if (path === '/timeline') { showView('timeline'); applyTlOnly(params.get('only') || ''); }
   else if (path === '/fast10') showView('fast');
-  else if (path === '/stats') showView('stats');
   else if (path === '/compare') {
     const ids = (params.get('ids') || '').split(',').filter((id) => byId.has(id)).slice(0, 4);
     if (ids.length) { compare = ids; saveCompare(); }

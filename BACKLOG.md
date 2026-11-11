@@ -21,6 +21,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-09: Timeline legend reads "Filter by frame →"; Clear shows all. 2026-11-10: chips combine as
   AND (a car shows only when it has every chosen badge): Debut plus one kind; kinds exclude each other.
 - 2026-11-10: The home page has no intro heading; browsing starts right under the header.
+- 2026-11-11: The Stats page is removed; the views are Browse, Compare, Fast 10 and Timeline. Old
+  `#/stats` links land on Browse.
 - 2026-11-10: The car-of-the-day hero banner replaces the family strip, with no visible heading;
   live since 2026-11-11, its credit linking the photo's page and licence.
 - 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.

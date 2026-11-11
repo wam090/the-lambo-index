@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pB3Ldlh1VGUvYm8KBgRVDSP93I9nXGZZlsHhVMZedYc='; style-src 'unsafe-inline'; font-src 'self'; img-src https://thumb.wikimedia.org https://upload.wikimedia.org https://live.staticflickr.com data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-IRVBiUGR5WUgJjUR1Q6RG7kG8tTdl2eMIBDGEkVK/KY='; style-src 'unsafe-inline'; font-src 'self'; img-src https://thumb.wikimedia.org https://upload.wikimedia.org https://live.staticflickr.com data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Lambo Index</title>
 <meta name="robots" content="noindex, nofollow">
@@ -308,61 +308,6 @@ button{cursor:pointer}
 .cmp .best{color:var(--accent);font-weight:700}
 .cmp .mono{font-size:13px}
 
-/* ---------- stats ---------- */
-.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
-.fig{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
-.fig b{display:block;font-family:var(--display);font-stretch:125%;font-weight:800;font-size:28px;line-height:1.05;font-variant-numeric:tabular-nums}
-.fig span{color:var(--muted);font-size:13px}
-.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding-bottom:80px}
-@media (max-width:900px){.stats-grid{grid-template-columns:minmax(0,1fr)}}
-.bar .tr i.swfill{box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
-.stack{display:flex;height:34px;border-radius:8px;overflow:hidden;gap:2px}
-.stack button{border:0;padding:0;min-width:4px;transition:filter .15s}
-.stack button:hover{filter:brightness(1.15)}
-.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;font-size:13.5px}
-.legend button{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:2px 0;color:var(--text)}
-.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
-.legend .v{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px 18px;min-width:0}
-.panel.wide{grid-column:1/-1}
-.panel h2{margin:0 0 4px;font-size:15px;font-weight:700}
-.panel .note{margin:0 0 14px;color:var(--faint);font-size:12.5px}
-.bars{display:grid;gap:3px}
-.bar{display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) 46px;gap:12px;align-items:center;width:100%;background:none;border:0;border-radius:7px;padding:4px 6px;text-align:left;font-size:13.5px}
-.bar:hover{background:var(--panel-2)}
-.bar .nm{display:flex;align-items:center;gap:7px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.bar .tr{height:12px;border-radius:3px;background:var(--line);overflow:hidden}
-.bar .tr i{display:block;height:100%;background:var(--accent);border-radius:3px}
-.bar .v{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
-.cols{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:4px;align-items:end;height:210px;padding-top:18px}
-.colb{display:grid;grid-template-rows:auto minmax(0,1fr) auto;height:100%;gap:4px;background:none;border:0;padding:0;align-items:end;justify-items:center;min-width:0}
-.colb .v{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
-.colb .tr{width:100%;height:100%;display:flex;align-items:flex-end}
-.colb .tr i{display:block;width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:2px}
-.colb:hover .tr i{background:var(--accent-2)}
-.colb .y{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
-.tbl-wrap{overflow-x:auto}
-.ptbl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
-.ptbl th,.ptbl td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
-.ptbl th{color:var(--muted);font-weight:500;font-size:12px}
-.ptbl td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.ptbl tr.clickable{cursor:pointer}
-.ptbl tr.clickable:hover td{background:var(--panel-2)}
-.rng{position:relative;height:14px;min-width:200px}
-.rng .full{position:absolute;top:6px;height:2px;background:var(--line-2)}
-.rng .mid{position:absolute;top:3px;height:8px;background:rgba(255,129,0,.45);border-radius:2px}
-.rng .med{position:absolute;top:0;width:2px;height:14px;background:var(--accent)}
-.axis{position:relative;height:16px;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
-.axis span{position:absolute;transform:translateX(-50%)}
-.toplist{display:grid;gap:6px;counter-reset:n}
-.toplist a{display:grid;grid-template-columns:22px 84px minmax(0,1fr) auto;gap:12px;align-items:center;text-decoration:none;padding:5px 6px;border-radius:8px}
-.toplist a:hover{background:var(--panel-2)}
-.toplist a::before{counter-increment:n;content:counter(n);font-family:var(--mono);font-size:12px;color:var(--faint);text-align:right}
-.toplist .ph{aspect-ratio:3/2;border-radius:5px}
-.toplist .nm{font-size:13.5px;font-weight:600;line-height:1.25;min-width:0}
-.toplist .nm small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
-.toplist .v{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-
 /* ---------- timeline ---------- */
 .decade{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding-block:24px;border-top:1px solid var(--line)}
 .decade h2{margin:0;font-family:var(--display);font-stretch:125%;font-weight:800;font-size:34px;line-height:1;color:var(--accent);position:sticky;top:calc(var(--top-h) + 18px);align-self:start}
@@ -494,18 +439,6 @@ a.tile{text-decoration:none;color:inherit}
 .grid.list .c-kind{display:none}
 .credit{margin:8px 2px 0;font-size:12px;color:var(--faint);line-height:1.45}
 .credit a{color:var(--muted)}
-.chart-wrap{overflow-x:auto;margin-top:4px}
-.chart-wrap svg{display:block;width:100%;min-width:680px;height:auto}
-.chart-wrap .gl{stroke:var(--line);stroke-width:1}
-.chart-wrap .gl-v{stroke-dasharray:2 5}
-.chart-wrap .ax{fill:var(--faint);font:12px var(--mono)}
-.chart-wrap .lbl{fill:var(--text);font:600 12.5px var(--body);paint-order:stroke;stroke:var(--panel);stroke-width:4px}
-.chart-wrap .frontier{fill:none;stroke:var(--accent);stroke-width:2;opacity:.5}
-.chart-wrap circle{cursor:pointer}
-.chart-wrap a:hover circle,.chart-wrap a:focus circle{stroke:#fff;stroke-width:2.5}
-.legend span{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
-.legend i.hy{background:transparent!important;border:2px solid var(--accent);border-radius:50%}
-.legend i.fr{height:2px;width:18px;border-radius:0;background:var(--accent);opacity:.6}
 .lb-bot{justify-content:space-between!important;gap:6px 18px;flex-wrap:wrap}
 .lb-bot a{color:#c9c2b8}
 .lb-keys{color:#777}
@@ -536,7 +469,7 @@ a.tile{text-decoration:none;color:inherit}
   .search input{height:42px;padding-right:72px}
   .search .kbd{display:none}
   .tabs{display:none}
-  .botnav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(14,13,12,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:4px var(--gut-r) calc(4px + env(safe-area-inset-bottom,0px)) var(--gut-l)}
+  .botnav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(14,13,12,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:4px var(--gut-r) calc(4px + env(safe-area-inset-bottom,0px)) var(--gut-l)}
   .botnav a{display:grid;justify-items:center;gap:2px;padding:7px 2px;text-decoration:none;color:var(--muted);font-size:11.5px;font-weight:600;position:relative}
   .botnav a[aria-current="page"]{color:var(--accent)}
   .botnav a .icon{width:20px;height:20px}
@@ -590,7 +523,6 @@ a.tile{text-decoration:none;color:inherit}
   <symbol id="i-fast" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0M12 17l4.5-5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-time" viewBox="0 0 24 24"><path d="M4 12h16M7 8v8M12 6v12M17 9v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-cmp" viewBox="0 0 24 24"><path d="M4 5h6v14H4zM14 5h6v14h-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-  <symbol id="i-stats" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
   <symbol id="i-back" viewBox="0 0 24 24"><path d="M10 6l-6 6 6 6M4 12h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -613,7 +545,6 @@ a.tile{text-decoration:none;color:inherit}
       <a class="tab" href="#/timeline" data-view="timeline">Timeline</a>
       <a class="tab" href="#/fast10" data-view="fast">Fast 10</a>
       <a class="tab" href="#/compare" data-view="compare">Compare <span class="n" data-cmp-count hidden>0</span></a>
-      <a class="tab" href="#/stats" data-view="stats">Stats</a>
     </nav>
   </div>
 </header>
@@ -694,16 +625,6 @@ a.tile{text-decoration:none;color:inherit}
     </div>
   </section>
 
-  <!-- Stats -->
-  <section class="view" id="view-stats" data-view="stats" aria-label="Stats" hidden>
-    <div class="wrap">
-      <div class="page-h">
-        <div><h1>The collection <em>in numbers</em></h1>
-        <p>Click any bar, dot or row to explore those cars.</p></div>
-      </div>
-      <div id="stats"></div>
-    </div>
-  </section>
 </main>
 
 <footer class="foot">
@@ -719,7 +640,6 @@ a.tile{text-decoration:none;color:inherit}
   <a href="#/timeline" data-view="timeline"><svg class="icon"><use href="#i-time"/></svg>Timeline</a>
   <a href="#/fast10" data-view="fast"><svg class="icon"><use href="#i-fast"/></svg>Fast 10</a>
   <a href="#/compare" data-view="compare"><svg class="icon"><use href="#i-cmp"/></svg>Compare<span class="n" data-cmp-count hidden>0</span></a>
-  <a href="#/stats" data-view="stats"><svg class="icon"><use href="#i-stats"/></svg>Stats</a>
 </nav>
 
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="d-title">
@@ -803,8 +723,6 @@ const famName = (f) => FAMILY_NAME[f] || f;
 const KIND_ORDER = ['Production', 'Limited series', 'One-off', 'Concept', 'Prototype', 'Race car'];
 const KIND_COLOUR = { Production: '#ff8100', 'Limited series': '#ffb46b', 'One-off': '#d8c3a5', Concept: '#8c7a66', Prototype: '#5e544a', 'Race car': '#c2410c' };
 const ENG_ORDER = ['V12', 'Hybrid V12', 'V10', 'Hybrid V10', 'V8', 'Hybrid V8', 'Inline-6', 'Electric', 'Other'];
-const ENG_COLOUR = { V12: '#ff8100', V10: '#e9dcc6', V8: '#9c8670', 'Inline-6': '#6f655a', Electric: '#5fb8c2', Other: '#5e544a' };
-const engBase = (e) => e.replace('Hybrid ', '');
 function bodyGroup(b) {
   const s = (b || '').toLowerCase();
   if (/suv|off-road/.test(s)) return 'SUV and off-road';
@@ -1420,84 +1338,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && document.body.classList.contains('filters-open')) document.body.classList.remove('filters-open');
 });
 
-/* ================= stats ================= */
-let statsBuilt = false;
-function barsHTML(entries, key, colourOf) {
-  const max = Math.max(...entries.map((e) => e[1]), 1);
-  return `<div class="bars">${entries.map(([v, n, label]) => `<button class="bar" type="button" data-go="${key}" data-v="${esc(v)}"><span class="nm">${esc(label || v)}</span><span class="tr"><i style="width:${((n / max) * 100).toFixed(1)}%;${colourOf ? `background:${colourOf(v)}` : ''}"></i></span><span class="v">${fmt(n)}</span></button>`).join('')}</div>`;
-}
-function powerChart() {
-  const P = (c) => hp(c.cv);
-  const pts = cars.filter((c) => c.cv && ['Production', 'Limited series', 'One-off'].includes(c.kind)).sort((a, b) => a.year - b.year || a.cv - b.cv);
-  const W = 1000; const H = 380; const L = 58; const R = 18; const T = 18; const B = 34;
-  const x0 = 1960; const x1 = 2030; const yMax = 1100;
-  const X = (y) => L + ((y - x0) / (x1 - x0)) * (W - L - R);
-  const Y = (v) => H - B - (v / yMax) * (H - T - B);
-  let grid = '';
-  for (let v = 0; v <= 1000; v += 200) grid += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" class="gl"/><text x="${L - 8}" y="${Y(v) + 4}" class="ax" text-anchor="end">${fmt(v)}</text>`;
-  for (let y = 1960; y <= 2020; y += 10) grid += `<line x1="${X(y)}" x2="${X(y)}" y1="${T}" y2="${H - B}" class="gl gl-v"/><text x="${X(y)}" y="${H - B + 20}" class="ax" text-anchor="middle">${y}s</text>`;
-  let rec = 0; let path = ''; const records = [];
-  for (const c of pts) {
-    if (P(c) > rec) { path += `${path ? 'L' : 'M'}${X(c.year).toFixed(1)},${Y(rec || P(c)).toFixed(1)} L${X(c.year).toFixed(1)},${Y(P(c)).toFixed(1)} `; rec = P(c); records.push(c); }
-  }
-  path += `L${X(2026).toFixed(1)},${Y(rec).toFixed(1)}`;
-  const dots = pts.map((c) => {
-    const col = ENG_COLOUR[engBase(c.eng)] || '#888';
-    const hybrid = c.eng.startsWith('Hybrid');
-    return `<a href="#/m/${c.id}" data-open="${c.id}"><circle cx="${X(c.year + 0.5).toFixed(1)}" cy="${Y(P(c)).toFixed(1)}" r="6" fill="${hybrid ? 'var(--panel)' : col}" stroke="${col}" stroke-width="${hybrid ? 2.5 : 1}"><title>${esc(c.name)} (${c.year}): ${fmt(P(c))} hp, ${esc(c.eng)}</title></circle></a>`;
-  }).join('');
-  const labelled = records.filter((c, i) => i === 0 || P(c) - P(records[i - 1]) >= 60 || i === records.length - 1);
-  const labels = labelled.map((c) => `<text x="${X(c.year + 0.5) - 4}" y="${Y(P(c)) - 11}" class="lbl" text-anchor="end">${esc(c.name.replace(/[“”]/g, ''))} · ${fmt(P(c))}</text>`).join('');
-  const legend = ['V12', 'V10', 'V8', 'Electric'].map((k) => `<span><i style="background:${ENG_COLOUR[k]}"></i>${k}</span>`).join('') + '<span><i class="hy"></i>Hybrid (ring)</span>';
-  return `<div class="chart-wrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Power of Lamborghini road cars by year, from ${fmt(P(records[0]))} hp in ${records[0].year} to ${fmt(rec)} hp">${grid}<text x="${L}" y="${T - 4}" class="ax">hp</text><path d="${path}" class="frontier"/>${dots}${labels}</svg></div><div class="legend">${legend}<span><i class="fr"></i>Most powerful so far</span></div>`;
-}
-function buildStats() {
-  if (statsBuilt) return;
-  statsBuilt = true;
-  const fams = countBy(cars, (c) => c.family);
-  const kinds = countBy(cars, (c) => c.kind);
-  const engs = countBy(cars, (c) => c.eng);
-  const designers = countBy(cars, (c) => c.designer);
-  const decades = countBy(cars, (c) => c.decade);
-  const decList = [...decades.entries()].sort((a, b) => a[0].localeCompare(b[0]));
-  const dMax = Math.max(...decList.map((e) => e[1]));
-  const road = cars.filter((c) => ['Production', 'Limited series', 'One-off'].includes(c.kind));
-  const rarest = road.filter((c) => c.units).sort((a, b) => a.units - b.units || b.year - a.year).slice(0, 10);
-  const strongest = cars.filter((c) => c.cv).sort((a, b) => b.cv - a.cv).slice(0, 10);
-  const listHTML = (list, val) => `<div class="toplist">${list.map((c) => `<a href="#/m/${c.id}" data-open="${c.id}">${phHTML(c.img, 330)}<span class="nm">${esc(c.name)}<small>${yearsLong(c)} · ${esc(c.kind)}</small></span><span class="v">${val(c)}</span></a>`).join('')}</div>`;
-  const concepts = (kinds.get('Concept') || 0) + (kinds.get('Prototype') || 0);
-  $('#stats').innerHTML = `
-  <div class="figs">
-    <div class="fig"><b>${fmt(cars.length)}</b><span>cars in the index</span></div>
-    <div class="fig"><b>${fmt(fams.size)}</b><span>families</span></div>
-    <div class="fig"><b>${fmt(concepts)}</b><span>concepts and prototypes</span></div>
-    <div class="fig"><b>${fmt(kinds.get('One-off') || 0)}</b><span>one-offs</span></div>
-    <div class="fig"><b>${fmt(totalPhotos)}</b><span>photos</span></div>
-    <div class="fig"><b>${fmt(hp(Math.max(...cars.map((c) => c.cv || 0))))}</b><span>hp, the most powerful</span></div>
-  </div>
-  <div class="stats-grid">
-    <section class="panel wide"><h2>Power, 1963 to today</h2><p class="note">Road cars with a published output. The line steps up each time a new car beats the record. Click a dot to open the car.</p>${powerChart()}</section>
-    <section class="panel"><h2>Cars per decade</h2><p class="note">By year first shown</p>
-      <div class="cols">${decList.map(([d, n]) => `<button class="colb" type="button" data-go="decade" data-v="${d}" title="${d}: ${n} cars"><span class="v">${n}</span><span class="tr"><i style="height:${((n / dMax) * 100).toFixed(1)}%"></i></span><span class="y">${d}</span></button>`).join('')}</div></section>
-    <section class="panel"><h2>Engines</h2><p class="note">Hybrids counted separately</p>${barsHTML(ENG_ORDER.filter((k) => engs.has(k)).map((k) => [k, engs.get(k)]), 'eng', (k) => ENG_COLOUR[engBase(k)])}</section>
-    <section class="panel wide"><h2>What kind of car</h2><p class="note">Every entry by type</p>
-      <div class="stack">${KIND_ORDER.filter((k) => kinds.has(k)).map((k) => `<button type="button" data-go="kind" data-v="${k}" title="${k}: ${kinds.get(k)}" style="flex:${kinds.get(k)};background:${KIND_COLOUR[k]}"></button>`).join('')}</div>
-      <div class="legend">${KIND_ORDER.filter((k) => kinds.has(k)).map((k) => `<button type="button" data-go="kind" data-v="${k}"><i style="background:${KIND_COLOUR[k]}"></i>${k} <span class="v">${kinds.get(k)}</span></button>`).join('')}</div></section>
-    <section class="panel"><h2>Designers</h2><p class="note">Top 10 by number of cars</p>${barsHTML([...designers.entries()].filter(([d]) => d !== 'Not credited').sort((a, b) => b[1] - a[1]).slice(0, 10), 'designer')}</section>
-    <section class="panel"><h2>Families</h2><p class="note">Top 10 by number of entries</p>${barsHTML([...fams.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([f, n]) => [f, n, famName(f)]), 'fam')}</section>
-    <section class="panel"><h2>Most powerful</h2><p class="note">All types, including race and concept cars with a published figure</p>${listHTML(strongest, (c) => `${fmt(hp(c.cv))} hp`)}</section>
-    <section class="panel"><h2>Rarest road cars</h2><p class="note">Production, limited and one-off cars with a known build count</p>${listHTML(rarest, (c) => (c.units === 1 ? '1 of 1' : `${fmt(c.units)} built`))}</section>
-  </div>`;
-}
-$('#stats').addEventListener('click', (e) => {
-  const t = e.target.closest('[data-go]');
-  if (!t) return;
-  for (const f of FACETS) state.sel[f.key].clear();
-  state.q = ''; state.minHp = 0;
-  state.sel[t.dataset.go].add(t.dataset.v);
-  location.hash = browseHash();
-});
-
 /* ================= timeline ================= */
 let tlBuilt = false;
 let fastBuilt = false;
@@ -1576,13 +1416,12 @@ function buildTimeline() {
 
 /* ================= views & routing ================= */
 let activeView = null;
-const TITLES = { browse: 'The Lambo Index', timeline: 'Timeline · The Lambo Index', fast: 'Fast 10 · The Lambo Index', compare: 'Compare · The Lambo Index', stats: 'Stats · The Lambo Index' };
+const TITLES = { browse: 'The Lambo Index', timeline: 'Timeline · The Lambo Index', fast: 'Fast 10 · The Lambo Index', compare: 'Compare · The Lambo Index' };
 function showView(v) {
   if (activeView !== v) {
     activeView = v;
     $$('.view').forEach((s) => { s.hidden = s.dataset.view !== v; });
     $$('a[data-view]').forEach((a) => a.setAttribute('aria-current', a.dataset.view === v ? 'page' : 'false'));
-    if (v === 'stats') buildStats();
     if (v === 'timeline') buildTimeline();
     if (v === 'fast') buildFast();
     window.scrollTo(0, 0);
@@ -1606,7 +1445,6 @@ function route() {
   lastViewHash = location.hash || '#/';
   if (path === '/timeline') { showView('timeline'); applyTlOnly(params.get('only') || ''); }
   else if (path === '/fast10') showView('fast');
-  else if (path === '/stats') showView('stats');
   else if (path === '/compare') {
     const ids = (params.get('ids') || '').split(',').filter((id) => byId.has(id)).slice(0, 4);
     if (ids.length) { compare = ids; saveCompare(); }
