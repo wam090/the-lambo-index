@@ -101,5 +101,9 @@ cd <scratch>/prN && cp index.html index.pr.html && python3 -I tools/build.py && 
   waits for the user; (c) the run's tool list is recorded (send_message, add_repo, create_session,
   trigger tools); (d) WebFetch of en.wikipedia.org and a press site works, and `scout_import.py
   check` runs in the clone. If (a) or (b) succeeds, stop and tell Cyber.
+  Run on 2026-11-11 (task "TEST Lambo scout", deleted after): (a) push refused, HTTP 403, repo not in
+  the session's sources; (b, c) no add_repo, send_message, create_session or trigger tools (only the
+  local SendMessage); (d) both fetches and `check` worked; a fire-time payload asking for more was
+  refused as data.
 - The old standing "Scout" chat (renamed from Refresh) has push access: archive it once the task works.
   Delete the disabled placeholder task `trig_017aDGyKxgfrxhwj1AYE5ofT` at the same time.
