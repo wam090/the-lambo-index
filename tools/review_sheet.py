@@ -5,6 +5,7 @@ Each row is one car: its candidates side by side, labelled with their index and 
 wrong cars can be added to "drop" in data/heroes.json and the best one to "hero".
 
 Usage: python3 tools/review_sheet.py data/flickr.json id,id,... out.png [--rows-per-sheet 3]
+       (also data/images.json, data/extra_images.json, flickr_embed_candidates.json)
 """
 import io, json, os, ssl, sys, urllib.request
 from PIL import Image, ImageDraw
@@ -14,8 +15,11 @@ TW, TH, PAD, LABEL = 240, 165, 6, 26
 
 
 def thumb(rec):
-    """Fetch a small version of a photo record from data/flickr.json."""
-    url = next((u for w, u in rec["sz"] if w >= TW), rec["sz"][-1][1])
+    """Fetch a small version of a photo record (Flickr "sz", or a Commons "h"/"n" record)."""
+    if "sz" in rec:
+        url = next((u for w, u in rec["sz"] if w >= TW), rec["sz"][-1][1])
+    else:
+        url = f"https://thumb.wikimedia.org/wikipedia/commons/thumb/{rec['h']}/{rec['n']}/330px-{rec['n']}"
     ctx = ssl.create_default_context(cafile=CA) if os.path.exists(CA) else None
     req = urllib.request.Request(url, headers={"User-Agent": "TheLamboIndexBuilder/1.0"})
     with urllib.request.urlopen(req, timeout=40, context=ctx) as r:
@@ -40,7 +44,7 @@ def main():
                 sheet.paste(thumb(rec), (x, y + LABEL))
             except Exception as e:
                 draw.text((x, y + LABEL + 20), f"error {e}"[:40], fill="red")
-            draw.text((x, y + LABEL + TH + 2), f"{ci}: {rec['title'][:34]}", fill="black")
+            draw.text((x, y + LABEL + TH + 2), f"{ci}: {rec.get('title') or rec['t']}"[:38], fill="black")
             draw.text((x, y + LABEL + TH + 13), f"{rec['l']}", fill="gray")
     sheet.save(out)
     print(out, sheet.size)

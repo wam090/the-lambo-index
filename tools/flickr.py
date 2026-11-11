@@ -95,6 +95,13 @@ QUERIES = {
 BLOCKED = {"autohistorian", "druidabruxux", "lancastervanderbilt", "lancaster vanderbilt"}
 TOY = re.compile(r"\blego\b|\b7\d{4}\b|speed champions|technic|brick|minifig|\bmoc\b", re.I)
 
+# Extra search terms per car from a Scout photo hunt (written by tools/scout_import.py hunt, which
+# validates them). Checked again here; the match pattern above still decides which photos count.
+TERM_RE = re.compile(r"[^\W_][\w .'-]{2,59}")     # same as scout_import.TERM_RE
+_q = os.path.join(ROOT, "data", "flickr_queries.json")
+EXTRA_QUERIES = {cid: [t for t in terms if isinstance(t, str) and TERM_RE.fullmatch(t)][:8]
+                 for cid, terms in (json.load(open(_q, encoding="utf-8")) if os.path.exists(_q) else {}).items()}
+
 _last = [0.0]
 
 
@@ -191,7 +198,7 @@ def find(car, embed=False):
         pattern = r"\b(?:" + "|".join(words) + r")\b" if words else ""
     want = re.compile(pattern, re.I) if pattern else None
     found = {}
-    for q in queries:
+    for q in queries + [t for t in EXTRA_QUERIES.get(car["id"], []) if t not in queries]:
         rows = search(q, any_licence=embed)
         if rows is None:   # rate limit or network: keep the photos we already have
             return None

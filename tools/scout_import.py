@@ -10,6 +10,7 @@ AST, then runs `python3 -I` on the edited catalogue. Any violation rejects the w
   python3 tools/scout_import.py photos PKG.json   # after your own images.py/flickr.py runs: apply
                                                   # drop/hero picks found in those runs only
   python3 tools/scout_import.py report PKG.json   # Markdown for the PR body (package text fenced)
+  python3 tools/scout_import.py hunt   PKG.json   # photo hunt: write the checked hints (see below)
   python3 tools/scout_import.py --self-test       # Cyber's hostile cases a-j on a scratch copy
 
 Package ("version": 1): one UTF-8 JSON object of at most 64 KB, keys exactly as below at every level.
@@ -37,8 +38,25 @@ listed in "unreachable" (Wikipedia, or every press host).
 A car whose id already exists is a blank-fill: every field equals today's row except fields that are
 None today (perf: only if the car has no PERF entry yet). New ids go at the end of CARS. A new family
 is never a refresh: it touches src/app.js and tools/images.py, so it is a separate, normal PR.
+
+Photo-hunt package (tools/REFRESH.md, "Photo hunt"): hints for cars that have too few photos. No
+URLs, no photo data: only names this tool and the Dev's own runs look up on Commons and Flickr.
+{
+  "version": 1, "kind": "photo-hunt",
+  "ids": ["sc20"],                                   # 1-10 existing car ids: those the fire text named
+  "photos": {"sc20": {                               # one entry per id
+    "cats":   ["Lamborghini SC20"],                  # 0-3 Commons categories (no "Category:"), each
+                                                     # containing the car's name; they go first in cats
+    "files":  ["Lamborghini SC20 Goodwood 2021.jpg"],# 0-10 Commons file titles (no "File:") outside
+                                                     # those categories; this tool fetches and credits
+                                                     # them, free licence only -> data/extra_images.json
+    "flickr": ["Lamborghini SC20 Goodwood"],         # 0-5 Flickr search terms -> data/flickr_queries.json
+    "hero": "flickr:123", "drop": [],                # picks, applied only if your own runs return them
+    "why": ""}},                                     # one line; required when nothing was found
+  "notes": ""
+}
 """
-import ast, datetime, json, os, re, shutil, subprocess, sys, tempfile, unicodedata, urllib.parse
+import ast, atexit, datetime, json, os, re, shutil, subprocess, sys, tempfile, unicodedata, urllib.parse
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 CATALOG = os.path.join(ROOT, "tools", "catalog.py")
@@ -398,7 +416,7 @@ def apply(pkg, cat_path=CATALOG):
 
 def own_photos():
     own = {}
-    for name in ("images.json", "flickr.json"):
+    for name in ("images.json", "extra_images.json", "flickr.json", "nonfree_images.json"):
         p = os.path.join(ROOT, "data", name)
         if os.path.exists(p):
             for cid, entry in json.load(open(p, encoding="utf-8")).items():
@@ -535,22 +553,338 @@ def self_test():
         h = json.load(open(hp, encoding="utf-8"))
         if len(ign) != 2 or h["drop"].get("zz-self-test") != ["Mine.jpg"] or "zz-self-test" in h["hero"]:
             fails.append("i: picks outside your own run were applied")
+        hf, hn = hunt_self_test(tmpd)
+        fails += hf
     finally:
         shutil.rmtree(tmpd)
     for f in fails:
         print("FAIL", f)
-    print("self-test " + ("FAILED" if fails else f"OK: {len(cases)} hostile packages rejected, "
-                          "(a) imported as an inert string, (i) picks outside your run ignored"))
+    print("self-test " + ("FAILED" if fails else f"OK: {len(cases)} hostile packages and {hn} hostile "
+                          "photo hunts rejected, (a) imported as an inert string, (i) picks outside your "
+                          "run ignored, a good hunt applied"))
     return not fails
+
+
+# ---- Photo hunt (tools/REFRESH.md, "Photo hunt"): hints only, never photo data ----------------
+HUNT_TOP = {"version", "kind", "ids", "photos", "notes"}
+HUNT_CAR = {"cats", "files", "flickr", "hero", "drop", "why"}
+HUNT_NAME_RE = re.compile(r"[^\W_][\w .,'()&+-]{1,149}")      # Commons category or file name: no / : # etc.
+TERM_RE = re.compile(r"[^\W_][\w .'-]{2,59}")                 # Flickr search term (same as flickr.py)
+FLICKR_ID_RE = re.compile(r"flickr:[0-9]{1,20}")
+IMAGE_EXT = (".jpg", ".jpeg", ".png", ".webp")
+EXTRA = os.path.join(ROOT, "data", "extra_images.json")
+FLICKR_Q = os.path.join(ROOT, "data", "flickr_queries.json")
+
+
+def fold_words(s):
+    s = unicodedata.normalize("NFD", s)
+    s = "".join(ch for ch in s if unicodedata.category(ch) != "Mn").lower()
+    return re.sub(r"[^a-z0-9]+", " ", s).strip()
+
+
+def names_car(cat, car_name):
+    """A hunted category must name the car itself ("Lamborghini SC20 at Goodwood" for SC20),
+    so it cannot pull in a whole family's photos."""
+    n, k = fold_words(car_name), fold_words(cat)
+    return f" {n} " in f" {k} " or n.replace(" ", "") in k.replace(" ", "")
+
+
+def hunt_name(v, where, ext=False):
+    one_line(v, where, 150, CAT_BAD)
+    if not HUNT_NAME_RE.fullmatch(v) or ".." in v or any(w in v.lower() for w in TEXT_BAD_WORDS):
+        raise Bad(f"{where}: letters, digits, spaces and . , ' ( ) & + - only; no namespace prefix")
+    if ext and not v.lower().endswith(IMAGE_EXT):
+        raise Bad(f"{where}: must be a {'/'.join(IMAGE_EXT)} file title without 'File:'")
+
+
+def validate_hunt(pkg, cat_path=CATALOG):
+    cars, _ = load_catalog(cat_path)
+    strict_keys(pkg, HUNT_TOP, "package")
+    if type(pkg["version"]) is not int or pkg["version"] != 1 or pkg["kind"] != "photo-hunt":
+        raise Bad("version must be 1 and kind 'photo-hunt'")
+    ids = pkg["ids"]
+    if type(ids) is not list or not 1 <= len(ids) <= 10 or len(set(map(str, ids))) != len(ids) or \
+            any(type(i) is not str or i not in cars for i in ids):
+        raise Bad("ids: 1-10 distinct car ids that exist in tools/catalog.py")
+    errs = []
+    if pkg["notes"] != "":
+        try:
+            text(pkg["notes"], "notes", 300)
+        except Bad as e:
+            errs.append(str(e))
+    ph = pkg["photos"]
+    if type(ph) is not dict or set(ph) != set(ids):
+        raise Bad("photos: exactly one entry per id in ids")
+    for cid in ids:
+        v, where, e = ph[cid], f"photos.{cid}", []
+        try:
+            strict_keys(v, HUNT_CAR, where)
+        except Bad as x:
+            errs.append(str(x))
+            continue
+
+        def lst(key, n):
+            if type(v[key]) is not list or len(v[key]) > n or len(set(map(str, v[key]))) != len(v[key]):
+                e.append(f"{where}.{key}: a list of at most {n} distinct entries")
+                return []
+            return v[key]
+        for j, k in enumerate(lst("cats", 3)):
+            try:
+                hunt_name(k, f"{where}.cats[{j}]")
+                if not names_car(k, cars[cid][0]["name"]):
+                    raise Bad(f"{where}.cats[{j}]: must contain the car's name '{cars[cid][0]['name']}'")
+            except Bad as x:
+                e.append(str(x))
+        files = lst("files", 10)
+        for j, t in enumerate(files):
+            try:
+                hunt_name(t, f"{where}.files[{j}]", ext=True)
+            except Bad as x:
+                e.append(str(x))
+        for j, t in enumerate(lst("flickr", 5)):
+            if type(t) is not str or not TERM_RE.fullmatch(t) or unicodedata.normalize("NFC", t) != t:
+                e.append(f"{where}.flickr[{j}]: 3-60 letters, digits, spaces and . ' - only")
+        for j, t in enumerate(lst("drop", 20) + ([v["hero"]] if v["hero"] is not None else [])):
+            try:
+                if type(t) is not str or not FLICKR_ID_RE.fullmatch(t):
+                    hunt_name(t, f"{where} pick {j}", ext=True)
+            except Bad as x:
+                e.append(str(x))
+        if v["why"] != "":
+            try:
+                text(v["why"], f"{where}.why", 200)
+            except Bad as x:
+                e.append(str(x))
+        if not (v["cats"] or v["files"] or v["flickr"]) and v["why"] == "":
+            e.append(f"{where}: nothing found needs a one-line 'why'")
+        errs.extend(e)
+    if errs:
+        raise Bad("\n".join(errs))
+    return pkg
+
+
+def is_hunt(pkg):
+    return type(pkg) is dict and "kind" in pkg
+
+
+def commons_file(title, fetch=None, credit=None):
+    """Our own record of a Commons file named by the Scout, or (None, reason). Fetched by this tool
+    from commons.wikimedia.org only; accepted only with a free licence we recognise and no
+    deletion, copyright-violation or missing-permission tag."""
+    import hashlib
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import images
+    fetch, credit = fetch or images.fetch_html, credit or images.raw_credit
+    page = fetch(images.PAGE + "File:" + urllib.parse.quote(title.replace(" ", "_")))
+    m = re.search(r'class="fileInfo">[^<]*?([\d,]+)\s*(?:×|&#215;|x)\s*([\d,]+)\s*pixels', page or "")
+    if not m:
+        return None, "no such file, or not an image"
+    w, h = (int(x.replace(",", "")) for x in m.groups())
+    raw = fetch("https://commons.wikimedia.org/w/index.php?" +
+                urllib.parse.urlencode({"title": "File:" + title, "action": "raw"})) or ""
+    if re.search(r"\{\{\s*(?:delete|speedy|copyvio|no permission|no license|no source|npd|nld|nsd|"
+                 r"db-|duplicate|nowcommons)", raw, re.I):
+        return None, "tagged for deletion or missing permission on Commons"
+    if images.BAD.search(title):
+        return None, "title names a detail, toy, render or interior"
+    if w < 600:
+        return None, f"too small ({w} px wide)"
+    cr = credit("File:" + title)
+    if not cr or not cr[1]:
+        return None, "no free licence recognised"
+    name = title.replace(" ", "_")
+    md5 = hashlib.md5(name.encode("utf-8")).hexdigest()
+    return {"t": title, "h": f"{md5[0]}/{md5[:2]}", "n": urllib.parse.quote(name), "w": w, "ht": h,
+            "a": cr[0], "l": cr[1], "lu": cr[2]}, ""
+
+
+def hunt(pkg, cat_path=CATALOG, extra_path=EXTRA, queries_path=FLICKR_Q, fetch=None, credit=None):
+    """Turn checked hints into our own data: categories (front of the car's cats), Flickr search
+    terms (data/flickr_queries.json, read by flickr.py) and Commons files fetched and credited by
+    this tool (data/extra_images.json). Photos still come only from the Dev's own runs."""
+    src = open(cat_path, encoding="utf-8").read()
+    cars, _ = load_catalog(cat_path)
+    lines = src.splitlines(keepends=True)
+    starts = [0]
+    for l in lines:
+        starts.append(starts[-1] + len(l))
+
+    def pos(lineno, col):
+        return starts[lineno - 1] + len(lines[lineno - 1].encode("utf-8")[:col].decode("utf-8"))
+    edits, want = [], {}
+    for cid in pkg["ids"]:
+        row, call = cars[cid]
+        new = [k for k in pkg["photos"][cid]["cats"] if k not in row["cats"]]
+        if not new:
+            continue
+        node = call.args[12]
+        if not isinstance(node, (ast.List, ast.Constant)):
+            raise Bad(f"{cid}: cats in catalog.py is not a literal; do it by hand")
+        want[cid] = new + row["cats"]
+        edits.append((pos(node.lineno, node.col_offset), pos(node.end_lineno, node.end_col_offset), repr(want[cid])))
+    for a, b, new in sorted(edits, key=lambda x: x[0], reverse=True):
+        src = src[:a] + new + src[b:]
+    if edits:
+        tmpd = tempfile.mkdtemp()
+        tmp = os.path.join(tmpd, "catalog.py")
+        try:
+            with open(tmp, "w", encoding="utf-8", newline="\n") as fh:
+                fh.write(src)
+            got, _ = load_catalog(tmp)
+            for cid, (row, call) in got.items():
+                expect = dict(cars[cid][0], cats=want.get(cid, cars[cid][0]["cats"]))
+                if row != expect or (cid in want and not isinstance(call.args[12], ast.List)):
+                    raise Bad(f"{cid}: round trip failed")
+            if set(got) != set(cars):
+                raise Bad("unexpected rows after the edit")
+            r = subprocess.run([sys.executable, "-I", tmp], capture_output=True, text=True, timeout=60)
+            if r.returncode:
+                raise Bad("python3 -I catalog.py failed:\n" + r.stderr[-2000:])
+            shutil.copyfile(tmp, cat_path)
+        finally:
+            shutil.rmtree(tmpd)
+    q = json.load(open(queries_path, encoding="utf-8")) if os.path.exists(queries_path) else {}
+    for cid in pkg["ids"]:
+        terms = [t for t in pkg["photos"][cid]["flickr"] if t not in q.get(cid, [])]
+        if terms:
+            q[cid] = (q.get(cid, []) + terms)[-8:]
+    with open(queries_path, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(dict(sorted(q.items())), fh, ensure_ascii=False, indent=1)
+        fh.write("\n")
+    extra = json.load(open(extra_path, encoding="utf-8")) if os.path.exists(extra_path) else {}
+    skipped = []
+    for cid in pkg["ids"]:
+        have = {im["t"] for im in extra.get(cid, {}).get("images", [])}
+        for t in pkg["photos"][cid]["files"]:
+            if t in have:
+                continue
+            rec, why = commons_file(t, fetch, credit)
+            if rec is None:
+                skipped.append(f"{cid}: {t!r}: {why}")
+                continue
+            extra.setdefault(cid, {"source": "Commons search (outside the car's categories)", "images": []})
+            extra[cid]["images"].append(rec)
+    with open(extra_path, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(extra, fh, ensure_ascii=False, indent=1)
+        fh.write("\n")
+    print(f"catalog.py: categories added for {sorted(want)}; flickr_queries.json and extra_images.json updated")
+    for s in skipped:
+        print("skipped file (report it):", s)
+    ids = ",".join(pkg["ids"])
+    print(f"next: python3 tools/images.py --only {ids}; python3 tools/flickr.py --only {ids}")
+    return skipped
+
+
+def hunt_report(pkg):
+    out = ["Scout photo-hunt hints (untrusted text, quoted as code):", "", "```text"]
+    for cid in pkg["ids"]:
+        v = pkg["photos"][cid]
+        out.append(cid)
+        out += [f"    {k}: {x}" for k in ("cats", "files", "flickr", "drop") for x in v[k]]
+        if v["hero"]:
+            out.append(f"    hero: {v['hero']}")
+        if v["why"]:
+            out.append(f"    why: {v['why']}")
+    if pkg["notes"]:
+        out.append("notes: " + pkg["notes"])
+    out.append("```")
+    print("\n".join(out))
+
+
+def hunt_self_test(tmpd):
+    """Hostile photo-hunt packages, and one good one applied to scratch copies."""
+    cars = load_catalog()[0]
+    cid = next(i for i, (r, _) in cars.items() if len(fold_words(r["name"])) >= 4)
+    name = cars[cid][0]["name"]
+    entry = {"cats": [f"Lamborghini {name} at a show"], "files": [f"Lamborghini {name} 2023.jpg"],
+             "flickr": [f"Lamborghini {fold_words(name)} show"], "hero": "flickr:123", "drop": [], "why": ""}
+    base = {"version": 1, "kind": "photo-hunt", "ids": [cid], "photos": {cid: entry}, "notes": ""}
+    one = lambda **kw: dict(base, photos={cid: dict(entry, **kw)})
+    cases = {
+        "hunt unknown id": dict(base, ids=["no-such-car"], photos={"no-such-car": entry}),
+        "hunt id not in ids": dict(base, photos={cid: entry, "zz": entry}),
+        "hunt extra key": dict(base, exec="x"), "hunt extra car key": one(url="x"),
+        "hunt bad kind": dict(base, kind="refresh"),
+        "hunt cat without car name": one(cats=["Lamborghini Aventador"]),
+        "hunt cat namespace": one(cats=[f"Category:Lamborghini {name}"]),
+        "hunt cat slash": one(cats=[f"Lamborghini {name}/../x"]),
+        "hunt cat link": one(cats=[f"https Lamborghini {name}"]),
+        "hunt file no ext": one(files=[f"Lamborghini {name}"]),
+        "hunt file prefix": one(files=[f"File:Lamborghini {name}.jpg"]),
+        "hunt file svg": one(files=["Lamborghini.svg"]),
+        "hunt file script": one(files=["<script>.jpg"]),
+        "hunt term ampersand": one(flickr=["Lamborghini&license=0"]),
+        "hunt term newline": one(flickr=["Lamborghini\nx"]),
+        "hunt term long": one(flickr=["Lamborghini " + "x" * 60]),
+        "hunt hero url": one(hero="https://evil.example/x.jpg"),
+        "hunt hero flickr letters": one(hero="flickr:12a"),
+        "hunt too many cats": one(cats=[f"Lamborghini {name} {i}" for i in range(4)]),
+        "hunt empty without why": one(cats=[], files=[], flickr=[]),
+        "hunt why with link": one(why="see www.evil.example"),
+        "hunt 11 ids": dict(base, ids=[cid] * 11),
+    }
+    fails = []
+    for n, p in cases.items():
+        try:
+            validate_hunt(json.loads(json.dumps(p)))
+            fails.append(f"{n}: accepted")
+        except Bad:
+            pass
+    cat, ex, fq = (os.path.join(tmpd, f) for f in ("catalog.py", "extra.json", "fq.json"))
+    shutil.copy(CATALOG, cat)
+    with open(ex, "w") as fh:
+        fh.write("{}")
+    page = '<span class="fileInfo">3,000 × 2,000 pixels</span>'
+    cc = lambda t: ("Test author", "CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/")
+    hunt(validate_hunt(base, cat), cat, ex, fq, fetch=lambda url: page if "/wiki/File:" in url else "{{self|cc-by-4.0}}", credit=cc)
+    row = load_catalog(cat)[0][cid][0]
+    q, x = json.load(open(fq)), json.load(open(ex))
+    if row["cats"][0] != entry["cats"][0] or row["cats"][1:] != cars[cid][0]["cats"]:
+        fails.append("hunt: category not put first, or the old ones changed")
+    if q.get(cid) != entry["flickr"]:
+        fails.append("hunt: flickr terms not written")
+    if [im["t"] for im in x.get(cid, {}).get("images", [])] != entry["files"]:
+        fails.append("hunt: Commons file not recorded")
+    shutil.copy(CATALOG, cat)
+    with open(ex, "w") as fh:
+        fh.write("{}")
+    hunt(base, cat, ex, fq, fetch=lambda url: page if "/wiki/File:" in url else "{{copyvio}}", credit=cc)
+    if json.load(open(ex)):
+        fails.append("hunt: a file tagged copyvio was recorded")
+    return fails, len(cases)
+
+
+def main_catalog_copy():
+    """After apply or hunt the catalogue differs from main's, so later steps validate against main's."""
+    r = subprocess.run(["git", "-C", ROOT, "show", "origin/main:tools/catalog.py"], capture_output=True, text=True)
+    if r.returncode:
+        raise Bad("cannot read origin/main:tools/catalog.py; run git fetch origin main first")
+    d = tempfile.mkdtemp()
+    atexit.register(shutil.rmtree, d, True)
+    p = os.path.join(d, "catalog.py")
+    with open(p, "w", encoding="utf-8") as fh:
+        fh.write(r.stdout)
+    return p
 
 
 def main():
     if sys.argv[1:] == ["--self-test"]:
         sys.exit(0 if self_test() else 1)
-    if len(sys.argv) != 3 or sys.argv[1] not in ("check", "apply", "photos", "report"):
+    if len(sys.argv) != 3 or sys.argv[1] not in ("check", "apply", "photos", "report", "hunt"):
         sys.exit(__doc__.split("\n\n")[1])
     try:
         pkg = load(sys.argv[2])
+        if is_hunt(pkg):
+            if sys.argv[1] == "apply":
+                raise Bad("a photo-hunt package: use 'hunt', not 'apply'")
+            validate_hunt(pkg, main_catalog_copy() if sys.argv[1] in ("photos", "report") else CATALOG)
+            if sys.argv[1] == "check":
+                print(f"photo-hunt package OK: {len(pkg['ids'])} cars")
+            else:
+                {"hunt": hunt, "photos": photos, "report": hunt_report}[sys.argv[1]](pkg)
+            return
+        if sys.argv[1] == "hunt":
+            raise Bad("not a photo-hunt package")
         if sys.argv[1] in ("check", "apply"):
             validate(pkg)
             if sys.argv[1] == "check":
@@ -558,17 +892,7 @@ def main():
             else:
                 apply(pkg)
         else:
-            # After apply the rows exist, so validate against main's catalogue instead of today's file.
-            r = subprocess.run(["git", "-C", ROOT, "show", "origin/main:tools/catalog.py"],
-                               capture_output=True, text=True)
-            if r.returncode:
-                raise Bad("cannot read origin/main:tools/catalog.py; run git fetch origin main first")
-            base = r.stdout
-            with tempfile.TemporaryDirectory() as d:
-                p = os.path.join(d, "catalog.py")
-                with open(p, "w", encoding="utf-8") as fh:
-                    fh.write(base)
-                validate(pkg, p)
+            validate(pkg, main_catalog_copy())
             (photos if sys.argv[1] == "photos" else report)(pkg)
     except Bad as e:
         sys.exit("package rejected:\n" + str(e))
