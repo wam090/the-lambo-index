@@ -60,7 +60,7 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 | `tools/build.py` | catalogue + photos + src → `data/cars.json` + `index.html` | rarely |
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |
 | `tools/REFRESH.md` | the monthly refresh: Scout, Dev and Cyber steps | yes |
-| `tools/scout_import.py` | checks the Scout's package and writes its rows with `repr()` | when the format changes |
+| `tools/scout_import.py` | checks the Scout's package (Cyber's spec), writes rows with `repr()`; `--self-test` | when the format changes |
 | `fonts/` | self-hosted Archivo and IBM Plex Mono (SIL OFL 1.1, licence files beside them) | rarely |
 | `data/images.json`, `data/flickr.json`, `data/cars.json`, `index.html` | outputs of images.py, flickr.py, build.py | never by hand |
 

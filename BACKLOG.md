@@ -48,12 +48,10 @@ history). Record each decision the user makes under Decisions, with its date.
 ## In progress
 
 - **Scout flow (PR A, Dev_0.3, 2026-11-11).** Done: package format, `tools/scout_import.py`
-  (check/apply/photos/report), `tools/REFRESH.md` Scout/Dev/Cyber steps, CLAUDE.md. Still to do:
+  (check/apply/photos/report/--self-test, to Cyber's spec), `tools/REFRESH.md` Scout/Dev/Cyber steps, CLAUDE.md. Still to do:
   - The user's choice: standing Scout chat or a fresh session per run (Cyber and Manager: fresh).
     Then the Setup section of REFRESH.md (task settings and prompt), Cyber's check of the design,
     and the Scout's task; delete the disabled placeholder task trig_017aDGyKxgfrxhwj1AYE5ofT after.
-  - Fold Cyber's full checklist (7-point check, scratch rebuild, hostile-data cases) into REFRESH.md
-    and `scout_import.py` where it adds to what is there.
 
 ## Next
 
