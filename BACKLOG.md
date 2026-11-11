@@ -30,6 +30,7 @@ history). Record each decision the user makes under Decisions, with its date.
   Automobili Lamborghini. Lamborghini and related names are trademarks of their owners." (smoke checks it).
 - 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
   the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
+- 2026-11-11: No "See photos at the source" link: a car with no photo keeps today's empty state.
 - 2026-11-11: Every chat hands over at about 50% of measured capacity (was 90%, before that 70%):
   it finishes its current task, reports it, and the Manager starts its successor.
 - 2026-11-11: Token plan: Dev Opus 5.5 (Extreme + UltraCode while coding, High otherwise), Cyber
