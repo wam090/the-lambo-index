@@ -152,14 +152,12 @@ const SORTERS = {
   photos: (a, b) => b.imgs.length - a.imgs.length || b.year - a.year,
   name: (a, b) => a.name.localeCompare(b.name),
 };
-let heroOn = false;   // car-of-the-day preview (#/?hero=1); stays on for the visit until hero=0
 function stateToQS() {
   const p = new URLSearchParams();
   if (state.q) p.set('q', state.q);
   for (const f of FACETS) for (const v of state.sel[f.key]) p.append(f.param, v);
   if (state.minHp) p.set('power', state.minHp);
   if (state.sort !== 'new') p.set('sort', state.sort);
-  if (heroOn) p.set('hero', '1');
   return p.toString();
 }
 function applyQS(p) {
@@ -305,8 +303,7 @@ function syncControls() {
   $('#sort').value = state.sort;
   $$('[data-layout]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.layout === state.view)));
 }
-function setHero(on) {   // preview only: the hero takes the family strip's place
-  heroOn = on;
+function setHero(on) {   // the car of the day takes the family strip's place
   $('#masthead').hidden = !on; $('#strip-h').hidden = on; $('#strip').hidden = on;
   if (!on || $('#hero').childElementCount) return;
   // a wide, sharp Commons lead photo, the same for everyone on a given date
@@ -317,7 +314,7 @@ function setHero(on) {   // preview only: the hero takes the family strip's plac
   const yrs = pick.end === 0 ? `${pick.year}–now` : pick.end ? `${pick.year}–${pick.end}` : `${pick.year}`;
   $('#hero').innerHTML = `<img src="${esc(imgUrl(pick.img, 1920))}" alt="${esc(pick.title)}" fetchpriority="high" decoding="async">
     <a class="hero-tag" href="#/m/${esc(pick.id)}"><span class="mono">Car of the day</span><b>${esc(pick.name)}</b><span class="mono">${yrs}</span>${icon('right')}</a>
-    <span class="hero-credit">Photo: ${esc(pick.img.a || 'unknown')} · ${esc(pick.img.l || '')}</span>`;
+    <span class="hero-credit">${creditHTML(pick.img)}</span>`;
 }
 function introText() {
   $('#foot-l').textContent = `Index compiled ${RAW.generated} · ${fmt(cars.length)} cars · ${fmt(totalPhotos)} photos`;
@@ -866,7 +863,7 @@ function route() {
     showView('compare');
   } else {
     const was = activeView === 'browse';
-    if (params.has('hero')) setHero(params.get('hero') === '1');
+    setHero(true);
     showView('browse');
     if (params.toString() !== currentQS || !was) { if (params.toString() !== currentQS) applyQS(params); update(); }
     document.title = TITLES.browse;
