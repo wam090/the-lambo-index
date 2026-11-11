@@ -30,7 +30,7 @@ Package ("version": 1): one UTF-8 JSON object of at most 64 KB, keys exactly as 
 }
 A car whose id already exists is a blank-fill: every field equals today's row except fields that are
 None today (perf: only if the car has no PERF entry yet). New ids go at the end of CARS. A new family
-is allowed only if its key is also its display name (nothing to add to FAMILY_NAME or FAMILY_WORDS).
+is never a refresh: it touches src/app.js and tools/images.py, so it is a separate, normal PR.
 """
 import ast, datetime, json, os, re, shutil, subprocess, sys, tempfile, unicodedata, urllib.parse
 
@@ -51,7 +51,7 @@ ID_RE = re.compile(r"[a-z0-9-]{2,40}")
 FAMILY_RE = re.compile(r"[A-Za-z0-9 ]{2,30}")
 TEXT_BAD = set("<>{}[]|\\`")
 CAT_BAD = set("<>[]{}|#")
-TEXT_BAD_WORDS = ("__li_", "javascript:", "http")
+TEXT_BAD_WORDS = ("__li_", "javascript:", "http", "://", "www.")
 INVISIBLE = {*range(0x200B, 0x2010), *range(0x202A, 0x202F), *range(0x2066, 0x206A), 0xFEFF}
 
 
@@ -164,6 +164,7 @@ def load_catalog(path=CATALOG):
 def validate(pkg, cat_path=CATALOG):
     cars, perf = load_catalog(cat_path)
     kinds, engs = read_order("KIND_ORDER"), read_order("ENG_ORDER")
+    families = {r["family"] for r, _ in cars.values()}
     today = datetime.date.today()
     errs = []
 
@@ -230,6 +231,8 @@ def validate(pkg, cat_path=CATALOG):
         else:
             for j, k in enumerate(cats):
                 chk(one_line, k, f"{where}.cats[{j}]", 150, CAT_BAD)
+                if type(k) is str and any(w in k.lower() for w in TEXT_BAD_WORDS):
+                    e.append(f"{where}.cats[{j}]: may not contain a link or __LI_")
         p = c["perf"]
         if p is not None:
             if not (type(p) is list and len(p) == 3 and type(p[0]) is int and 150 <= p[0] <= 500
@@ -243,6 +246,8 @@ def validate(pkg, cat_path=CATALOG):
         else:
             for j, u in enumerate(src):
                 chk(source, u, f"{where}.sources[{j}]")
+        if c["id"] not in cars and type(c["family"]) is str and c["family"] not in families:
+            e.append(f"{where}.family: new family '{c['family']}': a separate, normal PR, not a refresh")
         if c["id"] in cars and not e:          # blank-fill of an existing row
             old = cars[c["id"]][0]
             changed = [f for f in FIELDS if c[f] != old[f]]
@@ -432,6 +437,11 @@ def self_test():
         "h http": one(sources=["http://en.wikipedia.org/wiki/X"]),
         "h lamborghini.com": one(sources=["https://www.lamborghini.com/x"]),
         "h userinfo": one(sources=["https://en.wikipedia.org@evil.example/"]),
+        "c link in name": one(name="Huracan see https://evil.example now"),
+        "c www in note": one(note="see www.evil.example"), "c link in cat": one(cats=["a://b"]),
+        "e end false": one(end=False), "e end true": one(end=True),
+        "h unknown host": one(sources=["https://evil.example/page"]),
+        "new family": one(family="Newfamily"),
         "j over 64 KB": js + " " * MAX_BYTES,
         "j 21 cars": dict(base, cars=[dict(good, id=f"zz-{i}") for i in range(21)]),
     }
