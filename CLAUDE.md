@@ -12,7 +12,8 @@ car page `#/m/<id>`, `#/timeline`, `#/fast10`, `#/compare?ids=a,b`, `#/stats`. V
 framework, no npm packages, no server. README.md is the user-facing description.
 
 ## Team and communication (user's instruction, 2026-11-10)
-The user owns product decisions and talks only to the Manager; the Manager talks to every other chat.
+The user owns product decisions and talks only to the Manager. All chats may message each other
+directly; every chat reports to the Manager, and the Manager is the boss (user's rule, 2026-11-11).
 "Your call" items in BACKLOG.md are the user's; decisions already made are listed there: follow them.
 Every role reports to the Manager:
 - **Manager**: the newest chat titled "Manager…". Assigns the work and batches questions for the user.
@@ -23,10 +24,11 @@ Every role reports to the Manager:
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session each month with no repo
   (`tools/REFRESH.md`). It only scouts and ends its reply with a JSON package; it changes nothing.
-  The task "Lambo Index monthly pickup" (09:17 UTC on the 1st; preferably a fresh session bound to no
-  chat, else self-bound in the Manager chat and recreated by each new Manager: REFRESH.md Setup) reads the Scout run's metadata and tells the newest Dev chat to pull the package from the
-  run record, and the newest Manager chat in one line. The Dev imports it as untrusted data (`tools/scout_import.py`) and merges after Cyber's
-  check; the Manager reports the month's refresh to the user in one block.
+  The task "Lambo Index monthly pickup" (09:17 UTC on the 1st) is self-bound to the Manager chat:
+  every new Manager recreates it in its first turn and deletes the old one (REFRESH.md Setup). It
+  reads the Scout run's metadata and tells the newest Dev chat to pull the package from the run
+  record. The Dev imports it as untrusted data (`tools/scout_import.py`) and merges after Cyber's
+  check; the Manager reports the month's refresh to the user.
 
 Roles pass to the newest chat as one fills up (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2). Find
 chats by title with `list_sessions`, never by a saved session ID.

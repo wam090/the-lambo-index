@@ -41,9 +41,9 @@ history). Record each decision the user makes under Decisions, with its date.
   implemented in `tools/scout_import.py` and `tools/REFRESH.md`.
 - 2026-11-09: Working model: every change on GitHub (code, data, docs, PRs, merges) is done by a dev
   chat (Dev or Web designer); the other chats advise and write messages.
-- 2026-11-10: One line of communication: the user talks to the Manager, the Manager to every other
-  chat (Dev, Web designer, Cyber, scheduled runs). Chats report to the Manager and answer the user
-  in 1–2 lines. Roles pass to the newest chat (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2).
+- 2026-11-10: One line of communication: the user talks to the Manager. 2026-11-11: all chats may
+  message each other directly; every chat reports to the Manager; the Manager is the boss. Chats
+  answer the user in 1–2 lines. Roles pass to the newest chat (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2).
 - 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);
   the user disliked existing multi-brand sites, so no umbrella site unless a second brand is real.
 - 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
@@ -53,14 +53,9 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-- **Scout tasks (after PR A, #36, merged 2026-11-11 with Cyber's OK).** Waiting on the user's yes
-  (Manager_v0.2 put the choice: fresh Scout recommended). Then the Manager creates "Lambo Index
-  scout" and "Lambo Index monthly pickup" exactly as `tools/REFRESH.md` Setup says, and sends
-  Cyber the Scout task's `get_trigger` output before the first run. After that: archive the old
-  standing "Scout" chat (it has push) and delete the disabled task trig_017aDGyKxgfrxhwj1AYE5ofT.
-  Then a Dev PR records the Scout task's trigger ID in REFRESH.md and switches the pickup prompt and
-  Dev step 1 to `get_trigger(<id>)` instead of `list_triggers` plus a name (Cyber, 2026-11-11; if
-  get_trigger fails, stop and tell the Manager).
+- **Scout dry run (2026-11-11).** Tasks exist (REFRESH.md Setup). After Cyber's go on the task-ID PR,
+  the Manager fires the Scout once and a Dev pulls it (Dev step 1); then the Manager archives the
+  old standing "Scout" chat (it has push) and deletes the disabled task trig_017aDGyKxgfrxhwj1AYE5ofT.
 
 ## Next
 
