@@ -26,10 +26,16 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
 - 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
   the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
-- 2026-11-10: Every chat works to about 90% of its capacity (was 70%), then hands over.
+- 2026-11-11: Every chat hands over at about 50% of measured capacity (was 90%, before that 70%):
+  it finishes its current task, reports it, and the Manager starts its successor.
+- 2026-11-11: Token plan: Dev Opus 5.5 (Extreme + UltraCode while coding, High otherwise), Cyber
+  Opus 5.5 High, Manager Sonnet 5.5 Medium, Web designer Sonnet 5.5 High, Scout task Sonnet 5.5.
+  Message the Manager only when done or blocked; one message per hand-off; no progress notes.
+- 2026-11-11: Dev_0.1, Dev_0.2, the Coordinator, the first Manager chat, the old Scout chat and the
+  first Cyber chat are archived (still readable); the placeholder refresh task is deleted.
 - 2026-11-11: The Manager reports to the user only as bullets under Done / Next / Needs approval,
   no prose.
-- 2026-11-11: At about 90% measured the Manager starts its own successor (create_session, title
+- 2026-11-11: At about 50% measured the Manager starts its own successor (create_session, title
   Manager_v0.N+1, hand-over prompt) and tells the user in one line; likewise for any role that
   reports it is full.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
@@ -53,9 +59,8 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-- **Scout dry run (2026-11-11).** Tasks exist (REFRESH.md Setup). After Cyber's go on the task-ID PR,
-  the Manager fires the Scout once and a Dev pulls it (Dev step 1); then the Manager archives the
-  old standing "Scout" chat (it has push) and deletes the disabled task trig_017aDGyKxgfrxhwj1AYE5ofT.
+- **Scout sources.** The 2026-11-11 dry run (0 cars, checked by Cyber_v0.2) relied on search
+  snippets: the Scout must open named sources in full and list them in the package (next Dev PR).
 
 ## Next
 
