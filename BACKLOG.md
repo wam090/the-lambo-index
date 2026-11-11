@@ -28,10 +28,11 @@ history). Record each decision the user makes under Decisions, with its date.
   the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
 - 2026-11-10: Every chat works to about 90% of its capacity (was 70%), then hands over.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
-- 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager. It runs in
-  a standing chat titled "Refresh" (option B), woken by the scheduled task, and merges only PRs
-  confined to the catalogue, photo data and build outputs.
-- 2026-11-10: The monthly refresh's merge mode is parked: it stays `auto` for now.
+- 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager.
+- 2026-11-11: Refresh becomes the Scout. It only scouts (new cars, facts and sources, Commons
+  categories, photo candidates checked by eye) and sends the Dev a package; it never commits, pushes,
+  opens PRs or merges. The Dev builds the PR, Cyber checks it, the Dev merges after Cyber's OK.
+  This replaces MERGE MODE and the 2026-11-10 merge rules.
 - 2026-11-09: Working model: every change on GitHub (code, data, docs, PRs, merges) is done by a dev
   chat (Dev or Web designer); the other chats advise and write messages.
 - 2026-11-10: One line of communication: the user talks to the Manager, the Manager to every other
@@ -46,13 +47,21 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-Nothing. (A chat that runs low on room mid-task writes here what is left.)
+- **Scout flow (PR A, from Manager_v0.2, 2026-11-11; Dev_0.2 ran out of room).** Still to do:
+  - `tools/REFRESH.md` rewritten for the split: the Scout's steps and its JSON package, the Dev's
+    steps, Cyber's check, no MERGE MODE. CLAUDE.md: Refresh becomes Scout everywhere, the Scout
+    changes nothing in the repo, the Manager reports to the user in one block. MESSAGES.txt.
+  - Cyber's conditions (to Dev_0.2 and Manager_v0.2, 2026-11-11): the Scout has no write access (an
+    environment with no repo, no trigger or session tools; pre-approve only WebSearch, WebFetch,
+    Read, Bash and send_message), ideally a fresh session per run (the user's call). The Dev treats
+    the package as data: validates every value, writes rows from a script with repr(), takes photo
+    data only from its own images.py/flickr.py runs and opens no URL from it. Cyber_v0.2 checks
+    each refresh PR. Ask the Manager or Cyber for the full message.
+  - The placeholder task trig_017aDGyKxgfrxhwj1AYE5ofT is disabled; delete it once the Scout's own
+    task exists. After A merges, send the Manager the line the user types in the Scout chat.
 
 ## Next
 
-- [ ] **Monthly refresh task (the user, 10 seconds).** In the Refresh chat, type: "Create the monthly
-      refresh task as tools/REFRESH.md says, then fire it once as the setup test." A Dev then deletes
-      the placeholder task trig_017aDGyKxgfrxhwj1AYE5ofT (it would start a session without the repo).
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),
