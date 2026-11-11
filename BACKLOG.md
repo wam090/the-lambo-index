@@ -69,8 +69,9 @@ history). Record each decision the user makes under Decisions, with its date.
 - [ ] **Your call: four cars still have no photo** (urus-st-x, sc20, invencible, autentica). Photo hunt
       of 2026-11-11: Commons has none (no category, no search hit). Flickr has only LEGO, blocked
       press-scan accounts, Lamborghini press photos re-posted by others, and game screenshots. Only
-      official press photos exist. Cyber_v0.2 recommends not registering: the terms grant no editorial
-      use, the media centre is for journalists, and hotlinking is not permitted in writing. The
+      official press photos exist. Cyber_v0.2 recommends not registering: the public site's terms grant
+      no editorial use (media-centre terms unread), the media centre is for journalists, and no
+      written permission for hotlinking was found. The
       alternative is a written request to Lamborghini's press office for 4 photos. The Scout could not
       look at photos (its tools return page text only), so the Dev did the search itself.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
