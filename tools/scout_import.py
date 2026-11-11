@@ -26,8 +26,14 @@ Package ("version": 1): one UTF-8 JSON object of at most 64 KB, keys exactly as 
      "sources": ["https://en.wikipedia.org/wiki/..."]}  # 1-5, hosts in SOURCE_HOSTS; never opened
   ],
   "photos": {"temerario-gt3": {"drop": ["Some photo.jpg", "flickr:123"], "hero": null}},
-  "notes": "One line for the PR: teasers skipped, doubts."
+  "notes": "One line for the PR: teasers skipped, doubts.",
+  "opened": ["https://en.wikipedia.org/wiki/Lamborghini", "https://www.evo.co.uk/lamborghini"],
+                                                     # 2-30 pages read in full (not search snippets),
+                                                     # hosts in SOURCE_HOSTS; every car source among them
+  "unreachable": []                                  # SOURCE_HOSTS hosts that failed to load
 }
+"opened" must hold an en.wikipedia.org page and a page from one press host, unless that side is
+listed in "unreachable" (Wikipedia, or every press host).
 A car whose id already exists is a blank-fill: every field equals today's row except fields that are
 None today (perf: only if the car has no PERF entry yet). New ids go at the end of CARS. A new family
 is never a refresh: it touches src/app.js and tools/images.py, so it is a separate, normal PR.
@@ -43,7 +49,7 @@ MAX_CARS = 20
 FIELDS = ["id", "family", "name", "kind", "year", "end", "body", "engine", "eng", "cv", "units",
           "designer", "cats", "wiki", "note"]          # E(...) argument order in catalog.py
 CAR_KEYS = set(FIELDS) | {"perf", "sources"}
-TOP_KEYS = {"version", "window", "cars", "photos", "notes"}
+TOP_KEYS = {"version", "window", "cars", "photos", "notes", "opened", "unreachable"}
 PERF_KINDS = {"Production", "Limited series", "One-off"}
 SOURCE_HOSTS = {"en.wikipedia.org", "www.autocar.co.uk", "www.caranddriver.com", "www.motor1.com",
                 "www.topgear.com", "www.evo.co.uk", "www.carscoops.com"}
@@ -94,12 +100,13 @@ def integer(v, where, lo, hi, none=True):
 def source(v, where):
     if type(v) is not str or len(v) > 300 or any(not 33 <= ord(c) <= 126 for c in v) or "`" in v:
         raise Bad(f"{where}: must be printable ASCII, at most 300 characters")
-    u = urllib.parse.urlsplit(v)
     try:
-        port = u.port
+        u = urllib.parse.urlsplit(v)
+        port, host = u.port, u.hostname
     except ValueError:
-        port = "bad"
-    if u.scheme != "https" or "@" in u.netloc or port is not None or u.hostname not in SOURCE_HOSTS:
+        raise Bad(f"{where}: not a valid URL")
+    # netloc must be exactly the lower-case allowlisted host: no userinfo, port or upper case
+    if u.scheme != "https" or port is not None or host not in SOURCE_HOSTS or u.netloc != host:
         raise Bad(f"{where}: must be https on one of {sorted(SOURCE_HOSTS)}")
 
 
@@ -187,6 +194,29 @@ def validate(pkg, cat_path=CATALOG):
             text(pkg["notes"], "notes", 300)
         except Bad as e:
             errs.append(str(e))
+    opened, unreach = pkg["opened"], pkg["unreachable"]
+    if type(opened) is not list or not 2 <= len(opened) <= 30 or len(set(map(str, opened))) != len(opened):
+        errs.append("opened: 2-30 distinct pages read in full")
+        opened = []
+    else:
+        good = []
+        for j, u in enumerate(opened):
+            try:
+                source(u, f"opened[{j}]")
+                good.append(u)
+            except Bad as e:
+                errs.append(str(e))
+        opened = good
+    if type(unreach) is not list or len(unreach) > len(SOURCE_HOSTS) or \
+            any(type(h) is not str or h not in SOURCE_HOSTS for h in unreach) or len(set(unreach)) != len(unreach):
+        errs.append(f"unreachable: distinct hosts from {sorted(SOURCE_HOSTS)}")
+        unreach = []
+    hosts = {urllib.parse.urlsplit(u).hostname for u in opened}     # only entries that passed source()
+    press = SOURCE_HOSTS - {"en.wikipedia.org"}
+    if "en.wikipedia.org" not in hosts and "en.wikipedia.org" not in unreach:
+        errs.append("opened: no en.wikipedia.org page read, and Wikipedia not listed as unreachable")
+    if not hosts & press and not press <= set(unreach):
+        errs.append("opened: no press page read, and not every press host listed as unreachable")
     if type(pkg["cars"]) is not list or len(pkg["cars"]) > MAX_CARS:
         raise Bad(f"cars: a list of at most {MAX_CARS}")
 
@@ -248,6 +278,8 @@ def validate(pkg, cat_path=CATALOG):
         else:
             for j, u in enumerate(src):
                 chk(source, u, f"{where}.sources[{j}]")
+                if u not in opened:
+                    e.append(f"{where}.sources[{j}]: not among the pages listed in opened")
         if c["id"] not in cars and type(c["family"]) is str and c["family"] not in families:
             e.append(f"{where}.family: new family '{c['family']}': a separate, normal PR, not a refresh")
         if c["id"] in cars and not e:          # blank-fill of an existing row
@@ -408,6 +440,10 @@ def report(pkg):
         out += [f"    {u}" for u in c["sources"]]
     if pkg["notes"]:
         out.append("notes: " + pkg["notes"])
+    out.append("opened:")
+    out += [f"    {u}" for u in pkg["opened"]]
+    if pkg["unreachable"]:
+        out.append("unreachable: " + ", ".join(pkg["unreachable"]))
     out.append("```")
     print("\n".join(out))
 
@@ -419,7 +455,9 @@ def self_test():
             "units": None, "designer": None, "wiki": None, "note": "A note.",
             "cats": ["Lamborghini Self Test"], "perf": [340, False, 2.7],
             "sources": ["https://en.wikipedia.org/wiki/Lamborghini"]}
-    base = {"version": 1, "window": ["2026-10-01", "2026-11-01"], "cars": [good], "photos": {}, "notes": ""}
+    base = {"version": 1, "window": ["2026-10-01", "2026-11-01"], "cars": [good], "photos": {}, "notes": "",
+            "opened": ["https://en.wikipedia.org/wiki/Lamborghini", "https://www.evo.co.uk/lamborghini"],
+            "unreachable": []}
     one = lambda **kw: dict(base, cars=[dict(good, **kw)])
     some_id = next(iter(load_catalog()[0]))
     js = json.dumps(base)
@@ -446,6 +484,26 @@ def self_test():
         "new family": one(family="Newfamily"),
         "j over 64 KB": js + " " * MAX_BYTES,
         "j 21 cars": dict(base, cars=[dict(good, id=f"zz-{i}") for i in range(21)]),
+        "k source not opened": one(sources=["https://www.motor1.com/news/1/"]),
+        "k no press opened": dict(base, opened=["https://en.wikipedia.org/wiki/Lamborghini",
+                                                "https://en.wikipedia.org/wiki/List_of_Lamborghini_automobiles"]),
+        "k no wikipedia opened": dict(base, cars=[], opened=["https://www.evo.co.uk/lamborghini",
+                                                            "https://www.carscoops.com/category/lamborghini/"]),
+        "k opened off-list": dict(base, opened=base["opened"] + ["https://evil.example/x"]),
+        "k unreachable off-list": dict(base, unreachable=["evil.example"]),
+        "k missing opened": {k: v for k, v in base.items() if k != "opened"},
+        "k opened userinfo": dict(base, opened=base["opened"] + ["https://en.wikipedia.org@evil.example/"]),
+        "k opened http": dict(base, opened=base["opened"] + ["http://www.evo.co.uk/x"]),
+        "k opened control char": dict(base, opened=base["opened"] + ["https://www.evo.co.uk/a\nb"]),
+        "k opened too long": dict(base, opened=base["opened"] + ["https://www.evo.co.uk/" + "a" * 300]),
+        "k opened duplicate": dict(base, opened=base["opened"] + [base["opened"][0]]),
+        "k unreachable not a list": dict(base, unreachable="en.wikipedia.org"),
+        "k unreachable nested": dict(base, unreachable=[["en.wikipedia.org"]]),
+        "k opened bad ipv6": dict(base, opened=base["opened"] + ["https://[::1/x"]),
+        "k car source bad ipv6": one(sources=["https://[::1/x"]),
+        "k opened upper-case host": dict(base, opened=base["opened"] + ["https://EN.WIKIPEDIA.ORG/wiki/X"]),
+        "k unreachable dict": dict(base, unreachable=[{"h": "en.wikipedia.org"}]),
+        "k opened nested": dict(base, opened=[["https://en.wikipedia.org/wiki/Lamborghini"], "https://www.evo.co.uk/lamborghini"]),
     }
     tmpd = tempfile.mkdtemp()
     cat, pk = os.path.join(tmpd, "catalog.py"), os.path.join(tmpd, "p.json")
