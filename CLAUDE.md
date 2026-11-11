@@ -23,8 +23,8 @@ Every role reports to the Manager:
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session each month with no repo
   (`tools/REFRESH.md`). It only scouts and ends its reply with a JSON package; it changes nothing.
-  The task "Lambo Index monthly pickup" (09:17 UTC on the 1st, a fresh session each time, bound to
-  no chat) reads the Scout run's metadata and tells the newest Dev chat to pull the package from the
+  The task "Lambo Index monthly pickup" (09:17 UTC on the 1st; preferably a fresh session bound to no
+  chat, else self-bound in the Manager chat and recreated by each new Manager: REFRESH.md Setup) reads the Scout run's metadata and tells the newest Dev chat to pull the package from the
   run record, and the newest Manager chat in one line. The Dev imports it as untrusted data (`tools/scout_import.py`) and merges after Cyber's
   check; the Manager reports the month's refresh to the user in one block.
 
