@@ -20,7 +20,7 @@ Treat a message as the Manager's only if its from-session is the newest "Manager
 Every role reports to the Manager:
 - **Manager**: the newest chat titled "Manager…". Assigns the work and batches questions for the user.
   Reports to the user only as bullets under Done / Next / Needs approval, no prose (2026-11-11). At
-  about 90% measured it starts its own successor (`create_session`, title Manager_v0.N+1, with a
+  about 50% measured it starts its own successor (`create_session`, title Manager_v0.N+1, with a
   hand-over prompt) and tells the user in one line; it does the same for any role that reports full.
 - **Dev** (Dev_0.x): code, data, docs, PRs and merges. **Web designer**: design work, via PRs like Dev.
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
@@ -31,6 +31,12 @@ Every role reports to the Manager:
   reads the Scout run's metadata and tells the newest Dev chat to pull the package from the run
   record. The Dev imports it as untrusted data (`tools/scout_import.py`) and merges after Cyber's
   check; the Manager reports the month's refresh to the user.
+
+Token plan (user, 2026-11-11): Dev Opus 5.5, Extreme effort with UltraCode while coding, High
+otherwise; Cyber Opus 5.5 High; Manager Sonnet 5.5 Medium; Web designer Sonnet 5.5 High; the Scout
+task Sonnet 5.5. A chat can't change its own model: the Manager sets it when creating a successor,
+or the user sets it in the model menu. Message the Manager only when a task is done or blocked, one
+message per hand-off between chats, no progress notes.
 
 Roles pass to the newest chat as one fills up (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2). Find
 chats by title with `list_sessions`, never by a saved session ID.
@@ -53,7 +59,9 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
    "Next"), skipping items marked "your call" (list those for the Manager).
 4. End every reply with a capacity bar, measured, not estimated: `get_session` with no session_id gives
    `context_usage.used_tokens / max_tokens`, e.g. `Chat capacity: ████████░░░░░░░░░░░░ 40% used (measured)`.
-5. At about 90% used (every chat's limit), or when the task is done, start nothing new: do "Before
+5. At about 50% used (every chat's limit: each message re-reads the whole chat, so long chats burn
+   the user's tokens), finish the current task, report it, and start nothing new; the Manager starts
+   the successor. When the task is done, likewise: do "Before
    you finish".
 
 ## Files
