@@ -49,6 +49,9 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
       expect(((await page.textContent('#sheet-panel')) || '').includes(c.name), `car page #/m/${c.id}: name "${c.name}" missing`);
     }
 
+    const withPhoto = cars.find((c) => c.imgs.length);
+    await go('#/m/' + withPhoto.id);
+    expect(await n('#stage-credit a[href^="https://github.com/wam090/the-lambo-index/issues/new"]') === 1, 'car page: "Report a photo" link missing');
     await go('#/timeline');
     const debuts = cars.filter((c) => c.debut).length;
     expect(await page.isVisible('#view-timeline'), 'timeline: view not shown');
