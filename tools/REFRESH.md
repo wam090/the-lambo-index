@@ -1,5 +1,8 @@
 # Monthly refresh
 
+**Superseded on 2026-11-11: do not run this file.** The Scout only scouts and never commits, pushes,
+opens PRs or merges; this file is being rewritten for that (BACKLOG.md, In progress).
+
 The scheduled task "Lambo Index monthly refresh" wakes the standing Refresh chat once a month to run
 this job. Its prompt only points here, so the job is changed here, through a PR. Do this job only: OPEN messages
 and backlog items are for other chats. Every rule in CLAUDE.md applies, above all Rules and Photos.

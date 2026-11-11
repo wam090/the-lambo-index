@@ -42,7 +42,8 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
    is invisible to you. If an open PR touches your area, tell the Manager before starting.
 3. Then the ask. "next" or "continue": OPEN messages first, then BACKLOG.md ("In progress", then
    "Next"), skipping items marked "your call" (list those for the Manager).
-4. End every reply with a capacity bar, e.g. `Chat capacity: ████████░░░░░░░░░░░░ ~40% used (estimate)`.
+4. End every reply with a capacity bar, measured, not estimated: `get_session` with no session_id gives
+   `context_usage.used_tokens / max_tokens`, e.g. `Chat capacity: ████████░░░░░░░░░░░░ 40% used (measured)`.
 5. At about 90% used (every chat's limit), or when the task is done, start nothing new: do "Before
    you finish".
 
