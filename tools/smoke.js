@@ -90,6 +90,12 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
       && await n('#hero .hero-credit a[href^="https://"]') >= 1, 'browse: hero, its car link, its credit links or the hidden family strip is wrong');
     await go('#/?family=Countach');
     expect(!(await page.isVisible('#masthead')), 'browse: the hero should step aside while filtering');
+
+    const FAN = 'Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini. Lamborghini and related names are trademarks of their owners.';
+    for (const h of ['#/', '#/m/' + cars[0].id, '#/timeline', '#/fast10', '#/stats', '#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(',')]) {
+      await go(h);
+      expect(await page.isVisible('#fan-note') && ((await page.textContent('#fan-note')) || '').trim() === FAN, `footer: fan-site notice missing or changed on ${h}`);
+    }
   } finally {
     await browser.close();
   }
@@ -97,5 +103,5 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     console.error('smoke FAILED:\n- ' + problems.join('\n- '));
     process.exit(1);
   }
-  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, stats, compare and the hero work with no JavaScript errors`);
+  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, stats, compare, the hero and the fan-site notice work with no JavaScript errors`);
 })().catch((e) => { console.error('smoke FAILED: ' + e.message); process.exit(1); });

@@ -409,6 +409,7 @@ button{cursor:pointer}
 .foot{border-top:1px solid var(--line);padding-block:22px 34px;color:var(--faint);font-size:12.5px}
 .foot .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 .foot a{color:var(--muted)}
+.foot .fan-note{flex-basis:100%;margin:0;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:120;background:var(--text);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.5);max-width:calc(100% - 32px)}
 .botnav{display:none}
 
@@ -708,7 +709,8 @@ a.tile{text-decoration:none;color:inherit}
 <footer class="foot">
   <div class="wrap">
     <span id="foot-l"></span>
-    <span>Unofficial personal index. Photos by Wikimedia Commons and Flickr contributors, used under the licences credited on each photo. Not affiliated with Automobili Lamborghini S.p.A.</span>
+    <span>Photos by Wikimedia Commons and Flickr contributors, used under the licences credited on each photo.</span>
+    <p class="fan-note" id="fan-note">Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini. Lamborghini and related names are trademarks of their owners.</p>
   </div>
 </footer>
 
