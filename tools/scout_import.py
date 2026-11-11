@@ -204,7 +204,7 @@ def validate(pkg, cat_path=CATALOG):
             except Bad as e:
                 errs.append(str(e))
     if type(unreach) is not list or len(unreach) > len(SOURCE_HOSTS) or \
-            any(h not in SOURCE_HOSTS for h in unreach) or len(set(unreach)) != len(unreach):
+            any(type(h) is not str or h not in SOURCE_HOSTS for h in unreach) or len(set(unreach)) != len(unreach):
         errs.append(f"unreachable: distinct hosts from {sorted(SOURCE_HOSTS)}")
         unreach = []
     hosts = {urllib.parse.urlsplit(u).hostname for u in opened if type(u) is str}
@@ -494,6 +494,8 @@ def self_test():
         "k opened too long": dict(base, opened=base["opened"] + ["https://www.evo.co.uk/" + "a" * 300]),
         "k opened duplicate": dict(base, opened=base["opened"] + [base["opened"][0]]),
         "k unreachable not a list": dict(base, unreachable="en.wikipedia.org"),
+        "k unreachable nested": dict(base, unreachable=[["en.wikipedia.org"]]),
+        "k opened nested": dict(base, opened=[["https://en.wikipedia.org/wiki/Lamborghini"], "https://www.evo.co.uk/lamborghini"]),
     }
     tmpd = tempfile.mkdtemp()
     cat, pk = os.path.join(tmpd, "catalog.py"), os.path.join(tmpd, "p.json")
