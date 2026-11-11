@@ -682,8 +682,8 @@ def commons_file(title, fetch=None, credit=None):
     w, h = (int(x.replace(",", "")) for x in m.groups())
     raw = fetch("https://commons.wikimedia.org/w/index.php?" +
                 urllib.parse.urlencode({"title": "File:" + title, "action": "raw"})) or ""
-    if re.search(r"\{\{\s*(?:delete|speedy|copyvio|no permission|no license|no source|npd|nld|nsd|"
-                 r"db-|duplicate|nowcommons)", raw, re.I):
+    if re.search(r"\{\{\s*(?:delete|deletion|speedy|sd\s*\||copyvio|no permission|no license|no source|"
+                 r"dw no source|npd|nld|nsd|db-|duplicate|nowcommons)", raw, re.I):
         return None, "tagged for deletion or missing permission on Commons"
     if images.BAD.search(title):
         return None, "title names a detail, toy, render or interior"
@@ -848,9 +848,13 @@ def hunt_self_test(tmpd):
     shutil.copy(CATALOG, cat)
     with open(ex, "w") as fh:
         fh.write("{}")
-    hunt(base, cat, ex, fq, fetch=lambda url: page if "/wiki/File:" in url else "{{copyvio}}", credit=cc)
-    if json.load(open(ex)):
-        fails.append("hunt: a file tagged copyvio was recorded")
+    for tag in ("{{copyvio}}", "{{SD|F1}}", "{{Deletion request|x}}", "{{dw no source since|x}}"):
+        with open(ex, "w") as fh:
+            fh.write("{}")
+        hunt(base, cat, ex, fq, fetch=lambda url: page if "/wiki/File:" in url else "{{self|cc-by-4.0}}" + tag,
+             credit=cc)
+        if json.load(open(ex)):
+            fails.append(f"hunt: a file tagged {tag} was recorded")
     return fails, len(cases)
 
 
