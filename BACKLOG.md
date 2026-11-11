@@ -30,9 +30,10 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
 - 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager.
 - 2026-11-11: Refresh becomes the Scout. It only scouts (new cars, facts and sources, Commons
-  categories, photo candidates checked by eye) and sends the Dev a package; it never commits, pushes,
+  categories, photo candidates checked by eye) and leaves a package; it never commits, pushes,
   opens PRs or merges. The Dev builds the PR, Cyber checks it, the Dev merges after Cyber's OK.
-  This replaces MERGE MODE and the 2026-11-10 merge rules.
+  This replaces MERGE MODE and the 2026-11-10 merge rules. Format and checks: Cyber's spec,
+  implemented in `tools/scout_import.py` and `tools/REFRESH.md`.
 - 2026-11-09: Working model: every change on GitHub (code, data, docs, PRs, merges) is done by a dev
   chat (Dev or Web designer); the other chats advise and write messages.
 - 2026-11-10: One line of communication: the user talks to the Manager, the Manager to every other
@@ -47,11 +48,11 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-- **Scout flow (PR A, Dev_0.3, 2026-11-11).** Done: package format, `tools/scout_import.py`
-  (check/apply/photos/report/--self-test, to Cyber's spec), `tools/REFRESH.md` Scout/Dev/Cyber steps, CLAUDE.md. Still to do:
-  - The user's choice: standing Scout chat or a fresh session per run (Cyber and Manager: fresh).
-    Then the Setup section of REFRESH.md (task settings and prompt), Cyber's check of the design,
-    and the Scout's task; delete the disabled placeholder task trig_017aDGyKxgfrxhwj1AYE5ofT after.
+- **Scout tasks (after PR A, #36, merged 2026-11-11 with Cyber's OK).** Waiting on the user's yes
+  (Manager_v0.2 put the choice: fresh Scout recommended). Then the Manager creates "Lambo Index
+  scout" and its own "Lambo Index monthly pickup" exactly as `tools/REFRESH.md` Setup says, and sends
+  Cyber the Scout task's `get_trigger` output before the first run. After that: archive the old
+  standing "Scout" chat (it has push) and delete the disabled task trig_017aDGyKxgfrxhwj1AYE5ofT.
 
 ## Next
 
