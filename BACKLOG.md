@@ -27,15 +27,16 @@ history). Record each decision the user makes under Decisions, with its date.
   live since 2026-11-11, its credit linking the photo's page and licence.
 - 2026-11-12: The Scout runs weekly (Mondays 03:17 UTC, 10-day window), not monthly: it looks for
   new cars and fills blank specs of up to 7 cars per run (two agreeing sources, round-robin). A
-  Pickup chat on Haiku 5.5 replaces the Manager's monthly pickup; empty runs wake no other chat.
+  Pickup chat on Haiku 5.5 replaces the Manager's monthly pickup.
   One PR per run, the same day; Cyber checks every PR.
 - 2026-11-12: Visits are counted with GoatCounter (site code `thelamboindex`), without its script:
   app.js loads a tracking pixel per page shown (view or car page, never filters or searches; old
   `#/stats` counts as Browse), only on https. The footer says visits are counted anonymously, with
   no cookies. The user reads the counts in GoatCounter's dashboard and its weekly email.
-- 2026-11-12: Monthly design review: the task "Lambo Index monthly design review" (cron `17 6 5 * *`)
-  fires into the Web designer chat, which proposes up to 5 UI improvements to the Manager and changes
-  nothing in the repo until the user approves. The Manager recreates the task for a new Web designer chat.
+- 2026-11-12: Monthly design review on the 5th (06:17 UTC) by the Web designer: at most 5 UI
+  proposals to the Manager; nothing is built until the user approves.
+- 2026-11-12: The Pickup reads only the Scout task's run metadata and points the Dev at every
+  finished run (its tool limit is not enforced, so it reads nothing untrusted).
 - 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
   security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
 - 2026-11-11: Every page's footer says: "Unofficial fan site, not affiliated with or endorsed by
@@ -84,9 +85,9 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Scout import against the run's catalogue** (Cyber follow-up a): `gap_ids` reads the working
-      catalogue, so if main changes between a Scout run and its import, a legitimate fill can be
-      rejected (fails safe). Fix: compute it from main as of the run's fire time.
+- [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
+      gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be
+      rejected (fails closed). Compute them from `git rev-list -1 --before=<fire time> origin/main`.
 
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
