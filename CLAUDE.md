@@ -24,14 +24,18 @@ Every role reports to the Manager:
   about 50% measured it starts its own successor (`create_session`, title Manager_v0.N+1, with a
   hand-over prompt) and tells the user in one line; it does the same for any role that reports full.
 - **Dev** (Dev_0.x): code, data, docs, PRs and merges. **Web designer**: design work, via PRs like Dev.
+  Monthly design review (task "Lambo Index monthly design review", `trig_01JDbq6TY7vhifMPmydkSxJX`,
+  cron `17 6 5 * *`, fires into the Web designer chat): it proposes at most 5 UI improvements to the
+  Manager and changes nothing in the repo until the user approves. The Manager recreates the task
+  for a replacement Web designer chat.
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session with no repo every
   Monday at 03:17 UTC (`tools/REFRESH.md`). It only scouts new cars and fills blank specs of up to
   7 cars (two agreeing sources), ending its reply with a JSON package; it changes nothing.
-  **Pickup**: a small Haiku chat whose task fires an hour later; it reads only run metadata and the
-  result, and points the newest Dev chat at a run with new cars or fills in one fixed line, or
-  tells the Manager a run is missing. Its tools are limited by its
-  session settings; the Manager recreates it monthly (REFRESH.md Setup). The Dev verifies each run
+  **Pickup**: a small Haiku chat whose task fires an hour later; it reads only the Scout task's run
+  metadata (never a transcript: its tool limit is not enforced) and sends the newest Dev chat one
+  fixed line per finished run, or tells the Manager a run is missing, failed or not fired; the
+  Manager recreates it monthly (REFRESH.md Setup). The Dev verifies each run
   id, imports the package as untrusted data (`tools/scout_import.py`) and merges after Cyber's check.
 
 Token plan (user, 2026-11-11): Dev Opus 5.5, Extreme effort with UltraCode while coding, High
