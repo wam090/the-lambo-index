@@ -1,0 +1,333 @@
+{
+ "about": "Nightly family audit (tools/AUDIT.md). The Auditor takes the first night with checked false; its PR sets it to true. Families are keys of tools/catalog.py; ids are in CARS row order.",
+ "nights": [
+  {
+   "night": 1,
+   "families": [
+    "350",
+    "400"
+   ],
+   "ids": [
+    "350-gtv",
+    "350-gt",
+    "3500-gtz",
+    "350-gts",
+    "400-gt",
+    "400-gt-monza",
+    "flying-star-ii"
+   ],
+   "checked": false
+  },
+  {
+   "night": 2,
+   "families": [
+    "Miura"
+   ],
+   "ids": [
+    "miura-p400",
+    "miura-roadster",
+    "miura-p400s",
+    "miura-jota",
+    "miura-p400sv",
+    "miura-svj",
+    "miura-svr",
+    "miura-concept"
+   ],
+   "checked": false
+  },
+  {
+   "night": 3,
+   "families": [
+    "Marzal",
+    "Islero",
+    "Espada",
+    "Jarama"
+   ],
+   "ids": [
+    "marzal",
+    "islero",
+    "islero-s",
+    "espada",
+    "faena",
+    "jarama",
+    "jarama-s"
+   ],
+   "checked": false
+  },
+  {
+   "night": 4,
+   "families": [
+    "Countach"
+   ],
+   "ids": [
+    "countach-lp500",
+    "countach-lp400",
+    "countach-lp400s",
+    "countach-lp500s",
+    "countach-qv",
+    "countach-qvx",
+    "countach-evoluzione",
+    "countach-25th",
+    "countach-lpi-800"
+   ],
+   "checked": false
+  },
+  {
+   "night": 5,
+   "families": [
+    "Urraco",
+    "Bravo",
+    "Silhouette",
+    "Cheetah",
+    "Athon",
+    "Jalpa"
+   ],
+   "ids": [
+    "urraco-p250",
+    "urraco-p300",
+    "urraco-p200",
+    "bravo",
+    "silhouette",
+    "cheetah",
+    "athon",
+    "jalpa"
+   ],
+   "checked": false
+  },
+  {
+   "night": 6,
+   "families": [
+    "LM",
+    "Portofino",
+    "Genesis",
+    "P140",
+    "291",
+    "Pregunta"
+   ],
+   "ids": [
+    "lm001",
+    "lma002",
+    "lm002",
+    "portofino",
+    "genesis",
+    "p140",
+    "lambo-291",
+    "pregunta"
+   ],
+   "checked": false
+  },
+  {
+   "night": 7,
+   "families": [
+    "Diablo"
+   ],
+   "ids": [
+    "p132",
+    "diablo",
+    "diablo-vt",
+    "diablo-se30",
+    "diablo-se30-jota",
+    "diablo-vt-roadster",
+    "diablo-sv",
+    "diablo-svr",
+    "diablo-gt",
+    "diablo-gtr",
+    "diablo-vt-60",
+    "diablo-vt-60-se"
+   ],
+   "checked": false
+  },
+  {
+   "night": 8,
+   "families": [
+    "Cala",
+    "Raptor",
+    "P147",
+    "Canto",
+    "Concept S",
+    "Reventon",
+    "Estoque"
+   ],
+   "ids": [
+    "cala",
+    "raptor",
+    "p147-gandini",
+    "canto",
+    "concept-s",
+    "reventon",
+    "reventon-roadster",
+    "estoque"
+   ],
+   "checked": false
+  },
+  {
+   "night": 9,
+   "families": [
+    "Murcielago"
+   ],
+   "ids": [
+    "murcielago",
+    "murcielago-40th",
+    "murcielago-roadster",
+    "murcielago-rgt",
+    "murcielago-lp640",
+    "murcielago-lp640-roadster",
+    "murcielago-lp650",
+    "murcielago-sv",
+    "murcielago-rsv"
+   ],
+   "checked": false
+  },
+  {
+   "night": 10,
+   "families": [
+    "Gallardo"
+   ],
+   "ids": [
+    "gallardo",
+    "gallardo-se",
+    "gallardo-spyder",
+    "gallardo-nera",
+    "gallardo-gt3",
+    "gallardo-superleggera",
+    "gallardo-lp560",
+    "gallardo-lp560-spyder",
+    "gallardo-balboni",
+    "gallardo-super-trofeo",
+    "gallardo-lp550",
+    "gallardo-lp570-sl",
+    "gallardo-performante",
+    "gallardo-sts",
+    "gallardo-squadra-corse",
+    "5-95-zagato"
+   ],
+   "checked": false
+  },
+  {
+   "night": 11,
+   "families": [
+    "Sesto Elemento",
+    "Urus"
+   ],
+   "ids": [
+    "sesto-elemento",
+    "urus-concept",
+    "urus",
+    "urus-st-x",
+    "urus-performante",
+    "urus-s",
+    "urus-se",
+    "urus-se-performante"
+   ],
+   "checked": false
+  },
+  {
+   "night": 12,
+   "families": [
+    "Aventador"
+   ],
+   "ids": [
+    "aventador-lp700",
+    "aventador-j",
+    "aventador-roadster",
+    "aventador-50",
+    "aventador-sv",
+    "aventador-sv-roadster",
+    "aventador-s",
+    "aventador-s-roadster",
+    "aventador-svj",
+    "aventador-svj-roadster",
+    "aventador-ultimae"
+   ],
+   "checked": false
+  },
+  {
+   "night": 13,
+   "families": [
+    "Egoista",
+    "Veneno",
+    "Asterion",
+    "Centenario",
+    "Terzo Millennio",
+    "SC18"
+   ],
+   "ids": [
+    "egoista",
+    "veneno",
+    "veneno-roadster",
+    "asterion",
+    "centenario",
+    "centenario-roadster",
+    "terzo-millennio",
+    "sc18-alston"
+   ],
+   "checked": false
+  },
+  {
+   "night": 14,
+   "families": [
+    "Huracan"
+   ],
+   "ids": [
+    "huracan-lp610",
+    "huracan-gt3",
+    "huracan-super-trofeo",
+    "huracan-lp580",
+    "huracan-spyder",
+    "huracan-performante",
+    "huracan-performante-spyder",
+    "huracan-evo",
+    "huracan-evo-spyder",
+    "huracan-gt3-evo",
+    "huracan-evo-rwd",
+    "huracan-sto",
+    "huracan-tecnica",
+    "huracan-sterrato",
+    "huracan-stj"
+   ],
+   "checked": false
+  },
+  {
+   "night": 15,
+   "families": [
+    "Sian",
+    "V12 Vision GT",
+    "Essenza",
+    "SC20",
+    "Invencible",
+    "Autentica"
+   ],
+   "ids": [
+    "sian",
+    "sian-roadster",
+    "v12-vgt",
+    "essenza-scv12",
+    "sc20",
+    "invencible",
+    "autentica"
+   ],
+   "checked": false
+  },
+  {
+   "night": 16,
+   "families": [
+    "Revuelto",
+    "Lanzador",
+    "SC63",
+    "Temerario",
+    "Fenomeno"
+   ],
+   "ids": [
+    "revuelto",
+    "revuelto-sv",
+    "lanzador",
+    "sc63",
+    "temerario",
+    "temerario-gt3",
+    "fenomeno",
+    "fenomeno-roadster"
+   ],
+   "checked": false
+  }
+ ]
+}

@@ -1279,28 +1279,7 @@
     "Lamborghini Miura Jota"
    ],
    "debut": false,
-   "imgs": [
-    {
-     "t": "Lamborghini Miura SV J.jpg",
-     "h": "5/58",
-     "n": "Lamborghini_Miura_SV_J.jpg",
-     "w": 4890,
-     "ht": 3041,
-     "a": "MrWalkr",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "1973 Lamborghini Miura P400 SVJ.jpg",
-     "h": "5/58",
-     "n": "1973_Lamborghini_Miura_P400_SVJ.jpg",
-     "w": 5184,
-     "ht": 3456,
-     "a": "MrWalkr",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    }
-   ]
+   "imgs": []
   },
   {
    "id": "jarama",
@@ -1465,16 +1444,6 @@
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
     {
-     "t": "Lamborghini Miura SV J.jpg",
-     "h": "5/58",
-     "n": "Lamborghini_Miura_SV_J.jpg",
-     "w": 4890,
-     "ht": 3041,
-     "a": "MrWalkr",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
      "t": "Lamborghini Miura SV 1.jpg",
      "h": "3/32",
      "n": "Lamborghini_Miura_SV_1.jpg",
@@ -1511,16 +1480,6 @@
      "w": 4443,
      "ht": 2678,
      "a": "Calreyn88",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "1973 Lamborghini Miura P400 SVJ.jpg",
-     "h": "5/58",
-     "n": "1973_Lamborghini_Miura_P400_SVJ.jpg",
-     "w": 5184,
-     "ht": 3456,
-     "a": "MrWalkr",
      "l": "CC BY-SA 4.0",
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
@@ -6862,14 +6821,14 @@
    "debut": false,
    "imgs": [
     {
-     "t": "2014 Lamborghini Gallardo Superleggera Edizione Tecnica SP22.jpg",
-     "h": "e/e9",
-     "n": "2014_Lamborghini_Gallardo_Superleggera_Edizione_Tecnica_SP22.jpg",
-     "w": 11304,
-     "ht": 6679,
-     "a": "MrWalkr",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+     "t": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (1).jpg",
+     "h": "d/df",
+     "n": "Lamborghini_Gallardo_Superleggera_-_Flickr_-_Alexandre_Pr%C3%A9vot_%281%29.jpg",
+     "w": 4608,
+     "ht": 3072,
+     "a": "Alexandre Prévot from Nancy, France",
+     "l": "CC BY-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
     },
     {
      "t": "Lamborghini Gallardo Superleggera in Paris.jpg",
@@ -6910,26 +6869,6 @@
      "a": "Axion23",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "Lamborghini Gallardo Superleggera LP5704 Grey.jpg",
-     "h": "6/65",
-     "n": "Lamborghini_Gallardo_Superleggera_LP5704_Grey.jpg",
-     "w": 4920,
-     "ht": 2924,
-     "a": "MrWalkr",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (1).jpg",
-     "h": "d/df",
-     "n": "Lamborghini_Gallardo_Superleggera_-_Flickr_-_Alexandre_Pr%C3%A9vot_%281%29.jpg",
-     "w": 4608,
-     "ht": 3072,
-     "a": "Alexandre Prévot from Nancy, France",
-     "l": "CC BY-SA 2.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
     },
     {
      "t": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (15).jpg",
@@ -7351,16 +7290,6 @@
      "a": "Damian Morys",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "Lamborghini Gallardo LP 570-4 Spyder Performante (5482870463).jpg",
-     "h": "b/b7",
-     "n": "Lamborghini_Gallardo_LP_570-4_Spyder_Performante_%285482870463%29.jpg",
-     "w": 4752,
-     "ht": 3168,
-     "a": "Shane K from Mississauga, Canada",
-     "l": "CC BY-SA 2.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
     },
     {
      "t": "Lamborghini ABA-GECEH Gallardo LP 560-4 Spyder (23112610262).jpg",
@@ -8328,6 +8257,26 @@
      "a": "Yu Chu Chin",
      "l": "CC BY-SA 4.0",
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    {
+     "t": "2014 Lamborghini Gallardo Superleggera Edizione Tecnica SP22.jpg",
+     "h": "e/e9",
+     "n": "2014_Lamborghini_Gallardo_Superleggera_Edizione_Tecnica_SP22.jpg",
+     "w": 11304,
+     "ht": 6679,
+     "a": "MrWalkr",
+     "l": "CC BY-SA 4.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    {
+     "t": "Lamborghini Gallardo Superleggera LP5704 Grey.jpg",
+     "h": "6/65",
+     "n": "Lamborghini_Gallardo_Superleggera_LP5704_Grey.jpg",
+     "w": 4920,
+     "ht": 2924,
+     "a": "MrWalkr",
+     "l": "CC BY-SA 4.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     }
    ]
   },
@@ -8448,6 +8397,16 @@
      "w": 5118,
      "ht": 3412,
      "a": "Ben",
+     "l": "CC BY-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
+    },
+    {
+     "t": "Lamborghini Gallardo LP 570-4 Spyder Performante (5482870463).jpg",
+     "h": "b/b7",
+     "n": "Lamborghini_Gallardo_LP_570-4_Spyder_Performante_%285482870463%29.jpg",
+     "w": 4752,
+     "ht": 3168,
+     "a": "Shane K from Mississauga, Canada",
      "l": "CC BY-SA 2.0",
      "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
     }
@@ -11853,16 +11812,6 @@
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
     {
-     "t": "2020-giallo-inti-lamborghini-huracan-evo-coupe-rwd 50490830952 o.jpg",
-     "h": "8/86",
-     "n": "2020-giallo-inti-lamborghini-huracan-evo-coupe-rwd_50490830952_o.jpg",
-     "w": 5831,
-     "ht": 3893,
-     "a": "Tabascogiuseppe1960",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
      "t": "2021 Lamborghini Huracan EVO.jpg",
      "h": "d/db",
      "n": "2021_Lamborghini_Huracan_EVO.jpg",
@@ -12268,6 +12217,16 @@
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
     {
+     "t": "DTM, Paul Motorsport, Lamborghini Huracán GT3 (53985433319).jpg",
+     "h": "3/36",
+     "n": "DTM%2C_Paul_Motorsport%2C_Lamborghini_Hurac%C3%A1n_GT3_%2853985433319%29.jpg",
+     "w": 6000,
+     "ht": 4000,
+     "a": "Der Alf",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
      "t": "flickr:55056623095",
      "w": 1024,
      "ht": 771,
@@ -12511,26 +12470,6 @@
      "a": "MrWalkr",
      "l": "CC BY-SA 4.0",
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "Lamborghini Sián FKP 37 Roadster.jpg",
-     "h": "c/c9",
-     "n": "Lamborghini_Si%C3%A1n_FKP_37_Roadster.jpg",
-     "w": 3360,
-     "ht": 1868,
-     "a": "pelican-actor",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "Lamborghini Sián FKP 37 Roadster (cropped).jpg",
-     "h": "9/93",
-     "n": "Lamborghini_Si%C3%A1n_FKP_37_Roadster_%28cropped%29.jpg",
-     "w": 2818,
-     "ht": 1708,
-     "a": "pelican-actor",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
     }
    ]
   },
@@ -14402,16 +14341,6 @@
    ],
    "debut": false,
    "imgs": [
-    {
-     "t": "DTM, Paul Motorsport, Lamborghini Huracán GT3 (53985433319).jpg",
-     "h": "3/36",
-     "n": "DTM%2C_Paul_Motorsport%2C_Lamborghini_Hurac%C3%A1n_GT3_%2853985433319%29.jpg",
-     "w": 6000,
-     "ht": 4000,
-     "a": "Der Alf",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
     {
      "t": "2026-07-03 Motorsport, DTM, Norisring Nürnberg 2026 STP 0080.jpg",
      "h": "c/c5",
