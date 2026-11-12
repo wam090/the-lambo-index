@@ -121,6 +121,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   photo runs and checks by eye (`tools/REFRESH.md`, Photo hunt).
 - **Hero**: the car-of-the-day photo, no heading, replaces the family strip on Browse (`setHero()`;
   hidden while searching or filtering); its credit links the photo's page and licence (`creditHTML`).
+- **Visits**: GoatCounter tracking pixel, `countVisit()` in `app.js`: one count per view or car page
+  shown, path taken from the view (never the address), https only. No GoatCounter script, ever (CSP).
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 

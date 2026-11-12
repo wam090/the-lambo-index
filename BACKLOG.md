@@ -29,6 +29,10 @@ history). Record each decision the user makes under Decisions, with its date.
   new cars and fills blank specs of up to 7 cars per run (two agreeing sources, round-robin). A
   Pickup chat on Haiku 5.5 replaces the Manager's monthly pickup.
   One PR per run, the same day; Cyber checks every PR.
+- 2026-11-12: Visits are counted with GoatCounter (site code `thelamboindex`), without its script:
+  app.js loads a tracking pixel per page shown (view or car page, never filters or searches; old
+  `#/stats` counts as Browse), only on https. The footer says visits are counted anonymously, with
+  no cookies. The user reads the counts in GoatCounter's dashboard and its weekly email.
 - 2026-11-12: Monthly design review on the 5th (06:17 UTC) by the Web designer: at most 5 UI
   proposals to the Manager; nothing is built until the user approves.
 - 2026-11-12: The Pickup reads only the Scout task's run metadata and points the Dev at every

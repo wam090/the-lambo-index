@@ -15,7 +15,7 @@ URL_HOSTS = {
     "lu": {"creativecommons.org", "www.gnu.org", "artlibre.org",    # licence pages
            "commons.wikimedia.org", "www.flickr.com", "www.usa.gov"},
 }
-IMG_HOSTS = "https://thumb.wikimedia.org https://upload.wikimedia.org https://live.staticflickr.com"
+IMG_HOSTS = "https://thumb.wikimedia.org https://upload.wikimedia.org https://live.staticflickr.com https://thelamboindex.goatcounter.com"  # last: visit-count pixel (2026-11-12)
 
 import time
 for _ in range(10):  # images.json may be mid-write while tools/images.py runs

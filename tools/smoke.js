@@ -19,6 +19,8 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     const page = await browser.newPage();
     await page.route(/^https?:/, (r) => r.abort());
     page.on('pageerror', (e) => problems.push(`JavaScript error: ${e.message}`));
+    let localHits = 0;   // no visit counting on file:// (or http://)
+    page.on('request', (r) => { if (r.url().includes('goatcounter')) localHits++; });
     page.on('console', (m) => {
       if (m.type() === 'error' && !/Failed to load resource|net::ERR_/.test(m.text())) problems.push(`console.error: ${m.text()}`);
     });
@@ -100,6 +102,33 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
       await go(h);
       expect(await page.isVisible('#fan-note') && ((await page.textContent('#fan-note')) || '').trim() === FAN, `footer: fan-site notice missing or changed on ${h}`);
     }
+    expect(localHits === 0, `visits: ${localHits} counter requests from a file:// page, expected none`);
+    expect(await page.isVisible('#count-note') && /anonymously/.test(await page.textContent('#count-note')), 'footer: the visit-counting note is missing');
+
+    // Visit counting (2026-11-12): served from a fake https origin; the pixel is intercepted, nothing leaves.
+    const live = await browser.newPage();
+    const hits = [];
+    live.on('pageerror', (e) => problems.push(`JavaScript error (https): ${e.message}`));
+    await live.route(/^https?:/, (r) => {
+      const u = new URL(r.request().url());
+      if (u.origin === 'https://lambo.test') return r.fulfill({ contentType: 'text/html', path: PAGE });
+      if (u.hostname.endsWith('goatcounter.com')) { hits.push(u); return r.fulfill({ contentType: 'image/gif', body: Buffer.from('R0lGODlhAQABAAAAACw=', 'base64') }); }
+      return r.abort();
+    });
+    const lgo = async (hash) => { await live.evaluate((h) => { location.hash = h; }, hash); await live.waitForTimeout(200); };
+    const REF = 'https://example.org/somewhere';
+    await live.goto('https://lambo.test/#/', { referer: REF });
+    await live.waitForSelector('#grid .card', { timeout: 10000 });
+    await live.waitForTimeout(200);
+    const c0 = cars.find((c) => /[^a-z0-9-]/i.test(c.name)) || cars[0];
+    for (const h of ['#/?family=' + encodeURIComponent(fam), '#/m/' + c0.id, '#/stats', '#/m/<b>x?y=1', '#/timeline', '#/fast10', '#/compare']) await lgo(h);
+    const ps = hits.map((u) => u.searchParams.get('p'));
+    const want = ['/', '/m/' + c0.id, '/', '/timeline', '/fast10', '/compare'];
+    expect(JSON.stringify(ps) === JSON.stringify(want), `visits: counted ${JSON.stringify(ps)}, expected ${JSON.stringify(want)} (filters and unknown ids do not count; #/stats counts as Browse)`);
+    expect(hits.every((u) => u.origin + u.pathname === 'https://thelamboindex.goatcounter.com/count'), 'visits: a count went to the wrong address');
+    expect(hits[0] && hits[0].searchParams.get('r') === REF && hits.slice(1).every((u) => !u.searchParams.has('r')), 'visits: the referrer should go with the first count only');
+    expect(hits[1] && (hits[1].searchParams.get('t') || '').startsWith(c0.name), `visits: car page title not sent for ${c0.id}`);
+    expect(new Set(hits.map((u) => u.searchParams.get('rnd'))).size === hits.length, 'visits: each count needs its own cache-buster');
   } finally {
     await browser.close();
   }
@@ -107,5 +136,5 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     console.error('smoke FAILED:\n- ' + problems.join('\n- '));
     process.exit(1);
   }
-  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, compare, old stats links, the hero, the fan-site notice and no noindex work with no JavaScript errors`);
+  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, compare, old stats links, the hero, the fan-site notice, visit counting and no noindex work with no JavaScript errors`);
 })().catch((e) => { console.error('smoke FAILED: ' + e.message); process.exit(1); });

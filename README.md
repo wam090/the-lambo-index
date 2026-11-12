@@ -68,4 +68,8 @@ node tools/smoke.js                         # check the page still works
   A car with no free photo may show a private photographer's Flickr photo whose owner allows sharing,
   credited to them; never re-posted press photos. All photos are loaded from
   where they are hosted, not copied into this project.
+- Visits: the live site counts page views with GoatCounter, anonymously and with no cookies (a
+  one-pixel image per page shown; no outside script). Only which view or car page was opened, its
+  title and the referring site are sent, never search terms or filters. Opening `index.html` from disk
+  counts nothing.
 - Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini (every page says so in its footer).
