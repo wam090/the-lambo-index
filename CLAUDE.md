@@ -79,6 +79,7 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 | `data/extra_images.json` | hand-picked Commons files outside a car's categories | yes |
 | `data/flickr_queries.json` | extra Flickr search terms per car from a photo hunt | via `scout_import.py hunt` |
 | `tools/images.py`, `tools/flickr.py` | photo pickers: Commons per car with credits; Flickr CC for cars Commons lacks | rarely |
+| `tools/photo_check.py` | flags photos that may be on the wrong car page (duplicates, other family or version in the title) | rarely |
 | `tools/review_sheet.py` | contact sheet of photo candidates, for checking by eye (Pillow) | rarely |
 | `tools/build.py` | catalogue + photos + src → `data/cars.json` + `index.html` | rarely |
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |

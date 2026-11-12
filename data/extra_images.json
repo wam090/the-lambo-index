@@ -81,6 +81,56 @@
     "a": "SunflowerYuri",
     "l": "CC BY-SA 4.0",
     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+   },
+   {
+    "t": "DTM, Paul Motorsport, Lamborghini Huracán GT3 (53985433319).jpg",
+    "h": "3/36",
+    "n": "DTM%2C_Paul_Motorsport%2C_Lamborghini_Hurac%C3%A1n_GT3_%2853985433319%29.jpg",
+    "w": 6000,
+    "ht": 4000,
+    "a": "Der Alf",
+    "l": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0/"
+   }
+  ]
+ },
+ "gallardo-lp570-sl": {
+  "source": "moved from gallardo-superleggera (photo placement check, 2026-11-12)",
+  "images": [
+   {
+    "t": "2014 Lamborghini Gallardo Superleggera Edizione Tecnica SP22.jpg",
+    "h": "e/e9",
+    "n": "2014_Lamborghini_Gallardo_Superleggera_Edizione_Tecnica_SP22.jpg",
+    "w": 11304,
+    "ht": 6679,
+    "a": "MrWalkr",
+    "l": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+   },
+   {
+    "t": "Lamborghini Gallardo Superleggera LP5704 Grey.jpg",
+    "h": "6/65",
+    "n": "Lamborghini_Gallardo_Superleggera_LP5704_Grey.jpg",
+    "w": 4920,
+    "ht": 2924,
+    "a": "MrWalkr",
+    "l": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+   }
+  ]
+ },
+ "gallardo-performante": {
+  "source": "moved from gallardo-lp560-spyder (photo placement check, 2026-11-12)",
+  "images": [
+   {
+    "t": "Lamborghini Gallardo LP 570-4 Spyder Performante (5482870463).jpg",
+    "h": "b/b7",
+    "n": "Lamborghini_Gallardo_LP_570-4_Spyder_Performante_%285482870463%29.jpg",
+    "w": 4752,
+    "ht": 3168,
+    "a": "Shane K from Mississauga, Canada",
+    "l": "CC BY-SA 2.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
    }
   ]
  }

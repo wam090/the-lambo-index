@@ -23,7 +23,9 @@
   "huracan-gt3-evo": "flickr:52228506984",
   "jarama-s": "flickr:52866659143",
   "murcielago-lp650": "flickr:5595796675",
-  "murcielago-rsv": "flickr:6006008012"
+  "murcielago-rsv": "flickr:6006008012",
+  "temerario-gt3": "2026-07-03 Motorsport, DTM, Norisring Nürnberg 2026 STP 0080.jpg",
+  "gallardo-superleggera": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (1).jpg"
  },
  "drop": {
   "350-gtv": [
@@ -55,7 +57,8 @@
    "Lamborghini Gallardo LP 560-4 R-EX (25282105065).jpg"
   ],
   "gallardo-lp560-spyder": [
-   "Black on Black Lamborghini Gallardo 560-4 Spyder (10132410286).jpg"
+   "Black on Black Lamborghini Gallardo 560-4 Spyder (10132410286).jpg",
+   "Lamborghini Gallardo LP 570-4 Spyder Performante (5482870463).jpg"
   ],
   "gallardo-squadra-corse": [
    "Lamborghini Gallardo LP570-4 Squadra Corse rear-side at IAA 2013.JPG",
@@ -154,6 +157,28 @@
   ],
   "urus-st-x": [
    "flickr:49797331226"
+  ],
+  "miura-jota": [
+   "Lamborghini Miura SV J.jpg",
+   "1973 Lamborghini Miura P400 SVJ.jpg"
+  ],
+  "miura-p400sv": [
+   "Lamborghini Miura SV J.jpg",
+   "1973 Lamborghini Miura P400 SVJ.jpg"
+  ],
+  "huracan-evo": [
+   "2020-giallo-inti-lamborghini-huracan-evo-coupe-rwd 50490830952 o.jpg"
+  ],
+  "sian": [
+   "Lamborghini Sián FKP 37 Roadster.jpg",
+   "Lamborghini Sián FKP 37 Roadster (cropped).jpg"
+  ],
+  "temerario-gt3": [
+   "DTM, Paul Motorsport, Lamborghini Huracán GT3 (53985433319).jpg"
+  ],
+  "gallardo-superleggera": [
+   "2014 Lamborghini Gallardo Superleggera Edizione Tecnica SP22.jpg",
+   "Lamborghini Gallardo Superleggera LP5704 Grey.jpg"
   ]
  }
 }
