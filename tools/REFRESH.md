@@ -194,15 +194,19 @@ cd <scratch>/prN && cp index.html index.pr.html && python3 -I tools/build.py && 
   "mcp__claude-code-remote__send_message"]` (meant to make other calls wait for a person; not
   enforced in practice, see Pickup above), prompt `You are the Lambo Index Pickup. Do only
   what the scheduled task "Lambo Index pickup" asks when it fires; until then, do nothing.`
-- **Pickup task** "Lambo Index pickup": `create_trigger` with `persistent_session_id` = the Pickup
-  chat, cron `17 4 * * 1`, prompt:
+- **Pickup task** "Lambo Index pickup v2", **`trig_012KV7ehE4VXPxPTdtGHt5Ro`**: `create_trigger`
+  with `persistent_session_id` = the Pickup chat, cron `17 4 * * 1`, prompt (keep byte-identical):
   ```
   Pickup for The Lambo Index. Use only get_trigger, list_sessions and send_message; read no transcript and no package; do nothing else. 1) list_sessions: if this chat is not the newest chat titled "Pickup", stop. 2) get_trigger("trig_01UUEm7GWXBLcFjD7p3eHGRo") and read only its last_run metadata. 3) If last_run is ROUTINE_RUN_STATUS_SUCCEEDED and was fired today between 03:17 and 03:30 UTC: send_message the newest chat titled "Dev_..." exactly "Pickup: Scout run <last_run.session_id> finished; pull it as tools/REFRESH.md says", then stop. 4) Otherwise: send_message the newest chat titled "Manager..." exactly "Scout run missing, failed or not fired today: <today's date> <last_run status, or none>".
   ```
   The Manager recreates the Pickup chat and task monthly, not between 03:15 and 04:30 UTC on a
   Monday, and archives the old chat and deletes the old task the same day; Cyber confirms the new chat's
   settings with `get_session` and the task with `get_trigger` after every recreation.
-- **Retired**: the monthly pickup task self-bound to the Manager chat (`trig_017KWV62JHJXbU3RvHgZmb4a`
+- **Prompt changes**: a task's prompt can only be changed from the chat it posts into, so a prompt
+  change means a new task (record its ID here through a PR); the old one is disabled at once and
+  deleted after the new one's first run.
+- **Retired**: the first Pickup task, `trig_01NT62HPJ3C2yP3XCVztx2kG`, is disabled; the Manager deletes
+  it after the first Monday run of v2 (2026-11-16). The monthly pickup task self-bound to the Manager chat (`trig_017KWV62JHJXbU3RvHgZmb4a`
   while Manager_v0.2 is the Manager): the Manager deletes it once the Pickup chat and task exist.
 - **Created in the claude.ai routines UI** (if ever): the Scout task gets no connectors at all.
   Untick everything: the UI may preselect the account's connectors, and other routines here carry
