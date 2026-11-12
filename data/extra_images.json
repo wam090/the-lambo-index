@@ -58,5 +58,30 @@
     "lu": "https://commons.wikimedia.org/wiki/Template:PD-Italy"
    }
   ]
+ },
+ "huracan-gt3-evo": {
+  "source": "Commons category Lamborghini Huracán GT3 (EVO2 cars, moved from huracan-gt3)",
+  "images": [
+   {
+    "t": "Lamborghini Huracan, EMS 2024, Essen (P1031651).jpg",
+    "h": "e/e8",
+    "n": "Lamborghini_Huracan%2C_EMS_2024%2C_Essen_%28P1031651%29.jpg",
+    "w": 5184,
+    "ht": 3456,
+    "a": "Matti Blume",
+    "l": "CC BY-SA 2.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
+   },
+   {
+    "t": "Lamborghini 786 NLS 2. 2024.jpg",
+    "h": "e/ed",
+    "n": "Lamborghini_786_NLS_2._2024.jpg",
+    "w": 6000,
+    "ht": 4000,
+    "a": "SunflowerYuri",
+    "l": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+   }
+  ]
  }
 }

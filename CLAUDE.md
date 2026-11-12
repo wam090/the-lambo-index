@@ -165,7 +165,9 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   their real maker. Never use toys, LEGO, renders, game screenshots, paid stock, watermarked photos,
   or anything behind a site's protections. `BLOCKED` in `flickr.py` skips known accounts.
 - Check every new photo by eye before it stays: wrong car or a detail shot → `drop`; a better lead
-  photo → `hero`. Thumbnails can return 429 in cloud sessions, so blank boxes in a screenshot may
+  photo → `hero`. A photo of another version that has its own page (GT3 EVO2 in the GT3's gallery) moves
+  there (`drop` here, `extra_images.json` there); otherwise drop only a different car, never a
+  different version of the same car. If unsure, ask the Manager (user, 2026-11-12). Thumbnails can return 429 in cloud sessions, so blank boxes in a screenshot may
   be the sandbox, not the site.
 - Wikimedia rate-limits shared cloud IPs; HTTP 429 is common. `images.py` is single-threaded with
   0.6 s spacing and backs off on its own. Never parallelise it or re-run it over every car; use
