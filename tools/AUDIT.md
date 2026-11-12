@@ -80,6 +80,7 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
   ```
   Audit pickup for The Lambo Index. Use only get_trigger, list_sessions and send_message; read no transcript and no package; do nothing else. 1) list_sessions: if this chat is not the newest chat titled "Pickup", stop. 2) get_trigger("<AUDIT_TASK_ID>") and read only its last_run metadata. 3) If last_run is ROUTINE_RUN_STATUS_SUCCEEDED and was fired today between 00:17 and 00:30 UTC: send_message the newest chat titled "Dev_..." exactly "Pickup: audit run <last_run.session_id> finished; pull it as tools/AUDIT.md says", then stop. 4) Otherwise: send_message the newest chat titled "Manager..." exactly "Audit run missing, failed or not fired today: <today's date> <last_run status, or none>".
   ```
-- Record both task IDs here through a PR. A prompt can only be changed from the chat it posts into,
-  so a prompt change means a new task; the old one is disabled at once and deleted after the new
-  one's first run. Cyber checks both tasks with `get_trigger` after they are created.
+- Task IDs (created 2026-11-12): audit `trig_01Cn6vQ1xuJLBWbq1Mis3pzS`, audit pickup
+  `trig_014DCnjrL1cNGkssdkNh5vPa` (fires into the Pickup chat). Record new IDs here through a PR. A prompt can
+  only be changed from the chat it posts into, so a prompt change means a new task; the old one is
+  disabled at once and deleted after the new one's first run. Cyber checks both tasks with `get_trigger` after they are created.
