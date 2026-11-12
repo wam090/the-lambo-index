@@ -25,12 +25,15 @@ history). Record each decision the user makes under Decisions, with its date.
   `#/stats` links land on Browse.
 - 2026-11-10: The car-of-the-day hero banner replaces the family strip, with no visible heading;
   live since 2026-11-11, its credit linking the photo's page and licence.
-- 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
+- 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
+  security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
 - 2026-11-11: Every page's footer says: "Unofficial fan site, not affiliated with or endorsed by
   Automobili Lamborghini. Lamborghini and related names are trademarks of their owners." (smoke checks it).
 - 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
   the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
 - 2026-11-11: No "See photos at the source" link: a car with no photo keeps today's empty state.
+- 2026-11-11: urus-st-x, sc20, invencible and autentica keep the empty state for now: no registration
+  on Lamborghini's media site and no press-office request (photo hunt found only press photos).
 - 2026-11-11: Every chat hands over at about 50% of measured capacity (was 90%, before that 70%):
   it finishes its current task, reports it, and the Manager starts its successor.
 - 2026-11-11: Token plan: Dev Opus 5.5 (Extreme + UltraCode while coding, High otherwise), Cyber
@@ -66,14 +69,6 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Your call: four cars still have no photo** (urus-st-x, sc20, invencible, autentica). Photo hunt
-      of 2026-11-11: Commons has none (no category, no search hit). Flickr has only LEGO, blocked
-      press-scan accounts, Lamborghini press photos re-posted by others, and game screenshots. Only
-      official press photos exist. Cyber_v0.2 recommends not registering: the public site's terms grant
-      no editorial use (media-centre terms unread), the media centre is for journalists, and no
-      written permission for hotlinking was found. The
-      alternative is a written request to Lamborghini's press office for 4 photos. The Scout could not
-      look at photos (its tools return page text only), so the Dev did the search itself.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),

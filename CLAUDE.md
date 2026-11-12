@@ -139,8 +139,6 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   No external JS or fonts: only photos load from the network (fonts are self-hosted in `fonts/`, SIL
   OFL, licences beside them). A photo, licence or source URL outside `URL_HOSTS` (`build.py`) fails
   the build; add a host only for a real new source.
-- Keep `<meta name="robots" content="noindex, nofollow">` until a cyber-security expert has reviewed
-  the site (user's decision, 2026-11-10).
 - The GitHub repo is public: no secrets and no personal data in commits.
 - Anything outside this repo dies with the session's container. Commit it or lose it.
 

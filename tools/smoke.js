@@ -92,6 +92,9 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     await go('#/?family=Countach');
     expect(!(await page.isVisible('#masthead')), 'browse: the hero should step aside while filtering');
 
+    expect(!(await page.locator('meta[name="robots"]').evaluateAll((ms) => ms.some((m) => /noindex/i.test(m.content)))),
+      'head: the page is live (2026-11-12); a robots noindex tag is back');
+
     const FAN = 'Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini. Lamborghini and related names are trademarks of their owners.';
     for (const h of ['#/', '#/m/' + cars[0].id, '#/timeline', '#/fast10', '#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(',')]) {
       await go(h);
@@ -104,5 +107,5 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     console.error('smoke FAILED:\n- ' + problems.join('\n- '));
     process.exit(1);
   }
-  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, compare, old stats links, the hero and the fan-site notice work with no JavaScript errors`);
+  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, compare, old stats links, the hero, the fan-site notice and no noindex work with no JavaScript errors`);
 })().catch((e) => { console.error('smoke FAILED: ' + e.message); process.exit(1); });
