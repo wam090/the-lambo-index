@@ -39,8 +39,11 @@ history). Record each decision the user makes under Decisions, with its date.
   finished run (its tool limit is not enforced, so it reads nothing untrusted).
 - 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
   security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
-- 2026-11-11: Every page's footer says: "Unofficial fan site, not affiliated with or endorsed by
-  Automobili Lamborghini. Lamborghini and related names are trademarks of their owners." (smoke checks it).
+- 2026-11-12: Footer redesign: concise, grouped, quiet, at the content width. Line 1 the build's data
+  line; line 2 three notes with quiet separators (stacked on narrow screens): "Unofficial fan site, not
+  affiliated with Automobili Lamborghini" (fan notice of 2026-11-11, shortened; the trademark sentence
+  dropped), "Photos credited to their authors, under their licences", "Visits counted anonymously, no
+  cookies". smoke checks the exact text on six views.
 - 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
   the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
 - 2026-11-11: No "See photos at the source" link: a car with no photo keeps today's empty state.

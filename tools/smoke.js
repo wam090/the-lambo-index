@@ -97,13 +97,17 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     expect(!(await page.locator('meta[name="robots"]').evaluateAll((ms) => ms.some((m) => /noindex/i.test(m.content)))),
       'head: the page is live (2026-11-12); a robots noindex tag is back');
 
-    const FAN = 'Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini. Lamborghini and related names are trademarks of their owners.';
-    for (const h of ['#/', '#/m/' + cars[0].id, '#/timeline', '#/fast10', '#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(',')]) {
+    // Footer (2026-11-12): the data line, then the fan-site, photo and visit notes, on every view.
+    const NOTES = ['Unofficial fan site, not affiliated with Automobili Lamborghini', 'Photos credited to their authors, under their licences', 'Visits counted anonymously, no cookies'];
+    const nPhotos = cars.reduce((s, c) => s + c.imgs.length, 0).toLocaleString('en-US');
+    const DATA = new RegExp(`^Index compiled \\d{4}-\\d{2}-\\d{2} · ${cars.length} cars · ${nPhotos} photos$`);
+    for (const h of ['#/', '#/m/' + cars[0].id, '#/timeline', '#/fast10', '#/compare?ids=' + cars.slice(0, 2).map((c) => c.id).join(','), '#/stats']) {
       await go(h);
-      expect(await page.isVisible('#fan-note') && ((await page.textContent('#fan-note')) || '').trim() === FAN, `footer: fan-site notice missing or changed on ${h}`);
+      const notes = await page.$$eval('#foot-notes li', (els) => els.map((e) => e.textContent.trim()));
+      expect(await page.isVisible('#fan-note') && JSON.stringify(notes) === JSON.stringify(NOTES), `footer: notes missing or changed on ${h}: ${JSON.stringify(notes)}`);
+      expect(DATA.test(((await page.textContent('#foot-l')) || '').trim()), `footer: data line wrong on ${h}`);
     }
     expect(localHits === 0, `visits: ${localHits} counter requests from a file:// page, expected none`);
-    expect(await page.isVisible('#count-note') && /anonymously/.test(await page.textContent('#count-note')), 'footer: the visit-counting note is missing');
 
     // Visit counting (2026-11-12): served from a fake https origin; the pixel is intercepted, nothing leaves.
     const live = await browser.newPage();
@@ -136,5 +140,5 @@ const expect = (ok, msg) => { if (!ok) problems.push(msg); };
     console.error('smoke FAILED:\n- ' + problems.join('\n- '));
     process.exit(1);
   }
-  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, compare, old stats links, the hero, the fan-site notice, visit counting and no noindex work with no JavaScript errors`);
+  console.log(`smoke OK: ${cars.length} cars; browse, filter, search, car pages, timeline, fast 10, compare, old stats links, the hero, the footer, visit counting and no noindex work with no JavaScript errors`);
 })().catch((e) => { console.error('smoke FAILED: ' + e.message); process.exit(1); });
