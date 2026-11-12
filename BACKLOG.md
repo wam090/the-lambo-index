@@ -25,7 +25,8 @@ history). Record each decision the user makes under Decisions, with its date.
   `#/stats` links land on Browse.
 - 2026-11-10: The car-of-the-day hero banner replaces the family strip, with no visible heading;
   live since 2026-11-11, its credit linking the photo's page and licence.
-- 2026-11-10: `noindex` stays until a cyber-security expert has reviewed the site.
+- 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
+  security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
 - 2026-11-11: Every page's footer says: "Unofficial fan site, not affiliated with or endorsed by
   Automobili Lamborghini. Lamborghini and related names are trademarks of their owners." (smoke checks it).
 - 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where

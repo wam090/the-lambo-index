@@ -68,4 +68,4 @@ node tools/smoke.js                         # check the page still works
   A car with no free photo may show a private photographer's Flickr photo whose owner allows sharing,
   credited to them; never re-posted press photos. All photos are loaded from
   where they are hosted, not copied into this project.
-- Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini (every page says so in its footer). The page asks search engines not to index it.
+- Unofficial fan site, not affiliated with or endorsed by Automobili Lamborghini (every page says so in its footer).
