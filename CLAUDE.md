@@ -119,6 +119,9 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   `Photo hunt: <id>, <id>` (never 03:15-04:30 UTC) and sends the Dev the same text and the run id;
   the Scout returns hints only; the Dev runs `scout_import.py hunt`, its own
   photo runs and checks by eye (`tools/REFRESH.md`, Photo hunt).
+- **Audit** (all rows against two sources): the Manager fires the Scout task five times with
+  `Audit: batch N of 5` and sends the Dev the texts and run ids; the Dev checks each package and
+  applies the findings with `scout_import.py audit`, one PR (`tools/REFRESH.md`, Dev: audit).
 - **Hero**: the car-of-the-day photo, no heading, replaces the family strip on Browse (`setHero()`;
   hidden while searching or filtering); its credit links the photo's page and licence (`creditHTML`).
 - **Visits**: GoatCounter tracking pixel, `countVisit()` in `app.js`: one count per view or car page

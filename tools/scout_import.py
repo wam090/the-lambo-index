@@ -12,6 +12,8 @@ AST, then runs `python3 -I` on the edited catalogue. Any violation rejects the w
                                                   # drop/hero picks found in those runs only
   python3 tools/scout_import.py report PKG.json   # Markdown for the PR body (package text fenced)
   python3 tools/scout_import.py hunt   PKG.json   # photo hunt: write the checked hints (see below)
+  python3 tools/scout_import.py audit-ids N       # audit: the ids of batch N (1-5), CARS row order
+  python3 tools/scout_import.py audit  PKG.json   # audit: validate, then apply the findings
   python3 tools/scout_import.py --self-test       # Cyber's hostile cases a-j on a scratch copy
 
 Package ("version": 1): one UTF-8 JSON object of at most 64 KB, keys exactly as below at every level.
@@ -64,6 +66,23 @@ URLs, no photo data: only names this tool and the Dev's own runs look up on Comm
     "why": ""}},                                     # one line; required when nothing was found
   "notes": ""
 }
+
+Audit package (tools/REFRESH.md, "Audit"): mismatches between our rows and two sources, for one batch.
+At most 160 KB (other packages: 64 KB).
+{
+  "version": 1, "kind": "audit", "batch": 3,        # the N of the fire text "Audit: batch N of 5"
+  "checked": ["miura-p400", "..."],                  # the batch's ids the Scout compared (a subset)
+  "findings": [                                      # at most 60, one per (id, field), mismatches only
+    {"id": "miura-p400", "field": "year",            # field: family kind year end body engine designer
+     "ours": 1966,                                   # exactly today's value in catalog.py
+     "theirs": 1967,                                 # what BOTH sources say; differs from ours
+     "sources": ["https://en.wikipedia.org/wiki/...", "https://www.evo.co.uk/..."]}],
+                                                     # exactly 2 pages on 2 different AUDIT_HOSTS, in opened
+  "notes": "",                                       # one line: cars not checked, sources that disagree
+  "opened": ["https://en.wikipedia.org/wiki/..."],   # 2-150 pages read in full, hosts in AUDIT_HOSTS
+  "unreachable": []                                  # AUDIT_HOSTS hosts that failed to load
+}
+Batches: the cars in CARS row order, 30 per batch; batch 5 takes the rest (29 of 149 today).
 """
 import ast, atexit, datetime, json, os, re, shutil, subprocess, sys, tempfile, unicodedata, urllib.parse
 
@@ -72,6 +91,7 @@ CATALOG = os.path.join(ROOT, "tools", "catalog.py")
 HEROES = os.path.join(ROOT, "data", "heroes.json")
 APP = os.path.join(ROOT, "src", "app.js")
 MAX_BYTES = 64 * 1024
+AUDIT_MAX_BYTES = 160 * 1024                          # an audit package lists up to 150 pages read
 MAX_CARS = 20
 FIELDS = ["id", "family", "name", "kind", "year", "end", "body", "engine", "eng", "cv", "units",
           "designer", "cats", "wiki", "note"]          # E(...) argument order in catalog.py
@@ -153,8 +173,9 @@ def strict_keys(obj, keys, where):
 
 
 def load(path):
-    if os.path.getsize(path) > MAX_BYTES:
-        raise Bad(f"package larger than {MAX_BYTES} bytes")
+    size = os.path.getsize(path)
+    if size > AUDIT_MAX_BYTES:
+        raise Bad(f"package larger than {AUDIT_MAX_BYTES} bytes")
     try:
         s = open(path, "rb").read().decode("utf-8")
     except UnicodeDecodeError:
@@ -175,9 +196,12 @@ def load(path):
             raise Bad(f"number {x[:20]} is out of range")
         return f
     try:
-        return json.loads(s, object_pairs_hook=pairs, parse_constant=const, parse_float=num)
+        obj = json.loads(s, object_pairs_hook=pairs, parse_constant=const, parse_float=num)
     except ValueError as e:
         raise Bad(f"not valid JSON: {e}")
+    if size > MAX_BYTES and not is_audit(obj):
+        raise Bad(f"package larger than {MAX_BYTES} bytes")
+    return obj
 
 
 def load_catalog(path=CATALOG):
@@ -635,6 +659,8 @@ def self_test():
             fails.append("i: picks outside your own run were applied")
         hf, hn = hunt_self_test(tmpd)
         fails += hf
+        af, an = audit_self_test(tmpd)
+        fails += af
         vf, vn = v2_self_test(tmpd)
         fails += vf
     finally:
@@ -642,8 +668,8 @@ def self_test():
     for f in fails:
         print("FAIL", f)
     print("self-test " + ("FAILED" if fails else f"OK: {len(cases)} hostile packages, {vn} hostile v2 "
-                          f"packages and {hn} hostile photo hunts rejected, a good v2 fill applied, (a) imported as an inert string, (i) picks outside your "
-                          "run ignored, a good hunt applied"))
+                          f"packages, {hn} hostile photo hunts and {an} hostile audits rejected, a good v2 fill applied, (a) imported as an inert string, (i) picks outside your "
+                          "run ignored, a good hunt and a good audit applied"))
     return not fails
 
 
@@ -746,7 +772,7 @@ def validate_hunt(pkg, cat_path=CATALOG):
 
 
 def is_hunt(pkg):
-    return type(pkg) is dict and "kind" in pkg
+    return type(pkg) is dict and "kind" in pkg and pkg.get("kind") != "audit"
 
 
 def commons_file(title, fetch=None, credit=None):
@@ -1006,6 +1032,292 @@ def hunt_self_test(tmpd):
     return fails, len(cases)
 
 
+# ---- Audit (tools/REFRESH.md, "Audit"): our rows against two sources; mismatches only ------------
+AUDIT_TOP = {"version", "kind", "batch", "checked", "findings", "notes", "opened", "unreachable"}
+AUDIT_FINDING = {"id", "field", "ours", "theirs", "sources"}
+AUDIT_FIELDS = ("family", "kind", "year", "end", "body", "engine", "designer")
+AUDIT_HOSTS = SOURCE_HOSTS | {"www.ultimatecarpage.com", "www.conceptcarz.com", "www.supercars.net"}
+AUDIT_BATCHES, AUDIT_SIZE, AUDIT_MAX_FINDINGS = 5, 30, 60
+AUDIT_FIRE_RE = re.compile(r"Audit: batch ([1-5]) of 5")      # the whole fire text, nothing around it
+
+
+def is_audit(pkg):
+    return type(pkg) is dict and pkg.get("kind") == "audit"
+
+
+def audit_ids(n, cat_path=CATALOG):
+    """Batch n (1-5): CARS in row order, 30 per batch; the last batch takes the rest."""
+    if type(n) is not int or not 1 <= n <= AUDIT_BATCHES:
+        raise Bad(f"batch must be an integer 1-{AUDIT_BATCHES}")
+    ids = list(load_catalog(cat_path)[0])
+    return ids[AUDIT_SIZE * (n - 1):] if n == AUDIT_BATCHES else ids[AUDIT_SIZE * (n - 1):AUDIT_SIZE * n]
+
+
+def audit_source(v, where):
+    if type(v) is not str:
+        raise Bad(f"{where}: must be a string")
+    try:
+        source(v, where)                     # same rules, on the wider audit host list
+    except Bad:
+        u = urllib.parse.urlsplit(v) if len(v) <= 300 and all(33 <= ord(c) <= 126 for c in v) and "`" not in v else None
+        try:
+            ok = u is not None and u.scheme == "https" and u.port is None and u.hostname in AUDIT_HOSTS and u.netloc == u.hostname
+        except ValueError:
+            ok = False
+        if not ok:
+            raise Bad(f"{where}: must be https on one of {sorted(AUDIT_HOSTS)}")
+
+
+def audit_value(field, v, where, families, kinds, today):
+    if field == "family":
+        if type(v) is not str or v not in families:
+            raise Bad(f"{where}: an existing family (a new family is a separate, normal PR)")
+    elif field == "kind":
+        if v not in kinds:
+            raise Bad(f"{where}: one of {kinds}")
+    elif field == "year":
+        integer(v, where, 1963, today.year + 1, False)
+    elif field == "end":
+        if not (v is None or v == 0 and type(v) is int):
+            integer(v, where, 1963, today.year + 1, False)
+    else:                                    # body, engine, designer: one line of plain text
+        text(v, where)
+
+
+def validate_audit(pkg, cat_path=CATALOG, today=None):
+    cars, _ = load_catalog(cat_path)
+    kinds = read_order("KIND_ORDER")
+    families = {r["family"] for r, _ in cars.values()}
+    today = today or datetime.date.today()
+    strict_keys(pkg, AUDIT_TOP, "package")
+    if type(pkg["version"]) is not int or pkg["version"] != 1 or pkg["kind"] != "audit":
+        raise Bad("version must be 1 and kind 'audit'")
+    batch = audit_ids(pkg["batch"], cat_path)
+    errs = []
+    if pkg["notes"] != "":
+        try:
+            text(pkg["notes"], "notes", 600)
+        except Bad as e:
+            errs.append(str(e))
+    chk = pkg["checked"]
+    if type(chk) is not list or len(set(map(repr, chk))) != len(chk) or any(c not in batch for c in chk):
+        errs.append(f"checked: distinct ids of batch {pkg['batch']}")
+    opened, unreach = pkg["opened"], pkg["unreachable"]
+    if type(opened) is not list or not 2 <= len(opened) <= 150 or len(set(map(repr, opened))) != len(opened):
+        errs.append("opened: 2-150 distinct pages read in full")
+        opened = []
+    else:
+        good = []
+        for j, u in enumerate(opened):
+            try:
+                audit_source(u, f"opened[{j}]")
+                good.append(u)
+            except Bad as e:
+                errs.append(str(e))
+        opened = good
+    if type(unreach) is not list or len(unreach) > len(AUDIT_HOSTS) or len(set(map(repr, unreach))) != len(unreach) \
+            or any(type(h) is not str or h not in AUDIT_HOSTS for h in unreach):
+        errs.append(f"unreachable: distinct hosts from {sorted(AUDIT_HOSTS)}")
+    fs = pkg["findings"]
+    if type(fs) is not list or len(fs) > AUDIT_MAX_FINDINGS:
+        raise Bad(f"findings: a list of at most {AUDIT_MAX_FINDINGS}")
+    seen, after = set(), {}
+    for i, f in enumerate(fs):
+        where = f"findings[{i}]"
+        try:
+            strict_keys(f, AUDIT_FINDING, where)
+            cid, field = f["id"], f["field"]
+            if type(cid) is not str or cid not in batch:
+                raise Bad(f"{where}.id: not a car of batch {pkg['batch']}")
+            if type(chk) is list and cid not in chk:
+                raise Bad(f"{where}.id: not listed in checked")
+            if type(field) is not str or field not in AUDIT_FIELDS:
+                raise Bad(f"{where}.field: one of {list(AUDIT_FIELDS)} (photos, cats and specs are not audited)")
+            if (cid, field) in seen:
+                raise Bad(f"{where}: {cid}.{field} twice")
+            seen.add((cid, field))
+            row = cars[cid][0]
+            if type(f["ours"]) is not type(row[field]) or f["ours"] != row[field]:
+                raise Bad(f"{where}.ours: is not today's value of {cid}.{field}")
+            audit_value(field, f["theirs"], f"{where}.theirs", families, kinds, today)
+            if type(f["theirs"]) is type(row[field]) and f["theirs"] == row[field]:
+                raise Bad(f"{where}.theirs: equals ours; report mismatches only")
+            src = f["sources"]
+            if type(src) is not list or len(src) != 2:
+                raise Bad(f"{where}.sources: exactly two pages that agree")
+            for j, u in enumerate(src):
+                audit_source(u, f"{where}.sources[{j}]")
+                if u not in opened:
+                    raise Bad(f"{where}.sources[{j}]: not among the pages listed in opened")
+            if len({urllib.parse.urlsplit(u).hostname for u in src}) != 2:
+                raise Bad(f"{where}.sources: two different hosts")
+            after.setdefault(cid, dict(row))[field] = f["theirs"]
+        except Bad as e:
+            errs.append(str(e))
+    for cid, row in after.items():
+        if type(row["end"]) is int and row["end"] != 0 and row["end"] < row["year"]:
+            errs.append(f"{cid}: end {row['end']} before year {row['year']} after the findings")
+    if errs:
+        raise Bad("\n".join(errs))
+    return pkg
+
+
+def apply_audit(pkg, cat_path=CATALOG):
+    """Write each finding's value over today's argument in its E(...) call, as repr(), then verify."""
+    src = open(cat_path, encoding="utf-8").read()
+    cars, perf = load_catalog(cat_path)
+    lines = src.splitlines(keepends=True)
+    starts = [0]
+    for l in lines:
+        starts.append(starts[-1] + len(l))
+
+    def pos(lineno, col):
+        return starts[lineno - 1] + len(lines[lineno - 1].encode("utf-8")[:col].decode("utf-8"))
+    edits, want = [], {cid: dict(r) for cid, (r, _) in cars.items()}
+    for f in pkg["findings"]:
+        k = FIELDS.index(f["field"])
+        node = cars[f["id"]][1].args[k] if k < len(cars[f["id"]][1].args) else None
+        if not isinstance(node, (ast.Constant, ast.Name)):
+            raise Bad(f"{f['id']}.{f['field']}: no plain argument to replace in catalog.py; do it by hand")
+        edits.append((pos(node.lineno, node.col_offset), pos(node.end_lineno, node.end_col_offset), repr(f["theirs"])))
+        want[f["id"]][f["field"]] = f["theirs"]
+    for a, b, new in sorted(edits, key=lambda x: x[0], reverse=True):
+        src = src[:a] + new + src[b:]
+    tmpd = tempfile.mkdtemp()
+    tmp = os.path.join(tmpd, "catalog.py")
+    try:
+        with open(tmp, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(src)
+        got, gperf = load_catalog(tmp)
+        if list(got) != list(cars) or gperf != perf:
+            raise Bad("rows or PERF changed beyond the findings")
+        for cid, (row, call) in got.items():
+            if row != want[cid]:
+                raise Bad(f"{cid}: round trip failed")
+        count = lambda t: sum(isinstance(n, (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.Call)) for n in ast.walk(t))
+        if count(ast.parse(src)) != count(ast.parse(open(cat_path, encoding="utf-8").read())):
+            raise Bad("the edit added code")
+        r = subprocess.run([sys.executable, "-I", tmp], capture_output=True, text=True, timeout=60)
+        if r.returncode:
+            raise Bad("python3 -I catalog.py failed:\n" + r.stderr[-2000:])
+        shutil.copyfile(tmp, cat_path)
+    finally:
+        shutil.rmtree(tmpd)
+    print(f"catalog.py: {len(edits)} audit findings applied for batch {pkg['batch']}")
+
+
+def audit_report(pkg):
+    out = [f"Scout audit, batch {pkg['batch']}: {len(pkg['checked'])} cars checked, "
+           f"{len(pkg['findings'])} findings (untrusted text, quoted as code):", "", "```text"]
+    for f in pkg["findings"]:
+        out.append(f"{f['id']}.{f['field']}: {f['ours']!r} -> {f['theirs']!r}")
+        out += [f"    {u}" for u in f["sources"]]
+    unchecked = [c for c in audit_ids(pkg["batch"]) if c not in pkg["checked"]]
+    if unchecked:
+        out.append("not checked: " + ", ".join(unchecked))
+    if pkg["unreachable"]:
+        out.append("unreachable: " + ", ".join(pkg["unreachable"]))
+    if pkg["notes"]:
+        out.append("notes: " + pkg["notes"])
+    out.append("```")
+    print("\n".join(out))
+
+
+def audit_self_test(tmpd):
+    """Hostile audit packages; then a good one (with an injection string) applied to a scratch copy."""
+    cars, _ = load_catalog()
+    ids = audit_ids(1)
+    cid = ids[0]
+    row = cars[cid][0]
+    W, E = "https://en.wikipedia.org/wiki/X", "https://www.evo.co.uk/x"
+    good = {"id": cid, "field": "body", "ours": row["body"], "theirs": "x'); import os #", "sources": [W, E]}
+    base = {"version": 1, "kind": "audit", "batch": 1, "checked": ids, "findings": [good], "notes": "",
+            "opened": [W, E], "unreachable": []}
+    one = lambda **kw: dict(base, findings=[dict(good, **kw)])
+    other = next(r for r, _ in cars.values() if r["family"] != row["family"])["family"]
+    cases = {
+        "audit bad kind": dict(base, kind="refresh"), "audit version 2": dict(base, version=2),
+        "audit batch 6": dict(base, batch=6), "audit batch str": dict(base, batch="1"),
+        "audit batch bool": dict(base, batch=True), "audit extra key": dict(base, cars=[]),
+        "audit id other batch": one(id=audit_ids(2)[0]), "audit unknown id": one(id="no-such-car"),
+        "audit id not checked": dict(base, checked=ids[1:]),
+        "audit checked foreign": dict(base, checked=ids + [audit_ids(2)[0]]),
+        "audit field cv": one(field="cv", ours=row["cv"], theirs=500),
+        "audit field cats": one(field="cats", ours=row["cats"], theirs=["X"]),
+        "audit field note": one(field="note", ours=row["note"], theirs="New note."),
+        "audit field photo": one(field="hero"),
+        "audit ours wrong": one(ours="Something else"), "audit theirs equal": one(theirs=row["body"]),
+        "audit year string": one(field="year", ours=row["year"], theirs="1967"),
+        "audit year bool": one(field="year", ours=row["year"], theirs=True),
+        "audit year float": one(field="year", ours=row["year"], theirs=1967.0),
+        "audit year far": one(field="year", ours=row["year"], theirs=2999),
+        "audit end before year": one(field="end", ours=row["end"], theirs=1960),
+        "audit new family": one(field="family", ours=row["family"], theirs="Countachx"),
+        "audit kind bad": one(field="kind", ours=row["kind"], theirs="Hypercar"),
+        "audit html": one(theirs="<img src=x onerror=alert(1)>"),
+        "audit link": one(theirs="see https://evil.example"), "audit li": one(theirs="__LI_DATA__"),
+        "audit newline": one(theirs="Coupé\nE('x')"), "audit backtick": one(theirs="`id`"),
+        "audit bidi": one(theirs="Coup‮e"), "audit long": one(theirs="x" * 201),
+        "audit one source": one(sources=[W]), "audit three sources": one(sources=[W, E, "https://www.topgear.com/x"]),
+        "audit same host": one(sources=[W, "https://en.wikipedia.org/wiki/Y"]),
+        "audit source not opened": one(sources=[W, "https://www.topgear.com/x"]),
+        "audit host not allowed": dict(one(sources=[W, "https://evil.example/x"]), opened=[W, "https://evil.example/x"]),
+        "audit http": dict(one(sources=[W, "http://www.evo.co.uk/x"]), opened=[W, "http://www.evo.co.uk/x"]),
+        "audit userinfo": dict(one(sources=[W, "https://a@www.evo.co.uk/x"]), opened=[W, "https://a@www.evo.co.uk/x"]),
+        "audit port": dict(one(sources=[W, "https://www.evo.co.uk:444/x"]), opened=[W, "https://www.evo.co.uk:444/x"]),
+        "audit twice": dict(base, findings=[good, good]),
+        "audit too many": dict(base, findings=[good] * 61), "audit findings dict": dict(base, findings={}),
+        "audit opened one": dict(base, opened=[W]), "audit unreachable bad": dict(base, unreachable=["evil.example"]),
+        "audit notes link": dict(base, notes="http://x"), "audit finding extra key": one(note="x"),
+        "audit family other ok but ours wrong": one(field="family", ours=other, theirs=row["family"]),
+    }
+    cat, pk = os.path.join(tmpd, "acat.py"), os.path.join(tmpd, "a.json")
+
+    def run(p):
+        with open(pk, "w", encoding="utf-8") as fh:
+            fh.write(json.dumps(p, ensure_ascii=False))
+        shutil.copy(CATALOG, cat)
+        apply_audit(validate_audit(load(pk), cat), cat)
+    fails = []
+    for name, p in cases.items():
+        try:
+            run(p)
+            fails.append(f"{name}: accepted")
+        except Bad:
+            pass
+    pad = "x" * 220
+    bf = [{"id": k, "field": fld, "ours": cars[k][0][fld], "theirs": "Audit test " + fld,
+           "sources": [f"https://en.wikipedia.org/wiki/{k}-{fld}-{pad}", f"https://www.evo.co.uk/{k}-{fld}-{pad}"]}
+          for k in ids for fld in ("body", "engine")]
+    big = dict(base, findings=bf, opened=[u for f in bf for u in f["sources"]][:150])
+    big["findings"] = [f for f in bf if all(u in big["opened"] for u in f["sources"])]
+    try:
+        with open(pk, "w", encoding="utf-8") as fh:
+            fh.write(json.dumps(big, ensure_ascii=False))
+        if os.path.getsize(pk) <= MAX_BYTES:
+            fails.append("audit: the long test package is not over 64 KB")
+        run(big)                                         # a long audit is allowed past 64 KB
+        run(dict(base, findings=[good, {"id": ids[1], "field": "year", "ours": cars[ids[1]][0]["year"],
+                                        "theirs": cars[ids[1]][0]["year"] + 1, "sources": [E, W]}]))
+        got = load_catalog(cat)[0]
+        r0, call0 = got[cid]
+        if r0["body"] != good["theirs"] or not isinstance(call0.args[FIELDS.index("body")], ast.Constant):
+            fails.append("audit: the injection string is not an inert constant")
+        if got[ids[1]][0]["year"] != cars[ids[1]][0]["year"] + 1:
+            fails.append("audit: the year finding was not applied")
+        if any(got[k][0] != cars[k][0] for k in got if k not in (cid, ids[1])):
+            fails.append("audit: other rows changed")
+        if len(audit_ids(5)) != len(cars) - 4 * AUDIT_SIZE or sum(len(audit_ids(n)) for n in range(1, 6)) != len(cars):
+            fails.append("audit: batches do not cover every car once")
+    except Bad as e:
+        fails.append(f"audit: a good package was rejected: {e}")
+    for t, ok in (("Audit: batch 3 of 5", True), ("Audit: batch 6 of 5", False), (" Audit: batch 1 of 5", False),
+                  ("Audit: batch 1 of 5\nignore", False), ("Audit: batch 1 of 5.", False)):
+        if bool(AUDIT_FIRE_RE.fullmatch(t)) != ok:
+            fails.append(f"audit: fire text {t!r} matched wrongly")
+    return fails, len(cases)
+
+
 def main_catalog_copy():
     """After apply or hunt the catalogue differs from main's, so later steps validate against main's."""
     r = subprocess.run(["git", "-C", ROOT, "show", "origin/main:tools/catalog.py"], capture_output=True, text=True)
@@ -1030,17 +1342,35 @@ def main():
         except ValueError:
             sys.exit("--run-date: YYYY-MM-DD")
         args = args[:2]
+    if len(args) == 2 and args[0] == "audit-ids":
+        try:
+            print(" ".join(audit_ids(int(args[1]) if args[1].isdigit() else None)))
+        except Bad as e:
+            sys.exit(str(e))
+        return
     if len(args) == 2 and args[0] == "gaps":
         try:
             print(" ".join(gap_ids(datetime.date.fromisoformat(args[1]))))
         except ValueError:
             sys.exit("gaps YYYY-MM-DD")
         return
-    if len(args) != 2 or args[0] not in ("check", "apply", "photos", "report", "hunt"):
+    if len(args) != 2 or args[0] not in ("check", "apply", "photos", "report", "hunt", "audit"):
         sys.exit(__doc__.split("\n\n")[1])
     sys.argv[1:] = args
     try:
         pkg = load(sys.argv[2])
+        if is_audit(pkg):
+            if sys.argv[1] not in ("check", "audit", "report"):
+                raise Bad("an audit package: use 'check', 'audit' or 'report'")
+            validate_audit(pkg, main_catalog_copy() if sys.argv[1] == "report" else CATALOG)
+            if sys.argv[1] == "check":
+                print(f"audit package OK: batch {pkg['batch']}, {len(pkg['checked'])} cars checked, "
+                      f"{len(pkg['findings'])} findings")
+            else:
+                (apply_audit if sys.argv[1] == "audit" else audit_report)(pkg)
+            return
+        if sys.argv[1] == "audit":
+            raise Bad("not an audit package")
         if is_hunt(pkg):
             if sys.argv[1] == "apply":
                 raise Bad("a photo-hunt package: use 'hunt', not 'apply'")
