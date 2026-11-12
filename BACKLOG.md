@@ -25,10 +25,10 @@ history). Record each decision the user makes under Decisions, with its date.
   `#/stats` links land on Browse.
 - 2026-11-10: The car-of-the-day hero banner replaces the family strip, with no visible heading;
   live since 2026-11-11, its credit linking the photo's page and licence.
-- 2026-11-12: The Scout runs often, not monthly: it looks for new cars and fills blank specs (two
-  agreeing sources, a few cars per run, round-robin). Daily or weekly is the user's open choice
-  (`CADENCE`). A Pickup chat on Haiku 5.5 replaces the Manager's monthly pickup; empty runs wake
-  no other chat. New cars are imported the same day, fills weekly; Cyber checks every PR.
+- 2026-11-12: The Scout runs weekly (Mondays 03:17 UTC, 10-day window), not monthly: it looks for
+  new cars and fills blank specs of up to 7 cars per run (two agreeing sources, round-robin). A
+  Pickup chat on Haiku 5.5 replaces the Manager's monthly pickup; empty runs wake no other chat.
+  One PR per run, the same day; Cyber checks every PR.
 - 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
   security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
 - 2026-11-11: Every page's footer says: "Unofficial fan site, not affiliated with or endorsed by
@@ -71,9 +71,9 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-- [ ] **Scout cadence cut-over.** The user picks daily or weekly (`CADENCE`, a one-line PR if
-      weekly). Then the Manager sets the Scout cron, creates the Pickup chat and task, deletes the
-      monthly pickup task (REFRESH.md Setup), and Cyber verifies them. v1 packages stop on 2026-11-30.
+- [ ] **Scout cut-over.** The Manager sets the Scout cron to `17 3 * * 1`, creates the Pickup chat
+      and task, deletes the monthly pickup task (REFRESH.md Setup), and Cyber verifies them. v1
+      packages stop on 2026-11-30.
 
 ## Next
 

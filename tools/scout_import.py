@@ -85,8 +85,8 @@ FAMILY_RE = re.compile(r"[A-Za-z0-9 ]{2,30}")
 TEXT_BAD = set("<>{}[]|\\`")
 CAT_BAD = set("<>[]{}|#")
 TEXT_BAD_WORDS = ("__li_", "javascript:", "http", "://", "www.")
-# Cadence (tools/REFRESH.md): the user picks daily or weekly; changing it is this one line, in a PR.
-CADENCE = "daily"
+# Cadence (tools/REFRESH.md): weekly, the user's choice of 2026-11-12 (Mondays, 03:17 UTC).
+CADENCE = "weekly"
 CADENCES = {"daily": {"period": 1, "window": 7, "fills": 3}, "weekly": {"period": 7, "window": 10, "fills": 7}}
 GAP_EPOCH = datetime.date(2026, 1, 5)                 # a Monday; round-robin day 0
 GAP_FIELDS = ("cv", "units", "designer")              # plus "perf" (a missing PERF entry); wiki is not a gap
