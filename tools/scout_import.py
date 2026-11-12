@@ -5,7 +5,8 @@ This script never evaluates, executes or imports package text, never opens a URL
 no shell. It writes rows only as repr() of values that passed every check, verifies them with the
 AST, then runs `python3 -I` on the edited catalogue. Any violation rejects the whole package.
 
-  python3 tools/scout_import.py check  PKG.json   # validate only
+  python3 tools/scout_import.py check  PKG.json [--run-date D]   # validate only (v2 needs the run date)
+  python3 tools/scout_import.py gaps   YYYY-MM-DD  # the cars a run on that day may fill (round-robin)
   python3 tools/scout_import.py apply  PKG.json   # validate, then write rows to tools/catalog.py
   python3 tools/scout_import.py photos PKG.json   # after your own images.py/flickr.py runs: apply
                                                   # drop/hero picks found in those runs only
@@ -38,6 +39,14 @@ listed in "unreachable" (Wikipedia, or every press host).
 A car whose id already exists is a blank-fill: every field equals today's row except fields that are
 None today (perf: only if the car has no PERF entry yet). New ids go at the end of CARS. A new family
 is never a refresh: it touches src/app.js and tools/images.py, so it is a separate, normal PR.
+
+Version 2 (from 2026-11; version 1 is rejected after V1_UNTIL): "version": 2 and one more key,
+"fills", beside the keys above. "cars" holds new ids only. "fills" holds blank-fills of existing
+cars in the same row format, at most CADENCES[CADENCE]["fills"], and only for the ids
+`gaps <run date>` prints, only in their gap fields (cv, units, designer, a missing perf; never a
+SKIP field). Each fill cites two different pages on two different hosts, both in "opened". The
+window must end on the run date, which the Dev gives as --run-date from the run's fire event and
+never takes from the package. Photo picks are only for new cars.
 
 Photo-hunt package (tools/REFRESH.md, "Photo hunt"): hints for cars that have too few photos. No
 URLs, no photo data: only names this tool and the Dev's own runs look up on Commons and Flickr.
@@ -76,6 +85,14 @@ FAMILY_RE = re.compile(r"[A-Za-z0-9 ]{2,30}")
 TEXT_BAD = set("<>{}[]|\\`")
 CAT_BAD = set("<>[]{}|#")
 TEXT_BAD_WORDS = ("__li_", "javascript:", "http", "://", "www.")
+# Cadence (tools/REFRESH.md): weekly, the user's choice of 2026-11-12 (Mondays, 03:17 UTC).
+CADENCE = "weekly"
+CADENCES = {"daily": {"period": 1, "window": 7, "fills": 3}, "weekly": {"period": 7, "window": 10, "fills": 7}}
+GAP_EPOCH = datetime.date(2026, 1, 5)                 # a Monday; round-robin day 0
+GAP_FIELDS = ("cv", "units", "designer")              # plus "perf" (a missing PERF entry); wiki is not a gap
+SKIP = {cid: {"units"} for cid in ("miura-svj", "countach-lp400", "urraco-p200", "countach-lp500s",
+                                   "diablo-svr", "murcielago-sv", "countach-25th")}   # BACKLOG "spec doubts"
+V1_UNTIL = datetime.date(2026, 11, 30)                # v1 packages are rejected after this day
 INVISIBLE = {*range(0x200B, 0x2010), *range(0x202A, 0x202F), *range(0x2066, 0x206A), 0xFEFF}
 
 
@@ -188,16 +205,53 @@ def load_catalog(path=CATALOG):
     return cars, perf
 
 
-def validate(pkg, cat_path=CATALOG):
+def gap_fields(row, perf):
+    """The fields of a car that a fill may set: blank today and not a doubted blank (SKIP)."""
+    out = {f for f in GAP_FIELDS if row[f] is None}
+    if row["kind"] in PERF_KINDS and row["id"] not in perf:
+        out.add("perf")
+    return out - SKIP.get(row["id"], set())
+
+
+def gap_ids(run_date, cat_path=CATALOG):
+    """The cars a run on run_date may fill, round-robin over every car with a gap, sorted by id."""
+    cars, perf = load_catalog(cat_path)
+    cad = CADENCES[CADENCE]
+    ids = sorted(cid for cid, (row, _) in cars.items() if gap_fields(row, perf))
+    if not ids:
+        return []
+    k = (run_date - GAP_EPOCH).days // cad["period"] * cad["fills"]
+    return [ids[(k + i) % len(ids)] for i in range(min(cad["fills"], len(ids)))]
+
+
+def validate(pkg, cat_path=CATALOG, run_date=None, today=None):
     cars, perf = load_catalog(cat_path)
     kinds, engs = read_order("KIND_ORDER"), read_order("ENG_ORDER")
     families = {r["family"] for r, _ in cars.values()}
-    today = datetime.date.today()
+    today = today or datetime.date.today()
     errs = []
 
-    strict_keys(pkg, TOP_KEYS, "package")
-    if type(pkg["version"]) is not int or pkg["version"] != 1:
-        raise Bad("version must be 1")
+    ver = pkg.get("version") if type(pkg) is dict else None
+    if type(ver) is not int or ver not in (1, 2):
+        raise Bad("version must be 1 or 2")
+    strict_keys(pkg, TOP_KEYS | ({"fills"} if ver == 2 else set()), "package")
+    if ver == 1 and today > V1_UNTIL:
+        raise Bad(f"version 1 packages are not accepted after {V1_UNTIL}")
+    fills = pkg.get("fills", [])
+    if ver == 2:
+        cad = CADENCES[CADENCE]
+        if run_date is None:
+            raise Bad("version 2: give --run-date YYYY-MM-DD, the day the run was fired (from its fire event)")
+        if type(pkg["window"]) is not list or len(pkg["window"]) != 2 or pkg["window"][1] != run_date.isoformat():
+            raise Bad(f"window must end on the run date {run_date}")
+        try:
+            if (run_date - datetime.date.fromisoformat(pkg["window"][0])).days > cad["window"]:
+                raise Bad(f"window longer than {cad['window']} days")
+        except (TypeError, ValueError):
+            raise Bad("window: two ISO dates")
+        if type(fills) is not list or len(fills) > cad["fills"]:
+            raise Bad(f"fills: a list of at most {cad['fills']}")
+        today_gaps = gap_ids(run_date, cat_path)
     w = pkg["window"]
     try:
         if type(w) is not list or len(w) != 2 or not all(type(d) is str and len(d) == 10 for d in w):
@@ -239,8 +293,8 @@ def validate(pkg, cat_path=CATALOG):
         raise Bad(f"cars: a list of at most {MAX_CARS}")
 
     seen = set()
-    for i, c in enumerate(pkg["cars"]):
-        where = f"cars[{i}]"
+    for i, (c, is_fill) in enumerate([(c, False) for c in pkg["cars"]] + [(c, True) for c in fills]):
+        where = f"fills[{i - len(pkg['cars'])}]" if is_fill else f"cars[{i}]"
         try:
             strict_keys(c, CAR_KEYS, where)
             if type(c["id"]) is not str or not ID_RE.fullmatch(c["id"]):
@@ -300,6 +354,23 @@ def validate(pkg, cat_path=CATALOG):
                     e.append(f"{where}.sources[{j}]: not among the pages listed in opened")
         if c["id"] not in cars and type(c["family"]) is str and c["family"] not in families:
             e.append(f"{where}.family: new family '{c['family']}': a separate, normal PR, not a refresh")
+        if ver == 2 and not is_fill and c["id"] in cars:
+            e.append(f"{where}: an existing car; a blank-fill goes in fills")
+        if is_fill:
+            if c["id"] not in cars:
+                e.append(f"{where}: fills are for existing cars only")
+            elif c["id"] not in today_gaps:
+                e.append(f"{where}: not one of the gap ids for {run_date} ({', '.join(today_gaps)})")
+            else:
+                ok = gap_fields(cars[c["id"]][0], perf)
+                bad = [f for f in FIELDS if c[f] != cars[c["id"]][0][f] and f not in ok]
+                if p is not None and c["id"] not in perf and "perf" not in ok:
+                    bad.append("perf")
+                if bad:
+                    e.append(f"{where}: may fill only {sorted(ok)}, not {bad}")
+            src = c["sources"] if type(c["sources"]) is list else []
+            if len(set(src)) < 2 or len({urllib.parse.urlsplit(u).hostname for u in src if type(u) is str}) < 2:
+                e.append(f"{where}.sources: a fill needs two different pages on two different hosts that agree")
         if c["id"] in cars and not e:          # blank-fill of an existing row
             old = cars[c["id"]][0]
             changed = [f for f in FIELDS if c[f] != old[f]]
@@ -324,6 +395,8 @@ def validate(pkg, cat_path=CATALOG):
             try:
                 if cid not in cars and cid not in seen:
                     raise Bad(f"{where}: unknown car id")
+                if ver == 2 and cid not in {c["id"] for c in pkg["cars"] if type(c) is dict}:
+                    raise Bad(f"{where}: photo picks only for new cars")
                 strict_keys(v, {"drop", "hero"}, where)
                 if type(v["drop"]) is not list or len(v["drop"]) > 20:
                     raise Bad(f"{where}.drop: a list of at most 20 titles")
@@ -359,7 +432,8 @@ def apply(pkg, cat_path=CATALOG):
     top = {n.targets[0].id: n.value for n in tree.body
            if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
     edits, new_rows, new_perf = [], "", ""
-    for c in pkg["cars"]:
+    rows = pkg["cars"] + pkg.get("fills", [])
+    for c in rows:
         if c["id"] in cars:
             old, call = cars[c["id"]]
             for k, f in enumerate(FIELDS):
@@ -387,13 +461,13 @@ def apply(pkg, cat_path=CATALOG):
             fh.write(src)
         # Verify with the AST before writing: every package value is back, and only as a literal.
         got, gperf = load_catalog(tmp)
-        if set(got) != set(cars) | {c["id"] for c in pkg["cars"]}:
+        if set(got) != set(cars) | {c["id"] for c in rows}:
             raise Bad("unexpected rows after the edit")
         before = sum(isinstance(n, (ast.Import, ast.ImportFrom, ast.FunctionDef)) for n in ast.walk(tree))
         after = sum(isinstance(n, (ast.Import, ast.ImportFrom, ast.FunctionDef)) for n in ast.walk(ast.parse(src)))
         if before != after:
             raise Bad("the edit added code")
-        for c in pkg["cars"]:
+        for c in rows:
             row, call = got[c["id"]]
             if c["id"] not in cars and not all(isinstance(a, (ast.Constant, ast.List)) for a in call.args):
                 raise Bad(f"{c['id']}: written row is not all literals")
@@ -407,8 +481,8 @@ def apply(pkg, cat_path=CATALOG):
         shutil.copyfile(tmp, cat_path)
     finally:
         shutil.rmtree(tmpd)
-    new = [c["id"] for c in pkg["cars"] if c["id"] not in cars]
-    print(f"catalog.py: {len(new)} rows added, {len(pkg['cars']) - len(new)} rows filled, "
+    new = [c["id"] for c in rows if c["id"] not in cars]
+    print(f"catalog.py: {len(new)} rows added, {len(rows) - len(new)} rows filled, "
           f"{new_perf.count(chr(10))} PERF entries")
     if new:
         print("next: python3 tools/images.py --only " + ",".join(new))
@@ -455,6 +529,12 @@ def report(pkg):
            f"window {pkg['window'][0]} to {pkg['window'][1]}"]
     for c in pkg["cars"]:
         out.append(f"{c['id']} | {c['name']} | {c['kind']} | {c['year']}")
+        out += [f"    {u}" for u in c["sources"]]
+    cars = load_catalog()[0]
+    for c in pkg.get("fills", []):
+        old = cars.get(c["id"], ({}, None))[0]
+        got = [f"{f}={c[f]!r}" for f in FIELDS if c[f] != old.get(f)] + (["perf=" + repr(c["perf"])] if c["perf"] else [])
+        out.append(f"fill {c['id']} | {', '.join(got)}")
         out += [f"    {u}" for u in c["sources"]]
     if pkg["notes"]:
         out.append("notes: " + pkg["notes"])
@@ -530,7 +610,7 @@ def self_test():
         with open(pk, "w", encoding="utf-8") as fh:
             fh.write(p if isinstance(p, str) else json.dumps(p, ensure_ascii=False))
         shutil.copy(CATALOG, cat)
-        pkg = validate(load(pk), cat)
+        pkg = validate(load(pk), cat, today=V1_UNTIL)       # v1 cases: on the last day v1 is accepted
         apply(pkg, cat)
         return pkg
     fails = []
@@ -555,12 +635,14 @@ def self_test():
             fails.append("i: picks outside your own run were applied")
         hf, hn = hunt_self_test(tmpd)
         fails += hf
+        vf, vn = v2_self_test(tmpd)
+        fails += vf
     finally:
         shutil.rmtree(tmpd)
     for f in fails:
         print("FAIL", f)
-    print("self-test " + ("FAILED" if fails else f"OK: {len(cases)} hostile packages and {hn} hostile "
-                          "photo hunts rejected, (a) imported as an inert string, (i) picks outside your "
+    print("self-test " + ("FAILED" if fails else f"OK: {len(cases)} hostile packages, {vn} hostile v2 "
+                          f"packages and {hn} hostile photo hunts rejected, a good v2 fill applied, (a) imported as an inert string, (i) picks outside your "
                           "run ignored, a good hunt applied"))
     return not fails
 
@@ -791,6 +873,72 @@ def hunt_report(pkg):
     print("\n".join(out))
 
 
+def v2_self_test(tmpd):
+    """Version 2: fills only for the run date's gap ids, two hosts, the run date from the Dev."""
+    cars, perf = load_catalog()
+    day = datetime.date(2026, 11, 16)
+    gid = gap_ids(day)[0]
+    row = cars[gid][0]
+    f = sorted(gap_fields(row, perf) - {"perf"})[0] if gap_fields(row, perf) - {"perf"} else None
+    fill = dict(row, perf=None, sources=["https://en.wikipedia.org/wiki/Lamborghini", "https://www.evo.co.uk/lamborghini"])
+    if f:
+        fill[f] = {"cv": 400, "units": 10, "designer": "A Designer"}[f]
+    else:
+        fill["perf"] = [300, False, 3.5]
+    good = {"version": 2, "window": ["2026-11-09", "2026-11-16"], "cars": [], "fills": [fill], "photos": {},
+            "notes": "", "opened": ["https://en.wikipedia.org/wiki/Lamborghini", "https://www.evo.co.uk/lamborghini"],
+            "unreachable": []}
+    other = next(i for i in sorted(cars) if i not in gap_ids(day))
+    off = gap_ids(day + datetime.timedelta(days=CADENCES[CADENCE]["period"]))[0]
+    one = lambda **kw: dict(good, fills=[dict(fill, **kw)])
+    cases = {
+        "v2 fill id not today's": one(id=other),
+        "v2 fill id of the next run": dict(good, fills=[dict(cars[off][0], perf=None, sources=fill["sources"])]),
+        "v2 one source": one(sources=fill["sources"][:1]),
+        "v2 same page twice": one(sources=[fill["sources"][0]] * 2),
+        "v2 two pages, one host": dict(good, opened=good["opened"] + ["https://en.wikipedia.org/wiki/List_of_Lamborghini_automobiles"],
+                                       fills=[dict(fill, sources=["https://en.wikipedia.org/wiki/Lamborghini",
+                                                                  "https://en.wikipedia.org/wiki/List_of_Lamborghini_automobiles"])]),
+        "v2 source not opened": one(sources=[fill["sources"][0], "https://www.motor1.com/x/"]),
+        "v2 fill a non-gap field": one(note="Changed."),
+        "v2 fill wiki": one(wiki="Lamborghini") if row["wiki"] is None else one(note="x"),
+        "v2 window not on run date": dict(good, window=["2026-11-09", "2026-11-15"]),
+        "v2 window too long": dict(good, window=["2026-10-01", "2026-11-16"]),
+        "v2 existing id in cars": dict(good, cars=[fill], fills=[]),
+        "v2 too many fills": dict(good, fills=[fill] * (CADENCES[CADENCE]["fills"] + 1)),
+        "v2 photos for a fill": dict(good, photos={gid: {"drop": [], "hero": None}}),
+        "v2 missing fills key": {k: v for k, v in good.items() if k != "fills"},
+        "v2 no run date": None,
+        "v1 after cut-off": None,
+    }
+    fails = []
+    for name, p in cases.items():
+        try:
+            if name == "v2 no run date":
+                validate(json.loads(json.dumps(good)), today=day)
+            elif name == "v1 after cut-off":
+                v1 = {k: v for k, v in good.items() if k != "fills"}
+                validate(dict(v1, version=1, window=["2026-11-20", "2026-12-01"]), today=V1_UNTIL + datetime.timedelta(days=1))
+            else:
+                validate(json.loads(json.dumps(p)), run_date=day, today=day)
+            fails.append(f"{name}: accepted")
+        except Bad:
+            pass
+    skip_row = dict(cars["miura-svj"][0])
+    if "units" in gap_fields(skip_row, perf):
+        fails.append("v2: a SKIP field counts as a gap")
+    cat = os.path.join(tmpd, "catalog_v2.py")
+    shutil.copy(CATALOG, cat)
+    try:
+        apply(validate(json.loads(json.dumps(good)), cat, run_date=day, today=day), cat)
+        got, gperf = load_catalog(cat)
+        if (f and got[gid][0][f] != fill[f]) or (not f and gid not in gperf):
+            fails.append("v2: the good fill was not written")
+    except Bad as e:
+        fails.append(f"v2: the good fill was rejected: {e}")
+    return fails, len(cases)
+
+
 def hunt_self_test(tmpd):
     """Hostile photo-hunt packages, and one good one applied to scratch copies."""
     cars = load_catalog()[0]
@@ -872,10 +1020,25 @@ def main_catalog_copy():
 
 
 def main():
-    if sys.argv[1:] == ["--self-test"]:
+    args = sys.argv[1:]
+    if args == ["--self-test"]:
         sys.exit(0 if self_test() else 1)
-    if len(sys.argv) != 3 or sys.argv[1] not in ("check", "apply", "photos", "report", "hunt"):
+    run_date = None
+    if len(args) == 4 and args[2] == "--run-date":
+        try:
+            run_date = datetime.date.fromisoformat(args[3])
+        except ValueError:
+            sys.exit("--run-date: YYYY-MM-DD")
+        args = args[:2]
+    if len(args) == 2 and args[0] == "gaps":
+        try:
+            print(" ".join(gap_ids(datetime.date.fromisoformat(args[1]))))
+        except ValueError:
+            sys.exit("gaps YYYY-MM-DD")
+        return
+    if len(args) != 2 or args[0] not in ("check", "apply", "photos", "report", "hunt"):
         sys.exit(__doc__.split("\n\n")[1])
+    sys.argv[1:] = args
     try:
         pkg = load(sys.argv[2])
         if is_hunt(pkg):
@@ -890,13 +1053,14 @@ def main():
         if sys.argv[1] == "hunt":
             raise Bad("not a photo-hunt package")
         if sys.argv[1] in ("check", "apply"):
-            validate(pkg)
+            validate(pkg, run_date=run_date)
             if sys.argv[1] == "check":
-                print(f"package OK: {len(pkg['cars'])} cars, photo picks for {len(pkg['photos'])} cars")
+                print(f"package OK: {len(pkg['cars'])} cars, {len(pkg.get('fills', []))} fills, "
+                      f"photo picks for {len(pkg['photos'])} cars")
             else:
                 apply(pkg)
         else:
-            validate(pkg, main_catalog_copy())
+            validate(pkg, main_catalog_copy(), run_date=run_date)
             (photos if sys.argv[1] == "photos" else report)(pkg)
     except Bad as e:
         sys.exit("package rejected:\n" + str(e))
