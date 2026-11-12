@@ -39,6 +39,8 @@ history). Record each decision the user makes under Decisions, with its date.
   finished run (its tool limit is not enforced, so it reads nothing untrusted).
 - 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
   security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
+- 2026-11-12: Photos are dropped only when they show a different car, not a different version of the
+  same car (EVO, EVO2); when unsure, ask the Manager.
 - 2026-11-12: Footer redesign: concise, grouped, quiet, at the content width. Line 1 the build's data
   line; line 2 three notes with quiet separators (stacked on narrow screens): "Unofficial fan site, not
   affiliated with Automobili Lamborghini" (fan notice of 2026-11-11, shortened; the trademark sentence
