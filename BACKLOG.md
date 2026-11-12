@@ -29,6 +29,13 @@ history). Record each decision the user makes under Decisions, with its date.
   new cars and fills blank specs of up to 7 cars per run (two agreeing sources, round-robin). A
   Pickup chat on Haiku 5.5 replaces the Manager's monthly pickup; empty runs wake no other chat.
   One PR per run, the same day; Cyber checks every PR.
+- 2026-11-12: Visits are counted with GoatCounter (site code `thelamboindex`), without its script:
+  app.js loads a tracking pixel per page shown (view or car page, never filters or searches; old
+  `#/stats` counts as Browse), only on https. The footer says visits are counted anonymously, with
+  no cookies. The user reads the counts in GoatCounter's dashboard and its weekly email.
+- 2026-11-12: Monthly design review: the task "Lambo Index monthly design review" (cron `17 6 5 * *`)
+  fires into the Web designer chat, which proposes up to 5 UI improvements to the Manager and changes
+  nothing in the repo until the user approves. The Manager recreates the task for a new Web designer chat.
 - 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
   security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
 - 2026-11-11: Every page's footer says: "Unofficial fan site, not affiliated with or endorsed by
@@ -76,6 +83,10 @@ history). Record each decision the user makes under Decisions, with its date.
       packages stop on 2026-11-30.
 
 ## Next
+
+- [ ] **Scout import against the run's catalogue** (Cyber follow-up a): `gap_ids` reads the working
+      catalogue, so if main changes between a Scout run and its import, a legitimate fill can be
+      rejected (fails safe). Fix: compute it from main as of the run's fire time.
 
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
       Revisit if the site goes public (then it would need accounts or a shared store).

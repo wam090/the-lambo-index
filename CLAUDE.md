@@ -24,6 +24,9 @@ Every role reports to the Manager:
   about 50% measured it starts its own successor (`create_session`, title Manager_v0.N+1, with a
   hand-over prompt) and tells the user in one line; it does the same for any role that reports full.
 - **Dev** (Dev_0.x): code, data, docs, PRs and merges. **Web designer**: design work, via PRs like Dev.
+  The task "Lambo Index monthly design review" (cron `17 6 5 * *`) fires into its chat: it proposes up
+  to 5 UI improvements to the Manager and changes nothing until the user approves; the Manager
+  recreates the task for a replacement Web designer chat.
 - **Cyber** (Cyber_v0.x): security reviews; all security work goes there.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session with no repo every
   Monday at 03:17 UTC (`tools/REFRESH.md`). It only scouts new cars and fills blank specs of up to
@@ -117,6 +120,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   photo runs and checks by eye (`tools/REFRESH.md`, Photo hunt).
 - **Hero**: the car-of-the-day photo, no heading, replaces the family strip on Browse (`setHero()`;
   hidden while searching or filtering); its credit links the photo's page and licence (`creditHTML`).
+- **Visits**: GoatCounter tracking pixel, `countVisit()` in `app.js`: one count per view or car page
+  shown, path taken from the view (never the address), https only. No GoatCounter script, ever (CSP).
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 

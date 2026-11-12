@@ -621,6 +621,7 @@ function stepDetail(d) {
   detailId = c.id;
   renderDetail(c);
   sheet.scrollTop = 0;
+  countVisit();
 }
 sheet.addEventListener('click', (e) => {
   if (e.target === sheet) { closeModel(); return; }
@@ -632,6 +633,7 @@ sheet.addEventListener('click', (e) => {
     history.replaceState(null, '', `#/m/${c.id}`);
     detailId = c.id; detailList = null;
     renderDetail(c); sheet.scrollTop = 0;
+    countVisit();
     return;
   }
   const b = e.target.closest('a[href^="#/?"]');
@@ -768,7 +770,25 @@ function parseHash() {
   const i = h.indexOf('?');
   return { path: i >= 0 ? h.slice(0, i) : h, params: new URLSearchParams(i >= 0 ? h.slice(i + 1) : '') };
 }
-function route() {
+/* Visit counting (user's decision, 2026-11-12): GoatCounter, without its script (no external JS).
+   One tracking pixel per page shown, never on file:// or http://. The path comes from the view
+   actually shown, never from the address: an old #/stats link or an unknown car id lands on Browse
+   and counts as "/"; browse filters and searches are not sent and do not count again. */
+const COUNT_URL = 'https://thelamboindex.goatcounter.com/count';
+const VIEW_PATH = { browse: '/', timeline: '/timeline', fast: '/fast10', compare: '/compare' };
+let lastCounted = null;
+let firstCount = true;
+function countVisit() {
+  if (location.protocol !== 'https:') return;
+  const p = detailId && byId.has(detailId) ? `/m/${detailId}` : VIEW_PATH[activeView];
+  if (!p || p === lastCounted) return;
+  lastCounted = p;
+  const q = { p, t: document.title, r: firstCount ? document.referrer : '', rnd: Math.random().toString(36).slice(2, 7) };
+  firstCount = false;
+  new Image().src = COUNT_URL + '?' + Object.keys(q).filter((k) => q[k]).map((k) => `${k}=${encodeURIComponent(q[k])}`).join('&');
+}
+function route() { routeView(); countVisit(); }
+function routeView() {
   const { path, params } = parseHash();
   if (path.startsWith('/m/')) {
     const c = byId.get(decodeURIComponent(path.slice(3)));
