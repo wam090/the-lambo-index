@@ -42,6 +42,10 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-12: A photo of a different version that has its own page moves to that page (the two
   2024 GT3 EVO2 photos: Huracán GT3 → GT3 EVO). Otherwise photos are dropped only when they show a
   different car, not a different version of the same car; when unsure, ask the Manager.
+- 2026-11-12: Nightly family audit, 16 nights from 2026-11-13 (`tools/AUDIT.md`): a Scout-style task at
+  00:17 UTC (no standing Auditor chat) checks one night's facts against two sources; the Pickup's
+  second task points the Dev at it at 05:17 UTC; the Dev applies findings and checks the night's
+  photos; one PR a night, Cyber checks. A prompt change means a new task.
 - 2026-11-12: Footer redesign: concise, grouped, quiet, at the content width. Line 1 the build's data
   line; line 2 three notes with quiet separators (stacked on narrow screens): "Unofficial fan site, not
   affiliated with Automobili Lamborghini" (fan notice of 2026-11-11, shortened; the trademark sentence
@@ -90,6 +94,11 @@ history). Record each decision the user makes under Decisions, with its date.
       packages stop on 2026-11-30.
 
 ## Next
+
+- [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
+      write "audit done" here and the Manager disables both tasks. Needs the user's decision (Cyber):
+      may an audit replace one of our values when two sources agree against it? "Blank beats wrong"
+      covers only sources that disagree.
 
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
       gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be

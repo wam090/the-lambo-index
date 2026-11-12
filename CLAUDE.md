@@ -79,11 +79,12 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 | `data/extra_images.json` | hand-picked Commons files outside a car's categories | yes |
 | `data/flickr_queries.json` | extra Flickr search terms per car from a photo hunt | via `scout_import.py hunt` |
 | `tools/images.py`, `tools/flickr.py` | photo pickers: Commons per car with credits; Flickr CC for cars Commons lacks | rarely |
-| `tools/photo_check.py` | flags photos that may be on the wrong car page (duplicates, other family or version in the title) | rarely |
+| `tools/photo_check.py` | flags photos that may be on the wrong car page (duplicates, another family or version in the title or, with `--cats`, the Commons categories) | rarely |
 | `tools/review_sheet.py` | contact sheet of photo candidates, for checking by eye (Pillow) | rarely |
 | `tools/build.py` | catalogue + photos + src → `data/cars.json` + `index.html` | rarely |
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |
-| `tools/REFRESH.md` | the monthly refresh: Scout, Dev and Cyber steps | yes |
+| `tools/REFRESH.md` | the weekly refresh: Scout, Dev and Cyber steps | yes |
+| `tools/AUDIT.md`, `tools/audit_plan.json` | the nightly family audit: run, Dev and Cyber steps; the 16 nights | yes |
 | `tools/scout_import.py` | checks the Scout's package (Cyber's spec), writes rows with `repr()`; `gaps`; `CADENCE`; `--self-test` | when the format changes |
 | `fonts/` | self-hosted Archivo and IBM Plex Mono (SIL OFL 1.1, licence files beside them) | rarely |
 | `data/images.json`, `data/flickr.json`, `data/cars.json`, `index.html` | outputs of images.py, flickr.py, build.py | never by hand |
@@ -120,6 +121,10 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   `Photo hunt: <id>, <id>` (never 03:15-04:30 UTC) and sends the Dev the same text and the run id;
   the Scout returns hints only; the Dev runs `scout_import.py hunt`, its own
   photo runs and checks by eye (`tools/REFRESH.md`, Photo hunt).
+- **Nightly audit** (`tools/AUDIT.md`, plan in `tools/audit_plan.json`, 16 nights from 2026-11-13):
+  the task "Lambo Index audit" (00:17 UTC, a fresh session per fire, like the Scout) compares one
+  night's rows with two sources; the Pickup points the Dev at the run; the Dev applies findings with
+  `scout_import.py audit`, checks that night's photos (`tools/photo_check.py`, by eye), one PR a night.
 - **Hero**: the car-of-the-day photo, no heading, replaces the family strip on Browse (`setHero()`;
   hidden while searching or filtering); its credit links the photo's page and licence (`creditHTML`).
 - **Visits**: GoatCounter tracking pixel, `countVisit()` in `app.js`: one count per view or car page
