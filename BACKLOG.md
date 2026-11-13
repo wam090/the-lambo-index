@@ -11,7 +11,8 @@ history). Record each decision the user makes under Decisions, with its date.
   and applies only what the Manager relays as "approved". No answer: nothing is applied. A night
   with no change merges after Cyber's OK alone.
 - 2026-11-13: The user switches on GitHub's "Block command line pushes that expose my email"
-  themselves. Our commits use noreply addresses only, so pushes are unaffected.
+  themselves. Claude's commits use noreply addresses. 26 web-UI commits of 2026-11-09/10 carry the
+  user's personal email; "Keep my email addresses private" stops new ones (history is the user's call).
 - 2026-11-08: Scope is indexing and easy browsing first, built up step by step.
 - 2026-11-08: The timeline's orange frame marks only the original form of each car; versions,
   editions and race variants never get it (rules in tools/catalog.py).

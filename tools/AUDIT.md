@@ -57,7 +57,7 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    each photo change with its reason; tokens used) and leave the PR open; Cyber may check it
    meanwhile. Keep only what the Manager relays as "approved": restore `catalog.py` from
    `origin/main`, run `audit` on a copy of the package without the other findings (give Cyber both
-   SHA-256s), revert other photo changes, rebuild, and have Cyber re-check if the diff changed.
+   files and their SHA-256s), revert other photo changes, rebuild, and have Cyber re-check if the diff changed.
    No answer: nothing is applied, and the PR waits. A night with no change (it only marks the night
    checked) merges after Cyber's OK alone (Manager, 2026-11-13).
 8. **Merge** after Cyber's OK and the user's approval only. After the last night is merged, record
