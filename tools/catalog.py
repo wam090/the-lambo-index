@@ -35,7 +35,7 @@ CARS = [
       ["Lamborghini 350 GTV", "Lamborghini 350GTV"], "Lamborghini 350 GTV", "Lamborghini's first car, shown at the 1963 Turin Motor Show."),
     E("350-gt", "350", "350 GT", "Production", 1964, 1966, "Coupé", "3.5 L V12", "V12", 280, 120, T,
       ["Lamborghini 350 GT"], "Lamborghini 350 GT", "The first production Lamborghini, built in Sant'Agata Bolognese."),
-    E("3500-gtz", "350", "3500 GTZ", "Limited series", 1965, None, "Coupé", "3.5 L V12", "V12", None, 2, "Zagato",
+    E("3500-gtz", "350", "3500 GTZ", "Limited series", 1965, None, "Coupé", "3.5 L V12", "V12", None, 2, 'Ercole Spada',
       ["Lamborghini 3500 GTZ"], None, "Zagato-bodied coupé on the 350 GT chassis."),
     E("350-gts", "350", "350 GTS", "Limited series", 1965, None, "Roadster", "3.5 L V12", "V12", None, 2, T,
       ["Lamborghini 350 GTS", "Lamborghini 350 GT"], None, "Open Touring convertible on the 350 GT."),
