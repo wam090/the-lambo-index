@@ -8,7 +8,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-13: An audit may replace one of our values when two sources agree against it, but every
   audit change (fact, photo drop or move) goes to the user first: the Dev reports each night's
   proposals to the Manager (car, field, ours, theirs, the two source hosts), leaves the PR open
-  and applies only what the Manager relays as "approved". No answer: nothing is applied.
+  and applies only what the Manager relays as "approved". No answer: nothing is applied. A night
+  with no change merges after Cyber's OK alone.
 - 2026-11-13: The user switches on GitHub's "Block command line pushes that expose my email"
   themselves. Our commits use noreply addresses only, so pushes are unaffected.
 - 2026-11-08: Scope is indexing and easy browsing first, built up step by step.
