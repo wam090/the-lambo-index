@@ -103,7 +103,9 @@ history). Record each decision the user makes under Decisions, with its date.
 ## Next
 
 - [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
-      write "audit done" here and the Manager disables both tasks.
+      write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
+      night 16: 400-gt (night 1, no second source). Both sources must be pages about the exact car
+      (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages); flag it each night.
 
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
       gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be
