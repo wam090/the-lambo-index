@@ -52,10 +52,16 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    `tools/audit_plan.json`, `data/heroes.json`, `data/extra_images.json`, `data/cars.json`,
    `index.html`. Build, smoke, the scratch rebuild (`tools/REFRESH.md`), then send Cyber the PR, the
    package, its SHA-256, the run id and the run date.
-7. **Merge** after Cyber's OK only. Tell the Manager only when a night is blocked, when a night used
-   more than about 15% of your context, or when the last night is merged: then record "audit done"
-   in BACKLOG.md and the Manager disables both tasks. A missed or rejected night stays unchecked;
-   the Manager decides whether to run it again after night 16.
+7. **Approval** (user, 2026-11-13). Every change (fact, photo drop or move) needs the user's OK:
+   send the Manager one bulleted report per night (car, field, ours, theirs, the two source hosts;
+   each photo change with its reason; tokens used) and leave the PR open; Cyber may check it
+   meanwhile. Keep only what the Manager relays as "approved": restore `catalog.py` from
+   `origin/main`, run `audit` on a copy of the package without the other findings (give Cyber both
+   SHA-256s), revert other photo changes, rebuild, and have Cyber re-check if the diff changed.
+   No answer: nothing is applied, and the PR waits.
+8. **Merge** after Cyber's OK and the user's approval only. After the last night is merged, record
+   "audit done" in BACKLOG.md; the Manager disables both tasks. A missed or rejected night stays
+   unchecked; the Manager decides whether to run it again after night 16.
 
 ## Cyber's check of each night's PR (7 points)
 1. Paths stay inside the list in Dev step 6.
