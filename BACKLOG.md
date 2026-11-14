@@ -12,7 +12,8 @@ history). Record each decision the user makes under Decisions, with its date.
   with no change merges after Cyber's OK alone.
 - 2026-11-13: The user switches on GitHub's "Block command line pushes that expose my email"
   themselves. Claude's commits use noreply addresses. 26 web-UI commits of 2026-11-09/10 carry the
-  user's personal email; "Keep my email addresses private" stops new ones (history is the user's call).
+  user's personal email; "Keep my email addresses private" stops new ones. The user switches on both
+  settings; the old commits stay as they are (no history rewrite).
 - 2026-11-08: Scope is indexing and easy browsing first, built up step by step.
 - 2026-11-08: The timeline's orange frame marks only the original form of each car; versions,
   editions and race variants never get it (rules in tools/catalog.py).
@@ -105,7 +106,7 @@ history). Record each decision the user makes under Decisions, with its date.
 
 - [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
-      night 16: 400-gt (night 1, no second source). Both sources must be pages about the exact car
+      night 16: 400-gt (night 1), miura-svr and miura-concept (night 2): no second source. Both sources must be pages about the exact car
       (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages); flag it each night.
 
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
