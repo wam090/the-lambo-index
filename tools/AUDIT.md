@@ -12,7 +12,7 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
 1. **Night.** `python3 tools/scout_import.py audit-night <run date>` prints `night N: <ids>`, or
    `audit complete`: then end with the empty package (`"checked": []`, `"findings": []`, `"notes":
    "audit complete"`, `"opened"` with two pages you read) and nothing else.
-2. **Compare.** For each id, take its row in `tools/catalog.py` and read in full two pages about that
+2. **Compare.** For each id, take its row in `tools/catalog.py` and read two pages about that
    exact car on two different hosts: `AUDIT_HOSTS` in `scout_import.py`, at least one of the two on
    `SOURCE_HOSTS` (en.wikipedia.org or a press host). Never lamborghini.com, no user-agent tricks.
    Compare `family`, `kind`, `year`, `end`, `body`, `engine` and `designer`. `year` is when the car
@@ -40,6 +40,11 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    as a `repr()` literal and verifies the file with the AST. You may delete a finding (never edit one)
    that contradicts a user decision, a BACKLOG "spec doubts" item or `EXTRA_DEBUTS`/`NOT_DEBUTS`;
    list each deletion with its reason. Read `git diff tools/catalog.py` line by line.
+   **Source check** (user, 2026-11-14; the run's fetch tool returns summaries, not page text): check
+   every finding yourself against the car's own article, its row's `wiki`, fetched raw
+   (`https://en.wikipedia.org/w/index.php?title=<wiki>&action=raw`), never a link from the package.
+   In the Manager report mark each finding "confirmed" (the raw article gives `theirs`),
+   "contradicted" (it gives another value) or "unverified" (no `wiki`, or the article is silent).
 4. **Photos**, the night's cars: `python3 tools/photo_check.py --only <ids> --cats --json <scratch>/f.json`,
    then `tools/review_sheet.py <scratch>/f.json <ids> <scratch>/f.png` and a sheet of each car's lead
    photo; look at both. A different car: `drop`. A different version that has its own page: move it
