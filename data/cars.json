@@ -1,6 +1,6 @@
 {
  "brand": "Lamborghini",
- "generated": "2026-11-12",
+ "generated": "2026-11-13",
  "cars": [
   {
    "id": "350-gtv",
@@ -188,7 +188,7 @@
    "eng": "V12",
    "cv": null,
    "units": 2,
-   "designer": "Zagato",
+   "designer": "Ercole Spada",
    "wiki": null,
    "note": "Zagato-bodied coupé on the 350 GT chassis.",
    "cats": [
