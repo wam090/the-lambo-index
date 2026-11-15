@@ -122,7 +122,9 @@ history). Record each decision the user makes under Decisions, with its date.
       2026-11-15 (Dev_0.7): Flickr CC, `--embed` and Commons search found nothing allowed for
       urus-st-x, sc20, autentica, invencible (press or game only); miura-jota's free photos are all
       recreations (original destroyed 1971). 16 under-4 cars searched; only lanzador, 400-gt-monza and
-      murcielago-40th gained. Decisions pending with the user via the Manager.
+      murcielago-40th gained; batch 3 (8 cars): flying-star-ii, 3500-gtz, murcielago-rsv gained. Next:
+      athon, p132, genesis, p140, diablo-se30-jota, p147-gandini, canto, aventador-50, sc18-alston,
+      revuelto-sv. Decisions pending with the user via the Manager.
 - [ ] **Toy sweep** (rule of 2026-11-15): Commons categories and titles of every photo for toy and
       model words, then all photos by eye; proposed drops go to the user. Started by Dev_0.6: only
       6 title hits (5 are the real "V12 Vision Gran Turismo" show car; check centenario's "XBOX MEDIA

@@ -30,7 +30,8 @@
  "drop": {
   "350-gtv": [
    "Lamborghini 350 GTV 1963.JPG",
-   "Bizzarrini Lamborghini Dallara.jpg"
+   "Bizzarrini Lamborghini Dallara.jpg",
+   "flickr:24631763299"
   ],
   "diablo-svr": [
    "Lamborghini diablo SVR white (6653850581).jpg",
@@ -149,7 +150,9 @@
    "flickr:14268760551",
    "flickr:14270001842",
    "flickr:14271651804",
-   "flickr:14272084955"
+   "flickr:14272084955",
+   "flickr:14085430279",
+   "flickr:14085525857"
   ],
   "portofino": [
    "flickr:46143078895"
@@ -221,6 +224,29 @@
   ],
   "lanzador": [
    "flickr:53133730805"
+  ],
+  "urus-concept": [
+   "flickr:7978099184",
+   "flickr:45477519892",
+   "flickr:32691263268",
+   "flickr:45477521752",
+   "flickr:40169351971",
+   "flickr:40169353111",
+   "flickr:47940176693",
+   "flickr:47940176443"
+  ],
+  "3500-gtz": [
+   "flickr:6958219075"
+  ],
+  "flying-star-ii": [
+   "flickr:4460798450"
+  ],
+  "miura-svr": [
+   "flickr:4610486368",
+   "flickr:3754567718"
+  ],
+  "faena": [
+   "flickr:46187703155"
   ]
  }
 }
