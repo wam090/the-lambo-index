@@ -14433,42 +14433,6 @@
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
     {
-     "t": "flickr:53132774742",
-     "w": 1024,
-     "ht": 683,
-     "a": "Automotive  Rhythms",
-     "l": "CC BY-NC-ND 2.0",
-     "lu": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
-     "src": "flickr",
-     "p": "https://www.flickr.com/photos/artvlive/53132774742/",
-     "sz": [
-      [
-       320,
-       "https://live.staticflickr.com/65535/53132774742_ecca4550ac_n.jpg"
-      ],
-      [
-       400,
-       "https://live.staticflickr.com/65535/53132774742_ecca4550ac_w.jpg"
-      ],
-      [
-       500,
-       "https://live.staticflickr.com/65535/53132774742_ecca4550ac.jpg"
-      ],
-      [
-       640,
-       "https://live.staticflickr.com/65535/53132774742_ecca4550ac_z.jpg"
-      ],
-      [
-       800,
-       "https://live.staticflickr.com/65535/53132774742_ecca4550ac_c.jpg"
-      ],
-      [
-       1024,
-       "https://live.staticflickr.com/65535/53132774742_ecca4550ac_b.jpg"
-      ]
-     ]
-    },
-    {
      "t": "flickr:53133579974",
      "w": 1024,
      "ht": 564,
@@ -14573,42 +14537,6 @@
       [
        1024,
        "https://live.staticflickr.com/65535/53133536364_ff7202e590_b.jpg"
-      ]
-     ]
-    },
-    {
-     "t": "flickr:53132773092",
-     "w": 1024,
-     "ht": 683,
-     "a": "Automotive  Rhythms",
-     "l": "CC BY-NC-ND 2.0",
-     "lu": "https://creativecommons.org/licenses/by-nc-nd/2.0/",
-     "src": "flickr",
-     "p": "https://www.flickr.com/photos/artvlive/53132773092/",
-     "sz": [
-      [
-       320,
-       "https://live.staticflickr.com/65535/53132773092_beb6a7931a_n.jpg"
-      ],
-      [
-       400,
-       "https://live.staticflickr.com/65535/53132773092_beb6a7931a_w.jpg"
-      ],
-      [
-       500,
-       "https://live.staticflickr.com/65535/53132773092_beb6a7931a.jpg"
-      ],
-      [
-       640,
-       "https://live.staticflickr.com/65535/53132773092_beb6a7931a_z.jpg"
-      ],
-      [
-       800,
-       "https://live.staticflickr.com/65535/53132773092_beb6a7931a_c.jpg"
-      ],
-      [
-       1024,
-       "https://live.staticflickr.com/65535/53132773092_beb6a7931a_b.jpg"
       ]
      ]
     },
