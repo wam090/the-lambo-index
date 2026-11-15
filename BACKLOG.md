@@ -5,6 +5,13 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-15: Only real cars on the site: no toys, die-cast or scale models, LEGO or other models
+  in any photo (a sweep of all cars, then every audit night).
+- 2026-11-15: Audit findings are checked against the car's raw Wikipedia article (`tools/AUDIT.md`
+  Dev step 3, 2026-11-14): contradicted ones are deleted, unverified ones go to the user labelled
+  so, default no. 3500-gtz designer reverted to "Zagato": the night-1 sources did not name Spada;
+  re-add him only if two real pages about the GTZ do and one checks out raw.
+
 - 2026-11-13: An audit may replace one of our values when two sources agree against it, but every
   audit change (fact, photo drop or move) goes to the user first: the Dev reports each night's
   proposals to the Manager (car, field, ours, theirs, the two source hosts), leaves the PR open
@@ -106,8 +113,8 @@ history). Record each decision the user makes under Decisions, with its date.
 
 - [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
-      night 16: 400-gt (night 1), miura-svr and miura-concept (night 2): no second source. Both sources must be pages about the exact car
-      (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages); flag it each night.
+      night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3): no second source. Both sources must be pages about the exact car
+      (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
 
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
       gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be

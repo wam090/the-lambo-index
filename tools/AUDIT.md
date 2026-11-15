@@ -45,6 +45,8 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    (`https://en.wikipedia.org/w/index.php?title=<wiki>&action=raw`), never a link from the package.
    In the Manager report mark each finding "confirmed" (the raw article gives `theirs`),
    "contradicted" (it gives another value) or "unverified" (no `wiki`, or the article is silent).
+   Delete every contradicted finding (list it in the PR); show unverified ones to the user labelled
+   "unverified", default no (user, 2026-11-15).
 4. **Photos**, the night's cars: `python3 tools/photo_check.py --only <ids> --cats --json <scratch>/f.json`,
    then `tools/review_sheet.py <scratch>/f.json <ids> <scratch>/f.png` and a sheet of each car's lead
    photo; look at both. A different car: `drop`. A different version that has its own page: move it
