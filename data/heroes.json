@@ -30,7 +30,8 @@
  "drop": {
   "350-gtv": [
    "Lamborghini 350 GTV 1963.JPG",
-   "Bizzarrini Lamborghini Dallara.jpg"
+   "Bizzarrini Lamborghini Dallara.jpg",
+   "flickr:24631763299"
   ],
   "diablo-svr": [
    "Lamborghini diablo SVR white (6653850581).jpg",
@@ -124,7 +125,9 @@
    "flickr:5545843646",
    "flickr:5545845450",
    "flickr:8581753781",
-   "flickr:8582856516"
+   "flickr:8582856516",
+   "flickr:8581754777",
+   "flickr:5545840818"
   ],
   "lma002": [
    "flickr:30081740238",
@@ -134,7 +137,8 @@
    "flickr:43902137452",
    "flickr:43902138282",
    "flickr:43902140722",
-   "flickr:43950190781"
+   "flickr:43950190781",
+   "flickr:30081745918"
   ],
   "murcielago-lp650": [
    "flickr:3356764581",
@@ -146,14 +150,17 @@
    "flickr:14268760551",
    "flickr:14270001842",
    "flickr:14271651804",
-   "flickr:14272084955"
+   "flickr:14272084955",
+   "flickr:14085430279",
+   "flickr:14085525857"
   ],
   "portofino": [
    "flickr:46143078895"
   ],
   "urraco-p200": [
    "flickr:32125633187",
-   "flickr:33192180398"
+   "flickr:33192180398",
+   "flickr:31202153236"
   ],
   "urus-st-x": [
    "flickr:49797331226"
@@ -184,6 +191,64 @@
    "The Two Lamborghinis (6004980516).jpg",
    "1979 Caprie Nuccio Bertone e Chuck Jordan.jpg",
    "1977 Bertone designs.jpg"
+  ],
+  "cheetah": [
+   "flickr:8581753781",
+   "flickr:5545845450",
+   "flickr:8582856516",
+   "flickr:5545843646",
+   "flickr:5545260441",
+   "flickr:5545263679",
+   "flickr:5545257309",
+   "flickr:5545258915"
+  ],
+  "raptor": [
+   "flickr:14946241599",
+   "flickr:16310197326",
+   "flickr:39334212952"
+  ],
+  "400-gt-monza": [
+   "flickr:55083083241",
+   "flickr:55083346204",
+   "flickr:55082185022",
+   "flickr:55083284958"
+  ],
+  "murcielago-40th": [
+   "flickr:6200479613",
+   "flickr:29066748951",
+   "flickr:29066746341",
+   "flickr:28857091120",
+   "flickr:29039168452",
+   "flickr:29039169682",
+   "flickr:29066743171"
+  ],
+  "lanzador": [
+   "flickr:53133730805",
+   "flickr:53132774742",
+   "flickr:53132773092"
+  ],
+  "urus-concept": [
+   "flickr:7978099184",
+   "flickr:45477519892",
+   "flickr:32691263268",
+   "flickr:45477521752",
+   "flickr:40169351971",
+   "flickr:40169353111",
+   "flickr:47940176693",
+   "flickr:47940176443"
+  ],
+  "3500-gtz": [
+   "flickr:6958219075"
+  ],
+  "flying-star-ii": [
+   "flickr:4460798450"
+  ],
+  "miura-svr": [
+   "flickr:4610486368",
+   "flickr:3754567718"
+  ],
+  "faena": [
+   "flickr:46187703155"
   ]
  }
 }
