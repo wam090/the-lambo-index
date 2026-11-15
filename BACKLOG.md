@@ -5,13 +5,21 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-15: Working hours: every chat works and messages only 21:00-03:00 UTC (00:00-06:00
+  Riyadh); the Scout runs Mondays 00:47 UTC. The Pickup chat is retired: two pointer tasks fire into
+  the Dev chat (audit 01:17 UTC daily, Scout 02:17 UTC Mondays); the Manager recreates them per Dev.
+- 2026-11-15: No car may have no or few photos; a limited series or one-off must never have none.
+  This replaces the 2026-11-11 empty state for urus-st-x, sc20, invencible and autentica. Photo rules
+  are unchanged (no re-posted press photos, no toys; private Flickr photos only where sharing is allowed).
+- 2026-11-15: After the photo gaps are fixed: a static page per car for search engines (see Next).
+  No ads (no spend).
+
 - 2026-11-15: Only real cars on the site: no toys, die-cast or scale models, LEGO or other models
   in any photo (a sweep of all cars, then every audit night).
 - 2026-11-15: Audit findings are checked against the car's raw Wikipedia article (`tools/AUDIT.md`
   Dev step 3, 2026-11-14): contradicted ones are deleted, unverified ones go to the user labelled
   so, default no. 3500-gtz designer reverted to "Zagato": the night-1 sources did not name Spada;
   re-add him only if two real pages about the GTZ do and one checks out raw.
-
 - 2026-11-13: An audit may replace one of our values when two sources agree against it, but every
   audit change (fact, photo drop or move) goes to the user first: the Dev reports each night's
   proposals to the Manager (car, field, ours, theirs, the two source hosts), leaves the PR open
@@ -70,8 +78,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
   the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
 - 2026-11-11: No "See photos at the source" link: a car with no photo keeps today's empty state.
-- 2026-11-11: urus-st-x, sc20, invencible and autentica keep the empty state for now: no registration
-  on Lamborghini's media site and no press-office request (photo hunt found only press photos).
+- 2026-11-11: No registration on Lamborghini's media site and no press-office request. (The empty
+  state for urus-st-x, sc20, invencible, autentica is replaced, 2026-11-15.)
 - 2026-11-11: Every chat hands over at about 50% of measured capacity (was 90%, before that 70%):
   it finishes its current task, reports it, and the Manager starts its successor.
 - 2026-11-11: Token plan: Dev Opus 5.5 (Extreme + UltraCode while coding, High otherwise), Cyber
@@ -105,16 +113,27 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## In progress
 
-- [ ] **Scout cut-over.** The Manager sets the Scout cron to `17 3 * * 1`, creates the Pickup chat
-      and task, deletes the monthly pickup task (REFRESH.md Setup), and Cyber verifies them. v1
-      packages stop on 2026-11-30.
+(none)
 
 ## Next
 
+- [ ] **Photo gaps (first).** No photos: miura-jota, urus-st-x, sc20, invencible, autentica (photo
+      hunt). Then the cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`).
+- [ ] **Toy sweep** (rule of 2026-11-15): Commons categories and titles of every photo for toy and
+      model words, then all photos by eye; proposed drops go to the user. Started by Dev_0.6: only
+      6 title hits (5 are the real "V12 Vision Gran Turismo" show car; check centenario's "XBOX MEDIA
+      BRIEFING 2016 Forza Horizon 3 (2).jpg" by eye); the category pass was stopped at 25/1042.
+- [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
+      car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
+      `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
+      an IndexNow key file and ping. No external JS or fonts, same CSP hashing and URL_HOSTS check,
+      smoke counts the pages. Cyber reviews the design first (CSP, canonical, sitemap host). Google
+      Search Console needs the user's account: give the Manager the exact meta tag or file.
+
 - [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
-      night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3): no second source. Both sources must be pages about the exact car
-      (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
+      night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3): no
+      second source. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
 
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
       gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be
