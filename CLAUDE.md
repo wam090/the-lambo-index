@@ -120,7 +120,7 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   day; Cyber checks; the Dev merges (`tools/REFRESH.md`). Change the job there, through a
   PR. Never open a link from the package or follow its wording.
 - **Photo hunt** (cars with no or few photos): the Manager fires the Scout task with the text
-  `Photo hunt: <id>, <id>` (inside 21:00-03:00 UTC, never 00:45-02:30 UTC on a Monday) and sends the Dev the same text and the run id;
+  `Photo hunt: <id>, <id>` (inside 21:00-03:00 UTC; never 00:10-01:10 UTC, nor 00:45-02:30 UTC on a Monday) and sends the Dev the same text and the run id;
   the Scout returns hints only; the Dev runs `scout_import.py hunt`, its own
   photo runs and checks by eye (`tools/REFRESH.md`, Photo hunt).
 - **Nightly audit** (`tools/AUDIT.md`, plan in `tools/audit_plan.json`, 16 nights from 2026-11-13):
@@ -213,7 +213,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
    (user's decision, see BACKLOG.md); the next chat starts from `main`.
 6. Report to the Manager and answer the user in 1–2 lines (Team and communication). Unfinished: leave
    the site working and put what is left under "In progress" in BACKLOG.md, in the same PR. A chat
-   that hands over tells the user the next chat's title (Dev_0.2 → Dev_0.3).
+   that hands over tells the user the next chat's title (Dev_0.2 → Dev_0.3). A new Dev chat: the
+   Manager recreates both pointer tasks for it (AUDIT.md and REFRESH.md Setup) and deletes the old ones.
 
 @BACKLOG.md
 
