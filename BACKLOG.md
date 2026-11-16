@@ -129,8 +129,10 @@ history). Record each decision the user makes under Decisions, with its date.
       now also with `--embed` (decision 2026-11-16; most shareable private photos carry the
       photographer's watermark, so few qualify). Batch 5 (2026-11-16): sc18-alston, revuelto-sv,
       350-gtv, faena, murcielago-rsv reached 4. Still short after batches 4-5: miura-svr, athon, p132,
-      p140, p147-gandini, aventador-50 (no usable photo yet). Next: the 1-2 photo cars (lm001, lma002,
-      cheetah, raptor, portofino, ...), then the rest of the list. Retry the hunt for the six empty
+      p140, p147-gandini, aventador-50 (no usable photo yet). Batch 6: 350-gts and raptor 1->3,
+      urus-se-performante 1->2. Held for the Manager (no EXIF, so no camera check): cheetah (Marzal),
+      countach-qvx (Andre.32), portofino (Spiegelman, Sellers). Nothing usable: lm001, lma002,
+      huracan-stj, fenomeno-roadster, urraco-p200 (only P250s). Then the 2-photo cars. Retry the hunt for the six empty
       exceptions every few weeks.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
