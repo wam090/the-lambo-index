@@ -133,5 +133,40 @@
     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
    }
   ]
+ },
+ "countach-lp500s": {
+  "source": "Commons search (outside the car's categories)",
+  "images": [
+   {
+    "t": "1982 Lamborghini Countach LP500 - 32103850792.jpg",
+    "h": "2/21",
+    "n": "1982_Lamborghini_Countach_LP500_-_32103850792.jpg",
+    "w": 5075,
+    "ht": 3374,
+    "a": "Dave Hamster",
+    "l": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0/"
+   },
+   {
+    "t": "1982 Lamborghini Countach LP500.jpg",
+    "h": "c/cb",
+    "n": "1982_Lamborghini_Countach_LP500.jpg",
+    "w": 6016,
+    "ht": 4000,
+    "a": "Dave Hamster",
+    "l": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0/"
+   },
+   {
+    "t": "1982 Lamborghini Countach LP500 - 32133706491.jpg",
+    "h": "9/9c",
+    "n": "1982_Lamborghini_Countach_LP500_-_32133706491.jpg",
+    "w": 4615,
+    "ht": 3068,
+    "a": "Dave Hamster",
+    "l": "CC BY 2.0",
+    "lu": "https://creativecommons.org/licenses/by/2.0/"
+   }
+  ]
  }
 }

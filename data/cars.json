@@ -1,6 +1,6 @@
 {
  "brand": "Lamborghini",
- "generated": "2026-11-15",
+ "generated": "2026-11-16",
  "cars": [
   {
    "id": "350-gtv",
@@ -2056,26 +2056,6 @@
    "debut": true,
    "imgs": [
     {
-     "t": "1982 Lamborghini Countach LP500 - 32103850792.jpg",
-     "h": "2/21",
-     "n": "1982_Lamborghini_Countach_LP500_-_32103850792.jpg",
-     "w": 5075,
-     "ht": 3374,
-     "a": "Dave Hamster",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "1982 Lamborghini Countach LP500.jpg",
-     "h": "c/cb",
-     "n": "1982_Lamborghini_Countach_LP500.jpg",
-     "w": 6016,
-     "ht": 4000,
-     "a": "Dave Hamster",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
      "t": "Lamborghini Countach LP 500 (2).jpg",
      "h": "8/89",
      "n": "Lamborghini_Countach_LP_500_%282%29.jpg",
@@ -2084,16 +2064,6 @@
      "a": "Y.Leclercq©",
      "l": "CC BY-SA 4.0",
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "1982 Lamborghini Countach LP500 - 32133706491.jpg",
-     "h": "9/9c",
-     "n": "1982_Lamborghini_Countach_LP500_-_32133706491.jpg",
-     "w": 4615,
-     "ht": 3068,
-     "a": "Dave Hamster",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
     },
     {
      "t": "Lamborghini Countach LP 500.jpg",
@@ -3428,26 +3398,6 @@
      "lu": "https://creativecommons.org/licenses/by/2.0/"
     },
     {
-     "t": "Lamborghini Countach LP500S IMG 2822.jpg",
-     "h": "0/0b",
-     "n": "Lamborghini_Countach_LP500S_IMG_2822.jpg",
-     "w": 5056,
-     "ht": 3365,
-     "a": "Alexander Migl",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "Lamborghini Countach LP500S IMG 2825.jpg",
-     "h": "4/48",
-     "n": "Lamborghini_Countach_LP500S_IMG_2825.jpg",
-     "w": 5803,
-     "ht": 3862,
-     "a": "Alexander Migl",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
      "t": "Lamborghini Countach LP500S IMG 3048.jpg",
      "h": "9/94",
      "n": "Lamborghini_Countach_LP500S_IMG_3048.jpg",
@@ -3484,6 +3434,36 @@
      "w": 3888,
      "ht": 2592,
      "a": "Damian Morys from New York City, United States",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+     "t": "1982 Lamborghini Countach LP500 - 32103850792.jpg",
+     "h": "2/21",
+     "n": "1982_Lamborghini_Countach_LP500_-_32103850792.jpg",
+     "w": 5075,
+     "ht": 3374,
+     "a": "Dave Hamster",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+     "t": "1982 Lamborghini Countach LP500.jpg",
+     "h": "c/cb",
+     "n": "1982_Lamborghini_Countach_LP500.jpg",
+     "w": 6016,
+     "ht": 4000,
+     "a": "Dave Hamster",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+     "t": "1982 Lamborghini Countach LP500 - 32133706491.jpg",
+     "h": "9/9c",
+     "n": "1982_Lamborghini_Countach_LP500_-_32133706491.jpg",
+     "w": 4615,
+     "ht": 3068,
+     "a": "Dave Hamster",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
     }
@@ -3530,16 +3510,6 @@
      "lu": "https://creativecommons.org/publicdomain/zero/1.0/"
     },
     {
-     "t": "Lamborghini Countach 5000 quattrovalvole (22091109052).jpg",
-     "h": "1/1d",
-     "n": "Lamborghini_Countach_5000_quattrovalvole_%2822091109052%29.jpg",
-     "w": 4608,
-     "ht": 3072,
-     "a": "先従隗始",
-     "l": "CC0",
-     "lu": "https://creativecommons.org/publicdomain/zero/1.0/"
-    },
-    {
      "t": "Lamborghini Countach 5000 Quattrovalvole (24091414001).jpg",
      "h": "0/05",
      "n": "Lamborghini_Countach_5000_Quattrovalvole_%2824091414001%29.jpg",
@@ -3553,16 +3523,6 @@
      "t": "Lamborghini Countach 5000 Quattrovalvole (24091414002).jpg",
      "h": "c/cd",
      "n": "Lamborghini_Countach_5000_Quattrovalvole_%2824091414002%29.jpg",
-     "w": 4608,
-     "ht": 3072,
-     "a": "先従隗始",
-     "l": "CC0",
-     "lu": "https://creativecommons.org/publicdomain/zero/1.0/"
-    },
-    {
-     "t": "Lamborghini Countach 5000 Quattrovalvole (24091414052).jpg",
-     "h": "5/55",
-     "n": "Lamborghini_Countach_5000_Quattrovalvole_%2824091414052%29.jpg",
      "w": 4608,
      "ht": 3072,
      "a": "先従隗始",
@@ -13425,16 +13385,6 @@
      "w": 5249,
      "ht": 3316,
      "a": "MrWalkr",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "Lamborghini Countach LPI 800-4 3.jpg",
-     "h": "0/06",
-     "n": "Lamborghini_Countach_LPI_800-4_3.jpg",
-     "w": 16320,
-     "ht": 10292,
-     "a": "Calreyn88",
      "l": "CC BY-SA 4.0",
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
