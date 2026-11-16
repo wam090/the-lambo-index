@@ -5,6 +5,13 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-16: urus-st-x, sc20, invencible, autentica, countach-evoluzione and miura-jota keep the
+  empty state as logged exceptions to the 2026-11-15 rule (only press, game, die-cast photos or
+  recreations exist); the photo hunt is retried every few weeks.
+- 2026-11-16: Private photographers' Flickr photos (`flickr.py --embed`: owner allows sharing; the
+  photographer's own photos, checked by camera EXIF; never a media or re-posting account) are also
+  allowed for cars under 4 photos, up to 4 per car.
+- 2026-11-16: Toy sweep: no full by-eye pass of every photo; each audit night's photo check covers it.
 - 2026-11-15: Working hours: every chat works and messages only 21:00-03:00 UTC (00:00-06:00
   Riyadh); the Scout runs Mondays 00:47 UTC. The Pickup chat is retired: two pointer tasks fire into
   the Dev chat (audit 01:17 UTC daily, Scout 02:17 UTC Mondays); the Manager recreates them per Dev.
@@ -117,18 +124,10 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo gaps (first).** No photos: miura-jota, urus-st-x, sc20, invencible, autentica (photo
-      hunt). Then the cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`).
-      2026-11-15 (Dev_0.7): Flickr CC, `--embed` and Commons search found nothing allowed for
-      urus-st-x, sc20, autentica, invencible (press or game only); miura-jota's free photos are all
-      recreations (original destroyed 1971). 16 under-4 cars searched; only lanzador, 400-gt-monza and
-      murcielago-40th gained; batch 3 (8 cars): flying-star-ii, 3500-gtz, murcielago-rsv gained. Next:
-      athon, p132, genesis, p140, diablo-se30-jota, p147-gandini, canto, aventador-50, sc18-alston,
-      revuelto-sv. Decisions pending with the user via the Manager.
-- [ ] **Toy sweep** (rule of 2026-11-15): Commons categories and titles of every photo for toy and
-      model words, then all photos by eye; proposed drops go to the user. Started by Dev_0.6: only
-      6 title hits (5 are the real "V12 Vision Gran Turismo" show car; check centenario's "XBOX MEDIA
-      BRIEFING 2016 Forza Horizon 3 (2).jpg" by eye); the category pass was stopped at 25/1042.
+- [ ] **Photo gaps.** Cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`),
+      now also with `--embed` (decision 2026-11-16). Next: athon, p132, genesis, p140,
+      diablo-se30-jota, p147-gandini, canto, aventador-50, sc18-alston, revuelto-sv. Retry the hunt for
+      the six empty exceptions every few weeks.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
