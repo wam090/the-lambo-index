@@ -46,7 +46,9 @@ Version 2 (from 2026-11; version 1 is rejected after V1_UNTIL): "version": 2 and
 "fills", beside the keys above. "cars" holds new ids only. "fills" holds blank-fills of existing
 cars in the same row format, at most CADENCES[CADENCE]["fills"], and only for the ids
 `gaps <run date>` prints, only in their gap fields (cv, units, designer, a missing perf; never a
-SKIP field). Each fill cites two different pages on two different hosts, both in "opened". The
+SKIP field). Each fill cites two different pages on two different hosts, both in "opened"; one of
+them may be on EXTRA_HOSTS (then "opened" and "unreachable" may list those hosts too), the other
+must be on SOURCE_HOSTS. New cars cite SOURCE_HOSTS only. The
 window must end on the run date, which the Dev gives as --run-date from the run's fire event and
 never takes from the package. Photo picks are only for new cars.
 
@@ -102,6 +104,9 @@ TOP_KEYS = {"version", "window", "cars", "photos", "notes", "opened", "unreachab
 PERF_KINDS = {"Production", "Limited series", "One-off"}
 SOURCE_HOSTS = {"en.wikipedia.org", "www.autocar.co.uk", "www.caranddriver.com", "www.motor1.com",
                 "www.topgear.com", "www.evo.co.uk", "www.carscoops.com"}
+# Reference sites a v2 fill may cite as its second host (user, 2026-11-16), never alone: every fill
+# keeps one source on SOURCE_HOSTS, because these sites often copy each other (Cyber, 2026-11-12).
+EXTRA_HOSTS = {"www.ultimatecarpage.com", "www.conceptcarz.com", "www.supercars.net"}
 ID_RE = re.compile(r"[a-z0-9-]{2,40}")
 FAMILY_RE = re.compile(r"[A-Za-z0-9 ]{2,30}")
 TEXT_BAD = set("<>{}[]|\\`")
@@ -154,7 +159,7 @@ def integer(v, where, lo, hi, none=True):
         raise Bad(f"{where}: must be an integer {lo}-{hi}" + (" or null" if none else ""))
 
 
-def source(v, where):
+def source(v, where, hosts=SOURCE_HOSTS):
     if type(v) is not str or len(v) > 300 or any(not 33 <= ord(c) <= 126 for c in v) or "`" in v:
         raise Bad(f"{where}: must be printable ASCII, at most 300 characters")
     try:
@@ -163,8 +168,8 @@ def source(v, where):
     except ValueError:
         raise Bad(f"{where}: not a valid URL")
     # netloc must be exactly the lower-case allowlisted host: no userinfo, port or upper case
-    if u.scheme != "https" or port is not None or host not in SOURCE_HOSTS or u.netloc != host:
-        raise Bad(f"{where}: must be https on one of {sorted(SOURCE_HOSTS)}")
+    if u.scheme != "https" or port is not None or host not in hosts or u.netloc != host:
+        raise Bad(f"{where}: must be https on one of {sorted(hosts)}")
 
 
 def strict_keys(obj, keys, where):
@@ -293,6 +298,7 @@ def validate(pkg, cat_path=CATALOG, run_date=None, today=None):
         except Bad as e:
             errs.append(str(e))
     opened, unreach = pkg["opened"], pkg["unreachable"]
+    read_hosts = SOURCE_HOSTS | EXTRA_HOSTS if ver == 2 else SOURCE_HOSTS
     if type(opened) is not list or not 2 <= len(opened) <= 30 or len(set(map(str, opened))) != len(opened):
         errs.append("opened: 2-30 distinct pages read in full")
         opened = []
@@ -300,14 +306,14 @@ def validate(pkg, cat_path=CATALOG, run_date=None, today=None):
         good = []
         for j, u in enumerate(opened):
             try:
-                source(u, f"opened[{j}]")
+                source(u, f"opened[{j}]", read_hosts)
                 good.append(u)
             except Bad as e:
                 errs.append(str(e))
         opened = good
-    if type(unreach) is not list or len(unreach) > len(SOURCE_HOSTS) or \
-            any(type(h) is not str or h not in SOURCE_HOSTS for h in unreach) or len(set(unreach)) != len(unreach):
-        errs.append(f"unreachable: distinct hosts from {sorted(SOURCE_HOSTS)}")
+    if type(unreach) is not list or len(unreach) > len(read_hosts) or \
+            any(type(h) is not str or h not in read_hosts for h in unreach) or len(set(unreach)) != len(unreach):
+        errs.append(f"unreachable: distinct hosts from {sorted(read_hosts)}")
         unreach = []
     hosts = {urllib.parse.urlsplit(u).hostname for u in opened}     # only entries that passed source()
     press = SOURCE_HOSTS - {"en.wikipedia.org"}
@@ -375,7 +381,7 @@ def validate(pkg, cat_path=CATALOG, run_date=None, today=None):
             e.append(f"{where}.sources: 1-5 links")
         else:
             for j, u in enumerate(src):
-                chk(source, u, f"{where}.sources[{j}]")
+                chk(source, u, f"{where}.sources[{j}]", read_hosts if is_fill else SOURCE_HOSTS)
                 if u not in opened:
                     e.append(f"{where}.sources[{j}]: not among the pages listed in opened")
         if c["id"] not in cars and type(c["family"]) is str and c["family"] not in families:
@@ -395,8 +401,11 @@ def validate(pkg, cat_path=CATALOG, run_date=None, today=None):
                 if bad:
                     e.append(f"{where}: may fill only {sorted(ok)}, not {bad}")
             src = c["sources"] if type(c["sources"]) is list else []
-            if len(set(src)) < 2 or len({urllib.parse.urlsplit(u).hostname for u in src if type(u) is str}) < 2:
+            src_hosts = {urllib.parse.urlsplit(u).hostname for u in src if type(u) is str}
+            if len(set(src)) < 2 or len(src_hosts) < 2:
                 e.append(f"{where}.sources: a fill needs two different pages on two different hosts that agree")
+            elif not src_hosts & SOURCE_HOSTS:
+                e.append(f"{where}.sources: at least one on {sorted(SOURCE_HOSTS)}")
         if c["id"] in cars and not e:          # blank-fill of an existing row
             old = cars[c["id"]][0]
             changed = [f for f in FIELDS if c[f] != old[f]]
@@ -936,6 +945,12 @@ def v2_self_test(tmpd):
         "v2 too many fills": dict(good, fills=[fill] * (CADENCES[CADENCE]["fills"] + 1)),
         "v2 photos for a fill": dict(good, photos={gid: {"drop": [], "hero": None}}),
         "v2 missing fills key": {k: v for k, v in good.items() if k != "fills"},
+        "v2 fill on two extra hosts only": dict(good, opened=good["opened"] + ["https://www.conceptcarz.com/x.aspx",
+                                                                             "https://www.supercars.net/blog/x/"],
+                                                fills=[dict(fill, sources=["https://www.conceptcarz.com/x.aspx",
+                                                                           "https://www.supercars.net/blog/x/"])]),
+        "v2 extra host off the list": dict(good, opened=good["opened"] + ["https://www.example.com/x"],
+                                           fills=[dict(fill, sources=[fill["sources"][0], "https://www.example.com/x"])]),
         "v2 no run date": None,
         "v1 after cut-off": None,
     }
@@ -952,6 +967,12 @@ def v2_self_test(tmpd):
             fails.append(f"{name}: accepted")
         except Bad:
             pass
+    extra = dict(good, opened=good["opened"] + ["https://www.conceptcarz.com/x.aspx"],
+                 fills=[dict(fill, sources=[fill["sources"][0], "https://www.conceptcarz.com/x.aspx"])])
+    try:
+        validate(json.loads(json.dumps(extra)), run_date=day, today=day)
+    except Bad as x:
+        fails.append(f"v2 fill on Wikipedia + an extra host: rejected ({x})")
     skip_row = dict(cars["miura-svj"][0])
     if "units" in gap_fields(skip_row, perf):
         fails.append("v2: a SKIP field counts as a gap")
@@ -1038,7 +1059,7 @@ def hunt_self_test(tmpd):
 AUDIT_TOP = {"version", "kind", "checked", "findings", "notes", "opened", "unreachable"}
 AUDIT_FINDING = {"id", "field", "ours", "theirs", "sources"}
 AUDIT_FIELDS = ("family", "kind", "year", "end", "body", "engine", "designer")
-AUDIT_HOSTS = SOURCE_HOSTS | {"www.ultimatecarpage.com", "www.conceptcarz.com", "www.supercars.net"}
+AUDIT_HOSTS = SOURCE_HOSTS | EXTRA_HOSTS
 AUDIT_MAX_FINDINGS = 60
 AUDIT_EPOCH = datetime.date(2026, 11, 13)              # night 1 (tools/audit_plan.json)
 AUDIT_PLAN = os.path.join(ROOT, "tools", "audit_plan.json")
