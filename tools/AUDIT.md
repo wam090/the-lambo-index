@@ -14,14 +14,17 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    "audit complete"`, `"opened"` with two pages you read) and nothing else.
 2. **Compare.** For each id, take its row in `tools/catalog.py` and read two pages about that
    exact car on two different hosts: `AUDIT_HOSTS` in `scout_import.py`, at least one of the two on
-   `SOURCE_HOSTS` (en.wikipedia.org or a press host). Never lamborghini.com, no user-agent tricks.
+   `SOURCE_HOSTS` (en.wikipedia.org or a press host). Never lamborghini.com; fetch no host outside
+   `AUDIT_HOSTS`. Fetch pages with the WebFetch tool; if you use curl, pass no `-A`/`--user-agent` and no other header. A page that
+   refuses you is unreachable: list it in `unreachable` and use another host.
    Compare `family`, `kind`, `year`, `end`, `body`, `engine` and `designer`. `year` is when the car
    was first shown or built; `end` 0 = still built, `null` = one year only; `kind` and `family` take
    our values (`KIND_ORDER` in `src/app.js`, the families in `catalog.py`). Never photos, `cats` or specs.
 3. **Findings, mismatches only.** A finding only where both pages give the same value and it differs
    from ours: `ours` exactly as in `catalog.py`, `theirs` as both pages give it, `sources` the two pages.
    One page, or pages that disagree with each other: no finding; say so in `notes`. A family we do
-   not have: `notes` only. List in `checked` the cars you compared and in `opened` every page read.
+   not have: `notes` only. List in `checked` the cars you compared and in `opened` every URL you
+   fetched, including ones you did not use.
 4. **Package**: `"kind": "audit"`, format at the top of `tools/scout_import.py`. Run `python3
    tools/scout_import.py check <file> --run-date <run date>` until it passes, and end your final
    reply with the package as one ```json block and nothing after it. You send nothing anywhere.
