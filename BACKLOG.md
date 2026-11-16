@@ -8,9 +8,10 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-16: urus-st-x, sc20, invencible, autentica, countach-evoluzione and miura-jota keep the
   empty state as logged exceptions to the 2026-11-15 rule (only press, game, die-cast photos or
   recreations exist); the photo hunt is retried every few weeks.
-- 2026-11-16: Private photographers' Flickr photos (`flickr.py --embed`: owner allows sharing; the
-  photographer's own photos, checked by camera EXIF; never a media or re-posting account) are also
-  allowed for cars under 4 photos, up to 4 per car.
+- 2026-11-16: Private photographers' own Flickr photos (`flickr.py --embed`, owner allows sharing) are
+  also allowed for a car under 4 photos, only until it has 4 photos in all. Ownership evidence: a
+  personal account, the account's other photos, a consistent camera, no press-style titles; EXIF
+  only supports it (rules in CLAUDE.md Photos).
 - 2026-11-16: Toy sweep: no full by-eye pass of every photo; each audit night's photo check covers it.
 - 2026-11-15: Working hours: every chat works and messages only 21:00-03:00 UTC (00:00-06:00
   Riyadh); the Scout runs Mondays 00:47 UTC. The Pickup chat is retired: two pointer tasks fire into
@@ -139,6 +140,11 @@ history). Record each decision the user makes under Decisions, with its date.
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
       night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3): no
       second source. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
+
+- [ ] **Scout fill follow-ups** (Cyber, non-blocking): when a fill pairs Wikipedia with an
+      `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value,
+      the two sources are one: leave it blank (add to REFRESH.md Dev steps). The format comment at the
+      top of `scout_import.py` should say v2 `opened`/`unreachable` may also list `EXTRA_HOSTS`.
 
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
       gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be
