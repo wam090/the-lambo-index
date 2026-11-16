@@ -316,47 +316,6 @@
    }
   ]
  },
- "miura-svr": {
-  "images": [
-   {
-    "t": "nonfree:4651806783",
-    "src": "flickr",
-    "a": "Alejandro G. Angulo",
-    "l": "All rights reserved",
-    "lu": "",
-    "p": "https://www.flickr.com/photos/3alex3/4651806783/",
-    "w": 1024,
-    "ht": 768,
-    "sz": [
-     [
-      320,
-      "https://live.staticflickr.com/4061/4651806783_43433e4ef3_n.jpg"
-     ],
-     [
-      400,
-      "https://live.staticflickr.com/4061/4651806783_43433e4ef3_w.jpg"
-     ],
-     [
-      500,
-      "https://live.staticflickr.com/4061/4651806783_43433e4ef3.jpg"
-     ],
-     [
-      640,
-      "https://live.staticflickr.com/4061/4651806783_43433e4ef3_z.jpg"
-     ],
-     [
-      800,
-      "https://live.staticflickr.com/4061/4651806783_43433e4ef3_c.jpg"
-     ],
-     [
-      1024,
-      "https://live.staticflickr.com/4061/4651806783_43433e4ef3_b.jpg"
-     ]
-    ],
-    "share_ok": "2026-11-16"
-   }
-  ]
- },
  "murcielago-rsv": {
   "images": [
    {

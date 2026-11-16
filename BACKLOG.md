@@ -128,7 +128,7 @@ history). Record each decision the user makes under Decisions, with its date.
 - [ ] **Photo gaps.** Cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`),
       now also with `--embed` (decision 2026-11-16; most shareable private photos carry the
       photographer's watermark, so few qualify). Batch 5 (2026-11-16): sc18-alston, revuelto-sv,
-      350-gtv, faena, miura-svr, murcielago-rsv reached 4. Still short after batches 4-5: athon, p132,
+      350-gtv, faena, murcielago-rsv reached 4. Still short after batches 4-5: miura-svr, athon, p132,
       p140, p147-gandini, aventador-50 (no usable photo yet). Next: the 1-2 photo cars (lm001, lma002,
       cheetah, raptor, portofino, ...), then the rest of the list. Retry the hunt for the six empty
       exceptions every few weeks.
