@@ -5,6 +5,14 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-16: urus-st-x, sc20, invencible, autentica, countach-evoluzione and miura-jota keep the
+  empty state as logged exceptions to the 2026-11-15 rule (only press, game, die-cast photos or
+  recreations exist); the photo hunt is retried every few weeks.
+- 2026-11-16: Private photographers' own Flickr photos (`flickr.py --embed`, owner allows sharing) are
+  also allowed for a car under 4 photos, only until it has 4 photos in all. Ownership evidence: a
+  personal account, the account's other photos, a consistent camera, no press-style titles; EXIF
+  only supports it (rules in CLAUDE.md Photos).
+- 2026-11-16: Toy sweep: no full by-eye pass of every photo; each audit night's photo check covers it.
 - 2026-11-15: Working hours: every chat works and messages only 21:00-03:00 UTC (00:00-06:00
   Riyadh); the Scout runs Mondays 00:47 UTC. The Pickup chat is retired: two pointer tasks fire into
   the Dev chat (audit 01:17 UTC daily, Scout 02:17 UTC Mondays); the Manager recreates them per Dev.
@@ -117,18 +125,10 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo gaps (first).** No photos: miura-jota, urus-st-x, sc20, invencible, autentica (photo
-      hunt). Then the cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`).
-      2026-11-15 (Dev_0.7): Flickr CC, `--embed` and Commons search found nothing allowed for
-      urus-st-x, sc20, autentica, invencible (press or game only); miura-jota's free photos are all
-      recreations (original destroyed 1971). 16 under-4 cars searched; only lanzador, 400-gt-monza and
-      murcielago-40th gained; batch 3 (8 cars): flying-star-ii, 3500-gtz, murcielago-rsv gained. Next:
-      athon, p132, genesis, p140, diablo-se30-jota, p147-gandini, canto, aventador-50, sc18-alston,
-      revuelto-sv. Decisions pending with the user via the Manager.
-- [ ] **Toy sweep** (rule of 2026-11-15): Commons categories and titles of every photo for toy and
-      model words, then all photos by eye; proposed drops go to the user. Started by Dev_0.6: only
-      6 title hits (5 are the real "V12 Vision Gran Turismo" show car; check centenario's "XBOX MEDIA
-      BRIEFING 2016 Forza Horizon 3 (2).jpg" by eye); the category pass was stopped at 25/1042.
+- [ ] **Photo gaps.** Cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`),
+      now also with `--embed` (decision 2026-11-16). Next: athon, p132, genesis, p140,
+      diablo-se30-jota, p147-gandini, canto, aventador-50, sc18-alston, revuelto-sv. Retry the hunt for
+      the six empty exceptions every few weeks.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
@@ -140,6 +140,11 @@ history). Record each decision the user makes under Decisions, with its date.
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
       night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3): no
       second source. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
+
+- [ ] **Scout fill follow-ups** (Cyber, non-blocking): when a fill pairs Wikipedia with an
+      `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value,
+      the two sources are one: leave it blank (add to REFRESH.md Dev steps). The format comment at the
+      top of `scout_import.py` should say v2 `opened`/`unreachable` may also list `EXTRA_HOSTS`.
 
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
       gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be

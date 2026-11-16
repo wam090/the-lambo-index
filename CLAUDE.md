@@ -163,9 +163,13 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
 - Every photo is credited (author, licence, link to where it is hosted) and loaded from there; never
   commit image files. Sources, in order: Commons categories (`images.py`); Commons files outside a
   car's categories, found with `Special:Search` (`data/extra_images.json`); Flickr CC (`flickr.py`);
-  only for a car with no free photo, a private photographer's Flickr photo whose owner allows sharing
-  (`flickr.py --embed` checks it), in `data/nonfree_images.json`; never re-posted press photos (user's
-  decisions, 2026-11-08 and 2026-11-11). Car pages have a "Report a photo" link to a GitHub issue.
+  for a car with no free photo or under 4 photos (only until it has 4 photos in all), a private
+  photographer's own Flickr photo whose owner allows sharing (`flickr.py --embed` checks it): a
+  personal account (not media, dealer or re-posting), no one else's watermark or credit, the same
+  camera across that account's photos of the event, a real-world setting, no press-style title; EXIF
+  names a camera, not who took it, so it only supports; when unsure, leave it out. It goes in
+  `data/nonfree_images.json`; never re-posted press photos (user's decisions, 2026-11-08, 2026-11-11
+  and 2026-11-16). Car pages have a "Report a photo" link to a GitHub issue.
 - Non-commercial (NC) licences are accepted because the site is non-commercial. If it ever carries
   ads or sells anything, replace those photos.
 - Never label a photo freely licensed when it isn't: scans of print and re-uploaded press photos carry
