@@ -1,5 +1,5 @@
 {
- "_about": "Photos without a free licence, only for cars that have no freely licensed photo (user's decisions of 2026-11-08 and 2026-11-11): private photographers' photos on Flickr whose owner allows sharing (checked with flickr.py's can_share on the date in 'share_ok'), credited to the photographer and loaded from Flickr. No re-posted press photos.",
+ "_about": "Photos without a free licence, only for cars with no free photo or under 4 photos, until they have 4 in all (user's decisions of 2026-11-08, 2026-11-11 and 2026-11-16): private photographers' photos on Flickr whose owner allows sharing (checked with flickr.py's can_share on the date in 'share_ok'), credited to the photographer and loaded from Flickr. No re-posted press photos.",
  "huracan-stj": {
   "images": [
    {
@@ -194,6 +194,166 @@
      ]
     ],
     "share_ok": "2026-11-11"
+   },
+   {
+    "t": "nonfree:55513315406",
+    "src": "flickr",
+    "a": "Si",
+    "l": "All rights reserved",
+    "lu": "",
+    "p": "https://www.flickr.com/photos/si558/55513315406/",
+    "w": 1024,
+    "ht": 683,
+    "sz": [
+     [
+      320,
+      "https://live.staticflickr.com/65535/55513315406_6d4a6d8571_n.jpg"
+     ],
+     [
+      400,
+      "https://live.staticflickr.com/65535/55513315406_6d4a6d8571_w.jpg"
+     ],
+     [
+      500,
+      "https://live.staticflickr.com/65535/55513315406_6d4a6d8571.jpg"
+     ],
+     [
+      640,
+      "https://live.staticflickr.com/65535/55513315406_6d4a6d8571_z.jpg"
+     ],
+     [
+      800,
+      "https://live.staticflickr.com/65535/55513315406_6d4a6d8571_c.jpg"
+     ],
+     [
+      1024,
+      "https://live.staticflickr.com/65535/55513315406_6d4a6d8571_b.jpg"
+     ]
+    ],
+    "share_ok": "2026-11-16"
+   }
+  ]
+ },
+ "sc18-alston": {
+  "images": [
+   {
+    "t": "nonfree:49607466116",
+    "src": "flickr",
+    "a": "Bryan S",
+    "l": "All rights reserved",
+    "lu": "",
+    "p": "https://www.flickr.com/photos/136435491@N07/49607466116/",
+    "w": 1024,
+    "ht": 683,
+    "sz": [
+     [
+      320,
+      "https://live.staticflickr.com/65535/49607466116_d6f7b3512d_n.jpg"
+     ],
+     [
+      400,
+      "https://live.staticflickr.com/65535/49607466116_d6f7b3512d_w.jpg"
+     ],
+     [
+      500,
+      "https://live.staticflickr.com/65535/49607466116_d6f7b3512d.jpg"
+     ],
+     [
+      640,
+      "https://live.staticflickr.com/65535/49607466116_d6f7b3512d_z.jpg"
+     ],
+     [
+      800,
+      "https://live.staticflickr.com/65535/49607466116_d6f7b3512d_c.jpg"
+     ],
+     [
+      1024,
+      "https://live.staticflickr.com/65535/49607466116_d6f7b3512d_b.jpg"
+     ]
+    ],
+    "share_ok": "2026-11-16"
+   }
+  ]
+ },
+ "350-gtv": {
+  "images": [
+   {
+    "t": "nonfree:15702649825",
+    "src": "flickr",
+    "a": "eduardo lopes",
+    "l": "All rights reserved",
+    "lu": "",
+    "p": "https://www.flickr.com/photos/30555516@N06/15702649825/",
+    "w": 1024,
+    "ht": 589,
+    "sz": [
+     [
+      320,
+      "https://live.staticflickr.com/7486/15702649825_c309a98b79_n.jpg"
+     ],
+     [
+      400,
+      "https://live.staticflickr.com/7486/15702649825_c309a98b79_w.jpg"
+     ],
+     [
+      500,
+      "https://live.staticflickr.com/7486/15702649825_c309a98b79.jpg"
+     ],
+     [
+      640,
+      "https://live.staticflickr.com/7486/15702649825_c309a98b79_z.jpg"
+     ],
+     [
+      800,
+      "https://live.staticflickr.com/7486/15702649825_c309a98b79_c.jpg"
+     ],
+     [
+      1024,
+      "https://live.staticflickr.com/7486/15702649825_c309a98b79_b.jpg"
+     ]
+    ],
+    "share_ok": "2026-11-16"
+   }
+  ]
+ },
+ "murcielago-rsv": {
+  "images": [
+   {
+    "t": "nonfree:23984219198",
+    "src": "flickr",
+    "a": "benoits15",
+    "l": "All rights reserved",
+    "lu": "",
+    "p": "https://www.flickr.com/photos/87731987@N07/23984219198/",
+    "w": 1024,
+    "ht": 678,
+    "sz": [
+     [
+      320,
+      "https://live.staticflickr.com/4514/23984219198_999093d132_n.jpg"
+     ],
+     [
+      400,
+      "https://live.staticflickr.com/4514/23984219198_999093d132_w.jpg"
+     ],
+     [
+      500,
+      "https://live.staticflickr.com/4514/23984219198_999093d132.jpg"
+     ],
+     [
+      640,
+      "https://live.staticflickr.com/4514/23984219198_999093d132_z.jpg"
+     ],
+     [
+      800,
+      "https://live.staticflickr.com/4514/23984219198_999093d132_c.jpg"
+     ],
+     [
+      1024,
+      "https://live.staticflickr.com/4514/23984219198_999093d132_b.jpg"
+     ]
+    ],
+    "share_ok": "2026-11-16"
    }
   ]
  }
