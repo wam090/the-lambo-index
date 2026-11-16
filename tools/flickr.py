@@ -92,7 +92,8 @@ QUERIES = {
 
 # Accounts whose licences cannot be relied on: scans of printed promotional cards, re-uploaded
 # Lamborghini press photos, LEGO models. Skipped on every run.
-BLOCKED = {"autohistorian", "druidabruxux", "lancastervanderbilt", "lancaster vanderbilt"}
+BLOCKED = {"autohistorian", "druidabruxux", "lancastervanderbilt", "lancaster vanderbilt",
+           "50523210@n08"}   # re-posted catalogue photos (Cyber_v0.4, 2026-11-16)
 TOY = re.compile(r"\blego\b|\b7\d{4}\b|speed champions|technic|brick|minifig|\bmoc\b", re.I)
 
 # Extra search terms per car from a Scout photo hunt (written by tools/scout_import.py hunt, which

@@ -127,8 +127,8 @@ history). Record each decision the user makes under Decisions, with its date.
 
 - [ ] **Photo gaps.** Cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`),
       now also with `--embed` (decision 2026-11-16; most shareable private photos carry the
-      photographer's watermark, so few qualify). Batch 4 (2026-11-16): athon, genesis,
-      diablo-se30-jota, canto gained; p132, p140, p147-gandini, aventador-50 still short. Next:
+      photographer's watermark, so few qualify). Batch 4 (2026-11-16): genesis, diablo-se30-jota,
+      canto gained; athon, p132, p140, p147-gandini, aventador-50 still short. Next:
       sc18-alston, revuelto-sv, then the rest of the list. Retry the hunt for the six empty
       exceptions every few weeks.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
