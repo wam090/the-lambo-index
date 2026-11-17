@@ -151,6 +151,10 @@ history). Record each decision the user makes under Decisions, with its date.
       the two sources are one: leave it blank (add to REFRESH.md Dev steps). The format comment at the
       top of `scout_import.py` should say v2 `opened`/`unreachable` may also list `EXTRA_HOSTS`.
 
+- [ ] **`check` counts hosts in `opened`** (Cyber, non-blocking, 2026-11-17): since 404s go into
+      `opened`, a Wikipedia 404 satisfies the "en.wikipedia.org page read" rule. Harmless while every
+      finding needs two pages about the car and the Dev reads the raw article; tighten only if it matters.
+
 - [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
       gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be
       rejected (fails closed). Compute them from `git rev-list -1 --before=<fire time> origin/main`.
