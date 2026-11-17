@@ -24,7 +24,7 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    from ours: `ours` exactly as in `catalog.py`, `theirs` as both pages give it, `sources` the two pages.
    One page, or pages that disagree with each other: no finding; say so in `notes`. A family we do
    not have: `notes` only. List in `checked` the cars you compared and in `opened` every URL you
-   fetched, including ones you did not use.
+   fetched, including 404s, refusals and pages you did not use; an omitted URL is a rejection.
 4. **Package**: `"kind": "audit"`, format at the top of `tools/scout_import.py`. Run `python3
    tools/scout_import.py check <file> --run-date <run date>` until it passes, and end your final
    reply with the package as one ```json block and nothing after it. You send nothing anywhere.

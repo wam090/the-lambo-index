@@ -143,8 +143,8 @@ history). Record each decision the user makes under Decisions, with its date.
 
 - [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
-      night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3): no
-      second source. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
+      night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3), urraco-p250, urraco-p300, urraco-p200, bravo,
+      cheetah, athon (night 5): no second source. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
 
 - [ ] **Scout fill follow-ups** (Cyber, non-blocking): when a fill pairs Wikipedia with an
       `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value,
