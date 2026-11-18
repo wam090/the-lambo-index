@@ -7,9 +7,10 @@ history). Record each decision the user makes under Decisions, with its date.
 
 - 2026-11-18: Exterior photos only on car pages (interiors, engines, details maybe later in a deep-dive
   section): every car swept; the lead photo is an exterior; a car with none keeps the empty state.
-- 2026-11-18: No press photos and no other all-rights-reserved photos. Photographers' own Flickr
-  photos with sharing allowed stay (the 2026-11-16 rule; 2026-11-17: without camera data on
-  account evidence alone): the existing ones are kept; cheetah, countach-qvx, portofino may be added.
+- 2026-11-18: "no then I dont want headache": no press photos and, apart from photographers' own
+  Flickr photos with sharing allowed (rules of 2026-11-16/17), no all-rights-reserved photos.
+  Pending the user: confirm keeping the existing own photos. Until then they stay, and no new
+  own-photo additions (cheetah, countach-qvx, portofino, the athon rework wait).
 - 2026-11-18: A daily photo scout (`tools/PHOTO_SCOUT.md`) and a quality pass of every car's lead
   photo and gallery (about 15 cars a night; drops to the Manager, additions and heroes not).
 - 2026-11-17: A photographer's own small name watermark is allowed when it matches the credited

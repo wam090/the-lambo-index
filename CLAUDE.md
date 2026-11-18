@@ -170,8 +170,9 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   whose owner allows sharing (`flickr.py --embed`): a personal account (not media, dealer or
   re-posting) with other personal photos, no press-style titles, no one else's watermark; a
   consistent camera supports it, and without EXIF the account evidence alone may do (user,
-  2026-11-16/17). It goes in `data/nonfree_images.json`. No press photos and no other
-  all-rights-reserved photos (user, 2026-11-18). **Exterior photos only** (user, 2026-11-18): the whole car from outside; no
+  2026-11-16/17). It goes in `data/nonfree_images.json`. Apart from those photographers' own
+  photos, no all-rights-reserved photos; never press or promotional photos (user, 2026-11-18).
+  New own-photo additions wait for the user's confirmation (BACKLOG). **Exterior photos only** (user, 2026-11-18): the whole car from outside; no
   interiors, engines or details; the lead photo is always an exterior, and a car with none keeps
   the empty state. Never re-posted press photos. Car pages have a "Report a photo" link to a GitHub issue.
 - Non-commercial (NC) licences are accepted because the site is non-commercial. If it ever carries

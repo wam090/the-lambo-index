@@ -55,11 +55,15 @@ run, or tells the Manager "missing, failed or not fired today".
    `data/photo_scout_log.json`. Build, smoke, scratch rebuild, then send Cyber the PR, the package,
    its SHA-256, the run id and the run date. Merge after Cyber's OK; report to the Manager.
 
-## Cyber's check
-REFRESH.md's checks for a photo hunt, plus: every URL the run fetched (WebFetch inputs and any
+   Usage limit (Manager, 2026-11-18): the run stays daily, but one PR may carry two days' runs
+   (each verified and logged on its own).
+
+## Cyber's check (light, Manager 2026-11-18)
+The diff and a contact sheet of the added photos; the full REFRESH.md photo-hunt checks only
+when a photo is dropped or moved. Always: every URL the run fetched (WebFetch inputs and any
 curl in Bash) is in `opened`, and no `-A`/`--user-agent`/`-H` in its Bash commands, as for the audit; `photo-scout-done` passes for the run date and fire-time
 commit; `opened` lists only the hosts above; `photo_scout_log.json` changes only the day's ids, to
-the run date; every added photo is free-licensed and an exterior of the right car.
+the run date; every added photo is free-licensed (or an own photo CLAUDE.md allows) and an exterior of the right car.
 
 ## Setup (the Manager creates these after the PR that adds this file is merged)
 - **Photo-scout task** "Lambo Index photo scout": `create_trigger` with `create_new_session_on_fire:
