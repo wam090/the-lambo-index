@@ -1100,6 +1100,8 @@ def repo_json(rel, rev=None):
     if not re.fullmatch(r"[0-9a-f]{7,40}", rev):
         raise Bad("--at: a commit id")
     import subprocess
+    if subprocess.run(["git", "-C", ROOT, "cat-file", "-e", f"{rev}^{{commit}}"], capture_output=True).returncode:
+        raise Bad("--at: commit not found")
     out = subprocess.run(["git", "-C", ROOT, "show", f"{rev}:{rel}"], capture_output=True)
     if out.returncode:
         return None
