@@ -135,7 +135,8 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo quality pass** (user, 2026-11-18; not started): every car's lead photo and gallery,
+- [ ] **Photo quality pass** (user, 2026-11-18; night 1 done: `cars.json` order 350-gtv to espada;
+      next starts at jarama): every car's lead photo and gallery,
       about 12-15 cars a night by contact sheet, full-size check of each pick; prefer sharp, well-lit,
       whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
       choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
