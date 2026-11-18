@@ -135,15 +135,15 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo gaps.** Cars under 4 photos, about 8 a night (list: `python3 -c` over `data/cars.json`),
-      now also with `--embed` (decision 2026-11-16; most shareable private photos carry the
-      photographer's watermark, so few qualify). Batch 5 (2026-11-16): sc18-alston, revuelto-sv,
-      350-gtv, faena, murcielago-rsv reached 4. Still short after batches 4-5: miura-svr, athon, p132,
-      p140, p147-gandini, aventador-50 (no usable photo yet). Batch 6: 350-gts and raptor 1->3,
-      urus-se-performante 1->2. Held for the Manager (no EXIF, so no camera check): cheetah (Marzal),
-      countach-qvx (Andre.32), portofino (Spiegelman, Sellers). Nothing usable: lm001, lma002,
-      huracan-stj, fenomeno-roadster, urraco-p200 (only P250s). Then the 2-photo cars. Retry the hunt for the six empty
-      exceptions every few weeks.
+- [ ] **Photo quality pass** (user, 2026-11-18; not started): every car's lead photo and gallery,
+      about 12-15 cars a night by contact sheet, full-size check of each pick; prefer sharp, well-lit,
+      whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
+      choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
+      exterior sweep (PR #83) for the method.
+- [ ] **Photo gaps**: the daily photo scout covers cars under 4 photos (`tools/PHOTO_SCOUT.md`).
+      Day 1 (2026-11-18) found nothing usable; its WebFetch returns text only, so the run cannot see
+      images and its hints are unverified (think about Flickr search terms only). On hold until the
+      user confirms own photos: cheetah, countach-qvx, portofino, the athon rework.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
