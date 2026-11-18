@@ -5,6 +5,14 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-18: Exterior photos only on car pages (interiors, engines, details maybe later in a deep-dive
+  section): every car swept; the lead photo is an exterior; a car with none keeps the empty state.
+- 2026-11-18: No new non-free photos (no press, no all-rights-reserved); the 2026-11-17 approval of
+  photos without camera data is void. Pending: whether the 2026-11-16 private photos stay.
+- 2026-11-18: A daily photo scout (`tools/PHOTO_SCOUT.md`) and a quality pass of every car's lead
+  photo and gallery (about 15 cars a night; drops to the Manager, additions and heroes not).
+- 2026-11-17: A photographer's own small name watermark is allowed when it matches the credited
+  account; stock, agency, press and promotional marks stay banned.
 - 2026-11-16: urus-st-x, sc20, invencible, autentica, countach-evoluzione and miura-jota keep the
   empty state as logged exceptions to the 2026-11-15 rule (only press, game, die-cast photos or
   recreations exist); the photo hunt is retried every few weeks.
