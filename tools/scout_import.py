@@ -12,6 +12,8 @@ AST, then runs `python3 -I` on the edited catalogue. Any violation rejects the w
                                                   # drop/hero picks found in those runs only
   python3 tools/scout_import.py report PKG.json   # Markdown for the PR body (package text fenced)
   python3 tools/scout_import.py hunt   PKG.json   # photo hunt: write the checked hints (see below)
+  python3 tools/scout_import.py photo-scout YYYY-MM-DD [--at COMMIT]  # daily photo scout: that day's cars
+  python3 tools/scout_import.py photo-scout-done PKG.json --run-date D --at COMMIT  # check its ids, log them
   python3 tools/scout_import.py audit-night YYYY-MM-DD  # nightly audit: that date's night and car ids
   python3 tools/scout_import.py audit  PKG.json --run-date D  # audit: validate, then apply the findings
   python3 tools/scout_import.py --self-test       # Cyber's hostile cases a-j on a scratch copy
@@ -687,6 +689,8 @@ def self_test():
 # ---- Photo hunt (tools/REFRESH.md, "Photo hunt"): hints only, never photo data ----------------
 HUNT_TOP = {"version", "kind", "ids", "photos", "notes"}
 HUNT_CAR = {"cats", "files", "flickr", "hero", "drop", "why"}
+HUNT_HOSTS = {"commons.wikimedia.org", "thumb.wikimedia.org", "en.wikipedia.org", "www.flickr.com",
+              "live.staticflickr.com"}                 # a photo scout's "opened" (tools/PHOTO_SCOUT.md)
 HUNT_NAME_RE = re.compile(r"[^\W_][\w .,'()&+-]{1,149}")      # Commons category or file name: no / : # etc.
 TERM_RE = re.compile(r"[^\W_][\w .'-]{2,59}")                 # Flickr search term (same as flickr.py)
 FLICKR_ID_RE = re.compile(r"flickr:[0-9]{1,20}")
@@ -718,7 +722,7 @@ def hunt_name(v, where, ext=False):
 
 def validate_hunt(pkg, cat_path=CATALOG):
     cars, _ = load_catalog(cat_path)
-    strict_keys(pkg, HUNT_TOP, "package")
+    strict_keys(pkg, HUNT_TOP | ({"opened"} if type(pkg) is dict and "opened" in pkg else set()), "package")
     if type(pkg["version"]) is not int or pkg["version"] != 1 or pkg["kind"] != "photo-hunt":
         raise Bad("version must be 1 and kind 'photo-hunt'")
     ids = pkg["ids"]
@@ -731,6 +735,16 @@ def validate_hunt(pkg, cat_path=CATALOG):
             text(pkg["notes"], "notes", 300)
         except Bad as e:
             errs.append(str(e))
+    if "opened" in pkg:                        # photo scout: every URL it fetched, on HUNT_HOSTS only
+        op = pkg["opened"]
+        if type(op) is not list or len(op) > 200 or len(set(map(str, op))) != len(op):
+            errs.append("opened: at most 200 distinct URLs")
+        else:
+            for j, u in enumerate(op):
+                try:
+                    source(u, f"opened[{j}]", HUNT_HOSTS)
+                except Bad as e:
+                    errs.append(str(e))
     ph = pkg["photos"]
     if type(ph) is not dict or set(ph) != set(ids):
         raise Bad("photos: exactly one entry per id in ids")
@@ -1002,6 +1016,9 @@ def hunt_self_test(tmpd):
         "hunt id not in ids": dict(base, photos={cid: entry, "zz": entry}),
         "hunt extra key": dict(base, exec="x"), "hunt extra car key": one(url="x"),
         "hunt bad kind": dict(base, kind="refresh"),
+        "hunt opened off-list": dict(base, opened=["https://evil.example/x"]),
+        "hunt opened http": dict(base, opened=["http://www.flickr.com/x"]),
+        "hunt opened not a list": dict(base, opened="https://www.flickr.com/x"),
         "hunt cat without car name": one(cats=["Lamborghini Aventador"]),
         "hunt cat namespace": one(cats=[f"Category:Lamborghini {name}"]),
         "hunt cat slash": one(cats=[f"Lamborghini {name}/../x"]),
@@ -1067,6 +1084,60 @@ AUDIT_PLAN = os.path.join(ROOT, "tools", "audit_plan.json")
 
 def is_audit(pkg):
     return type(pkg) is dict and pkg.get("kind") == "audit"
+
+
+# ---- Daily photo scout (tools/PHOTO_SCOUT.md): which cars a run looks at, and the dated log ----
+SCOUT_LOG = os.path.join(ROOT, "data", "photo_scout_log.json")
+SCOUT_PER_DAY, SCOUT_MIN = 8, 4
+SCOUT_EXCEPTIONS = {"urus-st-x", "sc20", "invencible", "autentica", "countach-evoluzione", "miura-jota"}
+SCOUT_EXCEPTION_DAYS = 21                    # the logged empty-state cars: retried every three weeks
+
+
+def repo_json(rel, rev=None):
+    """A data file from the working tree, or as it was at git commit `rev` (the run's fire time)."""
+    if rev is None:
+        return json.load(open(os.path.join(ROOT, rel), encoding="utf-8"))
+    if not re.fullmatch(r"[0-9a-f]{7,40}", rev):
+        raise Bad("--at: a commit id")
+    import subprocess
+    if subprocess.run(["git", "-C", ROOT, "cat-file", "-e", f"{rev}^{{commit}}"], capture_output=True).returncode:
+        raise Bad("--at: commit not found")
+    out = subprocess.run(["git", "-C", ROOT, "show", f"{rev}:{rel}"], capture_output=True)
+    if out.returncode:
+        return None
+    return json.loads(out.stdout.decode("utf-8"))
+
+
+def photo_scout_ids(run_date, rev=None):
+    """The cars a photo-scout run on run_date looks at: under SCOUT_MIN photos in data/cars.json,
+    longest since last scouted first (never scouted first), then fewest photos, then catalogue
+    order; the logged empty-state exceptions only every SCOUT_EXCEPTION_DAYS days."""
+    cars = repo_json("data/cars.json", rev)["cars"]
+    log = repo_json("data/photo_scout_log.json", rev) or {}
+    pick = []
+    for k, c in enumerate(cars):
+        if len(c["imgs"]) >= SCOUT_MIN:
+            continue
+        last = log.get(c["id"])
+        if c["id"] in SCOUT_EXCEPTIONS and last and \
+                (run_date - datetime.date.fromisoformat(last)).days < SCOUT_EXCEPTION_DAYS:
+            continue
+        pick.append((last or "0000-00-00", len(c["imgs"]), k, c["id"]))
+    return [p[3] for p in sorted(pick)[:SCOUT_PER_DAY]]
+
+
+def photo_scout_done(pkg, run_date, rev):
+    """Check that a photo-scout package covers exactly that day's cars, then log them as scouted."""
+    want = photo_scout_ids(run_date, rev)
+    if pkg["ids"] != want:
+        raise Bad(f"ids must be exactly the day's cars, in order: {' '.join(want)}")
+    log = repo_json("data/photo_scout_log.json") if os.path.exists(SCOUT_LOG) else {}
+    for cid in want:
+        log[cid] = run_date.isoformat()
+    with open(SCOUT_LOG, "w", encoding="utf-8") as f:
+        json.dump(dict(sorted(log.items())), f, indent=1)
+        f.write("\n")
+    print(f"photo scout {run_date}: {len(want)} cars logged")
 
 
 def audit_night(run_date, cat_path=CATALOG, plan_path=AUDIT_PLAN):
@@ -1381,6 +1452,9 @@ def main():
     args = sys.argv[1:]
     if args == ["--self-test"]:
         sys.exit(0 if self_test() else 1)
+    at = None
+    if len(args) >= 3 and args[-2] == "--at":
+        at, args = args[-1], args[:-2]
     run_date = None
     if len(args) == 4 and args[2] == "--run-date":
         try:
@@ -1394,6 +1468,24 @@ def main():
         except (ValueError, Bad) as e:
             sys.exit(f"audit-night YYYY-MM-DD: {e}")
         print(f"night {night}: " + " ".join(ids) if night else "audit complete")
+        return
+    if args[:1] == ["photo-scout"] and len(args) == 2:
+        try:
+            print(" ".join(photo_scout_ids(datetime.date.fromisoformat(args[1]), at)))
+        except (ValueError, Bad) as e:
+            sys.exit(f"photo-scout YYYY-MM-DD [--at COMMIT]: {e}")
+        return
+    if args[:1] == ["photo-scout-done"] and len(args) == 2:
+        if run_date is None or at is None:
+            sys.exit("photo-scout-done PKG.json --run-date D --at COMMIT")
+        try:
+            pkg = load(args[1])
+            if not is_hunt(pkg) or "opened" not in pkg:
+                raise Bad("not a photo-scout package (a photo-hunt package with 'opened')")
+            validate_hunt(pkg)
+            photo_scout_done(pkg, run_date, at)
+        except Bad as e:
+            sys.exit("package rejected:\n" + str(e))
         return
     if len(args) == 2 and args[0] == "gaps":
         try:

@@ -5,6 +5,16 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-18: Exterior photos only on car pages (interiors, engines, details maybe later in a deep-dive
+  section): every car swept; the lead photo is an exterior; a car with none keeps the empty state.
+- 2026-11-18: "no then I dont want headache": no press photos and, apart from photographers' own
+  Flickr photos with sharing allowed (rules of 2026-11-16/17), no all-rights-reserved photos.
+  Pending the user: confirm keeping the existing own photos. Until then they stay, and no new
+  own-photo additions (cheetah, countach-qvx, portofino, the athon rework wait).
+- 2026-11-18: A daily photo scout (`tools/PHOTO_SCOUT.md`) and a quality pass of every car's lead
+  photo and gallery (about 15 cars a night; drops to the Manager, additions and heroes not).
+- 2026-11-17: A photographer's own small name watermark is allowed when it matches the credited
+  account; stock, agency, press and promotional marks stay banned.
 - 2026-11-16: urus-st-x, sc20, invencible, autentica, countach-evoluzione and miura-jota keep the
   empty state as logged exceptions to the 2026-11-15 rule (only press, game, die-cast photos or
   recreations exist); the photo hunt is retried every few weeks.
@@ -144,7 +154,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
       night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3), urraco-p250, urraco-p300, urraco-p200, bravo,
-      cheetah, athon (night 5): no second source. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
+      cheetah, athon (night 5): no second source.
+      Night 6 (2026-11-18): the run failed on the usage limit; re-run after night 16, no re-fire. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
 
 - [ ] **Scout fill follow-ups** (Cyber, non-blocking): when a fill pairs Wikipedia with an
       `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value,

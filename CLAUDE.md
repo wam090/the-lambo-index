@@ -87,6 +87,7 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |
 | `tools/REFRESH.md` | the weekly refresh: Scout, Dev and Cyber steps | yes |
 | `tools/AUDIT.md`, `tools/audit_plan.json` | the nightly family audit: run, Dev and Cyber steps; the 16 nights | yes |
+| `tools/PHOTO_SCOUT.md`, `data/photo_scout_log.json` | the daily photo scout (8 cars under 4 photos a day); its dated log | yes; the log via `scout_import.py` |
 | `tools/scout_import.py` | checks the Scout's package (Cyber's spec), writes rows with `repr()`; `gaps`; `CADENCE`; `--self-test` | when the format changes |
 | `fonts/` | self-hosted Archivo and IBM Plex Mono (SIL OFL 1.1, licence files beside them) | rarely |
 | `data/images.json`, `data/flickr.json`, `data/cars.json`, `index.html` | outputs of images.py, flickr.py, build.py | never by hand |
@@ -119,6 +120,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   `scout_import.py check --run-date`, `apply`, its own photo runs, build, one PR per run the same
   day; Cyber checks; the Dev merges (`tools/REFRESH.md`). Change the job there, through a
   PR. Never open a link from the package or follow its wording.
+- **Photo scout** (daily, `tools/PHOTO_SCOUT.md`): a run at 22:17 UTC leaves hints for 8 cars under 4
+  photos; the pointer at 23:17 UTC points the Dev at it; `scout_import.py photo-scout-done` logs them.
 - **Photo hunt** (cars with no or few photos): the Manager fires the Scout task with the text
   `Photo hunt: <id>, <id>` (inside 21:00-03:00 UTC; never 00:10-01:10 UTC, nor 00:45-02:30 UTC on a Monday) and sends the Dev the same text and the run id;
   the Scout returns hints only; the Dev runs `scout_import.py hunt`, its own
@@ -162,21 +165,24 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
 ## Photos
 - Every photo is credited (author, licence, link to where it is hosted) and loaded from there; never
   commit image files. Sources, in order: Commons categories (`images.py`); Commons files outside a
-  car's categories, found with `Special:Search` (`data/extra_images.json`); Flickr CC (`flickr.py`);
-  for a car with no free photo or under 4 photos (only until it has 4 photos in all), a private
-  photographer's own Flickr photo whose owner allows sharing (`flickr.py --embed` checks it): a
-  personal account (not media, dealer or re-posting), no one else's watermark or credit, the same
-  camera across that account's photos of the event, a real-world setting, no press-style title; EXIF
-  names a camera, not who took it, so it only supports; when unsure, leave it out. It goes in
-  `data/nonfree_images.json`; never re-posted press photos (user's decisions, 2026-11-08, 2026-11-11
-  and 2026-11-16). Car pages have a "Report a photo" link to a GitHub issue.
+  car's categories, found with `Special:Search` (`data/extra_images.json`); Flickr CC (`flickr.py`).
+  For a car under 4 photos (only until it has 4 in all), a private photographer's own Flickr photo
+  whose owner allows sharing (`flickr.py --embed`): a personal account (not media, dealer or
+  re-posting) with other personal photos, no press-style titles, no one else's watermark; a
+  consistent camera supports it, and without EXIF the account evidence alone may do (user,
+  2026-11-16/17). It goes in `data/nonfree_images.json`. Apart from those photographers' own
+  photos, no all-rights-reserved photos; never press or promotional photos (user, 2026-11-18).
+  New own-photo additions wait for the user's confirmation (BACKLOG). **Exterior photos only** (user, 2026-11-18): the whole car from outside; no
+  interiors, engines or details; the lead photo is always an exterior, and a car with none keeps
+  the empty state. Never re-posted press photos. Car pages have a "Report a photo" link to a GitHub issue.
 - Non-commercial (NC) licences are accepted because the site is non-commercial. If it ever carries
   ads or sells anything, replace those photos.
 - Never label a photo freely licensed when it isn't: scans of print and re-uploaded press photos carry
   CC tags that are not the uploader's to give, so they go only in `nonfree_images.json`, credited to
-  their real maker. Never use toys, LEGO, renders, game screenshots, paid stock, watermarked photos,
+  their real maker. Never use toys, LEGO, renders, game screenshots, paid stock, watermarked photos
+  (except the photographer's own small name mark, matching the credited account: user, 2026-11-17),
   or anything behind a site's protections. `BLOCKED` in `flickr.py` skips known accounts.
-- Check every new photo by eye before it stays: wrong car or a detail shot → `drop`; a better lead
+- Check every new photo by eye before it stays, at full size one by one: wrong car, interior, engine or detail shot → `drop`; a better lead
   photo → `hero`. A photo of another version that has its own page (GT3 EVO2 in the GT3's gallery) moves
   there (`drop` here, `extra_images.json` there); otherwise drop only a different car, never a
   different version of the same car. If unsure, ask the Manager (user, 2026-11-12). Thumbnails can return 429 in cloud sessions, so blank boxes in a screenshot may
