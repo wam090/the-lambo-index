@@ -5,19 +5,30 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-19: The user lets the Manager run team structure and orders; only approvals go back to the user.
+- 2026-11-19: Own-Flickr photos (owner allows sharing): the existing ones stay, and more are allowed
+  under the CLAUDE.md Photos rules for any car under 4 photos; cheetah, countach-qvx, portofino and
+  the athon rework are released. Cyber checks the ownership evidence as before.
+- 2026-11-19: One photo beats none: no car shows the empty state if any legally usable exterior photo
+  exists. The empty-state cars come first in every photo hunt. Press photos, recreations, toys and
+  renders stay banned; a car with only those keeps the empty state, and the Manager asks the user per car.
+- 2026-11-19: Quality-pass bar (sharp, whole car, >= 1280 px, no crowd) is waived only for a car with
+  no other usable photo anywhere: a lower-quality exterior stays as a placeholder until a better one
+  is found. Thumbnails and the empty-state card are unchanged (no UI work).
+- 2026-11-19: Drops approved: bravo "1979 Caprie Nuccio Bertone e Chuck Jordan.jpg" and "1977 Bertone
+  designs.jpg" (the site's purpose is correct data); marzal "1980s Nuccio Bertone and his designs.jpg"
+  (the Manager, delegated). Bravo (3 photos) joins the photo hunt.
+- 2026-11-19: The daily photo scout task and its pointer are deleted. A Photo chat (Photo_v0.x) checks
+  candidates by eye and sends the Dev verified picks, up to 6 cars a night, empty-state cars first.
+
 - 2026-11-18: Exterior photos only on car pages (interiors, engines, details maybe later in a deep-dive
-  section): every car swept; the lead photo is an exterior; a car with none keeps the empty state.
+  section): every car swept; the lead photo is an exterior.
 - 2026-11-18: "no then I dont want headache": no press photos and, apart from photographers' own
   Flickr photos with sharing allowed (rules of 2026-11-16/17), no all-rights-reserved photos.
-  Pending the user: confirm keeping the existing own photos. Until then they stay, and no new
-  own-photo additions (cheetah, countach-qvx, portofino, the athon rework wait).
-- 2026-11-18: A daily photo scout (`tools/PHOTO_SCOUT.md`) and a quality pass of every car's lead
-  photo and gallery (about 15 cars a night; drops to the Manager, additions and heroes not).
+- 2026-11-18: A quality pass of every car's lead photo and gallery (about 15 cars a night; drops to
+  the Manager, additions and heroes not).
 - 2026-11-17: A photographer's own small name watermark is allowed when it matches the credited
   account; stock, agency, press and promotional marks stay banned.
-- 2026-11-16: urus-st-x, sc20, invencible, autentica, countach-evoluzione and miura-jota keep the
-  empty state as logged exceptions to the 2026-11-15 rule (only press, game, die-cast photos or
-  recreations exist); the photo hunt is retried every few weeks.
 - 2026-11-16: Private photographers' own Flickr photos (`flickr.py --embed`, owner allows sharing) are
   also allowed for a car under 4 photos, only until it has 4 photos in all. Ownership evidence: a
   personal account, the account's other photos, a consistent camera, no press-style titles; EXIF
@@ -141,10 +152,10 @@ history). Record each decision the user makes under Decisions, with its date.
       whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
       choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
       exterior sweep (PR #83) for the method.
-- [ ] **Photo gaps**: the daily photo scout covers cars under 4 photos (`tools/PHOTO_SCOUT.md`).
-      Day 1 (2026-11-18) found nothing usable; its WebFetch returns text only, so the run cannot see
-      images and its hints are unverified (think about Flickr search terms only). On hold until the
-      user confirms own photos: cheetah, countach-qvx, portofino, the athon rework.
+- [ ] **Photo gaps** (30 of 149 cars under 4 photos on 2026-11-19, 7 with none): Photo_v0.1 sends
+      verified picks; the Dev checks each at full size and applies it. First the empty-state cars
+      (urus-st-x, sc20, invencible, autentica, miura-jota, countach-evoluzione, portofino), then
+      bravo, cheetah, countach-qvx, the athon rework. Cars with only banned photos: list to the Manager.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
