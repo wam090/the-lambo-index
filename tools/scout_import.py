@@ -12,7 +12,7 @@ AST, then runs `python3 -I` on the edited catalogue. Any violation rejects the w
                                                   # drop/hero picks found in those runs only
   python3 tools/scout_import.py report PKG.json   # Markdown for the PR body (package text fenced)
   python3 tools/scout_import.py hunt   PKG.json   # photo hunt: write the checked hints (see below)
-  python3 tools/scout_import.py photo-scout YYYY-MM-DD [--at COMMIT]  # daily photo scout: that day's cars
+  python3 tools/scout_import.py photo-scout YYYY-MM-DD [--at COMMIT]  # retired daily photo scout (2026-11-19): that day's cars
   python3 tools/scout_import.py photo-scout-done PKG.json --run-date D --at COMMIT  # check its ids, log them
   python3 tools/scout_import.py audit-night YYYY-MM-DD  # nightly audit: that date's night and car ids
   python3 tools/scout_import.py audit  PKG.json --run-date D  # audit: validate, then apply the findings
@@ -690,7 +690,7 @@ def self_test():
 HUNT_TOP = {"version", "kind", "ids", "photos", "notes"}
 HUNT_CAR = {"cats", "files", "flickr", "hero", "drop", "why"}
 HUNT_HOSTS = {"commons.wikimedia.org", "thumb.wikimedia.org", "en.wikipedia.org", "www.flickr.com",
-              "live.staticflickr.com"}                 # a photo scout's "opened" (tools/PHOTO_SCOUT.md)
+              "live.staticflickr.com"}                 # a photo scout's "opened" (retired 2026-11-19)
 HUNT_NAME_RE = re.compile(r"[^\W_][\w .,'()&+-]{1,149}")      # Commons category or file name: no / : # etc.
 TERM_RE = re.compile(r"[^\W_][\w .'-]{2,59}")                 # Flickr search term (same as flickr.py)
 FLICKR_ID_RE = re.compile(r"flickr:[0-9]{1,20}")
@@ -1086,7 +1086,7 @@ def is_audit(pkg):
     return type(pkg) is dict and pkg.get("kind") == "audit"
 
 
-# ---- Daily photo scout (tools/PHOTO_SCOUT.md): which cars a run looks at, and the dated log ----
+# ---- Daily photo scout (retired 2026-11-19; kept for its log): which cars a run looked at ----
 SCOUT_LOG = os.path.join(ROOT, "data", "photo_scout_log.json")
 SCOUT_PER_DAY, SCOUT_MIN = 8, 4
 SCOUT_EXCEPTIONS = {"urus-st-x", "sc20", "invencible", "autentica", "countach-evoluzione", "miura-jota"}
