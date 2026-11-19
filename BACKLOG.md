@@ -8,7 +8,9 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-19: The user lets the Manager run team structure and orders; only approvals go back to the user.
 - 2026-11-19: Own-Flickr photos (owner allows sharing): the existing ones stay, and more are allowed
   under the CLAUDE.md Photos rules for any car under 4 photos; cheetah, countach-qvx, portofino and
-  the athon rework are released. Cyber checks the ownership evidence as before.
+  the athon rework are released. Cyber checks each one's evidence in its PR: a personal account
+  with other personal photos, a consistent camera, no press-style titles, no foreign watermark,
+  sharing allowed, a full-size exterior, not a toy.
 - 2026-11-19: One photo beats none: no car shows the empty state if any legally usable exterior photo
   exists. The empty-state cars come first in every photo hunt. Press photos, recreations, toys and
   renders stay banned; a car with only those keeps the empty state, and the Manager asks the user per car.
