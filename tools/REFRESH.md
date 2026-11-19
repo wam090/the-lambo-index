@@ -78,6 +78,8 @@ text and the run id; the Dev turns the hints into photos with its own tools.
    show the car and whose titles or descriptions name it), `hero`/`drop` picks, and `why`: one line
    on what exists (e.g. "only all-rights-reserved Flickr photos; owners allow sharing" or "only
    press photos"). No URLs, authors, licences or photo data: the Dev's tools fetch all of that.
+   `opened` (required) lists every URL you fetched, 404s and refusals included, all on the hosts
+   above; an omitted URL is a rejection, as for the audit.
 4. **Package**: `"kind": "photo-hunt"`, format at the top of `tools/scout_import.py`; run
    `python3 tools/scout_import.py check <file>` until it passes; end your final reply with the
    package as one ```json block and nothing after it.
