@@ -182,7 +182,7 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   consistent camera supports it, and without EXIF the account evidence alone may do (user,
   2026-11-16/17). It goes in `data/nonfree_images.json`. Apart from those photographers' own
   photos, no all-rights-reserved photos; never press or promotional photos (user, 2026-11-18).
-  New own-photo additions wait for the user's confirmation (BACKLOG). **Exterior photos only** (user, 2026-11-18): the whole car from outside; no
+  Own-photo additions are allowed again (user, 2026-11-19); Cyber checks each one's evidence. **Exterior photos only** (user, 2026-11-18): the whole car from outside; no
   interiors, engines or details; the lead photo is always an exterior, and a car with none keeps
   the empty state. Never re-posted press photos. Car pages have a "Report a photo" link to a GitHub issue.
 - Non-commercial (NC) licences are accepted because the site is non-commercial. If it ever carries

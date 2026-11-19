@@ -160,8 +160,10 @@ history). Record each decision the user makes under Decisions, with its date.
       exterior sweep (PR #83) for the method.
 - [ ] **Photo gaps** (30 of 149 cars under 4 photos on 2026-11-19, 7 with none): Photo_v0.1 sends
       verified picks; the Dev checks each at full size and applies it. First the empty-state cars
-      (urus-st-x, sc20, invencible, autentica, miura-jota, countach-evoluzione, portofino), then
-      bravo, cheetah, countach-qvx, the athon rework. Cars with only banned photos: list to the Manager.
+      (urus-st-x, sc20, invencible, autentica, miura-jota, countach-evoluzione; portofino got 3 own
+      photos on 2026-11-19), then bravo, athon, cheetah, countach-qvx. Photo_v0.1 night 1: urus-st-x,
+      sc20, invencible, autentica have only press, game or LEGO images; miura-jota and
+      countach-evoluzione wait for the Manager (a Jota-spec conversion; PD-Italy period scans).
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
