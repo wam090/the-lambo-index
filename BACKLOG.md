@@ -6,6 +6,10 @@ history). Record each decision the user makes under Decisions, with its date.
 ## Decisions (settled: change only if the user asks)
 
 - 2026-11-19: The user lets the Manager run team structure and orders; only approvals go back to the user.
+- 2026-11-19: Quality-pass drops the Dev makes alone and lists in its nightly report (Manager,
+  delegated): (a) not an exterior of the car (interior, engine, detail), (b) the car is not the
+  subject (crowd, car park, group photo), (c) a toy, render or another car. Photos whose version is
+  ambiguous go to the Manager first; audit-night drops and moves still need the user (2026-11-13).
 - 2026-11-19: Own-Flickr photos (owner allows sharing): the existing ones stay, and more are allowed
   under the CLAUDE.md Photos rules for any car under 4 photos; cheetah, countach-qvx, portofino and
   the athon rework are released. Cyber checks each one's evidence in its PR: a personal account
