@@ -135,8 +135,8 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo quality pass** (user, 2026-11-18; night 1 done: `cars.json` order 350-gtv to espada;
-      next starts at jarama): every car's lead photo and gallery,
+- [ ] **Photo quality pass** (user, 2026-11-18; nights 1-2 done: `cars.json` order 350-gtv to faena;
+      next starts at athon): every car's lead photo and gallery,
       about 12-15 cars a night by contact sheet, full-size check of each pick; prefer sharp, well-lit,
       whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
       choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
@@ -155,7 +155,7 @@ history). Record each decision the user makes under Decisions, with its date.
 - [ ] **Nightly audit**: 16 nights from 2026-11-13 (`tools/audit_plan.json`). When the last is merged,
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
       night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3), urraco-p250, urraco-p300, urraco-p200, bravo,
-      cheetah, athon (night 5): no second source.
+      cheetah, athon (night 5); night 7: every Diablo-family id but diablo, and p132: no second source.
       Night 6 (2026-11-18): the run failed on the usage limit; re-run after night 16, no re-fire. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
 
 - [ ] **Scout fill follow-ups** (Cyber, non-blocking): when a fill pairs Wikipedia with an
