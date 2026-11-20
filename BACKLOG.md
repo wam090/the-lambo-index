@@ -5,6 +5,10 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-20: Photo calls (the Manager, delegated): gallardo-super-trofeo "American Le Mans Series Oak
+  Tree Grand Prix at VIR October 2013 (10295564514).jpg" drop (two small cars from behind, marshals in
+  front); murcielago-sv "... Super Veloce and Gemballa Mirage GT (15626905294).jpg" stays. Rule: drop a
+  two-car frame only when our car is not a clear whole subject.
 - 2026-11-19: The user lets the Manager run team structure and orders; only approvals go back to the user.
 - 2026-11-19: Quality-pass drops the Dev makes alone and lists in its nightly report (Manager,
   delegated): (a) not an exterior of the car (interior, engine, detail), (b) the car is not the
@@ -153,7 +157,8 @@ history). Record each decision the user makes under Decisions, with its date.
 ## Next
 
 - [ ] **Photo quality pass** (user, 2026-11-18; nights 1-5 done: `cars.json` order 350-gtv to
-      murcielago-rsv; next starts at aventador-lp700): every car's lead photo and gallery,
+      murcielago-rsv; next starts at aventador-lp700 and also applies the approved
+      gallardo-super-trofeo drop of 2026-11-20): every car's lead photo and gallery,
       about 12-15 cars a night by contact sheet, full-size check of each pick; prefer sharp, well-lit,
       whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
       choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
