@@ -1,6 +1,6 @@
 {
  "brand": "Lamborghini",
- "generated": "2026-11-19",
+ "generated": "2026-11-20",
  "cars": [
   {
    "id": "350-gtv",
@@ -7320,16 +7320,6 @@
    "debut": false,
    "imgs": [
     {
-     "t": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (1).jpg",
-     "h": "d/df",
-     "n": "Lamborghini_Gallardo_Superleggera_-_Flickr_-_Alexandre_Pr%C3%A9vot_%281%29.jpg",
-     "w": 4608,
-     "ht": 3072,
-     "a": "Alexandre Prévot from Nancy, France",
-     "l": "CC BY-SA 2.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
-    },
-    {
      "t": "Lamborghini Gallardo Superleggera in Paris.jpg",
      "h": "7/7c",
      "n": "Lamborghini_Gallardo_Superleggera_in_Paris.jpg",
@@ -7360,14 +7350,14 @@
      "lu": "https://creativecommons.org/licenses/by/2.0/"
     },
     {
-     "t": "Vorsteiner Lamborghini Gallardo Superleggera & BMW M3 (8587224491).jpg",
-     "h": "7/76",
-     "n": "Vorsteiner_Lamborghini_Gallardo_Superleggera_%26_BMW_M3_%288587224491%29.jpg",
-     "w": 4800,
-     "ht": 3179,
-     "a": "Axion23",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
+     "t": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (1).jpg",
+     "h": "d/df",
+     "n": "Lamborghini_Gallardo_Superleggera_-_Flickr_-_Alexandre_Pr%C3%A9vot_%281%29.jpg",
+     "w": 4608,
+     "ht": 3072,
+     "a": "Alexandre Prévot from Nancy, France",
+     "l": "CC BY-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
     },
     {
      "t": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (3).jpg",
@@ -7414,6 +7404,16 @@
    "vplus": false,
    "acc": 3.4,
    "imgs": [
+    {
+     "t": "2008 Lamborghini Reventon SP 24.jpg",
+     "h": "a/a8",
+     "n": "2008_Lamborghini_Reventon_SP_24.jpg",
+     "w": 4489,
+     "ht": 2531,
+     "a": "MrWalkr",
+     "l": "CC BY-SA 4.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
     {
      "t": "2008 Lamborghini Reventon HRO26.jpg",
      "h": "c/c8",
@@ -7485,16 +7485,6 @@
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
     {
-     "t": "2008 Lamborghini Reventon SP 24.jpg",
-     "h": "a/a8",
-     "n": "2008_Lamborghini_Reventon_SP_24.jpg",
-     "w": 4489,
-     "ht": 2531,
-     "a": "MrWalkr",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
      "t": "Lamborghini Reventon.jpg",
      "h": "6/62",
      "n": "Lamborghini_Reventon.jpg",
@@ -7527,16 +7517,6 @@
    "debut": false,
    "imgs": [
     {
-     "t": "Lamborghini Gallardo LP 560-4 2013 (34831870002).jpg",
-     "h": "8/84",
-     "n": "Lamborghini_Gallardo_LP_560-4_2013_%2834831870002%29.jpg",
-     "w": 4000,
-     "ht": 2600,
-     "a": "RL GNZLZ from Chile",
-     "l": "CC BY-SA 2.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
-    },
-    {
      "t": "LP560-4 (3911671956).jpg",
      "h": "f/fc",
      "n": "LP560-4_%283911671956%29.jpg",
@@ -7545,6 +7525,16 @@
      "a": "Damian Morys from New York City, United States",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
+     "t": "Lamborghini Gallardo LP 560-4 2013 (34831870002).jpg",
+     "h": "8/84",
+     "n": "Lamborghini_Gallardo_LP_560-4_2013_%2834831870002%29.jpg",
+     "w": 4000,
+     "ht": 2600,
+     "a": "RL GNZLZ from Chile",
+     "l": "CC BY-SA 2.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
     },
     {
      "t": "Lamborghini Gallardo LP 560-4.jpg",
@@ -8198,16 +8188,6 @@
      "a": "Christian Holmér from Nyköping, Sweden",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "Lamborghini Murcielago LP670-4 SuperVeloce (4575910326).jpg",
-     "h": "1/1f",
-     "n": "Lamborghini_Murcielago_LP670-4_SuperVeloce_%284575910326%29.jpg",
-     "w": 5184,
-     "ht": 3456,
-     "a": "Christian Holmér from Nyköping, Sweden",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
     }
    ]
   },
@@ -8588,6 +8568,16 @@
    "debut": false,
    "imgs": [
     {
+     "t": "Superleggera. (6689452263).jpg",
+     "h": "1/1b",
+     "n": "Superleggera._%286689452263%29.jpg",
+     "w": 5184,
+     "ht": 3243,
+     "a": "Damian Morys from New York City, United States",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
      "t": "Lamborghini Gallardo LP570-4 Superleggera at the 2025 Shannons Adelaide Rally (028A4483).jpg",
      "h": "f/f0",
      "n": "Lamborghini_Gallardo_LP570-4_Superleggera_at_the_2025_Shannons_Adelaide_Rally_%28028A4483%29.jpg",
@@ -8628,16 +8618,6 @@
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     },
     {
-     "t": "Lamborghini Gallardo Superleggera LP 570-4 5204cc registered September 2010 03.jpg",
-     "h": "4/42",
-     "n": "Lamborghini_Gallardo_Superleggera_LP_570-4_5204cc_registered_September_2010_03.jpg",
-     "w": 5472,
-     "ht": 3648,
-     "a": "Charles01",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
      "t": "Lamborghini superleggera (6778415345).jpg",
      "h": "c/c7",
      "n": "Lamborghini_superleggera_%286778415345%29.jpg",
@@ -8656,16 +8636,6 @@
      "a": "Ben",
      "l": "CC BY-SA 2.0",
      "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
-    },
-    {
-     "t": "Superleggera. (6689452263).jpg",
-     "h": "1/1b",
-     "n": "Superleggera._%286689452263%29.jpg",
-     "w": 5184,
-     "ht": 3243,
-     "a": "Damian Morys from New York City, United States",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
     },
     {
      "t": "Lamborghini Gallardo LP570-4 Superleggera at the 2026 Adelaide Rally Street Party on King William Road (028A4070).jpg",

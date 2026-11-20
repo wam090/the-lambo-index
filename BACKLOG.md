@@ -152,8 +152,8 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo quality pass** (user, 2026-11-18; nights 1-4 done: `cars.json` order 350-gtv to
-      murcielago-lp640-roadster; next starts at gallardo-superleggera): every car's lead photo and gallery,
+- [ ] **Photo quality pass** (user, 2026-11-18; nights 1-5 done: `cars.json` order 350-gtv to
+      murcielago-rsv; next starts at aventador-lp700): every car's lead photo and gallery,
       about 12-15 cars a night by contact sheet, full-size check of each pick; prefer sharp, well-lit,
       whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
       choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
