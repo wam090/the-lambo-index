@@ -175,7 +175,10 @@ history). Record each decision the user makes under Decisions, with its date.
       write "audit done" here and the Manager disables both tasks. Not checked, re-run decided after
       night 16: 400-gt (night 1), miura-svr and miura-concept (night 2), faena (night 3), urraco-p250, urraco-p300, urraco-p200, bravo,
       cheetah, athon (night 5); night 7: every Diablo-family id but diablo, and p132: no second source.
-      Night 6 (2026-11-18): the run failed on the usage limit; re-run after night 16, no re-fire. Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
+      Night 6 (2026-11-18): the run failed on the usage limit; re-run after night 16, no re-fire.
+      Night 8 (2026-11-20, run cse_01JqEE35UuxHoRcpUCpyhFZ9): no package. The run's own permission
+      classifier blocked `scout_import.py audit-night` and the run stopped; re-run after night 16. If
+      it recurs, the audit task's permissions need a look (Manager/Cyber). Both sources must be pages about the exact car (AUDIT.md, Audit run step 2): night 1 broke it for 3500-gtz (two 350 GT pages, now reverted); flag it.
 
 - [ ] **Scout fill follow-ups** (Cyber, non-blocking): when a fill pairs Wikipedia with an
       `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value,
