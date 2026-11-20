@@ -28,7 +28,7 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    not have: `notes` only. List in `checked` the cars you compared and in `opened` every URL you
    fetched, including 404s, refusals and pages you did not use; an omitted URL is a rejection.
 4. **Package**: `"kind": "audit"`, format at the top of `tools/scout_import.py`. Run `python3
-   tools/scout_import.py check <file> --run-date <run date>` until it passes, and end your final
+   <clone>/tools/scout_import.py check <file> --run-date <run date>` until it passes, and end your final
    reply with the package as one ```json block and nothing after it. You send nothing anywhere.
 
 ## Dev (when the audit pointer fires; work only in 21:00-03:00 UTC, user 2026-11-15)
