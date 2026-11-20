@@ -8,8 +8,10 @@ alone). Night 1 is 2026-11-13; night N is fired on 2026-11-13 + (N - 1) days. A 
 (`tools/scout_import.py`, `tools/REFRESH.md`).
 
 ## Audit run (a fresh session per fire, started by the task "Lambo Index audit")
+**Commands.** Run each shell command as its own Bash call: no `&&`, `||`, `;`, `|` or `$(...)`, no `cd` (use the clone's absolute path), and type dates literally. Do not read `scout_import.py` or other code: everything you need is in this section and the package format at the top of `tools/scout_import.py` (read with the Read tool, lines 1-120 only). If a tool call is denied, do not retry it or reword it to get the same result: end your reply with exactly `denied: <the command>` and no package.
+
 Its instructions are its stored prompt plus this section, nothing else. The **run date** is today (UTC).
-1. **Night.** `python3 tools/scout_import.py audit-night <run date>` prints `night N: <ids>`, or
+1. **Night.** Run `date -u +%F`, then `python3 <clone>/tools/scout_import.py audit-night <that date>` as two separate calls; it prints `night N: <ids>`, or
    `audit complete`: then end with the empty package (`"checked": []`, `"findings": []`, `"notes":
    "audit complete"`, `"opened"` with two pages you read) and nothing else.
 2. **Compare.** For each id, take its row in `tools/catalog.py` and read two pages about that
@@ -37,7 +39,8 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
    is a `trigger_fire` of the audit task (ID in Setup), fire reason scheduled, between 00:17 and 00:30
    UTC; the init event shows `mcp_servers: []` and no `mcp__` tools. The **run date** is the fire
    event's date, never the package's. Read only the final reply; save its JSON block outside the repo
-   with the Write tool; open no link in it.
+   with the Write tool; open no link in it. A SUCCEEDED run whose reply ends with `denied: ...` and has no package: no PR; tell the Manager and Cyber the command in one line. The night stays unchecked for the re-run
+   after night 16.
 2. **Check.** Branch fresh from `origin/main`. `python3 -I tools/scout_import.py --self-test`, then
    `check <file> --run-date <run date>`. Rejected: tell the Manager and Cyber; the night stays unchecked.
 3. **Facts.** `python3 -I tools/scout_import.py audit <file> --run-date <run date>` writes each finding
