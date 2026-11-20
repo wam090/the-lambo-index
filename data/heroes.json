@@ -9,7 +9,7 @@
   "diablo-svr": "1997 Lamborghini Diablo SV-R SCD 24 Low.jpg",
   "diablo-vt-60": "Moscow car show 2025-08-03 Lambo Diablo VT 6.0 2000 02.jpg",
   "gallardo": "Matte Black Lamborghini Gallardo and Blue Chrome Wrapped BMW M6 (10147843554).jpg",
-  "gallardo-lp560": "Lamborghini Gallardo LP 560-4 2013 (34831870002).jpg",
+  "gallardo-lp560": "LP560-4 (3911671956).jpg",
   "gallardo-lp560-spyder": "Lamborghini Gallardo LP 560-4 Bicolore - Flickr - Alexandre Prévot (2).jpg",
   "sesto-elemento": "Lamborghini Sesto Elemento 6.jpg",
   "gallardo-squadra-corse": "Lamborghini Gallardo LP570-4 Squadra Corse, MIAS 2014, Montreal (DSC04402-2).jpg",
@@ -25,7 +25,7 @@
   "murcielago-lp650": "flickr:5595796675",
   "murcielago-rsv": "flickr:6006008012",
   "temerario-gt3": "2026-07-03 Motorsport, DTM, Norisring Nürnberg 2026 STP 0080.jpg",
-  "gallardo-superleggera": "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (1).jpg",
+  "gallardo-superleggera": "Lamborghini Gallardo Superleggera in Paris.jpg",
   "400-gt-monza": "1966 Lamborghini 400 GT Monza.jpg",
   "diablo": "Lamborghini Diablo (1991) (52865640727).jpg",
   "countach-lp500s": "Lamborghini Countach LP500S IMG 3048.jpg",
@@ -33,7 +33,9 @@
   "cala": "Lamborghini Calà 1.jpg",
   "concept-s": "2005-03-04 Motorshow Geneva 046.JPG",
   "murcielago-roadster": "2006 Lamborghini Murcielago Roadster SCD 24.jpg",
-  "murcielago-lp640-roadster": "Lamborghini Murciélago LP640 Roadster Auto Zuerich 2023 1X7A1436.jpg"
+  "murcielago-lp640-roadster": "Lamborghini Murciélago LP640 Roadster Auto Zuerich 2023 1X7A1436.jpg",
+  "reventon": "2008 Lamborghini Reventon SP 24.jpg",
+  "gallardo-lp570-sl": "Superleggera. (6689452263).jpg"
  },
  "drop": {
   "350-gtv": [
@@ -201,7 +203,8 @@
   "gallardo-superleggera": [
    "2014 Lamborghini Gallardo Superleggera Edizione Tecnica SP22.jpg",
    "Lamborghini Gallardo Superleggera LP5704 Grey.jpg",
-   "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (15).jpg"
+   "Lamborghini Gallardo Superleggera - Flickr - Alexandre Prévot (15).jpg",
+   "Vorsteiner Lamborghini Gallardo Superleggera & BMW M3 (8587224491).jpg"
   ],
   "marzal": [
    "The Two Lamborghinis (6004980516).jpg",
@@ -374,7 +377,8 @@
   ],
   "murcielago-sv": [
    "Lamborghini Murciélago Super Veloce 6.5 '10 (11219917873).jpg",
-   "Lamborghini Murciélago Super Veloce 6.5 '10 (11219971754).jpg"
+   "Lamborghini Murciélago Super Veloce 6.5 '10 (11219971754).jpg",
+   "Lamborghini Murcielago LP670-4 SuperVeloce (4575910326).jpg"
   ],
   "reventon-roadster": [
    "Lamborghini Reventon Roadster 6.jpg"
@@ -423,6 +427,9 @@
    "Miami Concours parking.jpg",
    "LAMBORGHINI MURCIELAGO China.jpg",
    "LAMBORGHINI MURCIELAGO China (2).jpg"
+  ],
+  "gallardo-lp570-sl": [
+   "Lamborghini Gallardo Superleggera LP 570-4 5204cc registered September 2010 03.jpg"
   ]
  }
 }
