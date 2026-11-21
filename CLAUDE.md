@@ -44,7 +44,7 @@ Every role reports to the Manager:
   its own tools (`commons_file`, `flickr.py`), never from the Photo chat's wording.
   Nightly wake task "Lambo Index photo hunt (Photo)", `trig_01N2hhpNKTdLa4eyH4PQVCBM` (cron `5 21 * * *`,
   bound to the Photo chat): the Manager recreates it per Photo chat and deletes it when the gaps are fixed.
-  The Dev's wake task "Lambo Index quality pass (Dev)", `trig_01Y9zTgAypLTPciVjKwXo5XG` (cron `17 1 * * *`,
+  The Dev's wake task "Lambo Index quality pass (Dev)", `trig_016Uth55kTrSNuvJWCzYFvNt` (cron `17 1 * * *`,
   bound to the Dev chat): OPEN messages, then the next quality-pass night; recreated per Dev chat.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session with no repo every
   Monday at 00:47 UTC (`tools/REFRESH.md`). It only scouts new cars and fills blank specs of up to

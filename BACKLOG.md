@@ -15,6 +15,11 @@ history). Record each decision the user makes under Decisions, with its date.
   delegated). huracan-gt3 keeps "GT3 and GT4 race one ... (51373314403).jpg" until then and "2018 Rolex
   24 (41267772511).jpg" (filed under Huracán GT3 on Commons); huracan-super-trofeo drops "DSC 0062
   (35664140036).jpg" and "DSC 0063 (34893960913).jpg" (shot through a catch fence).
+- 2026-11-21: The 2026-11-19 delegation stands (the Manager): the Dev alone drops a photo that is
+  (a) not an exterior of the car, (b) not about the car (crowd, car park, group photo, hall
+  overview) or (c) a toy, render or another car, and lists each in its report; a version in doubt,
+  a drop that would leave a car under 4 photos and any move between pages go to the Manager; fact
+  changes stay with the user.
 - 2026-11-20: Photo calls (the Manager, delegated): gallardo-super-trofeo "American Le Mans Series Oak
   Tree Grand Prix at VIR October 2013 (10295564514).jpg" drop (two small cars from behind, marshals in
   front); murcielago-sv "... Super Veloce and Gemballa Mirage GT (15626905294).jpg" stays. Rule: drop a
