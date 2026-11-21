@@ -1,5 +1,9 @@
 # Nightly family audit: audit run → pointer task → Dev → Cyber
 
+**Stopped by the user on 2026-11-21**, after night 9. Both tasks (audit and audit pointer) are
+disabled; nights 6, 8 and 10-16 are not run. This file and `tools/audit_plan.json` stay as history;
+a restart needs the user's OK.
+
 User's plan, 2026-11-12. Every car is checked once, a few families a night: the facts by an
 **audit run** (Scout-style: a fresh session per fire, no repo write access, no connectors), the
 photos by the **Dev**. `tools/audit_plan.json` lists the 16 nights (at most 8 cars, the big families
@@ -90,7 +94,7 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
 6. A contact sheet of every dropped or moved photo shows each decision is right.
 7. Cyber reads, as text, every finding that changes `family`, `kind`, `year` or `end`, and 10 others.
 
-## Setup (the Manager creates these after the PR that sets them is merged)
+## Setup (history: both tasks disabled 2026-11-21; not recreated for a new Dev)
 - **Audit task** "Lambo Index audit": `create_trigger` with `create_new_session_on_fire: true`, no
   connectors, `notifications: {}`, model Sonnet 5.5, cron `17 0 * * *`, prompt (keep byte-identical):
   ```
@@ -106,6 +110,7 @@ Its instructions are its stored prompt plus this section, nothing else. The **ru
 - Task IDs: audit `trig_01Cn6vQ1xuJLBWbq1Mis3pzS` (2026-11-12), audit pointer
   `trig_01EjzdfGNVt2i45bjf1LqeiD` (2026-11-20, fires into Dev_0.10). Retired: the Pickup chat's audit
   pickup `trig_014DCnjrL1cNGkssdkNh5vPa` (disabled 2026-11-15); Dev_0.9's audit pointer
-  `trig_01Gfm3GpNxbq9NLZPeGtzcTX` (deleted 2026-11-20). Record new IDs here through a PR. A prompt can
+  `trig_01Gfm3GpNxbq9NLZPeGtzcTX` (deleted 2026-11-20). Both live IDs are disabled since 2026-11-21
+  (audit stopped by the user). Record new IDs here through a PR. A prompt can
   only be changed from the chat it posts into, so a prompt change means a new task; the old one is
   disabled at once and deleted after the new one's first run. Cyber checks both tasks with `get_trigger` after they are created.

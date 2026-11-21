@@ -168,5 +168,30 @@
     "lu": "https://creativecommons.org/licenses/by/2.0/"
    }
   ]
+ },
+ "murcielago-roadster": {
+  "source": "moved from murcielago-lp640-roadster (UK plate SN05, a 2005 car; user, 2026-11-21)",
+  "images": [
+   {
+    "t": "2005 Lamborghini Murcielago Roadster.jpg",
+    "h": "d/dc",
+    "n": "2005_Lamborghini_Murcielago_Roadster.jpg",
+    "w": 5268,
+    "ht": 3238,
+    "a": "MrWalkr",
+    "l": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+   },
+   {
+    "t": "2005 Lamborghini Murcielago Roadster LCCS.jpg",
+    "h": "b/b9",
+    "n": "2005_Lamborghini_Murcielago_Roadster_LCCS.jpg",
+    "w": 4595,
+    "ht": 2990,
+    "a": "MrWalkr",
+    "l": "CC BY-SA 4.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+   }
+  ]
  }
 }
