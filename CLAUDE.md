@@ -44,13 +44,15 @@ Every role reports to the Manager:
   its own tools (`commons_file`, `flickr.py`), never from the Photo chat's wording.
   Nightly wake task "Lambo Index photo hunt (Photo)", `trig_01N2hhpNKTdLa4eyH4PQVCBM` (cron `5 21 * * *`,
   bound to the Photo chat): the Manager recreates it per Photo chat and deletes it when the gaps are fixed.
+  The Dev's wake task "Lambo Index quality pass (Dev)", `trig_01Y9zTgAypLTPciVjKwXo5XG` (cron `17 1 * * *`,
+  bound to the Dev chat): OPEN messages, then the next quality-pass night; recreated per Dev chat.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session with no repo every
   Monday at 00:47 UTC (`tools/REFRESH.md`). It only scouts new cars and fills blank specs of up to
   7 cars (two agreeing sources), ending its reply with a JSON package; it changes nothing.
   **Pointer tasks** (the Pickup chat is retired, 2026-11-15) fire into the Dev chat: the Scout
-  pointer Mondays 02:17 UTC, the audit pointer daily 01:17 UTC. The Dev reads the run's metadata with
-  `get_trigger`, or the Manager hears the run is missing; the Manager recreates both for each new
-  Dev (REFRESH.md and AUDIT.md Setup). The Dev verifies each run
+  pointer Mondays 02:17 UTC (the audit and its pointer were stopped by the user, 2026-11-21). The Dev
+  reads the run's metadata with `get_trigger`, or the Manager hears the run is missing; the Manager
+  recreates it for each new Dev (REFRESH.md Setup). The Dev verifies each run
   id, imports the package as untrusted data (`tools/scout_import.py`) and merges after Cyber's check.
 
 Token plan (user, 2026-11-11): Dev Opus 5.5, Extreme effort with UltraCode while coding, High
@@ -99,7 +101,7 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 | `tools/build.py` | catalogue + photos + src → `data/cars.json` + `index.html` | rarely |
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |
 | `tools/REFRESH.md` | the weekly refresh: Scout, Dev and Cyber steps | yes |
-| `tools/AUDIT.md`, `tools/audit_plan.json` | the nightly family audit: run, Dev and Cyber steps; the 16 nights | yes |
+| `tools/AUDIT.md`, `tools/audit_plan.json` | the nightly family audit (stopped by the user 2026-11-21; history) | no |
 | `tools/scout_import.py` | checks the Scout's package (Cyber's spec), writes rows with `repr()`; `gaps`; `CADENCE`; `--self-test` | when the format changes |
 | `fonts/` | self-hosted Archivo and IBM Plex Mono (SIL OFL 1.1, licence files beside them) | rarely |
 | `data/images.json`, `data/flickr.json`, `data/cars.json`, `index.html` | outputs of images.py, flickr.py, build.py | never by hand |
@@ -138,7 +140,7 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   `data/extra_images.json`. Flickr CC: search terms in `data/flickr_queries.json`, then `flickr.py
   --only <id>`. A private photographer's own photo: `flickr.py --embed` into `nonfree_images.json`
   (Cyber checks the ownership evidence). One PR a night: `Photo hunt YYYY-MM-DD: <ids>`.
-- **Nightly audit** (`tools/AUDIT.md`, plan in `tools/audit_plan.json`, 16 nights from 2026-11-13):
+- **Nightly audit** (stopped by the user 2026-11-21 after night 9; history in `tools/AUDIT.md`):
   the task "Lambo Index audit" (00:17 UTC, a fresh session per fire, like the Scout) compares one
   night's rows with two sources; the audit pointer task (01:17 UTC) points the Dev at it; the Dev applies findings with
   `scout_import.py audit`, checks that night's photos (`tools/photo_check.py`, by eye), one PR a night.
@@ -236,7 +238,8 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
 6. Report to the Manager and answer the user in 1–2 lines (Team and communication). Unfinished: leave
    the site working and put what is left under "In progress" in BACKLOG.md, in the same PR. A chat
    that hands over tells the user the next chat's title (Dev_0.2 → Dev_0.3). A new Dev chat: the
-   Manager recreates both pointer tasks for it (AUDIT.md and REFRESH.md Setup) and deletes the old ones.
+   Manager recreates the Scout pointer (REFRESH.md Setup) and the quality-pass wake task for it and
+   deletes the old ones.
 
 @BACKLOG.md
 
