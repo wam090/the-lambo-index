@@ -5,6 +5,11 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
+- 2026-11-21: A poor photo whose drop would leave a car under 4 photos stays as a placeholder until
+  Photo's replacement is applied, unless it is not the car, a toy or not an exterior (the Manager,
+  delegated). huracan-gt3 keeps "GT3 and GT4 race one ... (51373314403).jpg" until then and "2018 Rolex
+  24 (41267772511).jpg" (filed under Huracán GT3 on Commons); huracan-super-trofeo drops "DSC 0062
+  (35664140036).jpg" and "DSC 0063 (34893960913).jpg" (shot through a catch fence).
 - 2026-11-20: Photo calls (the Manager, delegated): gallardo-super-trofeo "American Le Mans Series Oak
   Tree Grand Prix at VIR October 2013 (10295564514).jpg" drop (two small cars from behind, marshals in
   front); murcielago-sv "... Super Veloce and Gemballa Mirage GT (15626905294).jpg" stays. Rule: drop a
@@ -157,7 +162,8 @@ history). Record each decision the user makes under Decisions, with its date.
 ## Next
 
 - [ ] **Photo quality pass** (user, 2026-11-18; nights 1-6 done: `cars.json` order 350-gtv to
-      huracan-super-trofeo; next starts at aventador-sv): every car's lead photo and gallery,
+      huracan-super-trofeo; next starts at aventador-sv and also applies the two
+      huracan-super-trofeo drops of 2026-11-21): every car's lead photo and gallery,
       about 12-15 cars a night by contact sheet, full-size check of each pick; prefer sharp, well-lit,
       whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
       choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
@@ -165,7 +171,8 @@ history). Record each decision the user makes under Decisions, with its date.
 - [ ] **Photo gaps** (30 of 149 cars under 4 photos on 2026-11-19, 7 with none): Photo_v0.1 sends
       verified picks; the Dev checks each at full size and applies it. First the empty-state cars
       (urus-st-x, sc20, invencible, autentica, miura-jota, countach-evoluzione; portofino got 3 own
-      photos on 2026-11-19), then bravo, athon, cheetah, countach-qvx. Photo_v0.1 night 1: nothing
+      photos on 2026-11-19), then bravo, athon, cheetah, countach-qvx; huracan-gt3: replace the McLaren-frame photo (drop it
+      in the PR that applies the replacement). Photo_v0.1 night 1: nothing
       legal exists for those 6 (press, game, LEGO; a Jota-spec conversion; magazine scans): they keep
       the empty state, Photo retries every two weeks, and the Manager asks the user about press photos.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
