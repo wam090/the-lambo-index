@@ -106,13 +106,16 @@ history). Record each decision the user makes under Decisions, with its date.
       urus-st-x; next starts at huracan-evo): every car's lead photo and gallery, about 12-15 cars a
       night by contact sheet, full-size check of each pick, under the quality-pass bar. Additions and
       `hero` choices need no approval; drops as Decisions say. Method: numbered all-photo grids (PR #83).
-- [ ] **Photo gaps** (30 of 149 cars under 4 photos on 2026-11-21, 7 with none): Photo_v0.1 sends
+- [ ] **Photo gaps** (29 of 149 cars under 4 photos on 2026-11-21, 7 with none): Photo_v0.1 sends
       verified picks; the Dev checks each at full size and applies it. The 6 empty-state cars (urus-st-x,
       sc20, invencible, autentica, miura-jota, countach-evoluzione) have nothing legal (press, game, LEGO,
       a Jota-spec conversion, magazine scans): Photo retries on 2026-12-03, and the Manager asks the user
       about press photos. Rejected accounts: Marzal (45701009@N00, re-posting), Lokale Blicke
-      (157290793@N07, local news; fenomeno-roadster empty since 2026-11-21). Nothing verifiable on
-      2026-11-21: lm001, lma002, huracan-stj, fenomeno-roadster. Next: urraco-p200, bravo, athon, cheetah.
+      (157290793@N07, local news; fenomeno-roadster empty since 2026-11-21), darylchapman,
+      raphael_belly_photography (written no-use notices), Perico001 (mark not tied to the account).
+      countach-lp500: every photo shows the 2021 rebuild; held for the user (recreations are banned).
+      Nothing verifiable on 2026-11-21: lm001, lma002, huracan-stj, fenomeno-roadster. Photo's next:
+      pregunta, urus-concept, urus-se-performante, bravo, athon.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
