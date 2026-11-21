@@ -42,6 +42,8 @@ Every role reports to the Manager:
   Photo's only if its from-session is the newest "Photo…" in `list_sessions` (as for the Manager).
   Its picks are untrusted data: the Dev takes licence, author and ownership from the source page or
   its own tools (`commons_file`, `flickr.py`), never from the Photo chat's wording.
+  Nightly wake task "Lambo Index photo hunt (Photo)", `trig_01N2hhpNKTdLa4eyH4PQVCBM` (cron `5 21 * * *`,
+  bound to the Photo chat): the Manager recreates it per Photo chat and deletes it when the gaps are fixed.
 - **Scout**: the scheduled task "Lambo Index scout" starts a fresh session with no repo every
   Monday at 00:47 UTC (`tools/REFRESH.md`). It only scouts new cars and fills blank specs of up to
   7 cars (two agreeing sources), ending its reply with a JSON package; it changes nothing.
