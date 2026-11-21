@@ -35,7 +35,8 @@
   "murcielago-roadster": "2006 Lamborghini Murcielago Roadster SCD 24.jpg",
   "murcielago-lp640-roadster": "Lamborghini Murciélago LP640 Roadster Auto Zuerich 2023 1X7A1436.jpg",
   "reventon": "2008 Lamborghini Reventon SP 24.jpg",
-  "gallardo-lp570-sl": "Superleggera. (6689452263).jpg"
+  "gallardo-lp570-sl": "Superleggera. (6689452263).jpg",
+  "huracan-lp610": "Lamborghini Huracan LP610-4 (30115244777).jpg"
  },
  "drop": {
   "350-gtv": [
@@ -389,7 +390,9 @@
   "aventador-lp700": [
    "Lamborghini ABA-47L539 Aventador LP700-4 (16763094906).jpg",
    "Lamborghini ABA-47L539 Aventador LP700-4 (16763096196).jpg",
-   "Lamborghini Aventador LP700-4 - Mondial de l'Automobile de Paris 2014 - 006.jpg"
+   "Lamborghini Aventador LP700-4 - Mondial de l'Automobile de Paris 2014 - 006.jpg",
+   "Lamborghini Aventador LP700-4 - Mondial de l'Automobile de Paris 2014 - 004.jpg",
+   "Lamborghini Aventador LP700-4 - Mondial de l'Automobile de Paris 2014 - 005.jpg"
   ],
   "aventador-roadster": [
    "Aventador roadster (9550649882).jpg"
@@ -402,7 +405,8 @@
    "Autoworld Brüssel 155 - Italian Car Passion - Lamborghini Veneno Roadster.jpg",
    "Autoworld Brüssel 156 - Italian Car Passion - Lamborghini Veneno Roadster.jpg",
    "Autoworld Brüssel 159 - Italian Car Passion - Lamborghini Veneno Roadster.jpg",
-   "Autoworld Brüssel 161 - Italian Car Passion - Lamborghini Veneno Roadster.jpg"
+   "Autoworld Brüssel 161 - Italian Car Passion - Lamborghini Veneno Roadster.jpg",
+   "Autoworld Brüssel 163 - Italian Car Passion - Lamborghini Veneno Roadster.jpg"
   ],
   "centenario-roadster": [
    "Lamborghini Centenario Roadster Retro Classics 2020 IMG 0320.jpg"
@@ -430,6 +434,15 @@
   ],
   "gallardo-lp570-sl": [
    "Lamborghini Gallardo Superleggera LP 570-4 5204cc registered September 2010 03.jpg"
+  ],
+  "huracan-lp610": [
+   "Lamborghini Huracan LP 610-4 (31693625631).jpg"
+  ],
+  "asterion": [
+   "Lamborghini Aventador - Asterion - Huracán.jpg"
+  ],
+  "gallardo-super-trofeo": [
+   "American Le Mans Series Oak Tree Grand Prix at VIR October 2013 (10295564514).jpg"
   ]
  }
 }

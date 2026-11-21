@@ -1,6 +1,6 @@
 {
  "brand": "Lamborghini",
- "generated": "2026-11-20",
+ "generated": "2026-11-21",
  "cars": [
   {
    "id": "350-gtv",
@@ -8354,16 +8354,6 @@
      "lu": "https://creativecommons.org/licenses/by-sa/3.0/"
     },
     {
-     "t": "American Le Mans Series Oak Tree Grand Prix at VIR October 2013 (10295564514).jpg",
-     "h": "8/8e",
-     "n": "American_Le_Mans_Series_Oak_Tree_Grand_Prix_at_VIR_October_2013_%2810295564514%29.jpg",
-     "w": 5184,
-     "ht": 3456,
-     "a": "Trailers of the East Coast from Mocksville, USA",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
      "t": "Big wing is a must (16701738142).jpg",
      "h": "c/ce",
      "n": "Big_wing_is_a_must_%2816701738142%29.jpg",
@@ -9156,26 +9146,6 @@
      "t": "Lamborghini Aventador LP700-4 - Mondial de l'Automobile de Paris 2014 - 003.jpg",
      "h": "a/a8",
      "n": "Lamborghini_Aventador_LP700-4_-_Mondial_de_l%27Automobile_de_Paris_2014_-_003.jpg",
-     "w": 5184,
-     "ht": 3456,
-     "a": "Thesupermat",
-     "l": "CC BY-SA 3.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/3.0/"
-    },
-    {
-     "t": "Lamborghini Aventador LP700-4 - Mondial de l'Automobile de Paris 2014 - 004.jpg",
-     "h": "7/76",
-     "n": "Lamborghini_Aventador_LP700-4_-_Mondial_de_l%27Automobile_de_Paris_2014_-_004.jpg",
-     "w": 5184,
-     "ht": 3456,
-     "a": "Thesupermat",
-     "l": "CC BY-SA 3.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/3.0/"
-    },
-    {
-     "t": "Lamborghini Aventador LP700-4 - Mondial de l'Automobile de Paris 2014 - 005.jpg",
-     "h": "c/cd",
-     "n": "Lamborghini_Aventador_LP700-4_-_Mondial_de_l%27Automobile_de_Paris_2014_-_005.jpg",
      "w": 5184,
      "ht": 3456,
      "a": "Thesupermat",
@@ -10009,16 +9979,6 @@
      "a": "Klaus Nahr",
      "l": "CC BY-SA 2.0",
      "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
-    },
-    {
-     "t": "Autoworld Brüssel 163 - Italian Car Passion - Lamborghini Veneno Roadster.jpg",
-     "h": "1/19",
-     "n": "Autoworld_Br%C3%BCssel_163_-_Italian_Car_Passion_-_Lamborghini_Veneno_Roadster.jpg",
-     "w": 4608,
-     "ht": 3456,
-     "a": "Klaus Nahr",
-     "l": "CC BY-SA 2.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
     }
    ]
   },
@@ -10043,6 +10003,16 @@
    "debut": true,
    "imgs": [
     {
+     "t": "Lamborghini Huracan LP610-4 (30115244777).jpg",
+     "h": "8/87",
+     "n": "Lamborghini_Huracan_LP610-4_%2830115244777%29.jpg",
+     "w": 5184,
+     "ht": 3888,
+     "a": "FotoSleuth",
+     "l": "CC BY 2.0",
+     "lu": "https://creativecommons.org/licenses/by/2.0/"
+    },
+    {
      "t": "2016 Lamborghini Huracan 5.2 LP 610-4 (32162034380).jpg",
      "h": "6/69",
      "n": "2016_Lamborghini_Huracan_5.2_LP_610-4_%2832162034380%29.jpg",
@@ -10059,16 +10029,6 @@
      "w": 5184,
      "ht": 3456,
      "a": "Sicnag",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "Lamborghini Huracan LP 610-4 (31693625631).jpg",
-     "h": "0/02",
-     "n": "Lamborghini_Huracan_LP_610-4_%2831693625631%29.jpg",
-     "w": 5652,
-     "ht": 3768,
-     "a": "Adam Court",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
     },
@@ -10101,16 +10061,6 @@
      "a": "emperornie",
      "l": "CC BY-SA 2.0",
      "lu": "https://creativecommons.org/licenses/by-sa/2.0/"
-    },
-    {
-     "t": "Lamborghini Huracan LP610-4 (30115244777).jpg",
-     "h": "8/87",
-     "n": "Lamborghini_Huracan_LP610-4_%2830115244777%29.jpg",
-     "w": 5184,
-     "ht": 3888,
-     "a": "FotoSleuth",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
     },
     {
      "t": "Lamborghini Huracan LP610-4 (45003356472).jpg",
@@ -10213,16 +10163,6 @@
      "a": "Raphael Desrosiers",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "Lamborghini Aventador - Asterion - Huracán.jpg",
-     "h": "0/06",
-     "n": "Lamborghini_Aventador_-_Asterion_-_Hurac%C3%A1n.jpg",
-     "w": 3648,
-     "ht": 2736,
-     "a": "Blood Destructor",
-     "l": "CC BY-SA 3.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/3.0/"
     },
     {
      "t": "Lamborghini Asterion Concept 20170101 175758.jpg",
