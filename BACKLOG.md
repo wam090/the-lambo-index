@@ -5,165 +5,96 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Decisions (settled: change only if the user asks)
 
-- 2026-11-21: The nightly audit is stopped after night 9 (user, "Yes to all"): both tasks disabled;
-  nights 6, 8 and 10-16 are not run; `tools/audit_plan.json` stays as history.
-- 2026-11-21: The Manager decides photo drops and moves (quality pass, audit nights, anything else);
-  fact changes stay with the user (user). Replaces the 2026-11-13 rule for photos. Approved: the two
-  MrWalkr SN05 photos move from murcielago-lp640-roadster to murcielago-roadster.
-- 2026-11-21: A poor photo whose drop would leave a car under 4 photos stays as a placeholder until
-  Photo's replacement is applied, unless it is not the car, a toy or not an exterior (the Manager,
-  delegated). huracan-gt3 keeps "GT3 and GT4 race one ... (51373314403).jpg" until then and "2018 Rolex
-  24 (41267772511).jpg" (filed under Huracán GT3 on Commons); huracan-super-trofeo drops "DSC 0062
-  (35664140036).jpg" and "DSC 0063 (34893960913).jpg" (shot through a catch fence).
-- 2026-11-21: The 2026-11-19 delegation stands (the Manager): the Dev alone drops a photo that is
-  (a) not an exterior of the car, (b) not about the car (crowd, car park, group photo, hall
-  overview) or (c) a toy, render or another car, and lists each in its report; a version in doubt,
-  a drop that would leave a car under 4 photos and any move between pages go to the Manager; fact
-  changes stay with the user.
-- 2026-11-20: Photo calls (the Manager, delegated): gallardo-super-trofeo "American Le Mans Series Oak
-  Tree Grand Prix at VIR October 2013 (10295564514).jpg" drop (two small cars from behind, marshals in
-  front); murcielago-sv "... Super Veloce and Gemballa Mirage GT (15626905294).jpg" stays. Rule: drop a
-  two-car frame only when our car is not a clear whole subject.
-- 2026-11-19: The user lets the Manager run team structure and orders; only approvals go back to the user.
-- 2026-11-19: Quality-pass drops the Dev makes alone and lists in its nightly report (Manager,
-  delegated): (a) not an exterior of the car (interior, engine, detail), (b) the car is not the
-  subject (crowd, car park, group photo), (c) a toy, render or another car. Photos whose version is
-  ambiguous go to the Manager first; audit-night drops and moves still need the user (2026-11-13).
-- 2026-11-19: Own-Flickr photos (owner allows sharing): the existing ones stay, and more are allowed
-  under the CLAUDE.md Photos rules for any car under 4 photos; cheetah, countach-qvx, portofino and
-  the athon rework are released. Cyber checks each one's evidence in its PR: a personal account
-  with other personal photos, a consistent camera, no press-style titles, no foreign watermark,
-  sharing allowed, a full-size exterior, not a toy.
-- 2026-11-19: One photo beats none: no car shows the empty state if any legally usable exterior photo
-  exists. The empty-state cars come first in every photo hunt. Press photos, recreations, toys and
-  renders stay banned; a car with only those keeps the empty state, and the Manager asks the user per car.
-- 2026-11-19: Quality-pass bar (sharp, whole car, >= 1280 px, no crowd) is waived only for a car with
-  no other usable photo anywhere: a lower-quality exterior stays as a placeholder until a better one
-  is found. Thumbnails and the empty-state card are unchanged (no UI work).
-- 2026-11-19: Drops approved: bravo "1979 Caprie Nuccio Bertone e Chuck Jordan.jpg" and "1977 Bertone
-  designs.jpg" (the site's purpose is correct data); marzal "1980s Nuccio Bertone and his designs.jpg"
-  (the Manager, delegated). Bravo (3 photos) joins the photo hunt.
-- 2026-11-19: The daily photo scout task and its pointer are deleted. A Photo chat (Photo_v0.x) checks
-  candidates by eye and sends the Dev verified picks, up to 6 cars a night, empty-state cars first.
-
-- 2026-11-18: Exterior photos only on car pages (interiors, engines, details maybe later in a deep-dive
-  section): every car swept; the lead photo is an exterior.
-- 2026-11-18: "no then I dont want headache": no press photos and, apart from photographers' own
-  Flickr photos with sharing allowed (rules of 2026-11-16/17), no all-rights-reserved photos.
-- 2026-11-18: A quality pass of every car's lead photo and gallery (about 15 cars a night; drops to
-  the Manager, additions and heroes not).
-- 2026-11-17: A photographer's own small name watermark is allowed when it matches the credited
-  account; stock, agency, press and promotional marks stay banned.
-- 2026-11-16: Private photographers' own Flickr photos (`flickr.py --embed`, owner allows sharing) are
-  also allowed for a car under 4 photos, only until it has 4 photos in all. Ownership evidence: a
-  personal account, the account's other photos, a consistent camera, no press-style titles; EXIF
-  only supports it (rules in CLAUDE.md Photos).
-- 2026-11-16: Toy sweep: no full by-eye pass of every photo; each audit night's photo check covers it.
-- 2026-11-15: Working hours: every chat works and messages only 21:00-03:00 UTC (00:00-06:00
-  Riyadh); the Scout runs Mondays 00:47 UTC. The Pickup chat is retired: two pointer tasks fire into
-  the Dev chat (audit 01:17 UTC daily, Scout 02:17 UTC Mondays); the Manager recreates them per Dev.
-- 2026-11-15: No car may have no or few photos; a limited series or one-off must never have none.
-  This replaces the 2026-11-11 empty state for urus-st-x, sc20, invencible and autentica. Photo rules
-  are unchanged (no re-posted press photos, no toys; private Flickr photos only where sharing is allowed).
-- 2026-11-15: After the photo gaps are fixed: a static page per car for search engines (see Next).
-  No ads (no spend).
-
-- 2026-11-15: Only real cars on the site: no toys, die-cast or scale models, LEGO or other models
-  in any photo (a sweep of all cars, then every audit night).
-- 2026-11-15: Audit findings are checked against the car's raw Wikipedia article (`tools/AUDIT.md`
-  Dev step 3, 2026-11-14): contradicted ones are deleted, unverified ones go to the user labelled
-  so, default no. 3500-gtz designer reverted to "Zagato": the night-1 sources did not name Spada;
-  re-add him only if two real pages about the GTZ do and one checks out raw.
-- 2026-11-13: An audit may replace one of our values when two sources agree against it, but every
-  audit change (fact, photo drop or move) goes to the user first: the Dev reports each night's
-  proposals to the Manager (car, field, ours, theirs, the two source hosts), leaves the PR open
-  and applies only what the Manager relays as "approved". No answer: nothing is applied. A night
-  with no change merges after Cyber's OK alone.
-- 2026-11-13: The user switches on GitHub's "Block command line pushes that expose my email"
-  themselves. Claude's commits use noreply addresses. 26 web-UI commits of 2026-11-09/10 carry the
-  user's personal email; "Keep my email addresses private" stops new ones. The user switches on both
-  settings; the old commits stay as they are (no history rewrite).
-- 2026-11-08: Scope is indexing and easy browsing first, built up step by step.
-- 2026-11-08: The timeline's orange frame marks only the original form of each car; versions,
-  editions and race variants never get it (rules in tools/catalog.py).
-- 2026-11-08: Every car should have photos, taken from anywhere on the internet. Free licences
-  first; otherwise credited press or all-rights-reserved photos, loaded from where they are hosted
-  (`data/nonfree_images.json`; rules in CLAUDE.md, Photos).
-- 2026-11-08: Timeline frames by kind: limited series platinum, one-offs platinum with diamond sparkles (no colours),
-  race cars red with tyre marks, each with its own badge beside the Debut badge. One frame per car,
-  the highest it qualifies for (diamond > platinum > red > orange debut); every badge stays.
-- 2026-11-08: Keep pages lean: the user prefers visuals to explanatory text. The timeline has no
-  intro, only a one-line legend of mini frames (Debut › Race car › Limited › One-off).
-- 2026-11-09: Fast 10 tab beside Timeline: ranked by horsepower, then claimed top speed;
-  roadsters count with their coupé. The site shows power in hp, not CV.
-- 2026-11-09: Timeline legend reads "Filter by frame →"; Clear shows all. 2026-11-10: chips combine as
-  AND (a car shows only when it has every chosen badge): Debut plus one kind; kinds exclude each other.
-- 2026-11-10: The home page has no intro heading; browsing starts right under the header.
-- 2026-11-11: The Stats page is removed; the views are Browse, Compare, Fast 10 and Timeline. Old
-  `#/stats` links land on Browse.
-- 2026-11-10: The car-of-the-day hero banner replaces the family strip, with no visible heading;
-  live since 2026-11-11, its credit linking the photo's page and licence.
-- 2026-11-12: The Scout runs weekly (Mondays 03:17 UTC, 10-day window), not monthly: it looks for
-  new cars and fills blank specs of up to 7 cars per run (two agreeing sources, round-robin). A
-  Pickup chat on Haiku 5.5 replaces the Manager's monthly pickup.
-  One PR per run, the same day; Cyber checks every PR.
-- 2026-11-12: Visits are counted with GoatCounter (site code `thelamboindex`), without its script:
-  app.js loads a tracking pixel per page shown (view or car page, never filters or searches; old
-  `#/stats` counts as Browse), only on https. The footer says visits are counted anonymously, with
-  no cookies. The user reads the counts in GoatCounter's dashboard and its weekly email.
-- 2026-11-12: Monthly design review on the 5th (06:17 UTC) by the Web designer: at most 5 UI
-  proposals to the Manager; nothing is built until the user approves.
-- 2026-11-12: The Pickup reads only the Scout task's run metadata and points the Dev at every
-  finished run (its tool limit is not enforced, so it reads nothing untrusted).
-- 2026-11-12: The site goes live: the `noindex` tag is removed (it stood since 2026-11-10, pending a
-  security review; Cyber_v0.2 checks the go-live PR). smoke fails if a robots `noindex` returns.
-- 2026-11-12: A photo of a different version that has its own page moves to that page (the two
-  2024 GT3 EVO2 photos: Huracán GT3 → GT3 EVO). Otherwise photos are dropped only when they show a
-  different car, not a different version of the same car; when unsure, ask the Manager.
-- 2026-11-12: Nightly family audit, 16 nights from 2026-11-13 (`tools/AUDIT.md`): a Scout-style task at
-  00:17 UTC (no standing Auditor chat) checks one night's facts against two sources; the Pickup's
-  second task points the Dev at it at 05:17 UTC; the Dev applies findings and checks the night's
-  photos; one PR a night, Cyber checks. A prompt change means a new task.
-- 2026-11-12: Footer redesign: concise, grouped, quiet, at the content width. Line 1 the build's data
-  line; line 2 three notes with quiet separators (stacked on narrow screens): "Unofficial fan site, not
-  affiliated with Automobili Lamborghini" (fan notice of 2026-11-11, shortened; the trademark sentence
-  dropped), "Photos credited to their authors, under their licences", "Visits counted anonymously, no
-  cookies". smoke checks the exact text on six views.
-- 2026-11-11: Non-free photos: no re-posted press photos; private photographers' photos only where
-  the Flickr owner allows sharing. "Report a photo" opens a GitHub issue; no email anywhere.
-- 2026-11-11: No "See photos at the source" link: a car with no photo keeps today's empty state.
-- 2026-11-11: No registration on Lamborghini's media site and no press-office request. (The empty
-  state for urus-st-x, sc20, invencible, autentica is replaced, 2026-11-15.)
-- 2026-11-11: Every chat hands over at about 50% of measured capacity (was 90%, before that 70%):
-  it finishes its current task, reports it, and the Manager starts its successor.
-- 2026-11-11: Token plan: Dev Opus 5.5 (Extreme + UltraCode while coding, High otherwise), Cyber
-  Opus 5.5 High, Manager Sonnet 5.5 Medium, Web designer Sonnet 5.5 High, Scout task Sonnet 5.5.
+**Team and process**
+- 2026-11-08/09: Claude handles git end to end and merges its own PRs; every change on GitHub is made
+  by a dev chat (Dev or Web designer), the others advise and write messages. Keep everything relevant
+  in this repo, avoid steps that need the user's hands; the site has a working public link.
+- 2026-11-10/11: The user talks only to the Manager (the Coordinator chat is retired). All chats may
+  message each other; every chat reports to the Manager, the Manager is the boss. Chats answer the
+  user in 1–2 lines; roles pass to the newest chat. The Manager reports to the user only as bullets
+  under Done / Next / Needs approval, no prose.
+- 2026-11-11: Every chat hands over at about 50% of measured capacity: it finishes its current task
+  and reports it; the Manager starts its successor (its own too: Manager_v0.N+1, one line to the user).
+- 2026-11-11/19 token plan: Dev Opus 5.5 (Extreme + UltraCode while coding, High otherwise); Cyber Opus
+  5.5 High; Manager Sonnet 5.5 Medium; Web designer and Photo Sonnet 5.5 High; Scout task Sonnet 5.5.
   Message the Manager only when done or blocked; one message per hand-off; no progress notes.
-- 2026-11-11: Dev_0.1, Dev_0.2, the Coordinator, the first Manager chat, the old Scout chat and the
-  first Cyber chat are archived (still readable); the placeholder refresh task is deleted.
-- 2026-11-11: The Manager reports to the user only as bullets under Done / Next / Needs approval,
-  no prose.
-- 2026-11-11: At about 50% measured the Manager starts its own successor (create_session, title
-  Manager_v0.N+1, hand-over prompt) and tells the user in one line; likewise for any role that
-  reports it is full.
-- 2026-11-10: The Coordinator chat is retired; the user talks only to the Manager.
-- 2026-11-10: The monthly refresh sends no push notifications; it reports to the Manager.
-- 2026-11-11: Refresh becomes the Scout. It only scouts (new cars, facts and sources, Commons
-  categories, photo candidates checked by eye) and leaves a package; it never commits, pushes,
-  opens PRs or merges. The Dev builds the PR, Cyber checks it, the Dev merges after Cyber's OK.
-  This replaces MERGE MODE and the 2026-11-10 merge rules. Format and checks: Cyber's spec,
-  implemented in `tools/scout_import.py` and `tools/REFRESH.md`.
-- 2026-11-09: Working model: every change on GitHub (code, data, docs, PRs, merges) is done by a dev
-  chat (Dev or Web designer); the other chats advise and write messages.
-- 2026-11-10: One line of communication: the user talks to the Manager. 2026-11-11: all chats may
-  message each other directly; every chat reports to the Manager; the Manager is the boss. Chats
-  answer the user in 1–2 lines. Roles pass to the newest chat (Dev_0.2 → Dev_0.3, Manager → Manager_v0.2).
-- 2026-11-09: Lambo first. Room for other brands only where it costs nothing (`brand` in the data);
-  the user disliked existing multi-brand sites, so no umbrella site unless a second brand is real.
-- 2026-11-08: Claude merges its own PRs and handles git end to end; involve the user only when
-  really needed.
-- 2026-11-08: Keep everything relevant in this GitHub repo and avoid steps that need the user's
-  hands. The site should have a working public link.
+- 2026-11-15: Working hours 21:00-03:00 UTC (00:00-06:00 Riyadh) for every chat and task.
+- 2026-11-19: The Manager runs team structure and orders; only approvals go back to the user.
+- 2026-11-13: Claude's commits use noreply addresses. The user switches on "Keep my email addresses
+  private" and "Block command line pushes that expose my email"; the 26 web-UI commits of 2026-11-09/10
+  with the user's email stay as they are (no history rewrite).
+
+**Refresh and audit**
+- 2026-11-11/12/15: The Scout only scouts (new cars, blank specs of up to 7 cars a run, two agreeing
+  sources, round-robin) and leaves a package; it never commits, pushes, opens PRs or merges. Weekly,
+  Mondays 00:47 UTC. The Dev builds one PR per run the same day, Cyber checks, the Dev merges. Format
+  and checks: Cyber's spec in `tools/scout_import.py` and `tools/REFRESH.md`. No push notifications.
+  The Pickup chat is retired (2026-11-15): a pointer task fires into the Dev chat; a prompt change
+  means a new task.
+- 2026-11-12 → 2026-11-21: The nightly family audit is stopped after night 9 (user, "Yes to all"):
+  tasks disabled, nights 6, 8 and 10-16 not run; `tools/AUDIT.md` and `audit_plan.json` stay as history.
+  3500-gtz designer stays "Zagato": re-add Spada only if two real pages about the GTZ name him and
+  one checks out in the raw article.
+
+**Product and UI**
+- 2026-11-08: Scope is indexing and easy browsing first, built up step by step. Keep pages lean:
+  visuals over explanatory text.
+- 2026-11-08: Timeline frames by kind: limited series platinum, one-offs platinum with diamond sparkles
+  (no colours), race cars red with tyre marks, each with its own badge beside the Debut badge; one frame
+  per car, the highest (diamond > platinum > red > orange debut), every badge stays. The orange frame
+  marks only the original form of each car (rules in `tools/catalog.py`). No intro, only a one-line
+  legend "Filter by frame →" (Debut › Race car › Limited › One-off; Clear shows all); 2026-11-10: chips
+  combine as AND, Debut plus one kind, kinds exclude each other.
+- 2026-11-09: Fast 10 tab beside Timeline: ranked by horsepower, then claimed top speed; roadsters
+  count with their coupé. The site shows power in hp, not CV.
+- 2026-11-09: Lambo first; room for other brands only where it costs nothing (`brand` in the data); no
+  umbrella site unless a second brand is real.
+- 2026-11-10/11: No intro heading on the home page. The car-of-the-day hero (no visible heading)
+  replaces the family strip, its credit linking the photo's page and licence. The Stats page is
+  removed (views: Browse, Compare, Fast 10, Timeline; old `#/stats` links land on Browse).
+- 2026-11-12: Footer: concise, grouped, quiet, at the content width. Line 1 the build's data line;
+  line 2 three notes with quiet separators (stacked on narrow screens): "Unofficial fan site, not
+  affiliated with Automobili Lamborghini", "Photos credited to their authors, under their licences",
+  "Visits counted anonymously, no cookies". smoke checks the exact text on six views.
+- 2026-11-12: Visits via GoatCounter (site code `thelamboindex`) without its script: a tracking pixel
+  per view or car page shown (never filters or searches; old `#/stats` counts as Browse), https only.
+  The user reads the counts in GoatCounter's dashboard and weekly email.
+- 2026-11-12: The site is live and indexable; smoke fails if a robots `noindex` returns.
+- 2026-11-12: Monthly design review on the 5th (06:17 UTC) by the Web designer: at most 5 UI proposals
+  to the Manager; nothing is built until the user approves.
+- 2026-11-15: After the photo gaps: a static page per car for search engines (see Next). No ads.
+
+**Photos**
+- 2026-11-08/15/19: Every car should have photos; a limited series or one-off must never have none.
+  One photo beats none: no empty state if any legally usable exterior exists; empty-state cars come
+  first in every photo hunt. A car with only press photos, recreations, toys or renders keeps the
+  empty state, and the Manager asks the user per car. No "See photos at the source" link; no
+  registration on Lamborghini's media site and no press-office request (2026-11-11).
+- 2026-11-18: "no then I dont want headache": no press or promotional photos and, apart from
+  photographers' own Flickr photos, no all-rights-reserved photos. "Report a photo" opens a GitHub
+  issue; no email anywhere (2026-11-11).
+- 2026-11-16/17/19: Private photographers' own Flickr photos (owner allows sharing, `flickr.py
+  --embed`) for a car under 4 photos, until it has 4; evidence and Cyber's check in CLAUDE.md Photos.
+  Their own small name watermark is allowed when it matches the credited account; stock, agency,
+  press and promotional marks stay banned. Credit only the person who took a photo.
+- 2026-11-18: Exterior photos only on car pages (interiors, engines, details maybe later in a
+  deep-dive section); the lead photo is an exterior.
+- 2026-11-15/16: Only real cars: no toys, die-cast or scale models, LEGO or other models in any
+  photo; no separate full sweep (the quality pass looks at every photo).
+- 2026-11-12: A photo of a different version that has its own page moves to that page; otherwise drop
+  only a different car, never a different version of the same car.
+- 2026-11-19/21: Who drops: the Dev alone drops a photo that is (a) not an exterior of the car, (b) not
+  about the car (crowd, car park, group photo, hall overview) or (c) a toy, render or another car, and
+  lists each in its report. A version in doubt, a drop that would leave a car under 4 photos and any
+  move between pages go to the Manager, who decides photo drops and moves (user, 2026-11-21). Fact
+  changes stay with the user.
+- 2026-11-19: Quality-pass bar: sharp, whole car, >= 1280 px, no crowd. Waived only for a car with no
+  other usable photo anywhere: a lower-quality exterior stays as a placeholder until a better one is
+  found. No UI work for thumbnails or the empty-state card.
+- 2026-11-20/21 (the Manager): drop a two-car frame only when our car is not a clear whole subject. A
+  poor photo whose drop would leave a car under 4 photos stays until Photo's replacement is applied,
+  unless it is not the car, a toy or not an exterior: huracan-gt3 keeps "GT3 and GT4 race one ...
+  (51373314403).jpg" and "2018 Rolex 24 (41267772511).jpg" until then.
 
 ## In progress
 
@@ -172,43 +103,31 @@ history). Record each decision the user makes under Decisions, with its date.
 ## Next
 
 - [ ] **Photo quality pass** (user, 2026-11-18; nights 1-7 done: `cars.json` order 350-gtv to
-      urus-st-x; next starts at huracan-evo): every car's lead photo and gallery,
-      about 12-15 cars a night by contact sheet, full-size check of each pick; prefer sharp, well-lit,
-      whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
-      choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
-      exterior sweep (PR #83) for the method.
+      urus-st-x; next starts at huracan-evo): every car's lead photo and gallery, about 12-15 cars a
+      night by contact sheet, full-size check of each pick, under the quality-pass bar. Additions and
+      `hero` choices need no approval; drops as Decisions say. Method: numbered all-photo grids (PR #83).
 - [ ] **Photo gaps** (30 of 149 cars under 4 photos on 2026-11-21, 7 with none): Photo_v0.1 sends
       verified picks; the Dev checks each at full size and applies it. The 6 empty-state cars (urus-st-x,
       sc20, invencible, autentica, miura-jota, countach-evoluzione) have nothing legal (press, game, LEGO,
-      a Jota-spec conversion, magazine scans): they keep the empty state, Photo retries on 2026-12-03,
-      and the Manager asks the user about press photos. Done: portofino (2026-11-19), countach-qvx (own
-      Flickr photos, 2026-11-21). cheetah: Marzal (45701009@N00) rejected 2026-11-21: re-posting account
-      (credit only the person who took a photo); 1 own photo by Ahmed Rashid added (2 photos). Nothing
-      verifiable on 2026-11-21: lm001, lma002 (only the LM002 on Flickr), huracan-stj, fenomeno-roadster.
-      fenomeno-roadster is empty since 2026-11-21: Cyber failed Lokale Blicke (157290793@N07), a
-      local-news account, so its photo is removed. Next: urraco-p200, bravo, athon, cheetah, the rest.
+      a Jota-spec conversion, magazine scans): Photo retries on 2026-12-03, and the Manager asks the user
+      about press photos. Rejected accounts: Marzal (45701009@N00, re-posting), Lokale Blicke
+      (157290793@N07, local news; fenomeno-roadster empty since 2026-11-21). Nothing verifiable on
+      2026-11-21: lm001, lma002, huracan-stj, fenomeno-roadster. Next: urraco-p200, bravo, athon, cheetah.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
       an IndexNow key file and ping. No external JS or fonts, same CSP hashing and URL_HOSTS check,
       smoke counts the pages. Cyber reviews the design first (CSP, canonical, sitemap host). Google
       Search Console needs the user's account: give the Manager the exact meta tag or file.
-
-- [ ] **Scout fill follow-ups** (Cyber, non-blocking): when a fill pairs Wikipedia with an
-      `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value,
-      the two sources are one: leave it blank (add to REFRESH.md Dev steps). The format comment at the
-      top of `scout_import.py` should say v2 `opened`/`unreachable` may also list `EXTRA_HOSTS`.
-
-- [ ] **`check` counts hosts in `opened`** (Cyber, non-blocking, 2026-11-17): since 404s go into
-      `opened`, a Wikipedia 404 satisfies the "en.wikipedia.org page read" rule. Harmless while every
-      finding needs two pages about the car and the Dev reads the raw article; tighten only if it matters.
-
-- [ ] **gap_ids from the run's catalogue** (Cyber, non-blocking): `scout_import.py` computes a run's
-      gap ids from the working `catalog.py`; if main changed after the run, a valid fill can be
-      rejected (fails closed). Compute them from `git rev-list -1 --before=<fire time> origin/main`.
-
-- [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import.
-      Revisit if the site goes public (then it would need accounts or a shared store).
+- [ ] **Scout import follow-ups** (Cyber, non-blocking): (1) when a fill pairs Wikipedia with an
+      `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value, the
+      two sources are one: leave it blank (add to REFRESH.md Dev steps); the format comment in
+      `scout_import.py` should say v2 `opened`/`unreachable` may list `EXTRA_HOSTS`. (2) A Wikipedia
+      404 in `opened` satisfies the "en.wikipedia.org page read" rule; tighten only if it matters.
+      (3) Gap ids come from the working `catalog.py`, so a valid fill can be rejected if main changed
+      after the run: compute them from `git rev-list -1 --before=<fire time> origin/main`.
+- [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import (accounts or a
+      shared store would be needed for anything more).
 - [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),
       LP500 S (321–323), Urraco P200 (66–77), Murciélago SV (186 claimed, 268 found by a registry),
       Miura SVJ (about six), Diablo SV-R (31–34). Countach 25th Anniversary: 657 or 658. Gallardo
@@ -218,8 +137,6 @@ history). Record each decision the user makes under Decisions, with its date.
 
 - Specs depth: top speed, 0–100 km/h, weight, price when new.
 - Chassis-level detail for one-offs and race cars (chassis numbers, race results).
-- Link each car to its scale models in the diecast index built in an earlier session. That index is
-  lost: it is not in this repo, its old path no longer exists, and the zip the user uploaded on
-  2026-11-08 was an older copy of this repo. Rebuild it here if wanted. Car pages already link to
-  lambodiecast.com.
+- Link each car to its scale models (the diecast index of an earlier session is lost; rebuild it
+  here if wanted). Car pages already link to lambodiecast.com.
 - Light theme toggle.
