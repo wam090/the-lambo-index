@@ -40,8 +40,8 @@ chat as one fills up (Dev_0.10 → Dev_0.11). Decisions already made are in BACK
   (`tools/REFRESH.md`). It only scouts new cars and fills blank specs of up to 7 cars (two agreeing
   sources), ending with a JSON package; it changes nothing.
 - **Wake tasks** (the Manager recreates each for a new chat of that role and deletes the old one):
-  Dev quality pass `trig_016Uth55kTrSNuvJWCzYFvNt` (`17 1 * * *`: OPEN messages, then the next
-  quality-pass night); Dev Scout pointer (Mondays 02:17 UTC, ID and prompt in REFRESH.md Setup: the
+  Dev quality pass `trig_016Uth55kTrSNuvJWCzYFvNt` (`17 1 * * *`; the pass finished 2026-11-21,
+  wake disabled); Dev Scout pointer (Mondays 02:17 UTC, ID and prompt in REFRESH.md Setup: the
   Dev reads the run's metadata with `get_trigger`, or the Manager hears it is missing); Photo hunt
   `trig_013nHtSsabYC6KrrAx5cjMQo` (`5 21 * * *`, deleted when the gaps are fixed); the design review.
 
