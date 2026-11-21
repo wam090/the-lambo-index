@@ -168,13 +168,14 @@ history). Record each decision the user makes under Decisions, with its date.
       whole-car exteriors >= 1280 px wide, no crowd- or people-dominated frames. Additions and `hero`
       choices need no approval; drops go to the Manager. Numbered all-photo grids: see the
       exterior sweep (PR #83) for the method.
-- [ ] **Photo gaps** (29 of 149 cars under 4 photos on 2026-11-21, 6 with none): Photo_v0.1 sends
+- [ ] **Photo gaps** (30 of 149 cars under 4 photos on 2026-11-21, 6 with none): Photo_v0.1 sends
       verified picks; the Dev checks each at full size and applies it. The 6 empty-state cars (urus-st-x,
       sc20, invencible, autentica, miura-jota, countach-evoluzione) have nothing legal (press, game, LEGO,
       a Jota-spec conversion, magazine scans): they keep the empty state, Photo retries on 2026-12-03,
-      and the Manager asks the user about press photos. Done: portofino (2026-11-19), countach-qvx and
-      cheetah (own Flickr photos, 2026-11-21). Nothing verifiable on 2026-11-21: lm001, lma002 (only the
-      LM002 on Flickr), huracan-stj, fenomeno-roadster. Next: urraco-p200, bravo, athon, then the rest;
+      and the Manager asks the user about press photos. Done: portofino (2026-11-19), countach-qvx (own
+      Flickr photos, 2026-11-21). cheetah: Marzal (45701009@N00) rejected 2026-11-21: re-posting account
+      (credit only the person who took a photo). Nothing verifiable on 2026-11-21: lm001, lma002 (only
+      the LM002 on Flickr), huracan-stj, fenomeno-roadster. Next: urraco-p200, bravo, athon, cheetah, the rest;
       huracan-gt3: replace the McLaren-frame photo (drop it in the PR that applies the replacement).
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
