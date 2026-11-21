@@ -43,7 +43,7 @@ chat as one fills up (Dev_0.10 → Dev_0.11). Decisions already made are in BACK
   Dev quality pass `trig_016Uth55kTrSNuvJWCzYFvNt` (`17 1 * * *`: OPEN messages, then the next
   quality-pass night); Dev Scout pointer (Mondays 02:17 UTC, ID and prompt in REFRESH.md Setup: the
   Dev reads the run's metadata with `get_trigger`, or the Manager hears it is missing); Photo hunt
-  `trig_01N2hhpNKTdLa4eyH4PQVCBM` (`5 21 * * *`, deleted when the gaps are fixed); the design review.
+  `trig_013nHtSsabYC6KrrAx5cjMQo` (`5 21 * * *`, deleted when the gaps are fixed); the design review.
 
 Models and effort per role: the token plan in BACKLOG.md Decisions; the Manager sets them for a successor.
 - **Report** when you finish a task or hit a blocker, and only then (no progress notes, one message
