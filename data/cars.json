@@ -10615,26 +10615,6 @@
      "a": "double8crxsi",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "DSC 0062 (35664140036).jpg",
-     "h": "e/ec",
-     "n": "DSC_0062_%2835664140036%29.jpg",
-     "w": 6016,
-     "ht": 4000,
-     "a": "double8crxsi",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "DSC 0063 (34893960913).jpg",
-     "h": "2/2b",
-     "n": "DSC_0063_%2834893960913%29.jpg",
-     "w": 6016,
-     "ht": 4000,
-     "a": "double8crxsi",
-     "l": "CC BY 2.0",
-     "lu": "https://creativecommons.org/licenses/by/2.0/"
     }
    ]
   },
@@ -10661,6 +10641,16 @@
    "vplus": true,
    "acc": 2.8,
    "imgs": [
+    {
+     "t": "Lamborghini Aventador SV ( Ank kumar, Infosys Limited) 02.jpg",
+     "h": "2/27",
+     "n": "Lamborghini_Aventador_SV_%28_Ank_kumar%2C_Infosys_Limited%29_02.jpg",
+     "w": 6000,
+     "ht": 4000,
+     "a": "Ank kumar",
+     "l": "CC BY-SA 4.0",
+     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
     {
      "t": "Lamborghini ABA-47L539 Aventador LP 750-4 SV (24042815474).jpg",
      "h": "4/4e",
@@ -10715,16 +10705,6 @@
      "t": "Lamborghini Aventador SV ( Ank kumar, Infosys Limited) 01.jpg",
      "h": "7/78",
      "n": "Lamborghini_Aventador_SV_%28_Ank_kumar%2C_Infosys_Limited%29_01.jpg",
-     "w": 6000,
-     "ht": 4000,
-     "a": "Ank kumar",
-     "l": "CC BY-SA 4.0",
-     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
-    },
-    {
-     "t": "Lamborghini Aventador SV ( Ank kumar, Infosys Limited) 02.jpg",
-     "h": "2/27",
-     "n": "Lamborghini_Aventador_SV_%28_Ank_kumar%2C_Infosys_Limited%29_02.jpg",
      "w": 6000,
      "ht": 4000,
      "a": "Ank kumar",
@@ -11039,16 +11019,6 @@
      "a": "zombieite",
      "l": "CC BY 2.0",
      "lu": "https://creativecommons.org/licenses/by/2.0/"
-    },
-    {
-     "t": "XBOX E3 2016 Lamborghini (1).jpg",
-     "h": "0/0a",
-     "n": "XBOX_E3_2016_Lamborghini_%281%29.jpg",
-     "w": 5622,
-     "ht": 3748,
-     "a": "Guywelch2000",
-     "l": "CC BY 4.0",
-     "lu": "https://creativecommons.org/licenses/by/4.0/"
     },
     {
      "t": "XBOX E3 2016 Lamborghini (2).jpg",
