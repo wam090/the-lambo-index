@@ -102,9 +102,9 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo quality pass** (user, 2026-11-18; nights 1-7 done: `cars.json` order 350-gtv to
-      urus-st-x; next starts at huracan-evo): every car's lead photo and gallery, about 12-15 cars a
-      night by contact sheet, full-size check of each pick, under the quality-pass bar. Additions and
+- [ ] **Photo quality pass** (user, 2026-11-18; nights 1-8 done: `cars.json` order 350-gtv to
+      urus-performante; next starts at urus-s, 15 cars left): every car's lead photo and gallery,
+      about 12-15 cars a night by contact sheet, full-size check of each pick, under the quality-pass bar. Additions and
       `hero` choices need no approval; drops as Decisions say. Method: numbered all-photo grids (PR #83).
 - [ ] **Photo gaps** (29 of 149 cars under 4 photos on 2026-11-21, 7 with none): Photo_v0.1 sends
       verified picks; the Dev checks each at full size and applies it. The 6 empty-state cars (urus-st-x,
