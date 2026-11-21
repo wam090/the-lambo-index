@@ -174,9 +174,8 @@ history). Record each decision the user makes under Decisions, with its date.
       a Jota-spec conversion, magazine scans): they keep the empty state, Photo retries on 2026-12-03,
       and the Manager asks the user about press photos. Done: portofino (2026-11-19), countach-qvx (own
       Flickr photos, 2026-11-21). cheetah: Marzal (45701009@N00) rejected 2026-11-21: re-posting account
-      (credit only the person who took a photo). Nothing verifiable on 2026-11-21: lm001, lma002 (only
-      the LM002 on Flickr), huracan-stj, fenomeno-roadster. Next: urraco-p200, bravo, athon, cheetah, the rest;
-      huracan-gt3: replace the McLaren-frame photo (drop it in the PR that applies the replacement).
+      (credit only the person who took a photo); 1 own photo by Ahmed Rashid added (2 photos). Nothing verifiable on 2026-11-21: lm001, lma002 (only
+      the LM002 on Flickr), huracan-stj, fenomeno-roadster. Next: urraco-p200, bravo, athon, cheetah, the rest.
 - [ ] **Static car pages** (user, 2026-11-15; after the photo gaps): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
