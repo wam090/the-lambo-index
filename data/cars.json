@@ -15139,44 +15139,7 @@
    "vmax": 340,
    "vplus": true,
    "acc": 2.4,
-   "imgs": [
-    {
-     "t": "nonfree:55375144847",
-     "w": 1024,
-     "ht": 690,
-     "a": "Lokale Blicke",
-     "l": "All rights reserved",
-     "lu": "",
-     "src": "flickr",
-     "p": "https://www.flickr.com/photos/157290793@N07/55375144847/",
-     "sz": [
-      [
-       320,
-       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_n.jpg"
-      ],
-      [
-       400,
-       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_w.jpg"
-      ],
-      [
-       500,
-       "https://live.staticflickr.com/65535/55375144847_d5817a3d24.jpg"
-      ],
-      [
-       640,
-       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_z.jpg"
-      ],
-      [
-       800,
-       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_c.jpg"
-      ],
-      [
-       1024,
-       "https://live.staticflickr.com/65535/55375144847_d5817a3d24_b.jpg"
-      ]
-     ]
-    }
-   ]
+   "imgs": []
   },
   {
    "id": "urus-se-performante",
