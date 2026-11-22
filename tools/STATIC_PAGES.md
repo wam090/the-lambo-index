@@ -1,4 +1,4 @@
-# Static car pages: design (Cyber's OK with changes, 2026-11-22; changes written in below)
+# Static car pages: design (approved by Cyber, 2026-11-22)
 
 Goal (user, 2026-11-15; start now, 2026-11-22 C): search engines can find and index every car. Today the
 site is one URL: `#/m/<id>` fragments are invisible to Google, so 149 car pages index as one page.
@@ -40,12 +40,12 @@ Car pages hold no dates: a rebuild on a new day leaves them byte-identical, so o
 `summary_large_image` (X reads the `og:` tags for the rest). **`og:image` licence rule**: social sites
 are commercial and show and crop the preview without our credit line, so `og:image` is the first
 photo, lead first, whose licence is in `OG_LICENCES` (one constant in `build.py`): Public domain, CC0,
-CC BY and CC BY-SA, any version (Cyber, 2026-11-22). So no ND, no NC, no own-Flickr photos, no GFDL
-(it asks for its full text with every copy) and no PD-Italy (public domain only in Italy). 1280 px
-from its host; its credit goes into `og:description` ("Photo: <author>, <licence>"). None: no
-`og:image` and `twitter:card` `summary`. Today: 129 cars use their lead photo, 2 a later one
-(miura-roadster, murcielago-lp650), 18 get none (7 with no photo, 11 with no photo in that set).
-Allowing NC would be the user's call (through the Manager): one line in `OG_LICENCES`.
+CC BY and CC BY-SA, any version. So no ND, no own-Flickr photos, no GFDL (it asks for its full text
+with every copy) and no PD-Italy (public domain only in Italy). No NC either: Cyber's recommendation,
+pending the user (the Manager keeps NC out until the user decides; one line in `OG_LICENCES`).
+1280 px from its host; its credit goes into `og:description` ("Photo: <author>, <licence>"). None: no
+`og:image` and `twitter:card` `summary`. With 150 cars: 131 get one (2 of them from a later photo:
+miura-roadster, murcielago-lp650), 19 get none (8 with no photo, 11 with no photo in that set).
 
 ## Security: how the rules hold
 - **No JavaScript at all** on car pages and `m/`. CSP meta, scoped by path (`'self'` would cover
