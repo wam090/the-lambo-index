@@ -15401,6 +15401,27 @@
      ]
     }
    ]
+  },
+  {
+   "id": "temerario-spyder",
+   "family": "Temerario",
+   "name": "Temerario Spyder",
+   "kind": "Production",
+   "year": 2026,
+   "end": 0,
+   "body": "Roadster",
+   "engine": "4.0 L twin-turbo V8 plug-in hybrid",
+   "eng": "Hybrid V8",
+   "cv": 920,
+   "units": null,
+   "designer": "Lamborghini Centro Stile",
+   "wiki": "Lamborghini Temerario",
+   "note": "Open Temerario with Lamborghini's first retractable hardtop; unveiled in Los Angeles in November 2026.",
+   "cats": [
+    "Lamborghini Temerario Spyder"
+   ],
+   "debut": false,
+   "imgs": []
   }
  ]
 }

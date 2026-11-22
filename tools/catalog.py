@@ -334,6 +334,8 @@ CARS = [
       ["Lamborghini Urus SE Performante"], "Lamborghini Urus", "Lighter, sharper plug-in hybrid Urus; the most powerful Urus yet."),
     E("revuelto-sv", "Revuelto", "Revuelto SV", "Limited series", 2026, 0, "Coupé", "6.5 L V12 plug-in hybrid, three electric motors", "Hybrid V12", 1065, 1963, BORKERT,
       ["Lamborghini Revuelto SV"], "Lamborghini Revuelto", "Sharper Revuelto with 50 CV more; the most powerful series-production Lamborghini."),
+    E("temerario-spyder", "Temerario", "Temerario Spyder", "Production", 2026, 0, "Roadster", "4.0 L twin-turbo V8 plug-in hybrid", "Hybrid V8", 920, None, CS,
+      ["Lamborghini Temerario Spyder"], "Lamborghini Temerario", "Open Temerario with Lamborghini's first retractable hardtop; unveiled in Los Angeles in November 2026."),
 ]
 
 # Timeline frames. A debut is the original form of each distinct car: by default the first car of
