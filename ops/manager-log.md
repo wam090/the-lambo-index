@@ -11,7 +11,12 @@ Cyber's OK.
 
 ## Open approvals (asked, not yet answered)
 
-(none)
+- 2026-11-22 G (asked 21:15 UTC), chat-chain limit: get_session shows Manager_v0.8 at lineage depth 6
+  of limit 8, because each Manager creates the next; by Manager_v0.10 (about 25 Nov at the current
+  pace) the Manager could create no chats [TBC: exact behaviour at the limit]. Pick: the user starts
+  the next Manager once from the Claude app with one pasted line (depth back to 0). Alternative: a
+  scheduled task spawns it (unproven; the 2026-11-11 Scout test found no tools to create or message
+  chats in such a session).
 
 ## Decisions received (newest first)
 
@@ -83,8 +88,9 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
   get_trigger; Dev_0.12 records the new id in REFRESH.md through a PR.
 - Dev_0.12: a design PR and an estimate in nights for the static pages (asked 22 Nov 21:09 UTC).
 - Checks to carry with the user (not approvals): B was read as "do not add Photo's 2 new
-  countach-lp500 photos" (the user may say "add them"); F (add the Spyder outside working hours) got
-  no answer, so it is done in working hours on 22 Nov.
+  countach-lp500 photos" (the user may say "add them"); Dev_0.12's effort: the token plan's "Extreme"
+  read as xhigh (the user may say "max"). F (add the Spyder outside working hours) is moot: it is
+  done in working hours on 22 Nov; closed.
 - 2026-12-03, Photo: retry the 7 cars with no photo.
 
 ## Process fixes
