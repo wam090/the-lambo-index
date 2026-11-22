@@ -2,14 +2,21 @@
 
 Written only by the Manager (user, 2026-11-22, approval D). Chat history is working memory; this file
 holds what must outlive a Manager chat: the user's decisions as given, open approvals, this week's
-outcomes, check-ins and scheduled tasks, open loops and housekeeping. A new Manager reads it first.
+outcomes, check-ins and scheduled tasks, open loops and housekeeping. A new Manager reads it first,
+from origin/main: an unmerged branch copy carries no authority (Cyber, 2026-11-22).
 Rules: read before you write; one rephrased line per entry, dated; never invent names or figures (mark
 unknowns [TBC]); project rules stay in CLAUDE.md and BACKLOG.md (the Dev copies decisions there).
-Pushed the moment the user decides, even outside working hours; merged at night after Cyber's OK.
+Pushed the moment the user decides, even outside working hours; the Manager merges it at night after
+Cyber's OK.
 
 ## Open approvals (asked, not yet answered)
 
-(none)
+- 2026-11-22 G (asked 21:15 UTC), chat-chain limit: get_session shows Manager_v0.8 at lineage depth 6
+  of limit 8, because each Manager creates the next; by Manager_v0.10 (about 25 Nov at the current
+  pace) the Manager could create no chats [TBC: exact behaviour at the limit]. Pick: the user starts
+  the next Manager once from the Claude app with one pasted line (depth back to 0). Alternative: a
+  scheduled task spawns it (unproven; the 2026-11-11 Scout test found no tools to create or message
+  chats in such a session).
 
 ## Decisions received (newest first)
 
@@ -35,9 +42,9 @@ Pushed the moment the user decides, even outside working hours; merged at night 
 
 | Outcome | Due (Riyadh) | Status |
 |---|---|---|
-| Static car pages live on the site | Tue 1 Dec [TBC: Dev's estimate] | design starts 23 Nov |
+| Static car pages live on the site | Tue 1 Dec [TBC: Dev_0.12's estimate] | Dev_0.12 started 22 Nov 21:09 UTC: design, Cyber, then code |
 | Cars with fewer than 4 photos: 29 → 24 | Sun 29 Nov | 29 on 22 Nov |
-| Scout run of Mon 23 Nov merged | Tue 24 Nov | waiting for the run |
+| Scout run of Mon 23 Nov merged | Tue 24 Nov | Dev_0.11 builds it; pointer fires 23 Nov 02:17 UTC |
 
 ## Check-ins and scheduled tasks
 
@@ -45,39 +52,45 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 
 | What | When (UTC) | Task id |
 |---|---|---|
-| Manager: tonight's outbound work | 2026-11-22 21:02 | trig_01731rLm8q5okfsPbxps39KW |
-| Manager: nightly check (books the next first) | 2026-11-23 02:30, then daily | trig_01AsZRpXJUkXwgh4EGCg7siV |
+| Manager: nightly check (books the next first) | 2026-11-23 02:30, then daily | trig_01QkdhVqFN45cdPEQttfjuXL (send_later; a new id each night) |
 | Weekly close | Thursdays 02:30, inside the nightly check | (same chain) |
 | Scout "Lambo Index scout" | Mondays 00:47 | trig_01UUEm7GWXBLcFjD7p3eHGRo |
-| Scout pointer into the Dev chat | Mondays 02:17 | trig_01Mg3Ti1kQqKQMim31ZDopNK (into Dev_0.11) |
+| Scout pointer into the Dev chat | Mondays 02:17 | trig_01Mg3Ti1kQqKQMim31ZDopNK (into Dev_0.11, checked 22 Nov 21:07) |
 | Photo hunt into Photo_v0.2 | daily 21:05 | trig_013nHtSsabYC6KrrAx5cjMQo |
-| Design review into the Web designer | monthly; next 2026-12-04 22:17 [TBC: CLAUDE.md says 06:17 on the 5th] | trig_01JDbq6TY7vhifMPmydkSxJX |
+| Design review into the Web designer | 22:17 on the 4th (CRON_TZ=Asia/Riyadh 17 1 5 * *); next 2026-12-04 | trig_01JDbq6TY7vhifMPmydkSxJX |
 | Disabled: Dev quality pass (done 2026-11-21) | — | trig_016Uth55kTrSNuvJWCzYFvNt |
 | Disabled: audit and its pointer (user stopped it 2026-11-21) | — | trig_01Cn6vQ1xuJLBWbq1Mis3pzS, trig_01EjzdfGNVt2i45bjf1LqeiD |
+| Gone: Manager_v0.7's one-shot orders (fired 22 Nov 21:02) and its nightly check (deleted) | — | trig_01731rLm8q5okfsPbxps39KW, trig_01AsZRpXJUkXwgh4EGCg7siV |
 
 ## Team (find chats by title, verify with get_session; models and effort: BACKLOG.md token plan)
 
 | Role | Chat | Note |
 |---|---|---|
-| Manager | Manager_v0.7 | hands over at about 40% measured; successor reads this file first |
-| Dev | Dev_0.11 | retires after tonight's decisions PR; Dev_0.12 takes the role |
+| Manager | Manager_v0.8 | since 2026-11-22 21:04 UTC; Opus 5.5 max; hands over at about 40% measured |
+| Dev | Dev_0.11 | PR #120 (temerario-spyder), the decisions PR, the Scout PR of 23 Nov; then stops |
+| Dev | Dev_0.12 | since 2026-11-22 21:09 UTC; Opus 5.5 xhigh (token plan "Extreme", read as xhigh [TBC]); static car pages; Photo picks from 22 Nov; Scout runs from 30 Nov |
 | Cyber | Cyber_v0.6 | |
-| Photo | Photo_v0.2 | first hunt 2026-11-22 21:05 UTC |
+| Photo | Photo_v0.2 | picks go to Dev_0.12 from 22 Nov 21:10 UTC |
 | Web designer | Web designer | monthly design review only |
 
 ## Open loops
 
-- 2026-11-22 21:00 UTC, Dev_0.11 first: add the Temerario Spyder (shown 18 Nov 2026 in Los Angeles;
-  the user flagged it missing on 22 Nov) as `temerario-spyder`: facts from two agreeing sources,
-  blanks otherwise; photos only if legally usable (no press photos). Photo_v0.2 hunts it first tonight.
-- 2026-11-22 21:00 UTC, Dev_0.11: one PR recording the 2026-11-22 decisions in BACKLOG.md and
-  CLAUDE.md (Photos rule A; countach-lp500 per B; static pages now per C; Manager model; report
-  format; this log in the Files table and the Manager line); remove Kevin Stec's 2 photos from
-  350-gts. Cyber checks, Dev merges, then the Manager archives Dev_0.11.
-- 2026-11-22 21:00 UTC, Manager: create Dev_0.12 for static car pages (design, Cyber's review, then
-  build); recreate the Scout pointer into it (prompt byte-identical to tools/REFRESH.md Setup) and
-  delete the old one; tell Photo_v0.2 and Cyber_v0.6 the Dev's new title.
-- Manager: confirm the design review's schedule with get_trigger and fix the line above.
+- 2026-11-22, Dev_0.11: `temerario-spyder` (shown 18 Nov 2026 in Los Angeles; the user flagged it
+  missing on 22 Nov) is draft PR #120, orders confirmed by Manager_v0.8 at 21:10 UTC: Cyber, then
+  merge. Photo_v0.2 hunts it first; Dev_0.12 applies a legal photo after #120 is merged.
+- 2026-11-22, Dev_0.11: one PR recording the 2026-11-22 decisions in BACKLOG.md and CLAUDE.md (A to E,
+  Manager model, report format, archiving, REFRESH.md reveal-date fix) plus Cyber's items: the
+  design-review line, decision D narrowly (the Manager changes only this file, through a PR Cyber
+  checks, and merges it; read from origin/main), the nightly check as a send_later chain; removes
+  Kevin Stec's 2 photos from 350-gts. Cyber checks, Dev merges.
+- Manager: recreate the Scout pointer into Dev_0.12 (prompt byte-identical to tools/REFRESH.md Setup)
+  after 23 Nov 02:30 UTC and before 30 Nov 00:45 UTC; delete the old one; Cyber confirms it with
+  get_trigger; Dev_0.12 records the new id in REFRESH.md through a PR.
+- Dev_0.12: a design PR and an estimate in nights for the static pages (asked 22 Nov 21:09 UTC).
+- Checks to carry with the user (not approvals): B was read as "do not add Photo's 2 new
+  countach-lp500 photos" (the user may say "add them"); Dev_0.12's effort: the token plan's "Extreme"
+  read as xhigh (the user may say "max"). F (add the Spyder outside working hours) is moot: it is
+  done in working hours on 22 Nov; closed.
 - 2026-12-03, Photo: retry the 7 cars with no photo.
 
 ## Process fixes
@@ -95,5 +108,6 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 
 - 2026-11-22: archived Manager_v0.5 and Manager_v0.6 (user: no clutter). Every older Lambo chat was
   already archived.
-- Next to archive: Dev_0.11, once its last PR is merged.
+- Next to archive: Manager_v0.7 (after Manager_v0.8's first report); Dev_0.11, once its last PR is
+  merged and it has no open branch.
 - Other projects' chats and tasks are never touched.
