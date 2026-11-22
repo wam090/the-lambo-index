@@ -67,6 +67,9 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 
 ## Open loops
 
+- 2026-11-22 21:00 UTC, Dev_0.11 first: add the Temerario Spyder (shown 18 Nov 2026 in Los Angeles;
+  the user flagged it missing on 22 Nov) as `temerario-spyder`: facts from two agreeing sources,
+  blanks otherwise; photos only if legally usable (no press photos). Photo_v0.2 hunts it first tonight.
 - 2026-11-22 21:00 UTC, Dev_0.11: one PR recording the 2026-11-22 decisions in BACKLOG.md and
   CLAUDE.md (Photos rule A; countach-lp500 per B; static pages now per C; Manager model; report
   format; this log in the Files table and the Manager line); remove Kevin Stec's 2 photos from
@@ -76,6 +79,13 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
   delete the old one; tell Photo_v0.2 and Cyber_v0.6 the Dev's new title.
 - Manager: confirm the design review's schedule with get_trigger and fix the line above.
 - 2026-12-03, Photo: retry the 7 cars with no photo.
+
+## Process fixes
+
+- 2026-11-22, the Temerario Spyder miss: the Scout's 16 Nov notes named the 18 Nov reveal, but nobody
+  acted on it, and the weekly run left a 5-day gap. From now on: (1) a reveal date in a Scout note
+  gets a Manager send_later for the day after, and the Dev adds the car once it is shown; (2) the
+  Manager's nightly check runs one web search for Lamborghini cars shown in the last 48 hours.
 
 ## Weekly closes
 
