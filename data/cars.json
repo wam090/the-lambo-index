@@ -1,6 +1,17 @@
 {
  "brand": "Lamborghini",
  "generated": "2026-11-22",
+ "famNames": {
+  "Murcielago": "Murciélago",
+  "Huracan": "Huracán",
+  "Reventon": "Reventón",
+  "Sian": "Sián",
+  "Autentica": "Auténtica",
+  "Cala": "Calà",
+  "350": "350 GT",
+  "400": "400 GT",
+  "291": "Lambo 291"
+ },
  "cars": [
   {
    "id": "350-gtv",
