@@ -109,7 +109,9 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-20/21 (the Manager): drop a two-car frame only when our car is not a clear whole subject. A
   poor photo whose drop would leave a car under 4 photos stays until Photo's replacement is applied,
   unless it is not the car, a toy or not an exterior: huracan-gt3 keeps "GT3 and GT4 race one ...
-  (51373314403).jpg" and "2018 Rolex 24 (41267772511).jpg" until then.
+  (51373314403).jpg" and "2018 Rolex 24 (41267772511).jpg" until then; urus-concept keeps
+  Urusside.jpg (640 px) until then (2026-11-22). A new photo below 1280 px needs the Manager's OK
+  before it is applied (2026-11-22).
 
 ## In progress
 
@@ -125,13 +127,12 @@ history). Record each decision the user makes under Decisions, with its date.
       (157290793@N07, local news; fenomeno-roadster empty since 2026-11-21), darylchapman,
       raphael_belly_photography, kyter (written no-use notices), Perico001 (mark not tied to the
       account). Nothing legal yet: temerario-spyder (only press re-posts), urus-se-performante, bravo
-      (2026-11-22); lm001, lma002, huracan-stj, fenomeno-roadster (2026-11-21). urus-concept's
-      Urusside.jpg (640 px) is a placeholder below the quality bar (Manager, 2026-11-22). Rejected:
-      Automotive Rhythms (artvlive, media outlet). Photo's next: aventador-50, gallardo-squadra-corse,
-      350-gts, p147-gandini, raptor.
-- [ ] **Static car pages: after the merge** (`tools/STATIC_PAGES.md`): the Dev runs `indexnow.py`
-      once Pages serves them. Waiting on the user: Google Search Console (URL prefix, HTML tag; steps
-      in STATIC_PAGES.md): the Dev adds the tag, the user clicks Verify and submits `sitemap.xml`.
+      (2026-11-22); lm001, lma002, huracan-stj, fenomeno-roadster (2026-11-21). urus-concept needs a
+      1280 px or larger photo to replace Urusside.jpg. Rejected: Automotive Rhythms (artvlive, media
+      outlet). Photo's next: aventador-50, gallardo-squadra-corse, 350-gts, p147-gandini, raptor.
+- [ ] **Static car pages** (live 2026-11-22; IndexNow sent, HTTP 202). Waiting on the user: Google
+      Search Console (URL prefix, HTML tag; steps in STATIC_PAGES.md): the Dev adds the tag, the user
+      clicks Verify and submits `sitemap.xml`.
       Open for the user (through the Manager): NC licences in `og:image` (excluded until then;
       19 cars have no preview image). Parked (Manager, 2026-11-22): app cards linking to `m/<id>/`,
       a footer link to `m/`, JSON-LD.
