@@ -67,8 +67,8 @@ history). Record each decision the user makes under Decisions, with its date.
   per view or car page shown (never filters or searches; old `#/stats` counts as Browse), https only.
   The user reads the counts in GoatCounter's dashboard and weekly email.
 - 2026-11-12: The site is live and indexable; smoke fails if a robots `noindex` returns.
-- 2026-11-12: Monthly design review on the 5th (01:17 Riyadh, 22:17 UTC on the 4th) by the Web designer: at most 5 UI proposals
-  to the Manager; nothing is built until the user approves.
+- 2026-11-12: Monthly design review on the 5th (01:17 Riyadh, 22:17 UTC on the 4th) by the Web
+  designer: at most 5 UI proposals to the Manager; nothing is built until the user approves.
 - 2026-11-15: A static page per car for search engines (see Next). No ads. 2026-11-22 C (user): they
   start now, no longer after the photo gaps.
 
@@ -122,7 +122,8 @@ history). Record each decision the user makes under Decisions, with its date.
       about press photos. Rejected accounts: Marzal (45701009@N00, re-posting), Lokale Blicke
       (157290793@N07, local news; fenomeno-roadster empty since 2026-11-21), darylchapman,
       raphael_belly_photography, kyter (written no-use notices), Perico001 (mark not tied to the
-      account). temerario-spyder (new, 2026-11-22) has none yet: Photo hunts it first. Nothing verifiable on 2026-11-21: lm001, lma002, huracan-stj, fenomeno-roadster. Photo's next:
+      account). temerario-spyder (new, 2026-11-22) has none yet: Photo hunts it first. Nothing
+      verifiable on 2026-11-21: lm001, lma002, huracan-stj, fenomeno-roadster. Photo's next:
       pregunta, urus-concept, urus-se-performante, bravo, athon.
 - [ ] **Static car pages** (user, 2026-11-15; start now, 2026-11-22; Dev_0.12): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
