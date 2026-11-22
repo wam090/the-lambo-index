@@ -94,7 +94,9 @@ QUERIES = {
 # Lamborghini press photos, LEGO models. Skipped on every run.
 BLOCKED = {"autohistorian", "druidabruxux", "lancastervanderbilt", "lancaster vanderbilt",
            "50523210@n08",   # re-posted catalogue photos (Cyber_v0.4, 2026-11-16)
-           "kyter", "darylchapman", "raphael_belly_photography"}   # written no-use notices (user, 2026-11-22)
+           "kyter", "27862041@n07", "darylchapman", "26982917@n02",            # written no-use
+           "raphael_belly_photography", "50105406@n02",                         # notices (user, 2026-11-22)
+           "93207294@n04", "45701009@n00", "157290793@n07"}   # Perico001, Marzal, Lokale Blicke (Cyber)
 TOY = re.compile(r"\blego\b|\b7\d{4}\b|speed champions|technic|brick|minifig|\bmoc\b", re.I)
 
 # Extra search terms per car from a Scout photo hunt (written by tools/scout_import.py hunt, which

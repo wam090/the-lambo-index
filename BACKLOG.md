@@ -67,7 +67,7 @@ history). Record each decision the user makes under Decisions, with its date.
   per view or car page shown (never filters or searches; old `#/stats` counts as Browse), https only.
   The user reads the counts in GoatCounter's dashboard and weekly email.
 - 2026-11-12: The site is live and indexable; smoke fails if a robots `noindex` returns.
-- 2026-11-12: Monthly design review on the 5th (06:17 UTC) by the Web designer: at most 5 UI proposals
+- 2026-11-12: Monthly design review on the 5th (01:17 Riyadh, 22:17 UTC on the 4th) by the Web designer: at most 5 UI proposals
   to the Manager; nothing is built until the user approves.
 - 2026-11-15: A static page per car for search engines (see Next). No ads. 2026-11-22 C (user): they
   start now, no longer after the photo gaps.
