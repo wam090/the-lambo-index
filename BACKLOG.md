@@ -71,7 +71,8 @@ history). Record each decision the user makes under Decisions, with its date.
   designer: at most 5 UI proposals to the Manager; nothing is built until the user approves.
 - 2026-11-15: A static page per car for search engines. No ads. 2026-11-22 C (user): they start now,
   no longer after the photo gaps. Built 2026-11-22 to Cyber's design review: no robots.txt (crawlers
-  read it only at the host root), no JavaScript on the pages, `og:image` only PD, CC0, CC BY, CC BY-SA.
+  read it only at the host root), no JavaScript on the pages, `og:image` only PD, CC0, CC BY, CC BY-SA
+  (no NC until the user decides: Manager, on Cyber's recommendation).
 
 **Photos**
 - 2026-11-08/15/19: Every car should have photos; a limited series or one-off must never have none.

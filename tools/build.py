@@ -104,7 +104,7 @@ with open(out, "w", encoding="utf-8") as f:
 # No JavaScript: the pages are checked below and fail the build on anything outside the rules.
 # Changing PAGE_CSP or the markup checks needs Cyber's review.
 INDEXNOW_KEY = "c1856620fb371faad479a07e2dcf9ac2"   # public by design: served as <key>.txt (IndexNow)
-OG_LICENCES = re.compile(r"Public domain|CC0|CC BY(-SA)? \d\.\d")   # og:image licences, fullmatch (Cyber, 2026-11-22)
+OG_LICENCES = re.compile(r"Public domain|CC0|CC BY(-SA)? \d\.\d")   # og:image licences, fullmatch; no NC until the user decides
 PAGE_CSP = (f"default-src 'none'; style-src {SITE}src/page.css; font-src {SITE}fonts/; "
             f"img-src https://thumb.wikimedia.org https://live.staticflickr.com https://thelamboindex.goatcounter.com "
             f"{SITE}favicon.svg; base-uri 'none'; form-action 'none'")
@@ -334,8 +334,8 @@ class PageCheck(HTMLParser):
             self.bad.append(f"{tag} {k}={v[:80]}")
 
 
-def check_page(name, text):
-    p = PageCheck(name)
+def page_problems(text):
+    p = PageCheck("")
     p.feed(text)
     p.close()
     if re.search(r"<\s*/?\s*(script|style|iframe|object|embed|form|base)\b", text, re.I):
@@ -343,26 +343,80 @@ def check_page(name, text):
     for t in re.findall(r"<[^>]*>", text):
         if re.search(r"\s(on\w+|style)\s*=", t, re.I) or re.search(r"(javascript|data)\s*:", t, re.I):
             p.bad.append(f"raw attribute in {t[:80]}")
-    if p.bad:
-        sys.exit(f"static page {name} breaks the page rules:\n- " + "\n- ".join(p.bad))
+    return p.bad
 
 
-M = os.path.join(ROOT, "m")
-REAL_M = os.path.join(os.path.realpath(ROOT), "m")
+def check_page(name, text):
+    bad = page_problems(text)
+    if bad:
+        sys.exit(f"static page {name} breaks the page rules:\n- " + "\n- ".join(bad))
 
 
-def out_path(cid=None):
-    """m/<id>/index.html or m/index.html, refused if outside <repo>/m/ or reached through a symlink."""
+def out_path(cid=None, root=ROOT):
+    """m/<id>/index.html or m/index.html, refused if outside <root>/m/ or reached through a symlink."""
     if cid is not None and not ID_RE.fullmatch(cid):
         sys.exit(f"car id {cid!r} is not a safe path (a-z, 0-9, single hyphens)")
-    parts = [M] + ([os.path.join(M, cid)] if cid else [])
+    m, real_m = os.path.join(root, "m"), os.path.join(os.path.realpath(root), "m")
+    parts = [m] + ([os.path.join(m, cid)] if cid else [])
     p = os.path.join(parts[-1], "index.html")
-    if any(os.path.islink(x) for x in parts + [p]) or os.path.realpath(M) != REAL_M:
+    if any(os.path.islink(x) for x in parts + [p]) or os.path.realpath(m) != real_m:
         sys.exit(f"refusing to write through a symlink: {p}")
-    real = os.path.realpath(p)
-    if not real.startswith(REAL_M + os.sep):
+    if not os.path.realpath(p).startswith(real_m + os.sep):
         sys.exit(f"refusing to write outside m/: {p}")
     return p
+
+
+def self_test(good):
+    """Runs on every build: each banned pattern must fail the page checks, bad ids and symlinks the
+    path guard; the build stops if one gets through (Cyber, 2026-11-22)."""
+    import tempfile
+    a, img = '<a href="../x/">', '<img src="https://thumb.wikimedia.org/x.jpg" alt="">'
+    bad_pages = {
+        "script": "<SCRIPT >x</script>", "spaced script": "< script>x</script>", "style element": "<style>b{}</style>",
+        "iframe": '<iframe src="../"></iframe>', "object": "<object></object>", "embed": "<embed>",
+        "form": "<form></form>", "base": '<base href="https://evil.example/">', "svg": "<svg></svg>",
+        "event handler": img.replace("<img", "<img ONERROR = x"), "style attribute": '<p style="color:red">x</p>',
+        "srcset": img.replace("<img", '<img srcset="https://evil.example/x.jpg 2x"'),
+        "meta refresh": '<meta http-equiv="refresh" content="0;url=https://evil.example/">',
+        "link prefetch": '<link rel="prefetch" href="../x">',
+        "javascript url": '<a href="javascript:alert(1)">x</a>', "entity javascript url": '<a href="&#106;avascript:alert(1)">x</a>',
+        "data url": '<img src="data:image/svg+xml,x" alt="">', "http": '<a href="http://en.wikipedia.org/">x</a>',
+        "other host": '<a href="https://evil.example/">x</a>', "other Pages site": '<a href="https://wam090.github.io/other/">x</a>',
+        "root-relative": '<a href="/other-repo/">x</a>', "protocol-relative": '<a href="//evil.example/">x</a>',
+        "image from a page host": '<img src="https://en.wikipedia.org/x.jpg" alt="">',
+        "og:image elsewhere": '<meta property="og:image" content="https://evil.example/x.jpg">',
+        "other github path": '<a href="https://github.com/someone/else">x</a>',
+    }
+    if page_problems(good):
+        sys.exit("self-test: a good page fails the page checks: " + "; ".join(page_problems(good)))
+    missed = [k for k, v in bad_pages.items() if not page_problems(good.replace("</main>", v + "</main>"))]
+    for cid in ("../x", "a/b", "A", "x--y", "-x", "x-", "x.y", "", " x"):
+        try:
+            out_path(cid)
+            missed.append(f"id {cid!r}")
+        except SystemExit:
+            pass
+    with tempfile.TemporaryDirectory() as tmp:
+        root, other = os.path.join(tmp, "repo"), os.path.join(tmp, "other")
+        os.makedirs(root)
+        os.makedirs(os.path.join(other, "x"))
+        os.symlink(other, os.path.join(root, "m"))   # m/ itself a symlink
+        try:
+            out_path("x", root)
+            missed.append("m/ as a symlink")
+        except SystemExit:
+            pass
+        os.remove(os.path.join(root, "m"))
+        os.makedirs(os.path.join(root, "m"))
+        os.symlink(os.path.join(other, "x"), os.path.join(root, "m", "x"))   # m/<id>/ a symlink
+        try:
+            out_path("x", root)
+            missed.append("m/<id>/ as a symlink")
+        except SystemExit:
+            pass
+    if missed:
+        sys.exit("self-test: the page checks let these through: " + ", ".join(missed))
+    return len(bad_pages)
 
 
 def root_path(name):
@@ -392,6 +446,7 @@ order = {c["id"]: i for i, c in enumerate(cars)}
 fams = {}
 for c in sorted(cars, key=lambda c: (c["year"], order[c["id"]])):
     fams.setdefault(c["family"], []).append(c)
+n_tests = self_test(car_page(cars[0], fams[cars[0]["family"]]))
 lastmod, changed = {}, []
 for c in cars:
     text = car_page(c, fams[c["family"]])
@@ -426,4 +481,5 @@ write_if_changed(root_path(f"{INDEXNOW_KEY}.txt"), INDEXNOW_KEY)
 n_img = sum(len(c["imgs"]) for c in cars)
 print(f"wrote {out} ({os.path.getsize(out) / 1024:.0f} KB): {len(cars)} cars, {n_img} photos, "
       f"{sum(1 for c in cars if not c['imgs'])} without photos")
-print(f"wrote {len(cars)} car pages under m/ ({len(changed)} new or changed), m/, sitemap.xml ({len(urls)} URLs)")
+print(f"wrote {len(cars)} car pages under m/ ({len(changed)} new or changed), m/, sitemap.xml ({len(urls)} URLs); "
+      f"self-test: {n_tests} bad pages, 9 bad ids and 2 symlinks refused")
