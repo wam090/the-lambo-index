@@ -133,7 +133,7 @@ history). Record each decision the user makes under Decisions, with its date.
       once Pages serves them. Waiting on the user: Google Search Console (URL prefix, HTML tag; steps
       in STATIC_PAGES.md): the Dev adds the tag, the user clicks Verify and submits `sitemap.xml`.
       Open for the user (through the Manager): NC licences in `og:image` (excluded until then;
-      OGCOUNT cars have no preview image). Parked (Manager, 2026-11-22): app cards linking to `m/<id>/`,
+      19 cars have no preview image). Parked (Manager, 2026-11-22): app cards linking to `m/<id>/`,
       a footer link to `m/`, JSON-LD.
 - [ ] **Scout import follow-ups** (Cyber, non-blocking): (1) when a fill pairs Wikipedia with an
       `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value, the

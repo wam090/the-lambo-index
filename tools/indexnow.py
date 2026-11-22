@@ -43,6 +43,8 @@ def main():
     ap.add_argument("--base", default="HEAD^1")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
+    if args.base.startswith("-"):   # passed to git show: never let it read as an option
+        sys.exit("--base must be a revision, not an option")
     old, new = sitemap(args.base), sitemap("HEAD")
     if not new:
         sys.exit("no sitemap.xml at HEAD")

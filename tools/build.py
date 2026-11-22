@@ -438,6 +438,9 @@ def write_if_changed(p, text):
 
 if not re.fullmatch(r"[0-9a-f]{32}", INDEXNOW_KEY):
     sys.exit("INDEXNOW_KEY must be 32 hex characters")
+bad_ids = [c["id"] for c in cars if not ID_RE.fullmatch(c["id"])]   # before any page is written or linked
+if bad_ids:
+    sys.exit(f"car ids not safe as paths (a-z, 0-9, single hyphens): {bad_ids}")
 SITEMAP = root_path("sitemap.xml")
 old_map = open(SITEMAP, encoding="utf-8").read() if os.path.exists(SITEMAP) else ""
 old_mod = dict(re.findall(r"<loc>([^<]+)</loc><lastmod>(\d{4}-\d{2}-\d{2})</lastmod>", old_map))
@@ -469,8 +472,9 @@ for loc in old_mod:
         p = out_path(m.group(1))
         if os.path.isfile(p):
             os.remove(p)
-        if not os.listdir(os.path.dirname(p)):
-            os.rmdir(os.path.dirname(p))
+        d = os.path.dirname(p)
+        if os.path.isdir(d) and not os.listdir(d):   # the folder may be gone already (Cyber, 2026-11-22)
+            os.rmdir(d)
         print(f"removed stale page m/{m.group(1)}/")
 urls = [SITE, f"{SITE}m/"] + [f"{SITE}m/{c['id']}/" for c in cars]
 lastmod[SITE] = max(lastmod.values())
