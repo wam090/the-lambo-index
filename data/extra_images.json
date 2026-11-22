@@ -208,5 +208,20 @@
     "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
    }
   ]
+ },
+ "urus-concept": {
+  "source": "Commons file in the car's category, below images.py's size floor (Photo_v0.2, 2026-11-22)",
+  "images": [
+   {
+    "t": "Urusside.jpg",
+    "h": "0/03",
+    "n": "Urusside.jpg",
+    "w": 640,
+    "ht": 426,
+    "a": "72Dino",
+    "l": "CC BY-SA 3.0",
+    "lu": "https://creativecommons.org/licenses/by-sa/3.0/"
+   }
+  ]
  }
 }

@@ -115,7 +115,7 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo gaps** (25 of 150 cars under 4 photos on 2026-11-22, 8 with none): Photo (Photo_v0.x) sends
+- [ ] **Photo gaps** (24 of 150 cars under 4 photos on 2026-11-22, 8 with none): Photo (Photo_v0.x) sends
       verified picks; the Dev checks each at full size and applies it. The 6 empty-state cars (urus-st-x,
       sc20, invencible, autentica, miura-jota, countach-evoluzione) have nothing legal (press, game, LEGO,
       a Jota-spec conversion, magazine scans): Photo retries on 2026-12-03, and the Manager asks the user
@@ -123,9 +123,10 @@ history). Record each decision the user makes under Decisions, with its date.
       (157290793@N07, local news; fenomeno-roadster empty since 2026-11-21), darylchapman,
       raphael_belly_photography, kyter (written no-use notices), Perico001 (mark not tied to the
       account). Nothing legal yet: temerario-spyder (only press re-posts), urus-se-performante, bravo
-      (2026-11-22); lm001, lma002, huracan-stj, fenomeno-roadster (2026-11-21). urus-concept: Photo's
-      picks wait for the Manager (un-drop flickr:7978099184; the others are 612-640 px). Photo's next:
-      aventador-50, gallardo-squadra-corse, 350-gts, p147-gandini, raptor.
+      (2026-11-22); lm001, lma002, huracan-stj, fenomeno-roadster (2026-11-21). urus-concept's
+      Urusside.jpg (640 px) is a placeholder below the quality bar (Manager, 2026-11-22). Rejected:
+      Automotive Rhythms (artvlive, media outlet). Photo's next: aventador-50, gallardo-squadra-corse,
+      350-gts, p147-gandini, raptor.
 - [ ] **Static car pages** (user, 2026-11-15; start now, 2026-11-22; Dev_0.12): `build.py` writes one page per
       car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
       `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
