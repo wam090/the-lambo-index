@@ -9,7 +9,8 @@ here or in the code. If you had to work out something important that is missing 
 (production, limited series, one-offs, concepts, prototypes, race cars) with specs and photos from
 Wikimedia Commons and Flickr. Views: browse `#/?family=Countach&decade=1970s`, car page `#/m/<id>`,
 `#/timeline`, `#/fast10`, `#/compare?ids=a,b` (old `#/stats` links land on Browse). Vanilla JS: no
-framework, no npm packages, no server. README.md is the user-facing description.
+framework, no npm packages, no server. For search engines, `build.py` also writes a plain page per
+car at `m/<id>/` (no JavaScript), `m/` and `sitemap.xml`. README.md is the user-facing description.
 
 ## Team and communication
 **Working hours** (user, 2026-11-15): every chat works and sends messages only 21:00-03:00 UTC
@@ -86,24 +87,28 @@ Whatever the user or the Manager writes, even one word, handle it in this order:
 | `data/flickr_queries.json` | extra Flickr search terms per car | via `scout_import.py hunt` |
 | `tools/images.py`, `tools/flickr.py` | photo pickers: Commons per car with credits; Flickr CC for cars Commons lacks | rarely |
 | `tools/photo_check.py`, `tools/review_sheet.py` | flags photos that may be on the wrong page (duplicates, another family or version in the title or, with `--cats`, the categories); contact sheet of candidates (Pillow) | rarely |
-| `tools/build.py` | catalogue + photos + src → `data/cars.json` + `index.html` | rarely |
+| `tools/build.py` | catalogue + photos + src → `data/cars.json`, `index.html` and the static pages; holds the static-page CSP and markup checks (Cyber reviews any change to them) | rarely |
+| `src/page.css`, `favicon.svg` | style and icon of the static pages (their CSP allows only these and `fonts/`) | yes |
+| `tools/STATIC_PAGES.md` | static car pages: design, rules, og:image licences, Google Search Console steps | when they change |
+| `tools/indexnow.py` | tells IndexNow (Bing and others) which pages changed in a merge | rarely |
 | `tools/smoke.js` | headless check of every view | when the markup it checks changes |
 | `tools/REFRESH.md` | the weekly refresh: Scout, Dev and Cyber steps, task Setup | yes |
 | `tools/scout_import.py` | checks the Scout's package (Cyber's spec), writes rows with `repr()`; `gaps`; `CADENCE`; `--self-test` | when the format changes |
 | `ops/manager-log.md` | the Manager's log: user decisions as given, open approvals, outcomes, check-ins | Manager only |
 | `tools/AUDIT.md`, `tools/audit_plan.json` | the nightly family audit, stopped by the user 2026-11-21 (history) | no |
 | `fonts/` | self-hosted Archivo and IBM Plex Mono (SIL OFL 1.1, licence files beside them) | rarely |
-| `data/images.json`, `data/flickr.json`, `data/cars.json`, `index.html` | outputs of images.py, flickr.py, build.py | never by hand |
+| `data/images.json`, `data/flickr.json`, `data/cars.json`, `index.html`, `m/`, `sitemap.xml`, `<key>.txt` | outputs of images.py, flickr.py, build.py | never by hand |
 
 ## Commands
 ```bash
 python3 tools/catalog.py                # counts by type; asserts ids are unique
 python3 tools/images.py --only id1,id2  # pick photos + credits for these cars (slow on purpose)
 python3 tools/images.py --credits-only  # only fetch missing credits; no flag: also picks cars not in images.json
-python3 tools/build.py                  # rebuild data/cars.json and index.html; prints counts
+python3 tools/build.py                  # rebuild data/cars.json, index.html, m/, sitemap.xml; prints counts
 node tools/smoke.js                     # must print "smoke OK" before you commit
 python3 tools/flickr.py --all-gaps      # Flickr photos for cars with < 4 Commons photos (or --only)
 python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates side by side
+python3 tools/indexnow.py               # after a merge that changed pages, once Pages serves them
 ```
 
 ## Recipes
@@ -132,19 +137,24 @@ python3 tools/review_sheet.py data/flickr.json id1,id2 sheet.png   # candidates 
   hidden while searching or filtering); its credit links the photo's page and licence (`creditHTML`).
 - **Visits**: GoatCounter tracking pixel, `countVisit()` in `app.js`: one count per view or car page
   shown, path taken from the view (never the address), https only. No GoatCounter script, ever (CSP).
+- **Static car pages** (`tools/STATIC_PAGES.md`): generated from the same data, no step of their own;
+  smoke checks every one and compares its facts with the app's. After merging a change to them, run
+  `indexnow.py` (if it says not live yet, wait a minute for Pages and run it again).
 - **Brands**: the data carries `brand` (`BRAND` in `build.py`). If a second brand ever comes, build one
   page per brand with the same tools and move Lambo under `/lamborghini/`; nothing more until then.
 
 ## Rules
-- Never hand-edit `index.html`, `data/cars.json` or `data/images.json`. Commit them in the same
-  commit as the source change that produced them: `index.html` is what the user opens. A merge
-  conflict in them: resolve the sources, rebuild, commit the output; never by hand.
-- `build.py` writes today's date into the data: a rebuild on a new day changes both outputs. Expected.
-- Car `id`s are permanent: they are shared URLs (`#/m/<id>`) and the keys of `images.json` and
+- Never hand-edit `index.html`, `data/cars.json`, `data/images.json`, `m/`, `sitemap.xml` or the
+  IndexNow key file. Commit them in the same commit as the source change that produced them:
+  `index.html` is what the user opens. A merge conflict in them: resolve the sources, rebuild, commit
+  the output; never by hand.
+- `build.py` writes today's date into the data: a rebuild on a new day changes `index.html` and
+  `data/cars.json`. Expected. Static pages hold no date and change only with their car.
+- Car `id`s are permanent: they are shared URLs (`#/m/<id>`, `m/<id>/`) and the keys of `images.json` and
   `heroes.json`. Rename one only if the user asks, and move its keys in both files.
 - Row order in `CARS` matters: same-year ties for debut and for sorting go to the earlier row.
 - `family` is an ASCII key (`Murcielago`, `Huracan`). A family whose display name differs needs it in
-  both `FAMILY_NAME` (`src/app.js`, display) and `FAMILY_WORDS` (`tools/images.py`, photo matching).
+  both `FAMILY_NAME` (`tools/catalog.py`, display) and `FAMILY_WORDS` (`tools/images.py`, photo matching).
 - `kind` must be one of `KIND_ORDER` and `eng` one of `ENG_ORDER` (`src/app.js`; colours in
   `KIND_COLOUR`). `body` is free text that `bodyGroup()` maps to a filter group (unmatched: "Coupé").
   A new value needs code changes there.

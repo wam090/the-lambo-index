@@ -28,7 +28,8 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 - **Compare**: up to four cars side by side; most powerful and rarest highlighted.
 
 Links are shareable: filters, car pages and views live in the URL (`#/m/miura-p400`,
-`#/?family=Countach&decade=1970s`).
+`#/?family=Countach&decade=1970s`). Every car also has a plain page for search engines and link
+previews, with its lead photo, facts and family (`m/miura-p400/`; all cars at `m/`).
 
 ## How it's built
 
@@ -42,7 +43,9 @@ data/extra_images.json hand-picked Commons files outside the cars' categories
 data/heroes.json   hand-picked lead photos and rejected photos from visual review
 src/template.html  page shell and styles
 src/app.js         the app
-tools/build.py     merges everything into index.html
+tools/build.py     merges everything into index.html, plus a static page per car (m/), sitemap.xml
+src/page.css       style of the static pages
+tools/indexnow.py  tells IndexNow which pages changed after a merge
 tools/smoke.js     headless browser check of every view
 CLAUDE.md          working instructions loaded by every Claude Code session
 ```
