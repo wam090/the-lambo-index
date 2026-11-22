@@ -51,7 +51,7 @@ const reportHTML = (c, im) => (im ? ` · ${extLink(`${REPORT}?title=${encodeURIC
 const creditHTML = (im) => im ? `${im.src === 'press' ? 'Press photo' : 'Photo'}: ${extLink(filePage(im), esc(im.a || `${photoSource(im)} contributor`))}${im.l ? ` · ${extLink(im.lu, esc(im.l))}` : ''} · ${photoSource(im)}` : '';
 const photoSearches = (q) => `<a href="https://www.flickr.com/search/?text=${encodeURIComponent(q)}" target="_blank" rel="noopener">Flickr</a> · <a href="https://www.google.com/search?tbm=isch&amp;q=${encodeURIComponent(q)}" target="_blank" rel="noopener">Google Images</a>`;
 
-const FAMILY_NAME = { Murcielago: 'Murciélago', Huracan: 'Huracán', Reventon: 'Reventón', Sian: 'Sián', Autentica: 'Auténtica', Cala: 'Calà', '350': '350 GT', '400': '400 GT', '291': 'Lambo 291' };
+const FAMILY_NAME = RAW.famNames || {};   // display names, from FAMILY_NAME in tools/catalog.py
 const famName = (f) => FAMILY_NAME[f] || f;
 const KIND_ORDER = ['Production', 'Limited series', 'One-off', 'Concept', 'Prototype', 'Race car'];
 const KIND_COLOUR = { Production: '#ff8100', 'Limited series': '#ffb46b', 'One-off': '#d8c3a5', Concept: '#8c7a66', Prototype: '#5e544a', 'Race car': '#c2410c' };

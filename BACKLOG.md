@@ -69,8 +69,10 @@ history). Record each decision the user makes under Decisions, with its date.
 - 2026-11-12: The site is live and indexable; smoke fails if a robots `noindex` returns.
 - 2026-11-12: Monthly design review on the 5th (01:17 Riyadh, 22:17 UTC on the 4th) by the Web
   designer: at most 5 UI proposals to the Manager; nothing is built until the user approves.
-- 2026-11-15: A static page per car for search engines (see Next). No ads. 2026-11-22 C (user): they
-  start now, no longer after the photo gaps.
+- 2026-11-15: A static page per car for search engines. No ads. 2026-11-22 C (user): they start now,
+  no longer after the photo gaps. Built 2026-11-22 to Cyber's design review: no robots.txt (crawlers
+  read it only at the host root), no JavaScript on the pages, `og:image` only PD, CC0, CC BY, CC BY-SA
+  (no NC until the user decides: Manager, on Cyber's recommendation).
 
 **Photos**
 - 2026-11-08/15/19: Every car should have photos; a limited series or one-off must never have none.
@@ -127,12 +129,12 @@ history). Record each decision the user makes under Decisions, with its date.
       Urusside.jpg (640 px) is a placeholder below the quality bar (Manager, 2026-11-22). Rejected:
       Automotive Rhythms (artvlive, media outlet). Photo's next: aventador-50, gallardo-squadra-corse,
       350-gts, p147-gandini, raptor.
-- [ ] **Static car pages** (user, 2026-11-15; start now, 2026-11-22; Dev_0.12): `build.py` writes one page per
-      car (`/m/<id>/index.html`: title, specs, credits, canonical URL, link into `#/m/<id>`),
-      `sitemap.xml`, `robots.txt`, Open Graph/Twitter tags with the lead photo loaded from its host,
-      an IndexNow key file and ping. No external JS or fonts, same CSP hashing and URL_HOSTS check,
-      smoke counts the pages. Cyber reviews the design first (CSP, canonical, sitemap host). Google
-      Search Console needs the user's account: give the Manager the exact meta tag or file.
+- [ ] **Static car pages: after the merge** (`tools/STATIC_PAGES.md`): the Dev runs `indexnow.py`
+      once Pages serves them. Waiting on the user: Google Search Console (URL prefix, HTML tag; steps
+      in STATIC_PAGES.md): the Dev adds the tag, the user clicks Verify and submits `sitemap.xml`.
+      Open for the user (through the Manager): NC licences in `og:image` (excluded until then;
+      19 cars have no preview image). Parked (Manager, 2026-11-22): app cards linking to `m/<id>/`,
+      a footer link to `m/`, JSON-LD.
 - [ ] **Scout import follow-ups** (Cyber, non-blocking): (1) when a fill pairs Wikipedia with an
       `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value, the
       two sources are one: leave it blank (add to REFRESH.md Dev steps); the format comment in

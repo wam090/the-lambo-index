@@ -369,6 +369,13 @@ PERF = {
     "murcielago-sv": (342, False, 3.2), "reventon": (340, False, 3.4), "murcielago-lp640": (340, False, 3.4),
 }
 
+# Display names of families whose key differs (family keys are ASCII). The app and the static car
+# pages both take them from here through the data; tools/images.py has FAMILY_WORDS for photo matching.
+FAMILY_NAME = {
+    "Murcielago": "Murciélago", "Huracan": "Huracán", "Reventon": "Reventón", "Sian": "Sián",
+    "Autentica": "Auténtica", "Cala": "Calà", "350": "350 GT", "400": "400 GT", "291": "Lambo 291",
+}
+
 if __name__ == "__main__":
     import collections
     print(len(CARS), "cars")
@@ -376,3 +383,4 @@ if __name__ == "__main__":
     ids = [c["id"] for c in CARS]
     assert len(ids) == len(set(ids)), "duplicate ids"
     assert set(PERF) <= set(ids), f"PERF ids not in CARS: {set(PERF) - set(ids)}"
+    assert set(FAMILY_NAME) <= {c["family"] for c in CARS}, "FAMILY_NAME key that is no family"
