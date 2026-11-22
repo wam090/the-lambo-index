@@ -225,7 +225,8 @@ python3 tools/indexnow.py               # after a merge that changed pages, once
 4. `README.md` if user-visible features or counts changed. `MESSAGES.txt`: mark what you handled
    DONE and delete older DONE messages.
 5. Commit sources and outputs together, push your session branch, open a PR and merge it yourself
-   after Cyber's OK; the next chat starts from `main`.
+   after Cyber's OK; the OK covers only the head Cyber reviewed: a later commit, however small, needs
+   Cyber's re-check first (2026-11-22). The next chat starts from `main`.
 6. Report to the Manager and answer the user in 1–2 lines. Unfinished: leave the site working and put
    what is left under "In progress" in BACKLOG.md, in the same PR. A chat that hands over tells the
    user the next chat's title.
