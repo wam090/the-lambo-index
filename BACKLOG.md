@@ -111,9 +111,9 @@ history). Record each decision the user makes under Decisions, with its date.
   unless it is not the car, a toy or not an exterior: huracan-gt3 keeps "GT3 and GT4 race one ...
   (51373314403).jpg" and "2018 Rolex 24 (41267772511).jpg" until then; urus-concept keeps
   Urusside.jpg (640 px) until then (2026-11-22). A new photo below 1280 px needs the Manager's OK
-  before it is applied (2026-11-22), except (the Manager, 2026-11-23) a Flickr photo, CC or own, at
-  1024 px (the largest our Flickr tools use) that is an exterior, whole car, sharp, no crowd; Commons
-  photos under 1280 px and anything under 1024 px still go to the Manager.
+  before it is applied (2026-11-22); the bar is measured on the largest size the source offers (for
+  Flickr, the largest size in the record, up to 2048 px), not the 1024 px the page shows (the Manager,
+  2026-11-23).
 
 ## In progress
 
