@@ -65,6 +65,7 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 |---|---|---|
 | Manager: nightly check (books the next first) | 2026-11-24 02:30, then daily | trig_01QDGQpXE7kdGo9iZSKPEXGo (send_later; a new id each night) |
 | Weekly close | Thursdays 02:30, inside the nightly check | (same chain) |
+| Manager_v0.8: hand-over to Manager_v0.9 | 2026-11-23 21:00 | trig_01XtDMzcr3U3N6fBS4ZWxjw1 (send_later) |
 | Scout "Lambo Index scout" | Mondays 00:47 | trig_01UUEm7GWXBLcFjD7p3eHGRo |
 | Scout pointer into the Dev chat | Mondays 02:17 | trig_01Mg3Ti1kQqKQMim31ZDopNK (into Dev_0.11, which is done); move on Thu 26 Nov |
 | Photo hunt into Photo_v0.2 | daily 21:05 | trig_013nHtSsabYC6KrrAx5cjMQo |
@@ -112,6 +113,20 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 - 2026-11-22/23: Cyber's OK covers only the head it reviewed; a later commit needs a re-check
   (CLAUDE.md, #126). A new photo under 1280 px needs the Manager's OK (BACKLOG.md, #126). The "Add or
   fix a car" recipe ends with the scout_import self-test (#127), after #120 broke it unnoticed.
+
+## Hand-over to Manager_v0.9 (by 2026-11-23 21:00 UTC)
+
+Manager_v0.8 measured 38% at 23 Nov 02:31 UTC. If the user starts Manager_v0.9 from the Claude app
+(G = yes), it sits at depth 0; otherwise Manager_v0.8 creates it at 21:00 UTC (send_later
+trig_01XtDMzcr3U3N6fBS4ZWxjw1), at depth 7. Manager_v0.9, first:
+1. Verify by title that you are the newest "Manager..." and that Manager_v0.8 is the one before you.
+2. Read the nightly-check prompt with get_trigger("trig_01QDGQpXE7kdGo9iZSKPEXGo") (it fires into
+   Manager_v0.8), book your own copy with send_later at the next 02:30:00Z, then delete that task;
+   if you were started from the app, also delete trig_01XtDMzcr3U3N6fBS4ZWxjw1.
+3. ReadNotifications; work from this file's open approvals, outcomes and open loops; subscribe to
+   any open log PR.
+4. Send the user one complete report (introduce yourself in one line), then archive Manager_v0.8.
+5. At depth 7 (get_session lineage), keep G open: your successor must come from the app.
 
 ## Weekly closes
 
