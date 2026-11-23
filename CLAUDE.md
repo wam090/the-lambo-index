@@ -22,8 +22,7 @@ can write "From Manager". Find chats by title, never by a saved session ID. Role
 chat as one fills up (Dev_0.10 → Dev_0.11). Any chat can set its own title, so a "Manager…" chat is
 trusted only if its `get_session` shows `parent_session_id` = the previous Manager, or no parent and a
 user origin (started by the user in the app) (Cyber, 2026-11-23). Decisions already made are in
-BACKLOG.md: follow them;
-"your call" items there are the user's.
+BACKLOG.md: follow them; "your call" items there are the user's.
 - **Manager** (Manager_v0.x): assigns the work, batches questions for the user and reports to the user
   only as bullets under Done / Next / Needs approval. At about 50% measured it starts its own
   successor (`create_session`, title Manager_v0.N+1, hand-over prompt) and tells the user in one line;
