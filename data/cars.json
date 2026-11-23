@@ -1,6 +1,6 @@
 {
  "brand": "Lamborghini",
- "generated": "2026-11-22",
+ "generated": "2026-11-23",
  "famNames": {
   "Murcielago": "Murciélago",
   "Huracan": "Huracán",
@@ -15378,6 +15378,27 @@
      "lu": "https://creativecommons.org/licenses/by-sa/4.0/"
     }
    ]
+  },
+  {
+   "id": "temerario-super-trofeo",
+   "family": "Temerario",
+   "name": "Temerario Super Trofeo",
+   "kind": "Race car",
+   "year": 2025,
+   "end": 0,
+   "body": "Coupé",
+   "engine": "4.0 L twin-turbo V8",
+   "eng": "V8",
+   "cv": null,
+   "units": null,
+   "designer": "Squadra Corse",
+   "wiki": "Lamborghini Temerario",
+   "note": "One-make series car with the GT3's engine, no hybrid; races from 2027, replacing the Huracán Super Trofeo.",
+   "cats": [
+    "Lamborghini Temerario Super Trofeo"
+   ],
+   "debut": false,
+   "imgs": []
   },
   {
    "id": "fenomeno",
