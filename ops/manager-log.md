@@ -12,11 +12,20 @@ Cyber's OK.
 ## Open approvals (asked, not yet answered)
 
 - 2026-11-22 G (asked 21:15 UTC), chat-chain limit: get_session shows Manager_v0.8 at lineage depth 6
-  of limit 8, because each Manager creates the next; by Manager_v0.10 (about 25 Nov at the current
-  pace) the Manager could create no chats [TBC: exact behaviour at the limit]. Pick: the user starts
-  the next Manager once from the Claude app with one pasted line (depth back to 0). Alternative: a
-  scheduled task spawns it (unproven; the 2026-11-11 Scout test found no tools to create or message
-  chats in such a session).
+  of limit 8 (Dev_0.13 confirmed it independently at depth 7); each Manager creates the next, so by
+  Manager_v0.10 the Manager could create no chats [TBC: exact behaviour at the limit]. Pick: the user
+  starts the next Manager once from the Claude app (depth back to 0; steps in the Manager's latest
+  report). Without an answer the Manager creates the next one, and the one after must come from the
+  app. Alternative: a scheduled task spawns it (unproven; the 2026-11-11 Scout test found no tools to
+  create or message chats in such a session).
+- 2026-11-22 H (asked 21:20 UTC), share-preview photo (og:image): platforms show it without our
+  credit; ND and own-Flickr photos are excluded by design. Pick (Cyber's too): also exclude NC, using
+  the car's next eligible photo; live as the default since 22 Nov; 19 of 150 cars get no preview.
+- 2026-11-22 I (asked 21:20 UTC), Google discovery: the app's #-links are not crawlable and Google
+  retired sitemap pings in 2023. Pick: the user verifies the site in Search Console (URL prefix
+  https://wam090.github.io/the-lambo-index/, HTML tag) and sends the content value; the Dev adds the
+  tag; the user clicks Verify and submits sitemap.xml. Alternative: an "All cars" footer link (changes
+  the 12 Nov footer).
 
 ## Decisions received (newest first)
 
@@ -42,9 +51,11 @@ Cyber's OK.
 
 | Outcome | Due (Riyadh) | Status |
 |---|---|---|
-| Static car pages live on the site | Tue 1 Dec [TBC: Dev_0.12's estimate] | Dev_0.12 started 22 Nov 21:09 UTC: design, Cyber, then code |
-| Cars with fewer than 4 photos: 29 → 24 | Sun 29 Nov | 29 on 22 Nov |
-| Scout run of Mon 23 Nov merged | Tue 24 Nov | Dev_0.11 builds it; pointer fires 23 Nov 02:17 UTC |
+| Static car pages live on the site | Tue 1 Dec | done 22 Nov 21:42 UTC (#124); IndexNow: 152 URLs accepted |
+| Cars with fewer than 4 photos: 29 → 24 | Sun 29 Nov | done 22 Nov (#125): 24 by count; 25 at the 1280 px bar (urus-concept's Urusside.jpg, 640 px placeholder) |
+| Scout run of Mon 23 Nov merged | Tue 24 Nov | done: run verified, nothing new, so no PR (Dev_0.11; Cyber_v0.7) |
+
+All three were met on the first night: the close sets harder outcomes.
 
 ## Check-ins and scheduled tasks
 
@@ -52,46 +63,45 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 
 | What | When (UTC) | Task id |
 |---|---|---|
-| Manager: nightly check (books the next first) | 2026-11-23 02:30, then daily | trig_01QkdhVqFN45cdPEQttfjuXL (send_later; a new id each night) |
+| Manager: nightly check (books the next first) | 2026-11-24 02:30, then daily | trig_01QDGQpXE7kdGo9iZSKPEXGo (send_later; a new id each night) |
 | Weekly close | Thursdays 02:30, inside the nightly check | (same chain) |
 | Scout "Lambo Index scout" | Mondays 00:47 | trig_01UUEm7GWXBLcFjD7p3eHGRo |
-| Scout pointer into the Dev chat | Mondays 02:17 | trig_01Mg3Ti1kQqKQMim31ZDopNK (into Dev_0.11, checked 22 Nov 21:07) |
+| Scout pointer into the Dev chat | Mondays 02:17 | trig_01Mg3Ti1kQqKQMim31ZDopNK (into Dev_0.11, which is done); move on Thu 26 Nov |
 | Photo hunt into Photo_v0.2 | daily 21:05 | trig_013nHtSsabYC6KrrAx5cjMQo |
 | Design review into the Web designer | 22:17 on the 4th (CRON_TZ=Asia/Riyadh 17 1 5 * *); next 2026-12-04 | trig_01JDbq6TY7vhifMPmydkSxJX |
 | Disabled: Dev quality pass (done 2026-11-21) | — | trig_016Uth55kTrSNuvJWCzYFvNt |
 | Disabled: audit and its pointer (user stopped it 2026-11-21) | — | trig_01Cn6vQ1xuJLBWbq1Mis3pzS, trig_01EjzdfGNVt2i45bjf1LqeiD |
-| Gone: Manager_v0.7's one-shot orders (fired 22 Nov 21:02) and its nightly check (deleted) | — | trig_01731rLm8q5okfsPbxps39KW, trig_01AsZRpXJUkXwgh4EGCg7siV |
+| Gone: Manager_v0.7's one-shot and nightly check; Manager_v0.8's first nightly check (fired 23 Nov 02:30) | — | trig_01731rLm8q5okfsPbxps39KW, trig_01AsZRpXJUkXwgh4EGCg7siV, trig_01QkdhVqFN45cdPEQttfjuXL |
 
 ## Team (find chats by title, verify with get_session; models and effort: BACKLOG.md token plan)
 
 | Role | Chat | Note |
 |---|---|---|
-| Manager | Manager_v0.8 | since 2026-11-22 21:04 UTC; Opus 5.5 max; hands over at about 40% measured |
-| Dev | Dev_0.11 | PR #120 (temerario-spyder), the decisions PR, the Scout PR of 23 Nov; then stops |
-| Dev | Dev_0.12 | since 2026-11-22 21:09 UTC; Opus 5.5 xhigh (token plan "Extreme", read as xhigh [TBC]); static car pages; Photo picks from 22 Nov; Scout runs from 30 Nov |
-| Cyber | Cyber_v0.6 | |
-| Photo | Photo_v0.2 | picks go to Dev_0.12 from 22 Nov 21:10 UTC |
+| Manager | Manager_v0.8 | since 22 Nov 21:04 UTC; Opus 5.5 max; 38% measured at 23 Nov 02:31 UTC; hands over at about 40% (see G) |
+| Dev | Dev_0.13 | since 23 Nov 02:23 UTC; Opus 5.5 High; starts 23 Nov 21:00 UTC (its own send_later) |
+| Dev | Dev_0.12 | done (45%); archive once Dev_0.13 has taken over |
+| Dev | Dev_0.11 | done (47%); archive refused by the safety check on 23 Nov while the Scout pointer fires into it; retry after the move |
+| Cyber | Cyber_v0.7 | since 22 Nov 21:42 UTC; Opus 5.5 High |
+| Photo | Photo_v0.2 | picks to Dev_0.13 from 23 Nov 21:05 UTC, copy to Cyber_v0.7 |
 | Web designer | Web designer | monthly design review only |
 
 ## Open loops
 
-- 2026-11-22, Dev_0.11: `temerario-spyder` (shown 18 Nov 2026 in Los Angeles; the user flagged it
-  missing on 22 Nov) is draft PR #120, orders confirmed by Manager_v0.8 at 21:10 UTC: Cyber, then
-  merge. Photo_v0.2 hunts it first; Dev_0.12 applies a legal photo after #120 is merged.
-- 2026-11-22, Dev_0.11: one PR recording the 2026-11-22 decisions in BACKLOG.md and CLAUDE.md (A to E,
-  Manager model, report format, archiving, REFRESH.md reveal-date fix) plus Cyber's items: the
-  design-review line, decision D narrowly (the Manager changes only this file, through a PR Cyber
-  checks, and merges it; read from origin/main), the nightly check as a send_later chain; removes
-  Kevin Stec's 2 photos from 350-gts. Cyber checks, Dev merges.
-- Manager: recreate the Scout pointer into Dev_0.12 (prompt byte-identical to tools/REFRESH.md Setup)
-  after 23 Nov 02:30 UTC and before 30 Nov 00:45 UTC; delete the old one; Cyber confirms it with
-  get_trigger; Dev_0.12 records the new id in REFRESH.md through a PR.
-- Dev_0.12: a design PR and an estimate in nights for the static pages (asked 22 Nov 21:09 UTC).
+- Dev_0.13, from 23 Nov 21:00 UTC: add `temerario-super-trofeo` (missing; found by the Manager's 23 Nov
+  search): two agreeing sources, blanks otherwise, legal photos only. Then Photo's picks, IndexNow after
+  page changes, and the Search Console tag once the user sends the value (I).
+- Manager, Thu 26 Nov: recreate the Scout pointer into the Dev that will run the 30 Nov Scout PR
+  (prompt byte-identical to tools/REFRESH.md Setup); delete the old one; Cyber confirms with
+  get_trigger; the Dev records the new id in tools/REFRESH.md (Setup and Dev step 1) through a PR
+  before 30 Nov 02:17 UTC; then archive Dev_0.11.
+- Photo: a 1280 px or larger urus-concept photo to replace Urusside.jpg; temerario-spyder once legal
+  photos from its 18 Nov Los Angeles reveal appear; the 3 Dec retry of the 8 cars with no photo.
+- Weekly close, Thu 26 Nov: harder outcomes; chat usage per role (Dev_0.12 at xhigh used 45% in about
+  5 hours; Manager_v0.8 at max 38% in about 5.5 hours); the Scout's thin new-car search (3 pages on
+  23 Nov; it missed the Temerario Super Trofeo).
 - Checks to carry with the user (not approvals): B was read as "do not add Photo's 2 new
-  countach-lp500 photos" (the user may say "add them"); Dev_0.12's effort: the token plan's "Extreme"
-  read as xhigh (the user may say "max"). F (add the Spyder outside working hours) is moot: it is
-  done in working hours on 22 Nov; closed.
-- 2026-12-03, Photo: retry the 7 cars with no photo.
+  countach-lp500 photos" (the user may say "add them"); Dev effort: the token plan's "Extreme" read as
+  xhigh for coding (Dev_0.12), High otherwise (Dev_0.13); the user may say "max". F is closed (moot).
 
 ## Process fixes
 
@@ -99,6 +109,9 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
   acted on it, and the weekly run left a 5-day gap. From now on: (1) a reveal date in a Scout note
   gets a Manager send_later for the day after, and the Dev adds the car once it is shown; (2) the
   Manager's nightly check runs one web search for Lamborghini cars shown in the last 48 hours.
+- 2026-11-22/23: Cyber's OK covers only the head it reviewed; a later commit needs a re-check
+  (CLAUDE.md, #126). A new photo under 1280 px needs the Manager's OK (BACKLOG.md, #126). The "Add or
+  fix a car" recipe ends with the scout_import self-test (#127), after #120 broke it unnoticed.
 
 ## Weekly closes
 
@@ -106,8 +119,9 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 
 ## Housekeeping
 
-- 2026-11-22: archived Manager_v0.5 and Manager_v0.6 (user: no clutter). Every older Lambo chat was
-  already archived.
-- Next to archive: Manager_v0.7 (after Manager_v0.8's first report); Dev_0.11, once its last PR is
-  merged and it has no open branch.
+- 2026-11-22: archived Manager_v0.5 and Manager_v0.6, then Manager_v0.7 (21:15 UTC) and Cyber_v0.6
+  (21:43 UTC). Every older Lambo chat was already archived.
+- 2026-11-23 02:20 UTC: archiving Dev_0.11 was refused by the session's safety check; retry after the
+  Scout pointer moves; if refused again, the user archives it in the app.
+- Next to archive: Dev_0.12, once Dev_0.13 has taken over.
 - Other projects' chats and tasks are never touched.
