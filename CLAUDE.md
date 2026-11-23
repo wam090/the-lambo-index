@@ -113,7 +113,8 @@ python3 tools/indexnow.py               # after a merge that changed pages, once
 
 ## Recipes
 - **Add or fix a car**: edit its row in `tools/catalog.py` → if it is new or its `cats` changed,
-  `images.py --only <id>` → check the photos by eye (see Photos) → build → smoke.
+  `images.py --only <id>` → check the photos by eye (see Photos) → build → smoke →
+  `python3 -I tools/scout_import.py --self-test` (the next Scout import starts with it).
 - **Change the UI**: edit `src/` → build → smoke → screenshot what you changed at desktop and phone
   widths with Playwright (pre-installed in cloud sessions).
 - **Timeline frames**: a debut is the first car of each family by year, plus `EXTRA_DEBUTS`, minus

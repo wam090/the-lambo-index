@@ -1365,8 +1365,9 @@ def audit_self_test(tmpd):
         if any(got[k][0] != cars[k][0] for k in got if k not in (cid, ids[1])):
             fails.append("audit: other rows changed")
         plan = json.load(open(AUDIT_PLAN, encoding="utf-8"))["nights"]
-        if sorted(c for n in plan for c in n["ids"]) != sorted(cars) or [n["night"] for n in plan] != list(range(1, len(plan) + 1)):
-            fails.append("audit: the plan does not cover every car once, in night order")
+        planned = [c for n in plan for c in n["ids"]]   # the audit stopped 2026-11-21: cars added since are not in it
+        if len(planned) != len(set(planned)) or not set(planned) <= set(cars) or [n["night"] for n in plan] != list(range(1, len(plan) + 1)):
+            fails.append("audit: the plan lists a car twice or one not in the catalogue, or nights out of order")
     except Bad as e:
         fails.append(f"audit: a good package was rejected: {e}")
     end = AUDIT_EPOCH + datetime.timedelta(days=len(plan))
