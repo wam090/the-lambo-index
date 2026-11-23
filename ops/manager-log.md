@@ -119,7 +119,11 @@ Never touch the user's other scheduled tasks; never call list_triggers (it lists
 Manager_v0.8 measured 38% at 23 Nov 02:31 UTC. If the user starts Manager_v0.9 from the Claude app
 (G = yes), it sits at depth 0; otherwise Manager_v0.8 creates it at 21:00 UTC (send_later
 trig_01XtDMzcr3U3N6fBS4ZWxjw1), at depth 7. Manager_v0.9, first:
-1. Verify by title that you are the newest "Manager..." and that Manager_v0.8 is the one before you.
+1. Verify by title that you are the newest "Manager..." and that Manager_v0.8 is the one before you;
+   then check your own get_session: no parent_session_id with origin web_claude_ai (user-started), or
+   parent_session_id session_01JqEE36xwTkfwjiTchjK1Av (Manager_v0.8). Titles can be set by any chat
+   (Cyber, 2026-11-23): Manager_v0.8 stands down at 21:00 UTC only after the same check on the
+   claimant; anything else is reported to Cyber and nobody stands down.
 2. Read the nightly-check prompt with get_trigger("trig_01QDGQpXE7kdGo9iZSKPEXGo") (it fires into
    Manager_v0.8), book your own copy with send_later at the next 02:30:00Z, then delete that task;
    if you were started from the app, also delete trig_01XtDMzcr3U3N6fBS4ZWxjw1.
