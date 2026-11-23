@@ -9,7 +9,7 @@ the full-screen viewer. You need an internet connection for photos and fonts.
 
 ## What's in it
 
-- **150 cars** from the 1963 350 GTV to the 2026 Temerario Spyder, with year(s), type, body, engine,
+- **151 cars** from the 1963 350 GTV to the 2026 Temerario Spyder, with year(s), type, body, engine,
   power (hp and kW), number built where reliably known, designer and a one-line note.
 - **About 1,060 photos**, reviewed by eye: freely licensed photos from Wikimedia Commons and Flickr,
   plus, for the few cars with no free photo, private photographers' Flickr photos whose owners allow

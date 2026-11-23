@@ -326,6 +326,8 @@ CARS = [
       ["Lamborghini Huracán STJ"], "Lamborghini Huracán", "Ten-car farewell to the naturally aspirated V10, derived from the STO."),
     E("temerario-gt3", "Temerario", "Temerario GT3", "Race car", 2025, 0, "Coupé", "4.0 L twin-turbo V8", "V8", None, None, "Squadra Corse",
       ["Lamborghini Temerario GT3"], None, "Customer GT3 car replacing the Huracán GT3 EVO2."),
+    E("temerario-super-trofeo", "Temerario", "Temerario Super Trofeo", "Race car", 2025, 0, "Coupé", "4.0 L twin-turbo V8", "V8", None, None, "Squadra Corse",
+      ["Lamborghini Temerario Super Trofeo"], "Lamborghini Temerario", "One-make series car with the GT3's engine, no hybrid; races from 2027, replacing the Huracán Super Trofeo."),
     E("fenomeno", "Fenomeno", "Fenomeno", "Limited series", 2025, 0, "Coupé", "6.5 L V12 plug-in hybrid", "Hybrid V12", 1080, 29, BORKERT,
       ["Lamborghini Fenomeno"], None, "Few-off on Revuelto mechanicals; the most powerful Lamborghini so far."),
     E("fenomeno-roadster", "Fenomeno", "Fenomeno Roadster", "Limited series", 2026, 0, "Roadster", "6.5 L V12 plug-in hybrid", "Hybrid V12", 1080, 15, BORKERT,

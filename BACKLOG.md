@@ -119,7 +119,7 @@ history). Record each decision the user makes under Decisions, with its date.
 
 ## Next
 
-- [ ] **Photo gaps** (24 of 150 cars under 4 photos on 2026-11-22, 8 with none): Photo (Photo_v0.x) sends
+- [ ] **Photo gaps** (25 of 151 cars under 4 photos on 2026-11-23, 9 with none): Photo (Photo_v0.x) sends
       verified picks; the Dev checks each at full size and applies it. The 6 empty-state cars (urus-st-x,
       sc20, invencible, autentica, miura-jota, countach-evoluzione) have nothing legal (press, game, LEGO,
       a Jota-spec conversion, magazine scans): Photo retries on 2026-12-03, and the Manager asks the user
@@ -145,7 +145,10 @@ history). Record each decision the user makes under Decisions, with its date.
       after the run: compute them from `git rev-list -1 --before=<fire time> origin/main`.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import (accounts or a
       shared store would be needed for anything more).
-- [ ] **Spec doubts.** Build numbers left blank because sources disagree: Countach LP400 (152–157),
+- [ ] **Spec doubts.** Temerario Super Trofeo (added 2026-11-23, no photos yet: none on Commons): power
+      left blank (outlets give 620, 640 and 650 hp); Wikipedia's "unveiled August 2025" cites a 2024
+      article (outlets: Misano World Finals, 8 Nov 2025; the year agrees).
+      Build numbers left blank because sources disagree: Countach LP400 (152–157),
       LP500 S (321–323), Urraco P200 (66–77), Murciélago SV (186 claimed, 268 found by a registry),
       Miura SVJ (about six), Diablo SV-R (31–34). Countach 25th Anniversary: 657 or 658. Gallardo
       LP560-4 restyle: Walter de Silva (Wikipedia) or Filippo Perini; we keep the original designer.
