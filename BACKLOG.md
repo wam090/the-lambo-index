@@ -92,6 +92,8 @@ history). Record each decision the user makes under Decisions, with its date.
   photos left 350-gts; kyter, darylchapman and raphael_belly_photography are in `BLOCKED`.
 - 2026-11-22 B (user): countach-lp500 keeps its 2 photos of the 2021 factory recreation as the car's
   own ("the car came to existence"); Photo's 2 new own-Flickr photos of it are not added.
+- 2026-11-25 (the Manager, under user rule 2026-11-22 A): Richard Spiegelman's 2 portofino photos (ask-first
+  notice) and Eric Rosendahl's 2 raptor photos ("always like to know") dropped; both cars now have 1.
 - 2026-11-18: Exterior photos only on car pages (interiors, engines, details maybe later in a
   deep-dive section); the lead photo is an exterior.
 - 2026-11-15/16: Only real cars: no toys, die-cast or scale models, LEGO or other models in any
@@ -154,8 +156,6 @@ history). Record each decision the user makes under Decisions, with its date.
       LP560-4 restyle: Walter de Silva (Wikipedia) or Filippo Perini; we keep the original designer.
 - [ ] **flickr.py lm001 pattern** (low priority): it matches description text, so all 8 lm001
       candidates were the production LM002 (Photo_v0.3, 2026-11-25). Match titles only or exclude LM002.
-- 2026-11-25 (Manager, user rule 2026-11-22 A): Richard Spiegelman's 2 portofino photos (ask-first
-  notice) and Eric Rosendahl's 2 raptor photos ("always like to know") dropped; both cars now have 1.
 
 ## Ideas
 
