@@ -96,7 +96,10 @@ BLOCKED = {"autohistorian", "druidabruxux", "lancastervanderbilt", "lancaster va
            "50523210@n08",   # re-posted catalogue photos (Cyber_v0.4, 2026-11-16)
            "kyter", "27862041@n07", "darylchapman", "26982917@n02",            # written no-use
            "raphael_belly_photography", "50105406@n02",                         # notices (user, 2026-11-22)
-           "93207294@n04", "45701009@n00", "157290793@n07"}   # Perico001, Marzal, Lokale Blicke (Cyber)
+           "93207294@n04", "45701009@n00", "157290793@n07",   # Perico001, Marzal, Lokale Blicke (Cyber)
+           "carphotosbyrichard", "28826708@n03",   # ask-first notice; erdero: use only if told
+           "erdero", "12309043@n05",               # (Manager, 2026-11-25, user rule 2026-11-22 A)
+           "vandroid", "45135721@n07", "pedrosouzamg"}   # scans of prints; game screenshots
 TOY = re.compile(r"\blego\b|\b7\d{4}\b|speed champions|technic|brick|minifig|\bmoc\b", re.I)
 
 # Extra search terms per car from a Scout photo hunt (written by tools/scout_import.py hunt, which

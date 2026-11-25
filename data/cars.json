@@ -1,6 +1,6 @@
 {
  "brand": "Lamborghini",
- "generated": "2026-11-23",
+ "generated": "2026-11-25",
  "famNames": {
   "Murcielago": "Murciélago",
   "Huracan": "Huracán",
@@ -4199,78 +4199,6 @@
        "https://live.staticflickr.com/65535/51147510160_e433144c58_b.jpg"
       ]
      ]
-    },
-    {
-     "t": "nonfree:6896021523",
-     "w": 1024,
-     "ht": 683,
-     "a": "Richard Spiegelman",
-     "l": "All rights reserved",
-     "lu": "",
-     "src": "flickr",
-     "p": "https://www.flickr.com/photos/carphotosbyrichard/6896021523/",
-     "sz": [
-      [
-       320,
-       "https://live.staticflickr.com/7192/6896021523_df92812465_n.jpg"
-      ],
-      [
-       400,
-       "https://live.staticflickr.com/7192/6896021523_df92812465_w.jpg"
-      ],
-      [
-       500,
-       "https://live.staticflickr.com/7192/6896021523_df92812465.jpg"
-      ],
-      [
-       640,
-       "https://live.staticflickr.com/7192/6896021523_df92812465_z.jpg"
-      ],
-      [
-       800,
-       "https://live.staticflickr.com/7192/6896021523_df92812465_c.jpg"
-      ],
-      [
-       1024,
-       "https://live.staticflickr.com/7192/6896021523_df92812465_b.jpg"
-      ]
-     ]
-    },
-    {
-     "t": "nonfree:3229334946",
-     "w": 1024,
-     "ht": 499,
-     "a": "Richard Spiegelman",
-     "l": "All rights reserved",
-     "lu": "",
-     "src": "flickr",
-     "p": "https://www.flickr.com/photos/carphotosbyrichard/3229334946/",
-     "sz": [
-      [
-       320,
-       "https://live.staticflickr.com/3414/3229334946_3eda5d575f_n.jpg"
-      ],
-      [
-       400,
-       "https://live.staticflickr.com/3414/3229334946_3eda5d575f_w.jpg"
-      ],
-      [
-       500,
-       "https://live.staticflickr.com/3414/3229334946_3eda5d575f.jpg"
-      ],
-      [
-       640,
-       "https://live.staticflickr.com/3414/3229334946_3eda5d575f_z.jpg"
-      ],
-      [
-       800,
-       "https://live.staticflickr.com/3414/3229334946_3eda5d575f_c.jpg"
-      ],
-      [
-       1024,
-       "https://live.staticflickr.com/3414/3229334946_3eda5d575f_b.jpg"
-      ]
-     ]
     }
    ]
   },
@@ -5740,78 +5668,6 @@
      "a": "Zhu2005125",
      "l": "CC BY 4.0",
      "lu": "https://creativecommons.org/licenses/by/4.0/"
-    },
-    {
-     "t": "nonfree:2791180485",
-     "w": 1024,
-     "ht": 683,
-     "a": "Eric Rosendahl",
-     "l": "All rights reserved",
-     "lu": "",
-     "src": "flickr",
-     "p": "https://www.flickr.com/photos/erdero/2791180485/",
-     "sz": [
-      [
-       320,
-       "https://live.staticflickr.com/3098/2791180485_8c141a01c8_n.jpg"
-      ],
-      [
-       400,
-       "https://live.staticflickr.com/3098/2791180485_8c141a01c8_w.jpg"
-      ],
-      [
-       500,
-       "https://live.staticflickr.com/3098/2791180485_8c141a01c8.jpg"
-      ],
-      [
-       640,
-       "https://live.staticflickr.com/3098/2791180485_8c141a01c8_z.jpg"
-      ],
-      [
-       800,
-       "https://live.staticflickr.com/3098/2791180485_8c141a01c8_c.jpg"
-      ],
-      [
-       1024,
-       "https://live.staticflickr.com/3098/2791180485_8c141a01c8_b.jpg"
-      ]
-     ]
-    },
-    {
-     "t": "nonfree:2791181673",
-     "w": 1024,
-     "ht": 683,
-     "a": "Eric Rosendahl",
-     "l": "All rights reserved",
-     "lu": "",
-     "src": "flickr",
-     "p": "https://www.flickr.com/photos/erdero/2791181673/",
-     "sz": [
-      [
-       320,
-       "https://live.staticflickr.com/3252/2791181673_65f727512b_n.jpg"
-      ],
-      [
-       400,
-       "https://live.staticflickr.com/3252/2791181673_65f727512b_w.jpg"
-      ],
-      [
-       500,
-       "https://live.staticflickr.com/3252/2791181673_65f727512b.jpg"
-      ],
-      [
-       640,
-       "https://live.staticflickr.com/3252/2791181673_65f727512b_z.jpg"
-      ],
-      [
-       800,
-       "https://live.staticflickr.com/3252/2791181673_65f727512b_c.jpg"
-      ],
-      [
-       1024,
-       "https://live.staticflickr.com/3252/2791181673_65f727512b_b.jpg"
-      ]
-     ]
     }
    ]
   },

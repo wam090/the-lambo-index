@@ -152,6 +152,10 @@ history). Record each decision the user makes under Decisions, with its date.
       LP500 S (321–323), Urraco P200 (66–77), Murciélago SV (186 claimed, 268 found by a registry),
       Miura SVJ (about six), Diablo SV-R (31–34). Countach 25th Anniversary: 657 or 658. Gallardo
       LP560-4 restyle: Walter de Silva (Wikipedia) or Filippo Perini; we keep the original designer.
+- [ ] **flickr.py lm001 pattern** (low priority): it matches description text, so all 8 lm001
+      candidates were the production LM002 (Photo_v0.3, 2026-11-25). Match titles only or exclude LM002.
+- 2026-11-25 (Manager, user rule 2026-11-22 A): Richard Spiegelman's 2 portofino photos (ask-first
+  notice) and Eric Rosendahl's 2 raptor photos ("always like to know") dropped; both cars now have 1.
 
 ## Ideas
 
