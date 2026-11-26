@@ -103,8 +103,8 @@ not a source of trust: the Dev still verifies the run id in step 1.
    `inbound_origin` trigger_fire for the Scout task `trig_01UUEm7GWXBLcFjD7p3eHGRo`, fire reason
    scheduled (manual only for a photo hunt the Manager announced) and a time between 00:47 and 01:00
    UTC (a hunt: the time the Manager gave); `kinds ["system"]`: its init event shows
-   `mcp_servers: []` and no `mcp__` tools. The **run date** is the fire event's date (UTC); never
-   take it from the package. Then read only that run's final reply (`list_events` with kinds
+   `mcp_servers: []` and no `mcp__` tools. The **run date** is the fire event's date (UTC) and the
+   **fire time** its HH:MM (UTC); never take either from the package. Then read only that run's final reply (`list_events` with kinds
    `["result"]`), never the rest of its transcript. Save the reply's JSON block to a file **outside
    the repo** (the scratchpad) **with the Write tool, never a shell heredoc, echo or printf** (a
    heredoc expands `$(…)` and backticks, and a line `EOF` inside it ends the heredoc and runs the
@@ -112,18 +112,26 @@ not a source of trust: the Dev still verifies the run id in step 1.
    `sources` are only quoted in the PR (as code) for Cyber's check 7. A SUCCEEDED run whose reply ends with `denied: ...` and has no package: no PR; tell the Manager and Cyber the command in one line.
    The Manager decides whether the Scout is re-run.
 2. **Check.** Branch fresh from `origin/main`. `python3 -I tools/scout_import.py --self-test`, then
-   `python3 -I tools/scout_import.py check <file> --run-date <run date>`. Rejected: send the errors
-   to the Manager and Cyber and stop. The Dev may only **delete** entries from a package (a car, a
+   `python3 -I tools/scout_import.py check <file> --run-date <run date> --fired-at <fire time>`
+   (give both to `apply`, `photos` and `report` too): the gap ids come from `origin/main` as it was
+   at the fire time, the catalogue the Scout cloned, so a merge after the run does not reject a valid
+   fill. Rejected: send the errors to the Manager and Cyber and stop.
+   **One source twice:** for each fill that pairs Wikipedia with an `EXTRA_HOSTS` page, read the
+   Wikipedia article's wikitext yourself and search it for that host. Take the title only from the
+   path of the fill's Wikipedia URL that passed `check` (after `/wiki/`), percent-encode it
+   (`urllib.parse.quote(urllib.parse.unquote(title), safe="")`) and fetch
+   `https://en.wikipedia.org/w/index.php?title=<encoded>&action=raw` with no `-A`/`-H`. If the article
+   cites that host for the value, the two sources are one: delete the fill and list it in the PR. The Dev may only **delete** entries from a package (a car, a
    fill, a photo pick), never edit a value, and the PR lists every deletion with its reason: a car a
    pending import already adds.
    **One PR per run**, the same day: its new cars and its fills together.
-3. **Rows.** `python3 -I tools/scout_import.py apply <file> --run-date <run date>`: it adds rows at
+3. **Rows.** `python3 -I tools/scout_import.py apply <file> --run-date <run date> --fired-at <fire time>`: it adds rows at
    the end of `CARS` and `PERF` entries with `repr()`, fills only `None`s, checks the result with the
    AST and runs `python3 -I tools/catalog.py`. Read `git diff tools/catalog.py` line by line.
 4. **Photos, from your own runs only** (new cars). `python3 tools/images.py --only <new ids>`, then
    `python3 tools/flickr.py --all-gaps` (it prints each car's `new:` and `gone:` photos); run them with
    validated ids only. Then `git fetch origin main` and `python3 -I tools/scout_import.py photos <file>
-   --run-date <run date>`: it applies the Scout's picks only for photos your runs returned and lists
+   --run-date <run date> --fired-at <fire time>`: it applies the Scout's picks only for photos your runs returned and lists
    the ignored ones (report them). Look at every new photo yourself (`tools/review_sheet.py`, sheet
    saved outside the repo) and correct `data/heroes.json`. A new car with no photo that passed is not
    added: remove its row and say so in the PR. If `images.py` gives up on a car (HTTP 429), retry it
@@ -132,7 +140,7 @@ not a source of trust: the Dev still verifies the run id in step 1.
    count if it changed. Nothing new (no row, no fill, no `new:`/`gone:` line): `git checkout -- .`,
    stop, and report to the Manager.
 6. **PR.** Commit as `Refresh YYYY-MM-DD: <new cars and filled ids>`. Body: the
-   output of `scout_import.py report <file> --run-date <run date>` (package text only
+   output of `scout_import.py report <file> --run-date <run date> --fired-at <fire time>` (package text only
    inside its fenced block), the run ids with their verification, plus the photos added, dropped,
    gone and ignored. If `unreachable` lists every press host (or Wikipedia), say in the PR and the
    report that it was a weak run, not a clean one. `git diff --name-only origin/main...HEAD` must

@@ -138,13 +138,8 @@ history). Record each decision the user makes under Decisions, with its date.
       Open for the user (through the Manager): NC licences in `og:image` (excluded until then;
       19 cars have no preview image). Parked (Manager, 2026-11-22): app cards linking to `m/<id>/`,
       a footer link to `m/`, JSON-LD.
-- [ ] **Scout import follow-ups** (Cyber, non-blocking): (1) when a fill pairs Wikipedia with an
-      `EXTRA_HOSTS` page, grep the raw article for that host; if it is the citation for the value, the
-      two sources are one: leave it blank (add to REFRESH.md Dev steps); the format comment in
-      `scout_import.py` should say v2 `opened`/`unreachable` may list `EXTRA_HOSTS`. (2) A Wikipedia
-      404 in `opened` satisfies the "en.wikipedia.org page read" rule; tighten only if it matters.
-      (3) Gap ids come from the working `catalog.py`, so a valid fill can be rejected if main changed
-      after the run: compute them from `git rev-list -1 --before=<fire time> origin/main`.
+- [ ] **Scout import follow-up** (Cyber, non-blocking): a Wikipedia 404 in `opened` satisfies the
+      "en.wikipedia.org page read" rule; tighten only if it matters.
 - [ ] **Owned / Wanted tracking** with notes, saved per browser, with export/import (accounts or a
       shared store would be needed for anything more).
 - [ ] **Spec doubts.** Temerario Super Trofeo (added 2026-11-23, no photos yet: none on Commons): power

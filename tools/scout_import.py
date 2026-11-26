@@ -5,7 +5,8 @@ This script never evaluates, executes or imports package text, never opens a URL
 no shell. It writes rows only as repr() of values that passed every check, verifies them with the
 AST, then runs `python3 -I` on the edited catalogue. Any violation rejects the whole package.
 
-  python3 tools/scout_import.py check  PKG.json [--run-date D]   # validate only (v2 needs the run date)
+  python3 tools/scout_import.py check  PKG.json [--run-date D [--fired-at HH:MM]]   # validate only
+          # v2 needs the run date; its gap ids come from origin/main as of the fire time (default 00:47 UTC)
   python3 tools/scout_import.py gaps   YYYY-MM-DD  # the cars a run on that day may fill (round-robin)
   python3 tools/scout_import.py apply  PKG.json   # validate, then write rows to tools/catalog.py
   python3 tools/scout_import.py photos PKG.json   # after your own images.py/flickr.py runs: apply
@@ -33,8 +34,9 @@ Package ("version": 1): one UTF-8 JSON object of at most 64 KB, keys exactly as 
   "notes": "One line for the PR: teasers skipped, doubts.",
   "opened": ["https://en.wikipedia.org/wiki/Lamborghini", "https://www.evo.co.uk/lamborghini"],
                                                      # 2-30 pages read in full (not search snippets),
-                                                     # hosts in SOURCE_HOSTS; every car source among them
-  "unreachable": []                                  # SOURCE_HOSTS hosts that failed to load
+                                                     # hosts in SOURCE_HOSTS (v2: or EXTRA_HOSTS);
+                                                     # every car source among them
+  "unreachable": []                                  # SOURCE_HOSTS (v2: or EXTRA_HOSTS) hosts that failed
 }
 "opened" must hold an en.wikipedia.org page and a page from one press host, unless that side is
 listed in "unreachable" (Wikipedia, or every press host).
@@ -256,7 +258,43 @@ def gap_ids(run_date, cat_path=CATALOG):
     return [ids[(k + i) % len(ids)] for i in range(min(cad["fills"], len(ids)))]
 
 
-def validate(pkg, cat_path=CATALOG, run_date=None, today=None):
+SCOUT_FIRE = datetime.time(0, 47)    # the Scout task fires Mondays 00:47 UTC (REFRESH.md Setup)
+
+
+def catalog_at(when, root=ROOT, ref="origin/main"):
+    """tools/catalog.py as origin/main had it at `when` (an aware UTC datetime): the copy a Scout run
+    fired at that time cloned, so its gap ids are the ones it was allowed to fill (Cyber, 2026-11-24).
+    --first-parent keeps to main's own merges: without it a PR branch commit older than `when` but
+    merged after it would count (Cyber, 2026-11-26)."""
+    stamp = when.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    r = subprocess.run(["git", "-C", root, "rev-list", "-1", "--first-parent", f"--before={stamp}", ref],
+                       capture_output=True, text=True)
+    sha = r.stdout.strip()
+    if r.returncode or not re.fullmatch(r"[0-9a-f]{40}", sha):
+        raise Bad(f"no origin/main commit before {stamp}; run git fetch origin main first "
+                  f"(a shallow clone: git fetch --shallow-since={(when - datetime.timedelta(days=7)):%Y-%m-%d} origin main)")
+    r = subprocess.run(["git", "-C", root, "show", f"{sha}:tools/catalog.py"], capture_output=True, text=True)
+    if r.returncode:
+        raise Bad(f"cannot read {sha}:tools/catalog.py")
+    d = tempfile.mkdtemp()
+    atexit.register(shutil.rmtree, d, True)
+    out = os.path.join(d, "catalog.py")
+    with open(out, "w", encoding="utf-8") as fh:
+        fh.write(r.stdout)
+    return out
+
+
+def fired_at(run_date, hhmm=None):
+    """The run's fire time: --fired-at HH:MM from its fire event, else the scheduled 00:47 UTC."""
+    t = SCOUT_FIRE
+    if hhmm is not None:
+        if type(hhmm) is not str or not re.fullmatch(r"([01]\d|2[0-3]):[0-5]\d", hhmm):
+            raise Bad("--fired-at: HH:MM (UTC), from the run's fire event")
+        t = datetime.time(int(hhmm[:2]), int(hhmm[3:]))
+    return datetime.datetime.combine(run_date, t, datetime.timezone.utc)
+
+
+def validate(pkg, cat_path=CATALOG, run_date=None, today=None, gaps_cat=None):
     cars, perf = load_catalog(cat_path)
     kinds, engs = read_order("KIND_ORDER"), read_order("ENG_ORDER")
     families = {r["family"] for r, _ in cars.values()}
@@ -283,7 +321,7 @@ def validate(pkg, cat_path=CATALOG, run_date=None, today=None):
             raise Bad("window: two ISO dates")
         if type(fills) is not list or len(fills) > cad["fills"]:
             raise Bad(f"fills: a list of at most {cad['fills']}")
-        today_gaps = gap_ids(run_date, cat_path)
+        today_gaps = gap_ids(run_date, gaps_cat or cat_path)   # gaps_cat: main as the Scout cloned it
     w = pkg["window"]
     try:
         if type(w) is not list or len(w) != 2 or not all(type(d) is str and len(d) == 10 for d in w):
@@ -997,7 +1035,68 @@ def v2_self_test(tmpd):
             fails.append("v2: the good fill was not written")
     except Bad as e:
         fails.append(f"v2: the good fill was rejected: {e}")
-    return fails, len(cases)
+    # gap ids come from gaps_cat (main as the Scout cloned it), not from the working catalogue
+    try:
+        validate(json.loads(json.dumps(good)), run_date=day, today=day, gaps_cat=CATALOG)
+    except Bad as e:
+        fails.append(f"v2: the good fill was rejected with gaps_cat: {e}")
+    snap = os.path.join(tmpd, "catalog_snapshot.py")      # a snapshot in which gid has no row
+    with open(snap, "w", encoding="utf-8") as fh:
+        text_ = open(CATALOG, encoding="utf-8").read()
+        assert text_.count(f'E("{gid}",') == 1
+        fh.write(text_.replace(f'E("{gid}",', 'E("zz-not-in-snapshot",'))
+    try:
+        validate(json.loads(json.dumps(good)), run_date=day, today=day, gaps_cat=snap)
+        fails.append("v2: a fill outside the snapshot's gap ids was accepted")
+    except Bad:
+        pass
+    fails += catalog_at_self_test(tmpd)
+    return fails, len(cases) + 2 + 9
+
+
+def catalog_at_self_test(tmpd):
+    """catalog_at on a scratch repo: main, a branch commit older than the merge, then the merge.
+    Between the branch commit and the merge, main still holds the old catalogue (--first-parent)."""
+    repo, fails = os.path.join(tmpd, "git_at"), []
+    os.makedirs(os.path.join(repo, "tools"))
+    def git(*a, date=None):
+        env = dict(os.environ, GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@example.invalid",
+                   GIT_COMMITTER_NAME="t", GIT_COMMITTER_EMAIL="t@example.invalid")
+        if date:
+            env.update(GIT_AUTHOR_DATE=date, GIT_COMMITTER_DATE=date)
+        subprocess.run(["git", "-C", repo, *a], check=True, capture_output=True, env=env)
+    def put(text_):
+        with open(os.path.join(repo, "tools", "catalog.py"), "w", encoding="utf-8") as fh:
+            fh.write(text_)
+    utc = datetime.timezone.utc
+    try:
+        git("init", "-q", "-b", "main")
+        put("CARS = []  # main\n"); git("add", "-A"); git("commit", "-qm", "a", date="2026-11-01T00:00:00Z")
+        git("checkout", "-qb", "pr")
+        put("CARS = []  # branch\n"); git("commit", "-qam", "b", date="2026-11-02T00:00:00Z")
+        git("checkout", "-q", "main")
+        git("merge", "-q", "--no-ff", "-m", "m", "pr", date="2026-11-03T00:00:00Z")
+        for when, want in ((datetime.datetime(2026, 11, 2, 12, tzinfo=utc), "# main"),
+                           (datetime.datetime(2026, 11, 3, 12, tzinfo=utc), "# branch")):
+            got = open(catalog_at(when, repo, "main"), encoding="utf-8").read()
+            if want not in got:
+                fails.append(f"catalog_at {when:%d %b %H:%M}: not main's catalogue ({got.strip()})")
+        try:
+            catalog_at(datetime.datetime(2026, 10, 1, tzinfo=utc), repo, "main")
+            fails.append("catalog_at: a time before any commit was accepted")
+        except Bad:
+            pass
+    except (OSError, subprocess.CalledProcessError) as e:
+        fails.append(f"catalog_at self-test could not build its scratch repo: {e}")
+    for bad in ("0047", "00:47:59", "00:47+03:00", "24:00", "7:05"):
+        try:
+            fired_at(datetime.date(2026, 11, 30), bad)
+            fails.append(f"--fired-at {bad!r} accepted")
+        except Bad:
+            pass
+    if fired_at(datetime.date(2026, 11, 30), "00:52") != datetime.datetime(2026, 11, 30, 0, 52, tzinfo=utc):
+        fails.append("--fired-at 00:52 misread")
+    return fails
 
 
 def hunt_self_test(tmpd):
@@ -1400,13 +1499,18 @@ def main():
     args = sys.argv[1:]
     if args == ["--self-test"]:
         sys.exit(0 if self_test() else 1)
-    run_date = None
+    run_date, fire = None, None
+    if len(args) == 6 and args[4] == "--fired-at":
+        fire = args[5]
+        args = args[:4]
     if len(args) == 4 and args[2] == "--run-date":
         try:
             run_date = datetime.date.fromisoformat(args[3])
         except ValueError:
             sys.exit("--run-date: YYYY-MM-DD")
         args = args[:2]
+    elif fire is not None:
+        sys.exit("--fired-at needs --run-date first")
     if len(args) == 2 and args[0] == "audit-night":
         try:
             night, ids = audit_night(datetime.date.fromisoformat(args[1]))
@@ -1448,15 +1552,16 @@ def main():
             return
         if sys.argv[1] == "hunt":
             raise Bad("not a photo-hunt package")
+        gaps_cat = catalog_at(fired_at(run_date, fire)) if pkg.get("version") == 2 and run_date else None
         if sys.argv[1] in ("check", "apply"):
-            validate(pkg, run_date=run_date)
+            validate(pkg, run_date=run_date, gaps_cat=gaps_cat)
             if sys.argv[1] == "check":
                 print(f"package OK: {len(pkg['cars'])} cars, {len(pkg.get('fills', []))} fills, "
                       f"photo picks for {len(pkg['photos'])} cars")
             else:
                 apply(pkg)
         else:
-            validate(pkg, main_catalog_copy(), run_date=run_date)
+            validate(pkg, main_catalog_copy(), run_date=run_date, gaps_cat=gaps_cat)
             (photos if sys.argv[1] == "photos" else report)(pkg)
     except Bad as e:
         sys.exit("package rejected:\n" + str(e))
