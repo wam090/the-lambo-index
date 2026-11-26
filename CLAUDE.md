@@ -50,9 +50,10 @@ BACKLOG.md: follow them; "your call" items there are the user's.
   sources), ending with a JSON package; it changes nothing.
 - **Wake tasks** (the Manager recreates each for a new chat of that role and deletes the old one):
   Dev quality pass `trig_016Uth55kTrSNuvJWCzYFvNt` (`17 1 * * *`; the pass finished 2026-11-21,
-  wake disabled); Dev Scout pointer (Mondays 02:17 UTC, ID and prompt in REFRESH.md Setup: the
-  Dev reads the run's metadata with `get_trigger`, or the Manager hears it is missing); Photo hunt
-  `trig_013nHtSsabYC6KrrAx5cjMQo` (`5 21 * * *`, deleted when the gaps are fixed); the design review.
+  wake disabled); Dev Scout pointer `trig_01XCa3Um65LGiwb44KQckh4A` (Mondays 02:17 UTC, prompt in
+  REFRESH.md Setup: the Dev reads the run's metadata with `get_trigger`, or the Manager hears it
+  is missing); Photo hunt
+  `trig_01RMsnmxHEHNumU6c4EhSKAD` (`5 21 * * *`, deleted when the gaps are fixed); the design review.
 
 Models and effort per role: the token plan in BACKLOG.md Decisions; the Manager sets them for a successor.
 - **Report** when you finish a task or hit a blocker, and only then (no progress notes, one message
