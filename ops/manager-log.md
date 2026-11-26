@@ -16,7 +16,7 @@ Cyber's OK.
   no chats [TBC: exact behaviour at the limit]. Pick: the user starts Manager_v0.10 from the Claude app
   when Manager_v0.9 asks (at about 40%); steps in Hand-over. One app start covers about 8 Managers
   (about a week at one a day). Role chats at depth 8 work (Photo_v0.3 and Cyber_v0.8, 24 Nov). Asked
-  again 24 and 25 Nov: start it after the Thu 26 Nov weekly close.
+  again 24, 25 and 26 Nov: the weekly close is done, so start it now.
 - 2026-11-22 H (asked 22 Nov 21:20 UTC, again 23 Nov), share-preview photo (og:image): platforms show
   it without our credit; ND and own-Flickr photos are excluded by design. Pick (Cyber's too): also
   exclude NC; live as the default since 22 Nov; 20 of 151 cars get no preview (9 of them have no
@@ -33,6 +33,10 @@ Cyber's OK.
   Pick (Cyber's): at claude.ai/customize/connectors (account-wide), set every write or trading tool to
   need approval. Alternative: disconnect what the user does not use (also cuts tokens). No per-chat
   switch is known; tasks the Manager creates store no connectors.
+- 2026-11-26 K (asked in the 26 Nov report), photo PRs #132 and #134 (photos for 6 cars, cleared by
+  Cyber): Flickr's image host has blocked the Dev's container (429, CIDR range) since 23 Nov, so the
+  Dev cannot do the full-size look the Photos rules require. Pick: wait; the Dev retries nightly.
+  Alternative: the user opens the 8 Flickr photo pages and says pass or fail per photo.
 
 ## Decisions received (newest first)
 
@@ -54,15 +58,13 @@ Cyber's OK.
   open approval until answered (lettered, with a pick), next; tables for data; a receipt for each
   decision ("📌 Logged: <item> — <update>" or "⚠️ NOT logged: <reason>").
 
-## Outcomes this week (agreed 2026-11-22; close Thu 26 Nov, 05:30 Riyadh)
+## Outcomes next week (proposed 26 Nov; close Thu 3 Dec, 05:30 Riyadh)
 
 | Outcome | Due (Riyadh) | Status |
 |---|---|---|
-| Static car pages live on the site | Tue 1 Dec | done 22 Nov 21:42 UTC (#124); IndexNow: 152 URLs accepted; Google waits on I |
-| Cars with fewer than 4 photos: 29 → 24 | Sun 29 Nov | done 22 Nov (#125); 25 of 151 on 24 Nov, since temerario-super-trofeo (#131) joined with none; #132 (photos for 4 cars) waits on Flickr |
-| Scout run of Mon 23 Nov merged | Tue 24 Nov | done: run verified, nothing new, so no PR (Dev_0.11; Cyber_v0.7) |
-
-All three were met on the first night: the close sets harder outcomes.
+| Scout run of Mon 30 Nov handled the same day (PR merged, or run verified with nothing new) | Mon 30 Nov | open |
+| Scout import follow-ups (1) and (3) in BACKLOG merged before that run | Sun 29 Nov | open |
+| Cars with fewer than 4 photos: 25 → 21 (#132 and #134 alone get there) | Thu 3 Dec | open; needs the Dev's full-size look (K) |
 
 ## Check-ins and scheduled tasks
 
@@ -71,23 +73,22 @@ Manager creates carry no connectors (connectors [], Cyber, 2026-11-23).
 
 | What | When (UTC) | Task id |
 |---|---|---|
-| Manager: nightly check (books the next first) | 2026-11-26 02:30, then daily | trig_01BnpQDwtsZJt2aV4GToCbcz (send_later into Manager_v0.9; a new id each night) |
+| Manager: nightly check (books the next first) | 2026-11-27 02:30, then daily | trig_01UW3TPS7GP5TxCLyV5T1ZE5 (send_later into Manager_v0.9; a new id each night) |
 | Weekly close | Thursdays 02:30, inside the nightly check | (same chain) |
 | Scout "Lambo Index scout" | Mondays 00:47 | trig_01UUEm7GWXBLcFjD7p3eHGRo |
-| Scout pointer into the Dev chat | Mondays 02:17 | trig_01Mg3Ti1kQqKQMim31ZDopNK (into Dev_0.11, which is done); move on Thu 26 Nov |
+| Scout pointer into the Dev chat | Mondays 02:17 | trig_01XCa3Um65LGiwb44KQckh4A (into Dev_0.13, since 26 Nov 02:31) |
 | Photo hunt into Photo_v0.3 | daily 21:05 | trig_01RMsnmxHEHNumU6c4EhSKAD (no connectors) |
 | Design review into the Web designer | 22:17 on the 4th (CRON_TZ=Asia/Riyadh 17 1 5 * *); next 2026-12-04 | trig_01JDbq6TY7vhifMPmydkSxJX |
 | Disabled: Dev quality pass (done 2026-11-21) | — | trig_016Uth55kTrSNuvJWCzYFvNt |
 | Disabled: audit and its pointer (user stopped it 2026-11-21) | — | trig_01Cn6vQ1xuJLBWbq1Mis3pzS, trig_01EjzdfGNVt2i45bjf1LqeiD |
-| Gone: Photo_v0.2's photo hunt (deleted 24 Nov 21:11); Manager_v0.9's nightly checks of 24 and 25 Nov (fired); Manager_v0.8's nightly check and hand-over one-shot (23 Nov); older one-shots | — | trig_013nHtSsabYC6KrrAx5cjMQo, trig_01BxthqwJMg11J3NJtSFSLGy, trig_01EtXWQMmdDAeNpyM5PcYqFo, trig_01QDGQpXE7kdGo9iZSKPEXGo, trig_01XtDMzcr3U3N6fBS4ZWxjw1, trig_01731rLm8q5okfsPbxps39KW, trig_01AsZRpXJUkXwgh4EGCg7siV, trig_01QkdhVqFN45cdPEQttfjuXL |
+| Gone: the Scout pointer into Dev_0.11 (deleted 26 Nov 02:32); Photo_v0.2's photo hunt (deleted 24 Nov 21:11); Manager_v0.9's nightly checks of 24, 25 and 26 Nov (fired); Manager_v0.8's nightly check and hand-over one-shot (23 Nov); older one-shots | — | trig_01Mg3Ti1kQqKQMim31ZDopNK, trig_013nHtSsabYC6KrrAx5cjMQo, trig_01BxthqwJMg11J3NJtSFSLGy, trig_01EtXWQMmdDAeNpyM5PcYqFo, trig_01BnpQDwtsZJt2aV4GToCbcz, trig_01QDGQpXE7kdGo9iZSKPEXGo, trig_01XtDMzcr3U3N6fBS4ZWxjw1, trig_01731rLm8q5okfsPbxps39KW, trig_01AsZRpXJUkXwgh4EGCg7siV, trig_01QkdhVqFN45cdPEQttfjuXL |
 
 ## Team (find chats by title, verify with get_session; models and effort: BACKLOG.md token plan)
 
 | Role | Chat | Note |
 |---|---|---|
-| Manager | Manager_v0.9 | since 23 Nov 21:01 UTC (created by Manager_v0.8); Opus 5.5 max; depth 7 of 8; 35% measured at 25 Nov 02:26 UTC; hands over after the Thu 26 Nov weekly close; its successor comes from the app (G) |
-| Dev | Dev_0.13 | since 23 Nov 02:23 UTC; Opus 5.5 High; depth 7 |
-| Dev | Dev_0.11 | done (47%); archive after the Scout pointer moves (the safety check refused it on 23 Nov) |
+| Manager | Manager_v0.9 | since 23 Nov 21:01 UTC (created by Manager_v0.8); Opus 5.5 max; depth 7 of 8; 43% measured at 25 Nov 21:29 UTC; hands over now that the 26 Nov weekly close is done; its successor comes from the app (G) |
+| Dev | Dev_0.13 | since 23 Nov 02:23 UTC; Opus 5.5 High; depth 7; 25% at 25 Nov 21:29 UTC; the Scout pointer fires into it |
 | Cyber | Cyber_v0.8 | since 24 Nov 21:13 UTC (Cyber_v0.7 full at 49%); Opus 5.5 High; depth 8 |
 | Photo | Photo_v0.3 | since 24 Nov 21:11 UTC (Photo_v0.2 full at 48%); Sonnet 5.5 High; depth 8; picks to Dev_0.13, copy to Cyber_v0.8 |
 | Web designer | Web designer | monthly design review only |
@@ -98,22 +99,20 @@ Manager creates carry no connectors (connectors [], Cyber, 2026-11-23).
   murcielago-40th +1; cleared at dc96b1f) and PR #134 (24 Nov: cheetah +2, diablo-vt-60-se +1; cleared
   at 8ba5160) slipped two nights: live.staticflickr.com returned 429 ("CIDR range blocked") to the
   Dev's container on 23-24 and 24-25 Nov, while Photo_v0.3's container loaded it on 24 Nov 21:11 UTC.
-  From 25 Nov 21:00 UTC the Dev tries first; if blocked, Cyber_v0.8 looks at each photo at full size
-  from its own container and sends pass/fail; failures are skipped (new commit, Cyber re-check); merge
-  at the cleared head; IndexNow. Then the Search Console tag once the user sends the value (I).
+  Still blocked on 25-26 Nov. The Dev retries nightly from its own container only: routing around the
+  block through another chat's container would work around a site's protection, so the Manager's
+  fallback was withdrawn on 25 Nov (K). Both PRs now conflict with main: the Dev merges main in,
+  rebuilds, and Cyber re-checks before the merge. Then the Search Console tag once the user sends it (I).
   Low priority: tools/flickr.py's lm001 pattern matches description text (all 8 candidates were LM002).
-- Manager, Thu 26 Nov: recreate the Scout pointer into the Dev that will run the 30 Nov Scout PR
-  (prompt byte-identical to tools/REFRESH.md Setup, connectors []); delete the old one; Cyber confirms
-  with get_trigger; the Dev records the new id in tools/REFRESH.md (Setup and Dev step 1) through a PR
-  before 30 Nov 02:17 UTC; then archive Dev_0.11.
+- Dev_0.13 records the new Scout pointer trig_01XCa3Um65LGiwb44KQckh4A in tools/REFRESH.md (Setup and
+  Dev step 1) and CLAUDE.md through a PR before Mon 30 Nov 02:17 UTC; Cyber_v0.8 confirms the task with
+  get_trigger (prompt byte-identical, mcp_connections []).
 - Photo: urus-concept still needs a photo of 1280 px or more (Otis Blank's 1024 px one,
   flickr:7978099184, is already on the page, so Urusside.jpg stays); temerario-super-trofeo and
   temerario-spyder: retry 3 Dec with the empty-state cars, sooner if one is shown or races. Ste
   Bozzy's flickr 27628527504 is not used anywhere (LP640 face, so not the 40th; Manager, 23 Nov). geralds_1311 is a mixed account (car-ad and scale-model albums;
   Photo_v0.3, 24 Nov).
-- Weekly close, Thu 26 Nov: harder outcomes; chat usage per role (get_session cost_usd: report it to
-  the user, never in the repo); the Scout's thin new-car search (3 pages on 23 Nov; it missed the
-  Temerario Super Trofeo).
+- portofino and raptor fell to 1 photo each on 25 Nov (#136: ask-first and tell-me notices, rule A).
 - Checks to carry with the user (not approvals): B was read as "do not add Photo's 2 new
   countach-lp500 photos" (the user may say "add them"); Dev effort: the token plan's "Extreme" read as
   xhigh for coding (Dev_0.12), High otherwise (Dev_0.13); the user may say "max". F is closed (moot).
@@ -130,11 +129,14 @@ Manager creates carry no connectors (connectors [], Cyber, 2026-11-23).
 - 2026-11-23 (Manager_v0.9): the 1280 px bar is measured on the largest size the source offers (for
   Flickr, the largest size in the record), not the 1024 px the page shows; a photo under 1280 px still
   needs the Manager's OK (BACKLOG through #132). Cyber: tasks the Manager creates carry no connectors.
+- 2026-11-25 (Dev_0.13): never route a request around a site's block (Flickr's 429 "CIDR range
+  blocked") through another chat's container; the Manager withdrew such an order. 2026-11-26: this
+  account cannot pass connectors to create_trigger; new tasks store mcp_connections [] (Cyber checks).
 
 ## Hand-over to Manager_v0.10 (started from the Claude app)
 
-Manager_v0.9 sits at depth 7, so Manager_v0.10 comes from the app (G), after the Thu 26 Nov weekly
-close. Manager_v0.9 asks
+Manager_v0.9 sits at depth 7, so Manager_v0.10 comes from the app (G); the 26 Nov weekly close is
+done, so it can start now. Manager_v0.9 asks
 the user to open a new Code session on wam090/the-lambo-index (Opus 5.5, effort max) and send: "You
 are Manager_v0.10 for wam090/the-lambo-index. Read ops/manager-log.md on origin/main first and follow
 its Hand-over section." Manager_v0.10, first:
@@ -150,7 +152,13 @@ its Hand-over section." Manager_v0.10, first:
 
 ## Weekly closes
 
-(first close: Thu 26 Nov)
+- Thu 26 Nov (Manager_v0.9): all 3 outcomes of the week met (static pages live, #124; cars under 4
+  photos 29 → 24 on 23 Nov, 25 of 151 now after the Temerario Super Trofeo joined with none; Scout run
+  of 23 Nov verified). Slipped three nights: photo PRs #132 and #134, cleared by Cyber but blocked by
+  Flickr's CIDR block on the Dev's container (23-26 Nov); the fallback through Cyber's container was
+  withdrawn as a workaround (K). Chat usage per role went to the user, not here. The Scout's new-car
+  search stays thin (3 pages on 23 Nov, missed the Temerario Super Trofeo); the Manager's nightly
+  48-hour search remains the safety net, no change to REFRESH.md.
 
 ## Housekeeping
 
@@ -160,4 +168,5 @@ its Hand-over section." Manager_v0.10, first:
   Scout pointer moves; if refused again, the user archives it in the app.
 - 2026-11-23 21:05 UTC: archived Dev_0.12 and Manager_v0.8 (no open branches).
 - 2026-11-24 21:12 and 21:14 UTC: archived Photo_v0.2 and Cyber_v0.7 once their successors started.
+- 2026-11-26 02:32 UTC: archived Dev_0.11 once the Scout pointer had moved.
 - Other projects' chats and tasks are never touched.
