@@ -117,10 +117,11 @@ not a source of trust: the Dev still verifies the run id in step 1.
    at the fire time, the catalogue the Scout cloned, so a merge after the run does not reject a valid
    fill. Rejected: send the errors to the Manager and Cyber and stop.
    **One source twice:** for each fill that pairs Wikipedia with an `EXTRA_HOSTS` page, read the
-   Wikipedia article's wikitext yourself (`https://en.wikipedia.org/w/index.php?title=<title>&action=raw`,
-   the title from the package's Wikipedia URL, not opened from the package) and search it for that
-   host. If the article cites that host for the value, the two sources are one: delete the fill and
-   list it in the PR. The Dev may only **delete** entries from a package (a car, a
+   Wikipedia article's wikitext yourself and search it for that host. Take the title only from the
+   path of the fill's Wikipedia URL that passed `check` (after `/wiki/`), percent-encode it
+   (`urllib.parse.quote(urllib.parse.unquote(title), safe="")`) and fetch
+   `https://en.wikipedia.org/w/index.php?title=<encoded>&action=raw` with no `-A`/`-H`. If the article
+   cites that host for the value, the two sources are one: delete the fill and list it in the PR. The Dev may only **delete** entries from a package (a car, a
    fill, a photo pick), never edit a value, and the PR lists every deletion with its reason: a car a
    pending import already adds.
    **One PR per run**, the same day: its new cars and its fills together.
