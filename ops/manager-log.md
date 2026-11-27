@@ -63,8 +63,8 @@ Cyber's OK.
 | Outcome | Due (Riyadh) | Status |
 |---|---|---|
 | Scout run of Mon 30 Nov handled the same day (PR merged, or run verified with nothing new) | Mon 30 Nov | open |
-| Scout import follow-ups (1) and (3) in BACKLOG merged before that run | Sun 29 Nov | open |
-| Cars with fewer than 4 photos: 25 → 21 (#132 and #134 alone get there) | Thu 3 Dec | open; needs the Dev's full-size look (K) |
+| Scout import follow-ups (1) and (3) in BACKLOG merged before that run | Sun 29 Nov | done 26 Nov (#140, cleared at c95bcf2) |
+| Cars with fewer than 4 photos: 25 → 21 (#132 and #134 alone get there) | Thu 3 Dec | open; needs the Dev's full-size look (K); 26 Nov picks held: p132 +2, p147-gandini +2 (the latter also needs a flickr.py search fix for "P 147") |
 
 ## Check-ins and scheduled tasks
 
@@ -73,7 +73,7 @@ Manager creates carry no connectors (connectors [], Cyber, 2026-11-23).
 
 | What | When (UTC) | Task id |
 |---|---|---|
-| Manager: nightly check (books the next first) | 2026-11-27 02:30, then daily | trig_01UW3TPS7GP5TxCLyV5T1ZE5 (send_later into Manager_v0.9; a new id each night) |
+| Manager: nightly check (books the next first) | 2026-11-28 02:30, then daily | trig_01Mz7esHVfy7myECaVVtKxUi (send_later into Manager_v0.9; a new id each night) |
 | Weekly close | Thursdays 02:30, inside the nightly check | (same chain) |
 | Scout "Lambo Index scout" | Mondays 00:47 | trig_01UUEm7GWXBLcFjD7p3eHGRo |
 | Scout pointer into the Dev chat | Mondays 02:17 | trig_01XCa3Um65LGiwb44KQckh4A (into Dev_0.13, since 26 Nov 02:31) |
@@ -81,13 +81,13 @@ Manager creates carry no connectors (connectors [], Cyber, 2026-11-23).
 | Design review into the Web designer | 22:17 on the 4th (CRON_TZ=Asia/Riyadh 17 1 5 * *); next 2026-12-04 | trig_01JDbq6TY7vhifMPmydkSxJX |
 | Disabled: Dev quality pass (done 2026-11-21) | — | trig_016Uth55kTrSNuvJWCzYFvNt |
 | Disabled: audit and its pointer (user stopped it 2026-11-21) | — | trig_01Cn6vQ1xuJLBWbq1Mis3pzS, trig_01EjzdfGNVt2i45bjf1LqeiD |
-| Gone: the Scout pointer into Dev_0.11 (deleted 26 Nov 02:32); Photo_v0.2's photo hunt (deleted 24 Nov 21:11); Manager_v0.9's nightly checks of 24, 25 and 26 Nov (fired); Manager_v0.8's nightly check and hand-over one-shot (23 Nov); older one-shots | — | trig_01Mg3Ti1kQqKQMim31ZDopNK, trig_013nHtSsabYC6KrrAx5cjMQo, trig_01BxthqwJMg11J3NJtSFSLGy, trig_01EtXWQMmdDAeNpyM5PcYqFo, trig_01BnpQDwtsZJt2aV4GToCbcz, trig_01QDGQpXE7kdGo9iZSKPEXGo, trig_01XtDMzcr3U3N6fBS4ZWxjw1, trig_01731rLm8q5okfsPbxps39KW, trig_01AsZRpXJUkXwgh4EGCg7siV, trig_01QkdhVqFN45cdPEQttfjuXL |
+| Gone: the Scout pointer into Dev_0.11 (deleted 26 Nov 02:32); Photo_v0.2's photo hunt (deleted 24 Nov 21:11); Manager_v0.9's nightly checks of 24 to 27 Nov (fired); Manager_v0.8's nightly check and hand-over one-shot (23 Nov); older one-shots | — | trig_01Mg3Ti1kQqKQMim31ZDopNK, trig_01UW3TPS7GP5TxCLyV5T1ZE5, trig_013nHtSsabYC6KrrAx5cjMQo, trig_01BxthqwJMg11J3NJtSFSLGy, trig_01EtXWQMmdDAeNpyM5PcYqFo, trig_01BnpQDwtsZJt2aV4GToCbcz, trig_01QDGQpXE7kdGo9iZSKPEXGo, trig_01XtDMzcr3U3N6fBS4ZWxjw1, trig_01731rLm8q5okfsPbxps39KW, trig_01AsZRpXJUkXwgh4EGCg7siV, trig_01QkdhVqFN45cdPEQttfjuXL |
 
 ## Team (find chats by title, verify with get_session; models and effort: BACKLOG.md token plan)
 
 | Role | Chat | Note |
 |---|---|---|
-| Manager | Manager_v0.9 | since 23 Nov 21:01 UTC (created by Manager_v0.8); Opus 5.5 max; depth 7 of 8; 43% measured at 25 Nov 21:29 UTC; hands over now that the 26 Nov weekly close is done; its successor comes from the app (G) |
+| Manager | Manager_v0.9 | since 23 Nov 21:01 UTC (created by Manager_v0.8); Opus 5.5 max; depth 7 of 8; 50% measured at 26 Nov 21:18 UTC; hands over now that the 26 Nov weekly close is done; its successor comes from the app (G) |
 | Dev | Dev_0.13 | since 23 Nov 02:23 UTC; Opus 5.5 High; depth 7; 25% at 25 Nov 21:29 UTC; the Scout pointer fires into it |
 | Cyber | Cyber_v0.8 | since 24 Nov 21:13 UTC (Cyber_v0.7 full at 49%); Opus 5.5 High; depth 8 |
 | Photo | Photo_v0.3 | since 24 Nov 21:11 UTC (Photo_v0.2 full at 48%); Sonnet 5.5 High; depth 8; picks to Dev_0.13, copy to Cyber_v0.8 |
@@ -113,6 +113,9 @@ Manager creates carry no connectors (connectors [], Cyber, 2026-11-23).
   Bozzy's flickr 27628527504 is not used anywhere (LP640 face, so not the 40th; Manager, 23 Nov). geralds_1311 is a mixed account (car-ad and scale-model albums;
   Photo_v0.3, 24 Nov).
 - portofino and raptor fell to 1 photo each on 25 Nov (#136: ask-first and tell-me notices, rule A).
+- 26 Nov (Manager): raptor's palmer8 photos rejected (Cyber: a mixed account with commissioned work);
+  portofino's jerryhendricks crop not waived (not the whole car). The Dev's next flickr.py PR: palmer8
+  into BLOCKED, the "P 147" search and the lm001 pattern.
 - Checks to carry with the user (not approvals): B was read as "do not add Photo's 2 new
   countach-lp500 photos" (the user may say "add them"); Dev effort: the token plan's "Extreme" read as
   xhigh for coding (Dev_0.12), High otherwise (Dev_0.13); the user may say "max". F is closed (moot).
